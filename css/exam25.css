@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@500&display=swap');
+*
+{
+    padding: 0;
+    margin: 0;
+}
+body
+{
+    background-color: rgb(224, 224, 224);
+}
+header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+}
+header span
+{
+    margin-left: 4vh;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 3.5vw;
+}
+header span a
+{
+    color: rgb(38, 50, 56);
+    text-decoration: none;
+}
+header nav
+{
+    font-size: 1.7vw;
+    align-self: center;
+    margin-right: 4vh;
+    font-family: 'Khand', sans-serif;
+}
+header nav a
+{
+    color: rgb(69, 90, 100);
+    margin: 0.5vh;
+    text-decoration: none;
+}
+section
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100vw;
+}
+section .content
+{
+    margin: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    height: 96%;
+    width: 41%;
+}
+section .content span
+{
+    color: rgb(41, 76, 127);
+    align-self: self-start;
+    font-size: 3vw;
+    font-family: 'Oxygen', sans-serif;
+    margin-bottom: 5px;
+}
+section .content p
+{
+    color: rgb(53, 98, 165);
+    font-size: 1.5vw;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: justify;
+}
+section .content a
+{
+    font-size: 1.5vw;
+    color: white;
+    background-color: rgb(53, 98, 165);
+    margin: 20px 0 20px 0;
+    padding: 9px;
+    border: 1px solid rgb(38, 50, 56);
+    border-radius: 5px;
+    align-self: self-start;
+    text-decoration: none;
+}
+section .container
+{
+    height: 100%;
+    width: 55%;
+}
+section .container img
+{
+    aspect-ratio: 16/9;
+    object-fit:contain;
+    height: 90%;
+    width: 90%;
+    margin: 5%;
+}
+footer
+{
+    height: 10vh;
+    width: 100vw;
+}

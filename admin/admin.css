@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    /* font-weight: 500; */
+    font-style: normal;
+}
+body
+{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(245, 247, 255);
+}
+header
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+    background-color: #ffffff; 
+    box-shadow: -1px -5px 8px 5px #4b49ac8f;
+    z-index: 1;
+}
+header span
+{
+    margin-left: 3vw;
+    align-self: center;
+    font-family: "Pacifico", cursive;
+    font-size: 2.5vw;
+    font-weight: 400;
+    color: rgb(50, 50, 102);
+}
+header button
+{
+    margin-right: 10px;
+    align-self: center;
+    padding: 5px;
+    font-size: 1.2vw;
+    color: white;
+    background-color: rgb(50, 50, 102);
+    border-radius: 20px;
+    transition: all 300ms linear 0s;
+    border: 1px solid black;
+}
+header button:hover
+{
+    background-color: rgb(78, 78, 160);
+}
+section
+{
+    position: relative;
+    display: grid;
+    grid-template-columns: 15% auto;
+    height: 90%;
+    width: 100%;
+    /* background-color: aquamarine; */
+    z-index: 0;
+}
+section aside
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+    height: 100%;
+    background-color: white;
+    border-right: 2px solid black;
+}
+section aside ul
+{
+    display: flex;
+    justify-content:flex-start;
+    flex-flow: column wrap;
+    padding: 10px 0;
+    list-style: none;
+}
+section aside ul li
+{
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 10px;
+    font-size: 1.5vw;
+    color: white;
+    background-color: #4B49AC;
+    padding: 10px 5px;
+    border-radius: 8px;
+    transition: all 200ms linear 0s;
+    cursor: pointer;
+}
+section aside ul li:hover
+{
+    background-color: #7978E9;
+}
+section aside ul li a 
+{
+    text-decoration: none;
+    color: white;
+}
+section aside ul li img
+{
+    height: 2.5vw;
+    width: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+section #container
+{
+    height: 100%;
+    /* background-color: rgb(245, 247, 255); */
+    overflow-x: hidden;
+}
+
+/*------------------------DASHBOARD STYLE-------------------------------- */
+section #container .box-container
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    height: 30%;
+    /* background-color: red; */
+}
+section #container .box-container .box
+{
+    height: 130px;
+    width: 230px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    align-items: center;
+    border-radius: 10px;
+    background-color: blueviolet;
+    cursor: pointer;
+    transition: all 200ms linear 0s;
+    font-weight: 400;
+}
+section #container .box-container .box .info-dis
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+section #container .box-container .box .info-dis span
+{
+    font-size: 10vh;
+    color: white;
+}
+section #container .box-container .box .info-dis img
+{
+    height: 12vh;
+    width: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
+section #container .box-container .box span
+{
+    margin-top: 5px;
+    font-size: 1.4vw;
+    color: white;
+}
+section #container .box-container .box:nth-child(odd)
+{
+    background-color: rgb(125, 160, 250);
+}
+section #container .box-container .box:nth-child(even)
+{
+    background-color:rgb(121, 120, 233);
+}
+section #container .box-container .box:hover
+{
+    scale: 1.1;
+}
+/*------------------------STUDENT STYLE-------------------------------- */
+section #container .student-title
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    /* background-color: red; */
+}
+section #container .student-title span
+{
+    font-size: 3vw;
+    /* color:white; */
+}
+section #container .student-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85%;
+    width: 100%;
+    /* background-color: lightblue; */
+}
+section #container .student-container .student-display
+{
+    overflow:auto;
+    height: 90%;
+    width: 95%;
+    /* background-color: yellow; */
+    border: 1px solid black;
+    border-radius: 10px;
+}
+section #container .student-container .student-display table
+{
+    height: auto;
+    width:95%;
+    text-align: left;
+    /* border-collapse: collapse; */
+    white-space: nowrap;
+}
+section #container .student-container .student-display table thead tr th
+{
+    padding: 10px 5px;
+    font-size: 1.6vw;
+    border-bottom: 1px solid black;
+}
+section #container .student-container .student-display table tbody tr td
+{
+    padding: 5px 10px;
+    font-size: 1.3vw;
+    font-weight: 400;
+}
+section #container .student-container .student-display table tbody tr td a
+{
+    text-decoration: none;
+}
+section #container .student-container .student-display table tr td:nth-child(1),.student-display table tr td:nth-child(5),.student-display table tr td:nth-child(6),.student-display table tr td:nth-child(8),.student-display table tr td:nth-child(9),.student-display table tr td:nth-child(10)
+{
+    text-align: center;
+}
+/*------------------------QUESTION STYLE-------------------------------- */
+section #container .que-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    gap: 20px;
+    width: 100%;
+    height:40%;
+    /* background-color: red; */
+    border-bottom: 2px solid black;
+}
+section #container .que-container form
+{
+    height: auto;
+    width: auto;
+}
+section #container .que-container form table
+{
+    height: auto;
+    width: auto;
+}
+section #container .que-container form table th
+{
+    text-align: left;
+}
+section #container .que-container form table tr th input[type=text]
+{
+    width: 400px;
+    /* border: none; */
+    outline: none;
+}
+section #container .que-container form input[type=text]
+{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+}
+section #container .que-container form table tr td input[type=text]
+{
+    width: 190px;
+    outline: none;
+    /* border: none; */
+}
+section #container .que-container form table tr td input[type=submit]
+{
+    width: 75px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+section #container .que-container form table tr .button
+{
+    text-align: center;
+}
+section #container .que-display
+{
+    width: 100%;
+    height: 100%;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blueviolet; */
+}
+section #container .que-display .display-container
+{
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 80%;
+    width: 90%;
+    /* background-color: brown; */
+    border: 1px solid black;
+    border-radius: 25px;
+}
+section #container .que-display .display-container table
+{
+    display: flow;
+    height: auto;
+    width:95%;
+    text-align: left;
+    white-space: nowrap;
+    /* border-collapse: collapse; */
+}
+section #container .que-display .display-container table thead tr th
+{
+    padding: 10px 5px;
+    font-size: 1.6vw;
+    border-bottom: 1px solid black;
+}
+section #container .que-display .display-container table tbody tr td
+{
+    padding: 5px 10px;
+    font-size: 1.3vw;
+    font-weight: 400;
+}
+section #container .que-display .display-container table tbody tr td a
+{
+    text-decoration: none;
+}
+section #container .que-display .display-container table tr td:nth-child(1)
+{
+    text-align: center;
+}
+/*------------------------TEST STYLE------------------------------------*/
+section #container .test-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    gap: 20px;
+    width: 100%;
+    height:40%;
+    /* background-color: red; */
+    border-bottom: 2px solid black;
+}
+section #container .test-container form
+{
+    height: auto;
+    width: auto;
+}
+section #container .test-container form table
+{
+    height: auto;
+    width: auto;
+}
+section #container .test-container form table th
+{
+    text-align: left;
+}
+section #container .test-container form table tr th input[type=text]
+{
+    width: 400px;
+    /* border: none; */
+    outline: none;
+}
+section #container .test-container form input[type=text]
+{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+}
+section #container .test-container form table tr td input[type=text]
+{
+    width: 190px;
+    outline: none;
+    /* border: none; */
+}
+section #container .test-container form table tr td input[type=submit]
+{
+    width: 75px;
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+section #container .test-container form table tr .button
+{
+    text-align: center;
+}
+/*------------------------RESULT STYLE-------------------------------- */
+section #container .title
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    /* background-color: red; */
+}
+section #container .title span
+{
+    font-size: 3vw;
+    /* color:white; */
+}
+section #container .result-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85%;
+    width: 100%;
+    /* background-color: lightblue; */
+}
+section #container .result-container .result-display
+{
+    height: 90%;
+    width: 95%;
+    /* background-color: yellow; */
+    border: 1px solid black;
+    border-radius: 25px;
+}
