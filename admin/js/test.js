@@ -1,6 +1,6 @@
 function test_edit(test_id) {
   $("#container").animate({ scrollTop: 0 }, "medium");
-  jQuery("#container").load("test.php", { edit_id: test_id });
+  jQuery("#container").load("test.php?", { edit_id: test_id });
 }
 function test_delete(test_id) {
   if (confirm("Are you sure want to delete record?")) {
@@ -43,7 +43,7 @@ function test_update() {
 }
 
 $("#edit-test-container").hide();
-// $("#edit-test-container").show();
+
 // ----------close pop-up------------ //
 $(".close").click(function () {
   $("#edit-test-container").hide();
@@ -60,9 +60,39 @@ function list_all_test() {
     },
   });
 }
-$("#test-table").on("click",".testlink",function(){
-    $("#container").load("que.php?id="+this.id);
-})
+
+$("#test-table").on("click", ".testlink", function () {
+  $("#container").load("que.php?id=" + this.id);
+});
+
+// ------------edit test------------//
+
+$("#test-table").on("click", ".edit-test", function () {
+    $("#edit-test-container").show();
+  });
+
+
+  
+//-------------Delete Test------------//
+$("#test-table").on("click", ".delete-test", function () {
+    let data = this.id;
+    $.post("include/operation.php?ch=3",
+        {
+            ch: "3",
+            id: data
+        },
+        function (data, status) {
+            console.log(data)
+            if (data == 1) {
+                list_all_test();
+                // alert("Test deleted Successfully");
+            }
+            else {
+                alert("error");
+            }
+        });
+    
+  });
 
 list_all_test(); // get all tests for first load
 
@@ -85,90 +115,24 @@ $("#test_form").submit(function (e) {
     testTotalQues == ""
   ) {
     $(".test").html("* Fill all field");
+  } else {
+    let data = $("#test_form").serialize();
+    $.ajax({
+      type: "POST",
+      url: "include/operation.php?ch=2",
+      data: data,
+      encode: true,
+      success: function (response) {
+        console.log(response);
+        let dataArr = response.split("||");
+        if (dataArr[0] == 1) {
+          $("#test_form")[0].reset();
+          alert("Test created Successfully");
+          $("#container").load("que.php?id=" + dataArr[1]);
+        } else {
+          $(".test").html("* Error to insert");
+        }
+      },
+    });
   }
-
-  let data = $("#test_form").serialize();
-  $.ajax({
-    type: "POST",
-    url: "include/operation.php?ch=2",
-    data: data,
-    encode: true,
-    success: function (response) {
-      console.log(response);
-      let dataArr = response.split("||");
-      if (dataArr[0] == 1) {
-        $("#test_form")[0].reset();
-        alert("Test created Successfully");
-        $("#container").load("que.php?id=" + dataArr[1]);
-      } else {
-        alert("Somthing went wrong");
-      }
-    },
-  });
 });
-
-// function test_create() {
-//get data from question_form
-//   const create_test = 1;
-// let data = $('#test_form').serialize();
-// $.ajax({
-//     type : 'POST',
-//     url : 'include/operation.php?ch=1',
-//     data : data,
-
-// }).then((e) => {
-//     console.log(e);
-
-// })
-//   console.log(JSON.stringify(data));
-//   console.log(JSON.parse(JSON.stringify(data)));
-//   var test_name = document.forms["test_form"]["test_name"].value;
-//   var test_date = document.forms["test_form"]["test_date"].value;
-//   var test_start_time = document.forms["test_form"]["test_start_time"].value;
-//   var test_time = document.forms["test_form"]["test_time"].value;
-//   var test_marks = document.forms["test_form"]["test_marks"].value;
-//   var test_question = document.forms["test_form"]["test_question"].value;
-//   var flag = check_test(
-//     test_name,
-//     test_date,
-//     test_start_time,
-//     test_time,
-//     test_marks,
-//     test_question
-//   );
-//   if (flag == 0) {
-//     $("#container").load("test.php", {
-//       create_test: create_test,
-//       test_name: test_name,
-//       test_date: test_date,
-//       test_start_time: test_start_time,
-//       test_time: test_time,
-//       test_marks: test_marks,
-//       test_question,
-//     });
-//   } else {
-//     alert("field cant be null");
-//   }
-// }
-
-// function check_test(
-//   test_name,
-//   test_date,
-//   test_start_time,
-//   test_time,
-//   test_marks,
-//   test_question
-// ) {
-//   if (
-//     test_name == "" ||
-//     test_date == "" ||
-//     test_start_time == "" ||
-//     test_time == "" ||
-//     test_marks == "" ||
-//     test_question == ""
-//   ) {
-//     return 1;
-//   } else {
-//     return 0;
-//   }
-// }

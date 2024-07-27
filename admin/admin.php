@@ -26,7 +26,7 @@
    <section>
         <aside>
             <ul>
-                <li onclick="jQuery('#container').load('dash.php');"><img src="image/aside/monitor.png"><a href="javascript:void(0)" > Dashboard </a> </li>
+                <li onclick="$('#container').load('dash.php');"><img src="image/aside/monitor.png"><a href="javascript:void(0)" > Dashboard </a> </li>
                 <li onclick="jQuery('#container').load('student.php');"><img src="image/aside/profile.png"> <a href="javascript:void(0)" > Students </a> </li>
                 <li onclick="jQuery('#container').load('test.php');"><img src="image/aside/test.png"> <a href="javascript:void(0)" > Test </a> </li>
                 <!-- <li onclick="jQuery('#container').load('que.php');"> <img src="image/aside/test.png"><a href="javascript:void(0)" > Questions </a> </li> -->

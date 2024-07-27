@@ -18,7 +18,7 @@ class Test_operation
         }
         return $this->conn = $conn;
     }
-    function all_test()
+    public function all_test()
     {
 
         $query = 'select *from test';
@@ -38,10 +38,11 @@ class Test_operation
                 </tr>
             </thead>
             <tbody>';
+            $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
-                $str .= '<tr id="'.$row['id'] .'" class="testlink">
-                        <td>' . $row['id'] . '</td>
-                        <td>' . $row['test_name'] . '</td>
+                $str .= '<tr>
+                        <td>' . $i++ . '</td>
+                        <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
                         <td>' . $row['test_time'] . '</td>
                         <td>' . $row['test_start_time'] . '</td>
                         <td>' . $row['test_date'] . '</td>
@@ -70,7 +71,6 @@ class Test_operation
     //method used to insert test in database
     function insert_test($post)
     {
-        // var_dump($post); 
         $test_name = $post['test_name'];
         $test_date = $post['test_date'];
         $test_start_time = $post['test_start_time'];
@@ -80,11 +80,11 @@ class Test_operation
 
         $query = "INSERT INTO `test`(`test_name`, `test_time`, `test_start_time`, `test_date`, `test_question`, `test_marks`) VALUES ('$test_name',' $test_time','$test_start_time','$test_date','$test_question','$test_marks')";
         if (mysqli_query($this->conn, $query)) {
-            $stmt = "select *from test where test_name=".$test_name;
+            $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
             $execute = mysqli_query($this->conn, $stmt);
-            $result = mysqli_fetch_assoc($execute);
-            $id = $result['id'];
-            return '1||'.$id;
+            $lastRow = mysqli_fetch_assoc($execute);
+            $lastID = $lastRow["id"];
+            return 1 . "||" . $lastID;
         } else {
             return '<div class="alert alert-danger"><span class="alert-message"><strong>Error! </strong>Something went wrong.</span> </div>';
         }
@@ -111,15 +111,75 @@ class Test_operation
     //     }
     // }
     //method used to delete test in database
-    // function delete_test($id)
-    // {
+    // SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id = 1; to get all question of test
+    function delete_test($id)
+    {
+        $ansDelQuery = "SELECT id FROM answer WHERE que_id IN(SELECT id FROM question WHERE test_id IN(SELECT id from test where id = " . $id['id'] . "))";
+        $resultAns = mysqli_query($this->conn, $ansDelQuery);
+        $num = mysqli_num_rows($resultAns);
+        if ($num != 0) {
+            $optDelQuery = "SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id=" . $id['id'];
+            $resultOpt = mysqli_query($this->conn, $optDelQuery);
+            $num = mysqli_num_rows($resultOpt);
+            if ($num == 0) {
+                $queryTest = "delete from test where id=" . $id['id'];
+                if (mysqli_query($this->conn, $queryTest)) {
+                    return 1;
+                }
+            } else {
+                while ($rowOpt = mysqli_fetch_assoc($resultOpt)) {
+                    $queryAns = "delete from options where id=" . $rowOpt['id'];
+                    mysqli_query($this->conn, $queryAns);
+                }
+                while ($rowAns = mysqli_fetch_assoc($resultAns)) {
+                    $queryAns = "delete from answer where id=" . $rowAns['id'];
+                    mysqli_query($this->conn, $queryAns);
+                }
+                $queDelQuery = "SELECT `que_id`, `answer` FROM `answer` WHERE id =" . $rowAns['id'];
+                $resultQue = mysqli_query($this->conn, $queDelQuery);
+                $rowQue = mysqli_fetch_assoc($resultQue);
+                $queryQue = "delete from question where id=" . $rowQue['que_id'];
+                if (mysqli_query($this->conn, $queryQue)) {
+                    $queryTest = "delete from test where id=" . $id['id'];
+                    if (mysqli_query($this->conn, $queryTest)) {
+                        return 1;
+                    }
+                }
+            }
+        } else {
+            $optDelQuery = "SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id=" . $id['id'];
+            $resultOpt = mysqli_query($this->conn, $optDelQuery);
+            $num = mysqli_num_rows($resultOpt);
+            if ($num == 0) {
+                $queryTest = "delete from test where id=" . $id['id'];
+                if (mysqli_query($this->conn, $queryTest)) {
+                    return 1;
+                }
+            } else {
+                
+                while ($rowOpt = mysqli_fetch_assoc($resultOpt)) {
+                    $isOptExist = "SELECT * FROM options where que_id=".$rowOpt['id'];
+                    $resultIsOptExist = mysqli_query($this->conn, $isOptExist);
+                    $num = mysqli_num_rows($resultIsOptExist);
+                    if($num != 0){
+                       while ($rowOptExist = mysqli_fetch_assoc($resultIsOptExist)) {
+                        $queryAns = "delete from options where que_id=" . $rowOpt['id'];
+                        mysqli_query($this->conn, $queryAns);
+                       }
+                    }
 
-    //     $query = "delete from test where id=" . $id;
-    //     $result = mysqli_query(($this->dbobj)->get_db(), $query);
-    //     if ($result) {
-    //         return 1;
-    //     }
-    // }
+                }
+                $queryQue = "delete from question where test_id=" . $id['id'];
+                mysqli_query($this->conn, $queryQue);
+            }
+        }
+        $queryTest = "delete from test where id=" . $id['id'];
+        if (mysqli_query($this->conn, $queryTest)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
 
 $obj = new Test_operation();
@@ -130,6 +190,9 @@ switch ($ch) {
         break;
     case "2":
         echo $obj->insert_test($_POST);
+        break;
+    case "3":
+        echo $obj->delete_test($_POST);
         break;
 }
 
