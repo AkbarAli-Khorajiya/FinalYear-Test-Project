@@ -75,23 +75,25 @@ $("#test-table").on("click", ".edit-test", function () {
   
 //-------------Delete Test------------//
 $("#test-table").on("click", ".delete-test", function () {
-    let data = this.id;
-    $.post("include/operation.php?ch=3",
-        {
-            ch: "3",
-            id: data
-        },
-        function (data) {
-            console.log(data)
-            if (data == 1) {
-                list_all_test();
-                // alert("Test deleted Successfully");
-            }
-            else {
-                alert("error");
-            }
-        });
-    
+    if(confirm("Are you sure you want to Delete Test?"))
+    {
+      let data = this.id;
+      $.post("include/operation.php?ch=3",
+          {
+              ch: "3",
+              id: data
+          },
+          function (data) {
+              console.log(data)
+              if (data == 1) {
+                  list_all_test();
+                  // alert("Test deleted Successfully");
+              }
+              else {
+                  alert("error");
+              }
+          });
+    }
   });
 
 list_all_test(); // get all tests for first load
