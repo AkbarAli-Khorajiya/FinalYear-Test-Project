@@ -81,7 +81,7 @@ $("#test-table").on("click", ".delete-test", function () {
             ch: "3",
             id: data
         },
-        function (data, status) {
+        function (data) {
             console.log(data)
             if (data == 1) {
                 list_all_test();

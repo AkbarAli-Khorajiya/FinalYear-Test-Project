@@ -98,7 +98,7 @@ if (isset($_POST['edit_id'])) {
     <form id="test_form" name="test_form">
         <table cellspacing="20px">
             <tr>
-                <th colspan="" style="display: flex;flex-dierection:column;gap:10px;align-items:center;width:fit-content">
+                <th colspan="" style="display: flex;flex-direction:column;gap:10px;align-items:center;width:fit-content">
                     <h2>Add Test</h2>
                 </th>
                 <th>

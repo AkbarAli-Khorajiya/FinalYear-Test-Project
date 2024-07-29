@@ -114,70 +114,36 @@ class Test_operation
     // SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id = 1; to get all question of test
     function delete_test($id)
     {
-        $ansDelQuery = "SELECT id FROM answer WHERE que_id IN(SELECT id FROM question WHERE test_id IN(SELECT id from test where id = " . $id['id'] . "))";
-        $resultAns = mysqli_query($this->conn, $ansDelQuery);
-        $num = mysqli_num_rows($resultAns);
-        if ($num != 0) {
-            $optDelQuery = "SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id=" . $id['id'];
-            $resultOpt = mysqli_query($this->conn, $optDelQuery);
-            $num = mysqli_num_rows($resultOpt);
-            if ($num == 0) {
-                $queryTest = "delete from test where id=" . $id['id'];
-                if (mysqli_query($this->conn, $queryTest)) {
-                    return 1;
-                }
-            } else {
-                while ($rowOpt = mysqli_fetch_assoc($resultOpt)) {
-                    $queryAns = "delete from options where id=" . $rowOpt['id'];
-                    mysqli_query($this->conn, $queryAns);
-                }
-                while ($rowAns = mysqli_fetch_assoc($resultAns)) {
-                    $queryAns = "delete from answer where id=" . $rowAns['id'];
-                    mysqli_query($this->conn, $queryAns);
-                }
-                $queDelQuery = "SELECT `que_id`, `answer` FROM `answer` WHERE id =" . $rowAns['id'];
-                $resultQue = mysqli_query($this->conn, $queDelQuery);
-                $rowQue = mysqli_fetch_assoc($resultQue);
-                $queryQue = "delete from question where id=" . $rowQue['que_id'];
-                if (mysqli_query($this->conn, $queryQue)) {
-                    $queryTest = "delete from test where id=" . $id['id'];
-                    if (mysqli_query($this->conn, $queryTest)) {
-                        return 1;
-                    }
+        $que_obj = new Question_operation();
+        $query = "select id from question where test_id=".$id['id'];
+        $execute = mysqli_query($this->conn, $query);
+        $num = mysqli_num_rows($execute);
+        if($num != 0)
+        {
+            $count = 0;
+            while($row = mysqli_fetch_assoc($execute))
+            {
+                if($que_obj->delete_question($row["id"]) == 1)
+                {
+                    $count++;
                 }
             }
-        } else {
-            $optDelQuery = "SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id=" . $id['id'];
-            $resultOpt = mysqli_query($this->conn, $optDelQuery);
-            $num = mysqli_num_rows($resultOpt);
-            if ($num == 0) {
-                $queryTest = "delete from test where id=" . $id['id'];
-                if (mysqli_query($this->conn, $queryTest)) {
+            if($num == $count)
+            {
+                $query = "delete from test where id=".$id['id'];
+                if(mysqli_query($this->conn, $query))
+                {
                     return 1;
                 }
-            } else {
-                
-                while ($rowOpt = mysqli_fetch_assoc($resultOpt)) {
-                    $isOptExist = "SELECT * FROM options where que_id=".$rowOpt['id'];
-                    $resultIsOptExist = mysqli_query($this->conn, $isOptExist);
-                    $num = mysqli_num_rows($resultIsOptExist);
-                    if($num != 0){
-                       while ($rowOptExist = mysqli_fetch_assoc($resultIsOptExist)) {
-                        $queryAns = "delete from options where que_id=" . $rowOpt['id'];
-                        mysqli_query($this->conn, $queryAns);
-                       }
-                    }
-
-                }
-                $queryQue = "delete from question where test_id=" . $id['id'];
-                mysqli_query($this->conn, $queryQue);
             }
         }
-        $queryTest = "delete from test where id=" . $id['id'];
-        if (mysqli_query($this->conn, $queryTest)) {
-            return 1;
-        } else {
-            return 0;
+        else
+        {
+            $query = "delete from test where id=".$id['id'];
+                if(mysqli_query($this->conn, $query))
+                {
+                    return 1;
+                }
         }
     }
 }
