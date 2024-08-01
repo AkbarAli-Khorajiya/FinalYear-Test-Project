@@ -58,17 +58,6 @@ class Test_operation
         }
         return $str;
     }
-    //method used to intialize value for insert
-    // function insert_value($name,$date,$start_time,$time,$marks,$question)
-    // {
-    //     $this->test_name = $name;
-    //     $this->test_date = $date;
-    //     $this->test_start_time = $start_time;
-    //     $this->test_time = $time;
-    //     $this->test_marks = $marks;
-    //     $this->test_question = $question;
-    // }
-    //method used to insert test in database
     function insert_test($post)
     {
         $test_name = $post['test_name'];
@@ -89,6 +78,7 @@ class Test_operation
             return 0 . "|| Test Not Created";
         }
     }
+    //method used to get record for display in update pop up
     function get_edit_test($id){
         $query = "select *from test where id=".$id['id'];
         $stmt = mysqli_query($this->conn, $query);
@@ -98,6 +88,7 @@ class Test_operation
             return json_encode($row);
         }
     }
+    //Method used to upadte test in database
     function update_test($post)
     {
         $test_id = $post['test_id'];
@@ -164,23 +155,24 @@ class Test_operation
     }
 }
 
-$obj = new Test_operation();
+$test_obj = new Test_operation();
 $ch = $_GET["ch"];
 switch ($ch) {
     case "1":
-        echo $obj->all_test($_POST);
+        echo $test_obj->all_test($_POST);
         break;
     case "2":
-        echo $obj->insert_test($_POST);
+        echo $test_obj->insert_test($_POST);
         break;
     case "3":
-        echo $obj->delete_test($_POST);
+        echo $test_obj->delete_test($_POST);
         break;
     case "4":
-        echo $obj->get_edit_test($_POST);
+        echo $test_obj->get_edit_test($_POST);
         break;
     case "5":
-        echo $obj->update_test($_POST);
+        echo $test_obj->update_test($_POST);
+        break;
 }
 
 
@@ -270,4 +262,9 @@ class Question_operation extends Test_operation
             return $id["id"];
         }
     }
+}
+$que_obj = new Question_operation();
+switch($ch)
+{
+    case "":
 }

@@ -874,6 +874,10 @@ section #container .test-display .display-container table tr td:nth-child(1)
 {
     text-align: center;
 }
+section #container .test-display .display-container table tr td:nth-child(2)
+{
+    cursor: pointer;
+}
 section #container #alert-test-container
 {
     position: absolute;

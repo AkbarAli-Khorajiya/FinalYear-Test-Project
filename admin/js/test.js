@@ -106,13 +106,12 @@ list_all_test(); // get all tests for first load
 // ----------Create test------------ //
 $("#test_form").submit(function (e) {
   e.preventDefault();
-
-  let testName = $(".test_name").val();
-  let testdate = $(".test_date").val();
-  let testStartTime = $(".test_start_time").val();
-  let testMinTime = $(".test_time").val();
-  let testMarks = $(".test_marks").val();
-  let testTotalQues = $(".test_question").val();
+  let testName = $("#test_form .test_name").val();
+  let testdate = $("#test_form .test_date").val();
+  let testStartTime = $("#test_form .test_start_time").val();
+  let testMinTime = $("#test_form .test_time").val();
+  let testMarks = $("#test_form .test_marks").val();
+  let testTotalQues = $("#test_form .test_question").val();
   if (
     testName == "" ||
     testdate == "" ||
@@ -204,7 +203,7 @@ $("#edit_test_form").submit(function (e) {
           list_all_test();
           setTimeout(function(){
             $("#alert-test-container").fadeOut();
-          },900);
+          },1500);
         } else 
         {
           alert_show(dataArr[0] , dataArr[1]);
