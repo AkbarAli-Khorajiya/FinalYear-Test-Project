@@ -89,7 +89,9 @@ $("#test-table").on("click", ".delete-test", function () {
               // console.log(dataArr);
               if (dataArr[0] == 1) {
                 alert_show(dataArr[0],dataArr[1]);
-                list_all_test();
+                setTimeout(function(){
+                  list_all_test();
+                },1000);
                   // alert("Test deleted Successfully");
               }
               else {
