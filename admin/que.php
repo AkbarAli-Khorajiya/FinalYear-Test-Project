@@ -111,30 +111,32 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
 
 <div class="que-container">
     <h1><?php echo "<font style='color:red'>".$result['test_name']."</font>"; ?> Questions</h1>
-    <form id="question_form" name="question_form">
+    <form id="create_question_form" name="create_question_form">
         <table cellspacing="15px">
             <tr>
                 <th colspan="2">
                     <h2>Add Questions</h2>
+                    <span class="que" style="color: red; font-size:15px"></span>
                 </th>
             </tr>
             <tr>
-                <th colspan="2"> <input type="text" name="question" placeholder="Write Question" style="height:35px;" value="<?php echo $question; ?>" required> </th>
+                <th colspan="2"> <input type="text" name="question" class="question" placeholder="Write Question" style="height:35px;" value="" required> </th>
             </tr>
             <tr>
-                <td><input type="text" name="option_a" placeholder="Option A" value="<?php echo $opt[0]; ?>" required></td>
-                <td><input type="text" name="option_b" placeholder="Option B" value="<?php echo $opt[1]; ?>" required></td>
+                <td><input type="text" class="option_a" name="option_a" placeholder="Option A" value="" required></td>
+                <td><input type="text" class="option_b" name="option_b"  placeholder="Option B" value="" required></td>
             </tr>
             <tr>
-                <td><input type="text" name="option_c" placeholder="Option C" value="<?php echo $opt[2]; ?>" required></td>
-                <td><input type="text" name="option_d" placeholder="Option D" value="<?php echo $opt[3]; ?>" required></td>
+                <td><input type="text" class="option_c" name="option_c" placeholder="Option C" value="" required></td>
+                <td><input type="text" class="option_d" name="option_d" placeholder="Option D" value="" required></td>
             </tr>
             <tr>
-                <td> <input type="text" name="right_answer" placeholder="Right Option" value="<?php echo $right_answer; ?>" required> </td>
-                <td style="display:none;"> <input type="text" name="que_id" value="<?php echo $que_id; ?>" hidden> </td>
+                <td> <select name="right_answer" class="answer" required> <option value="">--Select Answer--</option> </select> </td>
+                <td style="display:none;"> <input type="text" name="que_id" value="" hidden> </td>
+                <td style="display:none;"> <input type="text" class="test_id" name="test_id" value="<?php echo $_GET['id'];?>" hidden> </td>
                 <td class="button">
                     <input type="reset" value="Clear">
-                    <input type="button" onclick="que_insert()" name="insert" value="Insert">
+                    <input type="submit" name="insert"  value="Insert">
                 </td>
             </tr>
         </table>

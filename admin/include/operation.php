@@ -178,10 +178,10 @@ switch ($ch) {
 
 class Question_operation extends Test_operation
 {
-    private $question;
-    private $opt_array;
-    private $answer;
-    private $test_id;
+    // private $question;
+    // private $opt_array;
+    // private $answer;
+    // private $test_id;
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
@@ -196,41 +196,52 @@ class Question_operation extends Test_operation
         }
         return $this->conn = $conn;
     }
-    function set_value($que, $opt_a, $opt_b, $opt_c, $opt_d, $ans, $test_id)
+    // function set_value($que, $opt_a, $opt_b, $opt_c, $opt_d, $ans, $test_id)
+    // {
+    //     $this->question = $que;
+    //     $this->opt_array[0] = $opt_a;
+    //     $this->opt_array[1] = $opt_b;
+    //     $this->opt_array[2] = $opt_c;
+    //     $this->opt_array[3] = $opt_d;
+    //     $this->answer = $ans;
+    //     $this->test_id = $test_id;
+    // }
+    function insert_question($post)
     {
-        $this->question = $que;
-        $this->opt_array[0] = $opt_a;
-        $this->opt_array[1] = $opt_b;
-        $this->opt_array[2] = $opt_c;
-        $this->opt_array[3] = $opt_d;
-        $this->answer = $ans;
-        $this->test_id = $test_id;
-    }
-    function insert_question()
-    {
-
-        $query = "insert into question (test_id,question) values ($this->test_id,'$this->question')";
+        $que = $post['question'];
+        $test_id = $post['test_id'];
+        $opt_arr[0] = $post['option_a'];
+        $opt_arr[1] = $post['option_b'];
+        $opt_arr[2] = $post['option_c'];
+        $opt_arr[3] = $post['option_d'];
+        $answer = $post['answer'];
+        $query = "insert into question (test_id,question) values ('$test_id','$que')";
         $result = mysqli_query($this->conn, $query);
         if ($result) {
-            $this->insert_option();
-            return 1;
+            if($this->insert_option($opt_arr) == 1)
+            {
+                if($this->insert_answer($answer) == 1)
+                {
+                    return 1 ."||Question Inserted Successfully";       
+                }
+            }
         }
     }
-    function insert_option()
+    function insert_option($opt_arr)
     {
 
         $que_id = $this->get_id();
-        foreach ($this->opt_array as $value) {
-            $option_query = "insert into options (que_id,options) values ($que_id,'$value')";
-            $option_result = mysqli_query($this->conn, $option_query);
+        foreach ($opt_arr as $opt) {
+            $query = "INSERT INTO `options`(`que_id`, `options`) VALUES ('$que_id','$opt')";
+            $result = mysqli_query($this->conn, $query);
         }
         return 1;
     }
-    function insert_answer()
+    function insert_answer($answer)
     {
 
         $que_id = $this->get_id();
-        $answer_query = "insert into answer (que_id,answer) values ($que_id,'$this->answer')";
+        $answer_query = "insert into answer (que_id,answer) values ($que_id,'$answer')";
         $answer_result = mysqli_query($this->conn, $answer_query);
         if ($answer_result) {
             return 1;
@@ -266,5 +277,7 @@ class Question_operation extends Test_operation
 $que_obj = new Question_operation();
 switch($ch)
 {
-    case "":
+    case "11":
+        echo $que_obj->insert_question($_POST);
+        break;
 }
