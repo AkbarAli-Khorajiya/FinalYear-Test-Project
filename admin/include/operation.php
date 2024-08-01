@@ -84,9 +84,9 @@ class Test_operation
             $execute = mysqli_query($this->conn, $stmt);
             $lastRow = mysqli_fetch_assoc($execute);
             $lastID = $lastRow["id"];
-            return 1 . "||" . $lastID;
+            return 1 . "||" . $lastID . "||Test Created Successfully";
         } else {
-            return '<div class="alert alert-danger"><span class="alert-message"><strong>Error! </strong>Something went wrong.</span> </div>';
+            return 0 . "|| Test Not Created";
         }
     }
     //method used to intialize value for update
@@ -133,7 +133,11 @@ class Test_operation
                 $query = "delete from test where id=".$id['id'];
                 if(mysqli_query($this->conn, $query))
                 {
-                    return 1;
+                    return 1+"||Test Deleted Successfully";
+                }
+                else
+                {
+                    return 0 +"||Test Not Deleted";
                 }
             }
         }
@@ -142,7 +146,11 @@ class Test_operation
             $query = "delete from test where id=".$id['id'];
                 if(mysqli_query($this->conn, $query))
                 {
-                    return 1;
+                    return 1 ."||Test Deleted Successfully";
+                }
+                else
+                {
+                    return 0 ."||Test Not Deleted";
                 }
         }
     }

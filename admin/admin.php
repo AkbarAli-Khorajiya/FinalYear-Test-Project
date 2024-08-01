@@ -55,5 +55,6 @@
         prevSelectedItem = this;
         });
     });
+    
 </script>
 </html>

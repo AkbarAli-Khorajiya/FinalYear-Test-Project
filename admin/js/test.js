@@ -83,14 +83,17 @@ $("#test-table").on("click", ".delete-test", function () {
               ch: "3",
               id: data
           },
-          function (data) {
-              console.log(data)
-              if (data == 1) {
-                  list_all_test();
+          function (response) {
+              // console.log(response);
+              let dataArr = response.split("||");
+              // console.log(dataArr);
+              if (dataArr[0] == 1) {
+                alert_show(dataArr[0],dataArr[1]);
+                list_all_test();
                   // alert("Test deleted Successfully");
               }
               else {
-                  alert("error");
+                alert_show(dataArr[0],dataArr[1]);
               }
           });
     }
@@ -129,12 +132,35 @@ $("#test_form").submit(function (e) {
         let dataArr = response.split("||");
         if (dataArr[0] == 1) {
           $("#test_form")[0].reset();
-          alert("Test created Successfully");
-          $("#container").load("que.php?id=" + dataArr[1]);
+          alert_show(dataArr[0] , dataArr[2]);
+          setTimeout(function(){
+            $("#alert-test-container").fadeOut();
+          },900);
+          setTimeout(function(){
+            $("#container").load("que.php?id=" + dataArr[1]);
+          },1400);
         } else {
-          $(".test").html("* Error to insert");
+          alert_show(dataArr[0] , dataArr[1]);
         }
       },
     });
   }
 });
+
+function alert_show(value , msg)
+{ 
+    switch(value)
+    {
+      case '1':
+          $(".alert h3").text(msg);
+          $("#alert-test-container div").addClass("success-alert");
+          $("#alert-test-container").show().css('display','flex');
+          break;
+      case '0':
+        $(".alert h3").text(msg);
+        $("#alert-test-container div").addClass("danger-alert");
+        $("#alert-test-container").show().css('display','flex');
+          break;
+
+    }
+}

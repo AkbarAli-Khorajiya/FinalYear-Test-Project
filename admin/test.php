@@ -60,7 +60,13 @@ if (isset($_POST['edit_id'])) {
 //     }
 // }
 ?>
-
+<!-- Test Alert -->
+<div id="alert-test-container">
+    <div class="alert slideright">
+        <h3></h3>
+        <a class="close-alert">&times;</a>
+    </div>
+</div>
 <!-- -----------Update test pop-up---------- -->
 <div id="edit-test-container">
     <div id="edit-test-content" class="slidedown">
@@ -94,7 +100,7 @@ if (isset($_POST['edit_id'])) {
 
 <!-- ------------create test------------ -->
 <div class="test-container">
-    <h2> Create / Update Test</h2>
+    <h2> Create Test Panel</h2>
     <form id="test_form" name="test_form">
         <table cellspacing="20px">
             <tr>
@@ -142,5 +148,16 @@ if (isset($_POST['edit_id'])) {
 </div>
 <script>
     <?php include 'js/test.js'; ?>
+    $(function(){
+        $(".close-alert").click(function(){
+            $("#alert-test-container").fadeOut();
+        });  
+
+        $("#alert-test-container").click(function () {
+            $("#alert-test-container").fadeOut();
+        }).children().click(function () {
+            return false;
+        });
+    });
 </script>
 <?php mysqli_close($dbobj->get_db()); ?>

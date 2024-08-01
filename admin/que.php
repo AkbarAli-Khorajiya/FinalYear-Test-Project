@@ -110,7 +110,7 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
 </div>
 
 <div class="que-container">
-    <h1><?php echo $result['test_name']; ?>test's questions</h1>
+    <h1><?php echo "<font style='color:red'>".$result['test_name']."</font>"; ?> Questions</h1>
     <form id="question_form" name="question_form">
         <table cellspacing="15px">
             <tr>
