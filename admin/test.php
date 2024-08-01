@@ -71,26 +71,26 @@ if (isset($_POST['edit_id'])) {
 <div id="edit-test-container">
     <div id="edit-test-content" class="slidedown">
         <button type="button" class="close">x</button>
-        <h3 class="edit-test-title">Edit Test</h3>
+        <h3 class="edit-test-title">Edit Test</h3> <span class="edit_test" style="color:red;font-size: 15px;text-align:end;"></span>
         <form id="edit_test_form" name="edit_test_form">
             <table cellspacing="20px">
                 <tr>
-                    <th colspan="2"> <input type="text" name="test_name" placeholder="Write test name" value="" required> </th>
+                    <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name" value="" required> </th>
                 </tr>
                 <tr>
-                    <td> <input type="text" name="test_date" placeholder="Test date" value="" onfocus="if(this.type !='date'){this.type = 'date'; this.showPicker()}" onblur="if(this.value==''){this.type='text'}" required> </td>
-                    <td> <input type="text" name="test_start_time" placeholder="Test start time" value="" onfocus="if(this.type !='time'){this.type = 'time'; this.showPicker()}" onblur="if(this.value==''){this.type='text'}" required></td>
+                    <td> <input type="text" name="test_date" class="test_date" placeholder="Test date" value="" onfocus="if(this.type !='date'){this.type = 'date'; this.showPicker()}" onblur="if(this.value==''){this.type='text'}" required> </td>
+                    <td> <input type="text" name="test_start_time" class="test_start_time" placeholder="Test start time" value="" onfocus="if(this.type !='time'){this.type = 'time'; this.showPicker()}" onblur="if(this.value==''){this.type='text'}" required></td>
                 </tr>
                 <tr>
-                    <td> <input type="text" name="test_time" placeholder="Test time (in minutes )" value="" required> </td>
-                    <td> <input type="text" name="test_marks" placeholder="Test marks" value="" required> </td>
+                    <td> <input type="text" name="test_time" class="test_time" placeholder="Test time (in minutes )" value="" required> </td>
+                    <td> <input type="text" name="test_marks" class="test_marks" placeholder="Test marks" value="" required> </td>
                 </tr>
                 <tr>
-                    <td> <input type="text" name="test_question" placeholder="Total number of Question" value="" required> </td>
-                    <td style="display:none;"> <input type="text" name="test_id" value="" hidden> </td>
+                    <td> <input type="text" name="test_question" class="test_question" placeholder="Total number of Question" value="" required> </td>
+                    <td style="display:none;"> <input type="text" name="test_id" class="test_id" value="" hidden> </td>
                     <td class="button">
                         <input type="reset" value="Clear">
-                        <input type="button" onclick="test_update()" name="update" value="Update">
+                        <input type="submit"  value="Update">
                     </td>
                 </tr>
             </table>
@@ -112,7 +112,7 @@ if (isset($_POST['edit_id'])) {
                 </th>
             </tr>
             <tr>
-                <th colspan="2"> <input type="text" name="test_name" class="test-name" placeholder="Write test name" value="<?php echo $test_name; ?>"> </th>
+                <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name" value="<?php echo $test_name; ?>"> </th>
             </tr>
             <tr>
                 <td> <input type="text" name="test_date" class="test_date" placeholder="Test date" value="<?php echo $test_date; ?>" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"> </td>
@@ -136,7 +136,7 @@ if (isset($_POST['edit_id'])) {
 </div>
 <div class="test-display">
     <div class="test-title">
-        <span>Test Details</span>
+        <span>Dashboard \ Test</span>
     </div>
     <div class="display-container">
         <table cellspacing="10px" id="test-table" class="slidedown">

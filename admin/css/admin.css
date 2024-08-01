@@ -631,7 +631,7 @@ section #container #edit-test-container #edit-test-content form table tr td inpu
     font-weight: 500;
     transition: all 200ms linear 0s;
 }
-section #container #edit-test-container #edit-test-content form table tr td input[type=button]
+section #container #edit-test-container #edit-test-content form table tr td input[type=submit]
 {
     width: 95px;
     height: 30px;
@@ -644,7 +644,7 @@ section #container #edit-test-container #edit-test-content form table tr td inpu
     font-weight: 500;
     transition: all 200ms linear 0s;
 }
-section #container #edit-test-container #edit-test-content form table tr td input[type=button]:hover
+section #container #edit-test-container #edit-test-content form table tr td input[type=submit]:hover
 {
     background-color: #7978E9;
 }

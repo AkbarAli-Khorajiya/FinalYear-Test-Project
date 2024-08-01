@@ -89,27 +89,35 @@ class Test_operation
             return 0 . "|| Test Not Created";
         }
     }
-    //method used to intialize value for update
-    // function update_value($id, $name, $date, $start_time, $time, $marks, $question)
-    // {
-    //     $this->test_id = $id;
-    //     $this->test_name = $name;
-    //     $this->test_date = $date;
-    //     $this->test_start_time = $start_time;
-    //     $this->test_time = $time;
-    //     $this->test_marks = $marks;
-    //     $this->test_question = $question;
-    // }
-    //method used to update test data in database
-    // function update_test()
-    // {
-
-    //     $query = "UPDATE `test` SET `test_name`=' $this->test_name',`test_time`=' $this->test_time',`test_start_time`='$this->test_start_time',`test_date`='$this->test_date',`test_question`='$this->test_question',`test_marks`='$this->test_marks' WHERE `id`= $this->test_id";
-    //     $result = mysqli_query(($this->dbobj)->get_db(), $query);
-    //     if ($result) {
-    //         return 1;
-    //     }
-    // }
+    function get_edit_test($id){
+        $query = "select *from test where id=".$id['id'];
+        $stmt = mysqli_query($this->conn, $query);
+        if(mysqli_num_rows($stmt) > 0)
+        {
+            $row = mysqli_fetch_assoc($stmt);   
+            return json_encode($row);
+        }
+    }
+    function update_test($post)
+    {
+        $test_id = $post['test_id'];
+        $test_name = $post['test_name'];
+        $test_date = $post['test_date'];
+        $test_start_time = $post['test_start_time'];
+        $test_time = $post['test_time'];
+        $test_marks = $post['test_marks'];
+        $test_question = $post['test_question'];
+        $query = "UPDATE `test` SET `test_name`='$test_name',`test_time`='$test_time',`test_start_time`='$test_start_time',`test_date`='$test_date',`test_question`='$test_question',`test_marks`='$test_marks' WHERE `id`= $test_id";
+        $result = mysqli_query($this->conn, $query);
+        if ($result) 
+        {
+            return 1 . "||Test Update Successfully.";
+        }
+        else
+        {
+            return 0 . "||Test Not Updated.";
+        }
+    }
     //method used to delete test in database
     // SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id = 1; to get all question of test
     function delete_test($id)
@@ -168,6 +176,11 @@ switch ($ch) {
     case "3":
         echo $obj->delete_test($_POST);
         break;
+    case "4":
+        echo $obj->get_edit_test($_POST);
+        break;
+    case "5":
+        echo $obj->update_test($_POST);
 }
 
 

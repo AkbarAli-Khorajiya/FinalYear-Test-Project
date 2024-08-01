@@ -107,7 +107,7 @@ list_all_test(); // get all tests for first load
 $("#test_form").submit(function (e) {
   e.preventDefault();
 
-  let testName = $(".test-name").val();
+  let testName = $(".test_name").val();
   let testdate = $(".test_date").val();
   let testStartTime = $(".test_start_time").val();
   let testMinTime = $(".test_time").val();
@@ -148,7 +148,72 @@ $("#test_form").submit(function (e) {
     });
   }
 });
-
+//-----------Display Edit Test---------//
+$("#test-table").on("click", ".edit-test", function (){
+      let data = this.id;
+      $.post("include/operation.php?ch=4",
+          {
+              ch: "4",
+              id: data
+          },
+          function (response) {
+              let data = JSON.parse(response);
+              $("#edit_test_form .test_id").val(data['id']);
+              $("#edit_test_form .test_name").val(data['test_name']);
+              $("#edit_test_form .test_date").val(data['test_date']);
+              $("#edit_test_form .test_start_time").val(data['test_start_time']);
+              $("#edit_test_form .test_time").val(data['test_time']);
+              $("#edit_test_form .test_marks").val(data['test_marks']);
+              $("#edit_test_form .test_question").val(data['test_question']);
+          });
+});
+//-----------Update Test------------//
+$("#edit_test_form").submit(function (e) {
+  e.preventDefault();
+  let testid = $("#edit_test_form .test_id").val();
+  let testName = $("#edit_test_form .test_name").val();
+  let testdate = $("#edit_test_form .test_date").val();
+  let testStartTime = $("#edit_test_form .test_start_time").val();
+  let testMinTime = $("#edit_test_form .test_time").val();
+  let testMarks = $("#edit_test_form .test_marks").val();
+  let testTotalQues = $("#edit_test_form .test_question").val();
+  if (
+    testid == "" ||
+    testName == "" ||
+    testdate == "" ||
+    testStartTime == "" ||
+    testMinTime == "" ||
+    testMarks == "" ||
+    testTotalQues == ""
+  ) {
+    $(".edit_test").html("* Fill all field");
+  } else {
+    let data = $("#edit_test_form").serialize();
+    $.ajax({
+      type: "POST",
+      url: "include/operation.php?ch=5",
+      data: data,
+      encode: true,
+      success: function (response) {
+        console.log(response);
+        let dataArr = response.split("||");
+        if (dataArr[0] == 1) {
+          $("#edit_test_form")[0].reset();
+          $("#edit-test-container").fadeOut();
+          alert_show(dataArr[0] , dataArr[1]);
+          list_all_test();
+          setTimeout(function(){
+            $("#alert-test-container").fadeOut();
+          },900);
+        } else 
+        {
+          alert_show(dataArr[0] , dataArr[1]);
+        }
+      },
+    });
+  }
+});
+//-----------Show Alert------------//
 function alert_show(value , msg)
 { 
     switch(value)
