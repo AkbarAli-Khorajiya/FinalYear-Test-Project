@@ -203,7 +203,7 @@ $("#edit_test_form").submit(function (e) {
           list_all_test();
           setTimeout(function(){
             $("#alert-test-container").fadeOut();
-          },1500);
+          }, 3000);
         } else 
         {
           alert_show(dataArr[0] , dataArr[1]);

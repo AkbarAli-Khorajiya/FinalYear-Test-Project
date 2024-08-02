@@ -11,7 +11,7 @@ if (!isset($_GET['id'])) {
     die();
 }
 
-$stmt = "select *from test where id =" .$_GET['id'];
+$stmt = "select *from test where id =" . $_GET['id'];
 $execute = mysqli_query($dbobj->get_db(), $stmt);
 $result = mysqli_fetch_assoc($execute);
 
@@ -86,19 +86,26 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             <table cellspacing="20px">
                 <table cellspacing="20px">
                     <tr>
-                        <th colspan="2" id="Que"> <input type="text" name="question" placeholder="Write Question" value="<?php echo $question; ?>" required> </th>
+                        <th colspan="2" id="Que"> <input type="text" name="question" placeholder="Write Question"
+                                value="<?php echo $question; ?>" required> </th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="option_a" placeholder="Option A" value="<?php echo $opt[0]; ?>" required></td>
-                        <td><input type="text" name="option_b" placeholder="Option B" value="<?php echo $opt[1]; ?>" required></td>
+                        <td><input type="text" name="option_a" placeholder="Option A" value="<?php echo $opt[0]; ?>"
+                                required></td>
+                        <td><input type="text" name="option_b" placeholder="Option B" value="<?php echo $opt[1]; ?>"
+                                required></td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="option_c" placeholder="Option C" value="<?php echo $opt[2]; ?>" required></td>
-                        <td><input type="text" name="option_d" placeholder="Option D" value="<?php echo $opt[3]; ?>" required></td>
+                        <td><input type="text" name="option_c" placeholder="Option C" value="<?php echo $opt[2]; ?>"
+                                required></td>
+                        <td><input type="text" name="option_d" placeholder="Option D" value="<?php echo $opt[3]; ?>"
+                                required></td>
                     </tr>
                     <tr>
-                        <td> <input type="text" name="right_answer" placeholder="Right Option" value="<?php echo $right_answer; ?>" required> </td>
-                        <td style="display:none;"> <input type="text" name="que_id" value="<?php echo $que_id; ?>" hidden> </td>
+                        <td> <input type="text" name="right_answer" placeholder="Right Option"
+                                value="<?php echo $right_answer; ?>" required> </td>
+                        <td style="display:none;"> <input type="text" name="que_id" value="<?php echo $que_id; ?>"
+                                hidden> </td>
                         <td class="button">
                             <input type="reset" value="Clear">
                             <input type="button" name="update" value="Update">
@@ -110,7 +117,7 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
 </div>
 
 <div class="que-container">
-    <h1><?php echo "<font style='color:red'>".$result['test_name']."</font>"; ?> Questions</h1>
+    <h1><?php echo "<font style='color:red'>" . $result['test_name'] . "</font>"; ?> Questions</h1>
     <form id="create_question_form" name="create_question_form">
         <table cellspacing="15px">
             <tr>
@@ -120,23 +127,27 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
                 </th>
             </tr>
             <tr>
-                <th colspan="2"> <input type="text" name="question" class="question" placeholder="Write Question" style="height:35px;" value="" required> </th>
+                <th colspan="2"> <input type="text" name="question" class="question" placeholder="Write Question"
+                        style="height:35px;" value="" required> </th>
             </tr>
             <tr>
                 <td><input type="text" class="option_a" name="option_a" placeholder="Option A" value="" required></td>
-                <td><input type="text" class="option_b" name="option_b"  placeholder="Option B" value="" required></td>
+                <td><input type="text" class="option_b" name="option_b" placeholder="Option B" value="" required></td>
             </tr>
             <tr>
                 <td><input type="text" class="option_c" name="option_c" placeholder="Option C" value="" required></td>
                 <td><input type="text" class="option_d" name="option_d" placeholder="Option D" value="" required></td>
             </tr>
             <tr>
-                <td> <select name="right_answer" class="answer" required> <option value="">--Select Answer--</option> </select> </td>
+                <td> <select name="right_answer" class="answer" required>
+                        <option value="">--Select Answer--</option>
+                    </select> </td>
                 <td style="display:none;"> <input type="text" name="que_id" value="" hidden> </td>
-                <td style="display:none;"> <input type="text" class="test_id" name="test_id" value="<?php echo $_GET['id'];?>" hidden> </td>
+                <td style="display:none;"> <input type="text" class="test_id" name="test_id"
+                        value="<?php echo $_GET['id']; ?>" hidden> </td>
                 <td class="button">
                     <input type="reset" value="Clear">
-                    <input type="submit" name="insert"  value="Insert">
+                    <input type="submit" name="insert" value="Insert">
                 </td>
             </tr>
         </table>
@@ -149,57 +160,58 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             //check that test selected or not from option
             if (isset($_POST['que_dis']) && $_POST['que_dis'] == 1 || isset($_POST['test_id'])) {
             ?>
-                <thead>
-                    <tr>
-                        <th>Que_id</th>
-                        <th>Questions</th>
-                        <th>Option A</th>
-                        <th>Option B</th>
-                        <th>Option C</th>
-                        <th>Option D</th>
-                        <th>Right Answer</th>
-                        <th colspan="2" align="center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+            <thead>
+                <tr>
+                    <th>Que_id</th>
+                    <th>Questions</th>
+                    <th>Option A</th>
+                    <th>Option B</th>
+                    <th>Option C</th>
+                    <th>Option D</th>
+                    <th>Right Answer</th>
+                    <th colspan="2" align="center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
                     //display questions in datagrid
                     $test_id = $_POST['test_id'];
-                    $que_dis_query = 'select id,question from question where test_id=' . $test_id;
+                    $que_dis_query = 'select id,question from question where test_id=' . $_GET['id'];
                     $que_dis_result = mysqli_query($dbobj->get_db(), $que_dis_query) or die('Query not exectued');
                     while ($que_row = mysqli_fetch_assoc($que_dis_result)) {
                     ?>
-                        <tr>
-                            <td><?php echo $que_row['id'] ?></td>
-                            <td><?php echo $que_row['question'] ?></td>
-                            <?php
+                <tr>
+                    <td><?php echo $que_row['id'] ?></td>
+                    <td><?php echo $que_row['question'] ?></td>
+                    <?php
                             //for display options in datagrid
                             $opt_dis_query = "select options from options where que_id=" . $que_row['id'];
                             $opt_dis_result = mysqli_query($dbobj->get_db(), $opt_dis_query);
                             while ($opt_dis_row = mysqli_fetch_assoc($opt_dis_result)) {
 
                             ?>
-                                <td><?php echo $opt_dis_row['options'] ?></td>
-                            <?php
+                    <td><?php echo $opt_dis_row['options'] ?></td>
+                    <?php
                             }
                             //display right answer in datagrid
                             $ans_dis_query = "select answer from answer where que_id=" . $que_row['id'];
                             $ans_dis_result = mysqli_query($dbobj->get_db(), $ans_dis_query);
                             $ans_dis_row = mysqli_fetch_assoc($ans_dis_result);
                             ?>
-                            <td><?php echo $ans_dis_row['answer']; ?></td>
-                            <td> <button class="edit" onclick="que_edit(<?php echo $que_row['id']; ?>)">Edit</button> </td>
-                            <td> <button class="delete" onclick="que_delete(<?php echo $que_row['id']; ?>)">Delete</button> </td>
-                        </tr>
+                    <td><?php echo $ans_dis_row['answer']; ?></td>
+                    <td> <button class="edit" onclick="que_edit(<?php echo $que_row['id']; ?>)">Edit</button> </td>
+                    <td> <button class="delete" onclick="que_delete(<?php echo $que_row['id']; ?>)">Delete</button>
+                    </td>
+                </tr>
                 <?php
                     }
                 }
                 ?>
-                </tbody>
+            </tbody>
         </table>
     </div>
 </div>
 <script>
-    <?php include 'js/que.js'; ?>
+<?php include 'js/que.js'; ?>
 </script>
 <?php mysqli_close($dbobj->get_db()); ?>
