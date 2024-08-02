@@ -105,7 +105,11 @@ $("#que-table").on("click", ".edit-que", function () {
       $("#edit_que_form .option_b").val(data['option_2']);
       $("#edit_que_form .option_c").val(data['option_3']);
       $("#edit_que_form .option_d").val(data['option_4']);
-      $("#edit_que_form .test_id").val(data['answer']);
+      var answer= $("<option>");
+      answer.val(data['answer']);
+      answer.text(data['answer']);
+      $("#edit_que_form .answer").append(answer);
+      $("#edit_que_form .answer option:contains("+data['answer']+")").prop('selected',true);
     });
 });
 //------------- Delete Question------------------//

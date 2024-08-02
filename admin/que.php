@@ -153,6 +153,9 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
     </form>
 </div>
 <div class="que-display">
+    <div class="que-title">
+        <span>Dashboard \ Test \ Question</span>
+    </div>
     <div class="display-container">
         <table cellspacing="10px" id="que-table">
 
