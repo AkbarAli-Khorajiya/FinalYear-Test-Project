@@ -12,7 +12,9 @@ function que_delete(que_id) {
 }
 
 // $('#edit-que-container').show();
-$('#edit-que-container').hide();
+$(".edit-que").click(function () {
+  $("#edit-que-container").show();
+});
 // ----------close pop-up------------ //
 $(".close").click(function () {
   $('#edit-que-container').hide();
@@ -59,6 +61,7 @@ $("#create_question_form").submit(function (e) {
     $(".que").html("* Fill all field");
   } else {
     let data = $("#create_question_form").serialize();
+    console.log(data);
     $.ajax({
       type: "POST",
       url: "include/operation.php?ch=11",
@@ -68,38 +71,69 @@ $("#create_question_form").submit(function (e) {
         console.log(response);
         let dataArr = response.split("||");
         if (dataArr[0] == 1) {
-          alert("Question Inserted");
           $("#create_question_form")[0].reset();
-
-          // alert_show(dataArr[0], dataArr[2]);
-          // setTimeout(function () {
-          //   $("#alert-test-container").fadeOut();
-          // }, 900);
-          // setTimeout(function () {
-          //   $("#container").load("que.php?id=" + dataArr[1]);
-          // }, 1400);
+          alert_show(dataArr[0], dataArr[2]);
+          setTimeout(function () {
+            $("#alert-test-container").fadeOut();
+          }, 900);
+          setTimeout(function () {
+            $("#container").load("que.php?id=" + dataArr[1]);
+          }, 1400);
         } else {
-          // alert_show(dataArr[0], dataArr[1]);
+          alert_show(dataArr[0], dataArr[1]);
         }
       },
     });
   }
 });
-function check_que(question, option_a, option_b, option_c, option_d, right_answer, test_id) {
-  if (question == '' || option_a == '' || option_b == '' || option_c == '' || option_d == '' || right_answer == '' || test_id == '') {
-    return 1;
+//-----------Display Edit Test---------//
+$("#que-table").on("click", ".edit-que", function () {
+  let data = this.id;
+  let test_id = $("#edit_que_form .test_id").val();
+  $.post("include/operation.php?ch=13",
+    {
+      ch: "13",
+      id: data,
+      test_id: test_id
+    },
+    function (response) {
+      let data = JSON.parse(response);
+      $("#edit_que_form .que_id").val(data['que_id']);
+      $("#edit_que_form .question").val(data['question']);
+      $("#edit_que_form .option_a").val(data['option_1']);
+      $("#edit_que_form .option_b").val(data['option_2']);
+      $("#edit_que_form .option_c").val(data['option_3']);
+      $("#edit_que_form .option_d").val(data['option_4']);
+      $("#edit_que_form .test_id").val(data['answer']);
+    });
+});
+//------------- Delete Question------------------//
+$("#que-table").on("click", ".delete-que", function () {
+  if (confirm("Are you sure you want to Delete Question?")) {
+    let data = this.id;
+    $.post("include/operation.php?ch=12",
+      {
+        ch: "12",
+        id: data
+      },
+      function (response) {
+        // console.log(response);
+        let dataArr = response.split("||");
+        // console.log(dataArr);
+        if (dataArr[0] == 1) {
+          setTimeout(function () {
+            alert_show(dataArr[0], dataArr[1]);
+          }, 1500);
+          // alert("Test deleted Successfully");
+        }
+        else {
+          alert_show(dataArr[0], dataArr[1]);
+        }
+      });
   }
-  else {
-    return 0;
-  }
-}
+});
 
-function dis_que() {
-  let que_dis = 1;
-  let test_opt = document.getElementById('test_opt');
-  test_id = test_opt.value;
-  jQuery('#container').load('que.php', { test_id: test_id, que_dis: que_dis });
-}
+
 
 //------- dynamic option select-----------//
 $("#create_question_form .answer").click(function () {

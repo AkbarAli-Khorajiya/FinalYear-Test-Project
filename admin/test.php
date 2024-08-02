@@ -61,7 +61,7 @@ if (isset($_POST['edit_id'])) {
 // }
 ?>
 <!-- Test Alert -->
-<div id="alert-test-container">
+<div id="alert-container">
     <div class="alert slideright">
         <h3></h3>
         <a class="close-alert">&times;</a>
@@ -150,11 +150,11 @@ if (isset($_POST['edit_id'])) {
     <?php include 'js/test.js'; ?>
     $(function(){
         $(".close-alert").click(function(){
-            $("#alert-test-container").fadeOut();
+            $("#alert-container").fadeOut();
         });  
 
-        $("#alert-test-container").click(function () {
-            $("#alert-test-container").fadeOut();
+        $("#alert-container").click(function () {
+            $("#alert-container").fadeOut();
         }).children().click(function () {
             return false;
         });
