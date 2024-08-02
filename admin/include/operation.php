@@ -222,9 +222,13 @@ class Question_operation extends Test_operation
             {
                 if($this->insert_answer($answer) == 1)
                 {
-                    return 1 ."||Question Inserted Successfully";       
+                    return 1 ."||".$test_id."||Question Inserted Successfully";       
                 }
             }
+        }
+        else
+        {
+            return 0 ."|| Question Not Inserted";
         }
     }
     function insert_option($opt_arr)
@@ -247,10 +251,10 @@ class Question_operation extends Test_operation
             return 1;
         }
     }
-    function delete_question($que_id)
+    function delete_question($post)
     {
-
-        $ans_del_query = 'delete from answer where que_id=' . $que_id;
+        $que_id = $post['id'];
+        $ans_del_query = 'delete from answer where que_id='. $que_id;
         $ans_del_result = mysqli_query($this->conn, $ans_del_query);
         if ($ans_del_result) {
             $opt_del_query = 'delete from options where que_id=' . $que_id;
@@ -259,9 +263,45 @@ class Question_operation extends Test_operation
                 $que_del_query = 'delete from question where id=' . $que_id;
                 $que_del_result = mysqli_query($this->conn, $que_del_query);
                 if ($que_del_result) {
-                    return 1;
+                    return 1 . "||Question Deleted Successfully.";
                 }
             }
+        }
+        return 0 . "||Question Not Deleted.";
+    }
+    function get_edit_que($id)
+    {
+        $que_id = $id['id'];
+        $test_id = $id['test_id'];
+        $dataArr['que_id'] = $que_id;
+        $query = "select question from question where id=".$que_id." and test_id=".$test_id." ";
+        $result = mysqli_query($this->conn,$query);
+        if($result)
+        {
+            $row = mysqli_fetch_assoc($result);
+            $dataArr['question'] = $row['question'];
+            $opt_query = 'select options from options where que_id ='. $que_id;
+            $opt_result = mysqli_query($this->conn,$opt_query);
+            if ($opt_result)
+            {   $i=1;
+                while($opt_row = mysqli_fetch_assoc($opt_result))
+                {
+                    $dataArr["option_".$i] = $opt_row['options'];
+                    $i++;
+                }
+            }
+            $ans_query = 'select answer from answer where que_id ='. $que_id;
+            $ans_result = mysqli_query($this->conn,$ans_query);
+            if($ans_result)
+            {
+                $ans_row = mysqli_fetch_assoc($ans_result);
+                $dataArr['answer'] = $ans_row['answer'];
+            }   
+            return json_encode($dataArr);
+        }
+        else
+        {
+            return "Error";
         }
     }
     function get_id()
@@ -279,5 +319,13 @@ switch($ch)
 {
     case "11":
         echo $que_obj->insert_question($_POST);
+        break;
+
+    case "12":
+        echo $que_obj->delete_question($_POST);
+        break;
+    
+    case "13":
+        echo $que_obj->get_edit_que($_POST);
         break;
 }

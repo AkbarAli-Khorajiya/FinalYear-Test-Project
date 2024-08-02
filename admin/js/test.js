@@ -135,7 +135,7 @@ $("#test_form").submit(function (e) {
           $("#test_form")[0].reset();
           alert_show(dataArr[0] , dataArr[2]);
           setTimeout(function(){
-            $("#alert-test-container").fadeOut();
+            $("#alert-container").fadeOut();
           },900);
           setTimeout(function(){
             $("#container").load("que.php?id=" + dataArr[1]);
@@ -212,21 +212,3 @@ $("#edit_test_form").submit(function (e) {
     });
   }
 });
-//-----------Show Alert------------//
-function alert_show(value , msg)
-{ 
-    switch(value)
-    {
-      case '1':
-          $(".alert h3").text(msg);
-          $("#alert-test-container div").addClass("success-alert");
-          $("#alert-test-container").show().css('display','flex');
-          break;
-      case '0':
-        $(".alert h3").text(msg);
-        $("#alert-test-container div").addClass("danger-alert");
-        $("#alert-test-container").show().css('display','flex');
-          break;
-
-    }
-}
