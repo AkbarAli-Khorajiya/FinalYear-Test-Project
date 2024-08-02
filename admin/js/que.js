@@ -17,6 +17,7 @@ $(".edit-que").click(function () {
 });
 // ----------close pop-up------------ //
 $(".close").click(function () {
+  $("#edit_que_form")[0].reset();
   $('#edit-que-container').hide();
 });
 
