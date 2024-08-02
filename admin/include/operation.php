@@ -79,12 +79,12 @@ class Test_operation
         }
     }
     //method used to get record for display in update pop up
-    function get_edit_test($id){
-        $query = "select *from test where id=".$id['id'];
+    function get_edit_test($id)
+    {
+        $query = "select *from test where id=" . $id['id'];
         $stmt = mysqli_query($this->conn, $query);
-        if(mysqli_num_rows($stmt) > 0)
-        {
-            $row = mysqli_fetch_assoc($stmt);   
+        if (mysqli_num_rows($stmt) > 0) {
+            $row = mysqli_fetch_assoc($stmt);
             return json_encode($row);
         }
     }
@@ -100,12 +100,9 @@ class Test_operation
         $test_question = $post['test_question'];
         $query = "UPDATE `test` SET `test_name`='$test_name',`test_time`='$test_time',`test_start_time`='$test_start_time',`test_date`='$test_date',`test_question`='$test_question',`test_marks`='$test_marks' WHERE `id`= $test_id";
         $result = mysqli_query($this->conn, $query);
-        if ($result) 
-        {
+        if ($result) {
             return 1 . "||Test Update Successfully.";
-        }
-        else
-        {
+        } else {
             return 0 . "||Test Not Updated.";
         }
     }
@@ -114,43 +111,31 @@ class Test_operation
     function delete_test($id)
     {
         $que_obj = new Question_operation();
-        $query = "select id from question where test_id=".$id['id'];
+        $query = "select id from question where test_id=" . $id['id'];
         $execute = mysqli_query($this->conn, $query);
         $num = mysqli_num_rows($execute);
-        if($num != 0)
-        {
+        if ($num != 0) {
             $count = 0;
-            while($row = mysqli_fetch_assoc($execute))
-            {
-                if($que_obj->delete_question($row["id"]) == 1)
-                {
+            while ($row = mysqli_fetch_assoc($execute)) {
+                if ($que_obj->delete_question($row["id"]) == 1) {
                     $count++;
                 }
             }
-            if($num == $count)
-            {
-                $query = "delete from test where id=".$id['id'];
-                if(mysqli_query($this->conn, $query))
-                {
-                    return 1+"||Test Deleted Successfully";
-                }
-                else
-                {
-                    return 0 +"||Test Not Deleted";
+            if ($num == $count) {
+                $query = "delete from test where id=" . $id['id'];
+                if (mysqli_query($this->conn, $query)) {
+                    return 1 + "||Test Deleted Successfully";
+                } else {
+                    return 0 + "||Test Not Deleted";
                 }
             }
-        }
-        else
-        {
-            $query = "delete from test where id=".$id['id'];
-                if(mysqli_query($this->conn, $query))
-                {
-                    return 1 ."||Test Deleted Successfully";
-                }
-                else
-                {
-                    return 0 ."||Test Not Deleted";
-                }
+        } else {
+            $query = "delete from test where id=" . $id['id'];
+            if (mysqli_query($this->conn, $query)) {
+                return 1 . "||Test Deleted Successfully";
+            } else {
+                return 0 . "||Test Not Deleted";
+            }
         }
     }
 }
@@ -218,11 +203,9 @@ class Question_operation extends Test_operation
         $query = "insert into question (test_id,question) values ('$test_id','$que')";
         $result = mysqli_query($this->conn, $query);
         if ($result) {
-            if($this->insert_option($opt_arr) == 1)
-            {
-                if($this->insert_answer($answer) == 1)
-                {
-                    return 1 ."||Question Inserted Successfully";       
+            if ($this->insert_option($opt_arr) == 1) {
+                if ($this->insert_answer($answer) == 1) {
+                    return 1 . "||Question Inserted Successfully";
                 }
             }
         }
@@ -273,11 +256,4 @@ class Question_operation extends Test_operation
             return $id["id"];
         }
     }
-}
-$que_obj = new Question_operation();
-switch($ch)
-{
-    case "11":
-        echo $que_obj->insert_question($_POST);
-        break;
 }
