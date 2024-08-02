@@ -70,8 +70,6 @@ $("#create_question_form").submit(function (e) {
         if (dataArr[0] == 1) {
           alert("Question Inserted");
           $("#create_question_form")[0].reset();
-          $("#create_question_form .answer option").remove();
-          $("#create_question_form .answer").append("<option>--Select Answer--</option>");
 
           // alert_show(dataArr[0], dataArr[2]);
           // setTimeout(function () {
