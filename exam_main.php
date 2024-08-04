@@ -8,7 +8,7 @@
     // {
     $link = mysqli_connect('localhost','root','','exam_test');
     //get question id from DB
-    $que_get_query = 'select id from question where test_id = 1';
+    $que_get_query = 'select id from question where test_id = 39';
     $que_get_result = mysqli_query($link,$que_get_query);
     $i=0;
     while($row = mysqli_fetch_assoc($que_get_result))

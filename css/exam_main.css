@@ -259,6 +259,11 @@ header span:nth-child(3)
     font-family: "Roboto",sans-serif;
     font-style: normal;
     font-weight: bold;
+    transition: all 200ms linear 0s;
+}
+.panel #container2 .alert #list li a:hover
+{
+    background-color: rgb(72, 87, 94);
 }
 .panel #get_value
 {

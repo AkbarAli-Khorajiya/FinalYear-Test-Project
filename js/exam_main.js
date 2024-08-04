@@ -31,6 +31,7 @@ function link(number)
 {
     jQuery('#container').load('question_display.php',{id:number});
     valid();
+    answer_count();
     id=id_arr.indexOf(number);
 }
 function valid()
