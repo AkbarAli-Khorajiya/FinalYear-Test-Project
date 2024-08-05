@@ -212,3 +212,21 @@ $("#edit_test_form").submit(function (e) {
     });
   }
 });
+//-----------Search Test in js------------//
+$(".search .search_input").keyup(function(){
+  let data = $(".search_input").val();
+  $.post("include/operation.php?ch=6",
+    {
+        ch: "6",
+        data: data
+    }, 
+    function (response) {
+      $("#test-table").html(response);
+    });
+});
+
+//-------- clear search -------------//
+$(".search .reset").on("click",function(){
+    $(".search .search_input").val('');
+    list_all_test();
+});

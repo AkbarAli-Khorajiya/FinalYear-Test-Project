@@ -18,12 +18,21 @@ class Test_operation
         }
         return $this->conn = $conn;
     }
-    public function all_test()
+    public function all_test($post)
     {
-
-        $query = 'select *from test';
-        $result = mysqli_query($this->conn, $query);
-        $num = mysqli_num_rows($result);
+        if(isset($post['data']))
+        {
+            $val = $post['data'];
+            $query = "select * from test where test_name LIKE '%$val%' OR test_time = '$val' OR test_start_time LIKE '%$val%' OR test_date LIKE '%$val%' OR test_question = '$val' OR test_marks = '$val'";
+            $result = mysqli_query($this->conn, $query);
+            $num = mysqli_num_rows($result);
+        }
+        else
+        {
+            $query = 'select *from test';
+            $result = mysqli_query($this->conn, $query);
+            $num = mysqli_num_rows($result);
+        }
         if ($num > 0) {
             $str = '<thead>
                 <tr>
@@ -45,7 +54,7 @@ class Test_operation
                         <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
                         <td>' . $row['test_time'] . '</td>
                         <td>' . $row['test_start_time'] . '</td>
-                        <td>' . $row['test_date'] . '</td>
+                        <td>' . date("d-m-Y",strtotime($row['test_date'])) . '</td>
                         <td>' . $row['test_question'] . '</td>
                         <td>' . $row['test_marks'] . '</td>
                         <td> <button class="edit-test" id="' . $row['id'] . '">Edit</button> </td> 
@@ -157,6 +166,9 @@ switch ($ch) {
         break;
     case "5":
         echo $test_obj->update_test($_POST);
+        break;
+    case "6":
+        echo $test_obj->all_test($_POST);
         break;
 }
 
