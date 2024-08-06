@@ -205,6 +205,53 @@ class Question_operation extends Test_operation
     //     $this->answer = $ans;
     //     $this->test_id = $test_id;
     // }
+
+    function all_ques($post)
+    {
+        $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options FROM `question` q JOIN options o ON q.id = o.que_id WHERE q.test_id =" . $post['id'] . " GROUP BY q.id ORDER BY q.id";
+        $result = mysqli_query($this->conn, $query);
+        $num = mysqli_num_rows($result);
+        if ($num > 0) {
+            $str = '<thead>
+                <tr>
+                    <th>Que Id</th>
+                    <th>Questions</th>
+                    <th>Option A</th>
+                    <th>Option B</th>
+                    <th>Option C</th>
+                    <th>Option D</th>
+                    <th>Right Answer</th>
+                    <th colspan="2" align="center">Action</th>
+                </tr>
+            </thead>
+            <tbody>';
+            $i = 1;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $options = explode('||', $row['options']);
+                // return $options[2];
+                $str .=
+                '<tr>
+                            <td>' . $i++ .
+                    '</td>
+                            <td>' . $row['question'] . '</td>';
+                $a = 0;
+                while ($a <  count($options)) {
+                    $str .= '<td>' . $options[$a] . '</td>';
+                    $a++;
+                }
+
+                $str .= '<td> <button class="edit-que" id="' . $row['id'] .
+                    '">Edit</button> </td>
+                            <td> <button class="delete-que" id="' . $row['id'] . '">Delete</button> </td>
+                        </tr>';
+            }
+            $str .= '</tbody>';
+        } else {
+            $str = 'Data Not Found';
+        }
+        return $str;
+    }
+
     function insert_question($post)
     {
         $que = $post['question'];
@@ -316,5 +363,8 @@ switch ($ch) {
 
     case "13":
         echo $que_obj->get_edit_que($_POST);
+        break;
+    case "14":
+        echo $que_obj->all_ques($_POST);
         break;
 }

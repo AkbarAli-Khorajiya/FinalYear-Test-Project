@@ -951,6 +951,11 @@ section #container .test-display .display-container table
     text-transform: capitalize;
     border-collapse: collapse;
 }
+section #container .test-display .display-container  .slidedown
+{
+    position: relative;
+    /* animation:  slidedown  0.5; */
+}
 section #container .test-display .display-container table thead tr th
 {
     padding: 10px 5px;
