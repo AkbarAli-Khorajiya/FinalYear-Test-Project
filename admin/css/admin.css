@@ -402,15 +402,13 @@ section #container .que-display .display-container
 }
 section #container .que-display .display-container table
 {
-    display: flow;
+    /* display: flow; */
     height: auto;
     width:100%;
     text-align: left;
     white-space: nowrap;
     text-transform: capitalize;
     border-collapse: collapse;
-    position: relative;
-    animation: slidedown 0.5s;
 }
 section #container .que-display .display-container table thead tr th
 {
@@ -952,11 +950,6 @@ section #container .test-display .display-container table
     white-space: nowrap;
     text-transform: capitalize;
     border-collapse: collapse;
-}
-section #container .test-display .display-container  .slidedown
-{
-    position: relative;
-    animation:  slidedown  0.5;
 }
 section #container .test-display .display-container table thead tr th
 {

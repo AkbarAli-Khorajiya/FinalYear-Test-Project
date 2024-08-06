@@ -152,7 +152,7 @@ if (isset($_POST['edit_id'])) {
         </span>
     </div>
     <div class="display-container">
-        <table cellspacing="10px" id="test-table" class="slidedown">
+        <table cellspacing="10px" id="test-table">
 
             <!-- ///// created test list ///// -->
 
