@@ -20,10 +20,10 @@ class Test_operation
     }
     public function all_test($post)
     {
-        if(isset($post['data']))
+        if(isset($post['data']) && strlen($post['data']) > 0)
         {
             $val = $post['data'];
-            $query = "select * from test where test_name LIKE '%$val%' OR test_time = '$val' OR test_start_time LIKE '%$val%' OR test_date LIKE '%$val%' OR test_question = '$val' OR test_marks = '$val'";
+            $query = "select * from test where test_name LIKE '%$val%' OR test_date LIKE '%$val%' OR test_question LIKE '%$val%' OR test_marks LIKE '%$val%'";
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         }
@@ -126,16 +126,18 @@ class Test_operation
         if ($num != 0) {
             $count = 0;
             while ($row = mysqli_fetch_assoc($execute)) {
-                if ($que_obj->delete_question($row["id"]) == 1) {
+                $response = $que_obj->delete_question($row);
+                $responseArr = explode("||",$response);
+                if ( $responseArr[0] == "1") {
                     $count++;
                 }
             }
             if ($num == $count) {
                 $query = "delete from test where id=" . $id['id'];
                 if (mysqli_query($this->conn, $query)) {
-                    return 1 + "||Test Deleted Successfully";
+                    return 1  ."||Test Deleted Successfully";
                 } else {
-                    return 0 + "||Test Not Deleted";
+                    return 0 ."||Test Not Deleted";
                 }
             }
         } else {
@@ -246,7 +248,7 @@ class Question_operation extends Test_operation
     }
     function delete_question($post)
     {
-        $que_id = $post['id'];
+        $que_id = $post["id"];
         $ans_del_query = 'delete from answer where que_id=' . $que_id;
         $ans_del_result = mysqli_query($this->conn, $ans_del_query);
         if ($ans_del_result) {

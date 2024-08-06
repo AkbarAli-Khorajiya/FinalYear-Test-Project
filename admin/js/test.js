@@ -84,7 +84,7 @@ $("#test-table").on("click", ".delete-test", function () {
               id: data
           },
           function (response) {
-              // console.log(response);
+              console.log(response);
               let dataArr = response.split("||");
               // console.log(dataArr);
               if (dataArr[0] == 1) {

@@ -863,7 +863,7 @@ section #container .test-title span
   --width-of-input: 150px;
   --height-of-input: 35px;
   --border-height: 2px;
-  --input-bg: #bebbfe;
+  --input-bg: #d9d9d9ba;
   --border-color: #4b49ac;
   --border-radius: 30px;
   --after-border-radius: 1px;
@@ -956,7 +956,7 @@ section #container .test-display .display-container table
 section #container .test-display .display-container  .slidedown
 {
     position: relative;
-    animation: slidedown  0.5s;
+    animation:  slidedown  0.5;
 }
 section #container .test-display .display-container table thead tr th
 {
