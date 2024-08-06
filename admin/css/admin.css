@@ -410,7 +410,6 @@ section #container .que-display .display-container table
     text-transform: capitalize;
     border-collapse: collapse;
     position: relative;
-    animation: slidedown 0.5s;
 }
 section #container .que-display .display-container table thead tr th
 {
@@ -956,7 +955,7 @@ section #container .test-display .display-container table
 section #container .test-display .display-container  .slidedown
 {
     position: relative;
-    animation:  slidedown  0.5;
+    /* animation:  slidedown  0.5; */
 }
 section #container .test-display .display-container table thead tr th
 {

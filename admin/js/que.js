@@ -40,6 +40,22 @@ function que_update() {
   }
 
 }
+
+// ---------Displaying all question------------- //
+function list_all_ques(test_id) {
+  $.post("include/operation.php?ch=14",
+    {
+      ch: "14",
+      id: test_id,
+    },
+    function (response) {
+      $("#que-table").html(response);
+    }
+  )
+}
+var testId = $('#test_id').val();
+list_all_ques(testId);
+
 //---------- Insert Question ---------//
 $("#create_question_form").submit(function (e) {
   e.preventDefault();
