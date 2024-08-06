@@ -55,5 +55,23 @@
         prevSelectedItem = this;
         });
     });
+    //-----------Show Alert------------//
+    function alert_show(value , msg)
+    { 
+        switch(value)
+        {
+            case '1':
+                $(".alert h3").text(msg);
+                $("#alert-container div").addClass("success-alert");
+                $("#alert-container").show().css('display','flex');
+                break;
+            case '0':
+                $(".alert h3").text(msg);
+                $("#alert-container div").addClass("danger-alert");
+                $("#alert-container").show().css('display','flex');
+          break;
+
+        }
+    }
 </script>
 </html>
