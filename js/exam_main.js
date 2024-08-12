@@ -57,7 +57,7 @@ function valid()
     else
     {
         indicate.style.backgroundColor = '#009E60';
-        indicate.style.borderRadius = '50%';
+        indicate.style.borderRadius = '20%';
         indicate.style.color = 'white';
         localStorage.setItem(id_arr[id],option);
         jQuery('#get_value').load('answer_store.php',{option:option,id:id_arr[id]});  
