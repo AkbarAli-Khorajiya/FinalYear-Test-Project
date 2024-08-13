@@ -29,33 +29,18 @@ var id=0;
 //set a link for anchor tag
 function link(number)
 {
-    jQuery('#container').load('question_display.php',{id:number});
+    id=id_arr.indexOf(number);
+    jQuery('#container').load('question_display.php',{id:number,que_no: id+1});
     valid();
     answer_count();
-    id=id_arr.indexOf(number);
 }
-function valid()
+function valid(element)
 {
-    var element = document.getElementsByName("option");
     var indicate = document.getElementById("a"+id_arr[id]);
-    var flag = true;
-    for(var i=0;i<element.length;i++)
+    if(typeof element !== 'undefined')
     {
-        if(element[i].checked)
-        {
-            flag = false;
-            var option = element[i].value;
-            break;
-        }
-    }
-    if(flag == true)
-    {
-        indicate.style.backgroundColor = '#E60026';
-        indicate.style.borderRadius = '20%';
-        indicate.style.color = 'white';  
-    }
-    else
-    {
+        var flag = false;
+        var option = element.value;
         indicate.style.backgroundColor = '#009E60';
         indicate.style.borderRadius = '20%';
         indicate.style.color = 'white';
@@ -63,26 +48,70 @@ function valid()
         jQuery('#get_value').load('answer_store.php',{option:option,id:id_arr[id]});  
         console.log(option);
     }
+    else
+    {
+            if(flag != false)
+            {    
+                indicate.style.backgroundColor = '#E60026';
+                indicate.style.borderRadius = '20%';
+                indicate.style.color = 'white'; 
+            }   
+    }
   
 }
+var nvisit_answer = document.getElementById("nvisit");
+var answer = document.getElementById("ans");
+var not_answer = document.getElementById("nans"); 
+
+function answer_count(value)
+{
+    const link = document.getElementsByClassName("radio_val");
+    let nvisit_count = max;
+    let ans_count=0;
+    let notans_count = 0;
+    for(var i = 0 ; i < link.length; i++ )
+    {
+        if(link[i].style.backgroundColor == 'rgb(0, 158, 96)')
+        {
+            ans_count++;
+            nvisit_count--;
+        }
+        else if(link[i].style.backgroundColor == 'rgb(230, 0, 38)')
+        {
+            notans_count++;
+            nvisit_count--;
+        }
+    }
+    nvisit_answer.value = nvisit_count; 
+    answer.value = ans_count;
+    not_answer.value = notans_count;
+    if(value!= 'null' && value == 1)
+    {
+        let arr = {answer : ans_count,not_answer:notans_count,nvisit_answer:nvisit_count,total_que:max};
+        return arr;
+    }
+} 
 function go(element)
 {
-if(typeof element !== 'undefined')
-{
-    switch(element.value)
+    if(typeof element !== 'undefined')
     {
-        case "Next":
+        switch(element.value)
+        {
+            case "Next":
             {
-                answer_count();
+                
                 if(id<max-1)
                 {
                     id++;
                     console.log("next:"+id);
-                    jQuery('#container').load('question_display.php',{id:id_arr[id]});
+                    jQuery('#container').load('question_display.php',{id:id_arr[id] , que_no:id+1});
+                    valid();
+                    answer_count();
                 }
                 else
                 {
-                    element.disabled = true;
+                    // element.disabled = true;
+                    element.style.display = 'none';
                 }
                 break;
             }
@@ -92,23 +121,25 @@ if(typeof element !== 'undefined')
                 {
                     id--;
                     console.log("back"+id);
-                    jQuery('#container').load('question_display.php',{id:id_arr[id]});
+                    jQuery('#container').load('question_display.php',{id:id_arr[id], que_no: id+1});
                 }
                 else
                 {
-                    element.disabled = true;
+                    // element.disabled = true;
+                    element.style.display = 'none';
                 }
                 break;
             }       
-    } 
-}
-else
-{
-    jQuery('#container').load('question_display.php',{id:id_arr[0]});
-}
+        } 
+    }
+    else
+    {
+        valid();
+        jQuery('#container').load('question_display.php',{id:id_arr[0] , que_no:id+1});
+        answer_count();
+    }
 }
 go();
-
 // Set the date and time for the countdown to end
 // var countDownDate = new Date();
 // countDownDate.setHours(countDownDate.getHours() + 1); // Add 1 hour to the current time
@@ -168,38 +199,8 @@ function option_check()
     }
 }
 
-var nvisit_answer = document.getElementById("nvisit");
-var answer = document.getElementById("ans");
-var not_answer = document.getElementById("nans"); 
 
-function answer_count(value)
-{
-    const link = document.getElementsByClassName("radio_val");
-    var nvisit_count = max;
-    let ans_count=0;
-    let notans_count = 0;
-    for(var i = 0 ; i < link.length; i++ )
-    {
-        if(link[i].style.backgroundColor == 'rgb(0, 158, 96)')
-        {
-            ans_count++;
-            nvisit_count--;
-        }
-        else if(link[i].style.backgroundColor == 'rgb(230, 0, 38)')
-        {
-            notans_count++;
-            nvisit_count--;
-        }
-    }
-    nvisit_answer.value = nvisit_count; 
-    answer.value = ans_count;
-    not_answer.value = notans_count;
-    if(value!= 'null' && value == 1)
-    {
-        let arr = {answer : ans_count,not_answer:notans_count,nvisit_answer:nvisit_count,total_que:max};
-        return arr;
-    }
-}  
+ 
 
 
 function redirect(value)
