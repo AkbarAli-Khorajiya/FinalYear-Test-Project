@@ -208,7 +208,7 @@ class Question_operation extends Test_operation
 
     function all_ques($post)
     {
-        $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options FROM `question` q JOIN options o ON q.id = o.que_id WHERE q.test_id =" . $post['id'] . " GROUP BY q.id ORDER BY q.id";
+        $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.test_id =" . $post['id'] . " GROUP BY q.id ORDER BY q.id";
         $result = mysqli_query($this->conn, $query);
         $num = mysqli_num_rows($result);
         if ($num > 0) {
@@ -230,9 +230,8 @@ class Question_operation extends Test_operation
                 $options = explode('||', $row['options']);
                 // return $options[2];
                 $str .=
-                '<tr>
-                            <td>' . $i++ .
-                    '</td>
+                        '<tr>
+                            <td>' . $i++ .'</td>
                             <td>' . $row['question'] . '</td>';
                 $a = 0;
                 while ($a <  count($options)) {
@@ -240,7 +239,7 @@ class Question_operation extends Test_operation
                     $a++;
                 }
 
-                $str .= '<td> <button class="edit-que" id="' . $row['id'] .
+                $str .= '<td>'.$row['answer'].'</td><td> <button class="edit-que" id="' . $row['id'] .
                     '">Edit</button> </td>
                             <td> <button class="delete-que" id="' . $row['id'] . '">Delete</button> </td>
                         </tr>';
