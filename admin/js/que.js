@@ -11,13 +11,11 @@ function que_delete(que_id) {
   }
 }
 
-// $('#edit-que-container').show();
-$(".edit-que").click(function () {
+$("#que-table").on("click", ".edit-que", function () {
   $("#edit-que-container").show();
 });
 // ----------close pop-up------------ //
 $(".close").click(function () {
-  $("#edit_que_form")[0].reset();
   $('#edit-que-container').hide();
 });
 

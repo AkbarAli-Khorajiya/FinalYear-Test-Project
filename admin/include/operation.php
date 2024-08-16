@@ -20,15 +20,12 @@ class Test_operation
     }
     public function all_test($post)
     {
-        if(isset($post['data']) && strlen($post['data']) > 0)
-        {
+        if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
             $query = "select * from test where test_name LIKE '%$val%' OR test_date LIKE '%$val%' OR test_question LIKE '%$val%' OR test_marks LIKE '%$val%'";
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
-        }
-        else
-        {
+        } else {
             $query = 'select *from test';
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
@@ -54,7 +51,7 @@ class Test_operation
                         <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
                         <td>' . $row['test_time'] . '</td>
                         <td>' . $row['test_start_time'] . '</td>
-                        <td>' . date("d-m-Y",strtotime($row['test_date'])) . '</td>
+                        <td>' . date("d-m-Y", strtotime($row['test_date'])) . '</td>
                         <td>' . $row['test_question'] . '</td>
                         <td>' . $row['test_marks'] . '</td>
                         <td> <button class="edit-test" id="' . $row['id'] . '">Edit</button> </td> 
@@ -127,17 +124,17 @@ class Test_operation
             $count = 0;
             while ($row = mysqli_fetch_assoc($execute)) {
                 $response = $que_obj->delete_question($row);
-                $responseArr = explode("||",$response);
-                if ( $responseArr[0] == "1") {
+                $responseArr = explode("||", $response);
+                if ($responseArr[0] == "1") {
                     $count++;
                 }
             }
             if ($num == $count) {
                 $query = "delete from test where id=" . $id['id'];
                 if (mysqli_query($this->conn, $query)) {
-                    return 1  ."||Test Deleted Successfully";
+                    return 1  . "||Test Deleted Successfully";
                 } else {
-                    return 0 ."||Test Not Deleted";
+                    return 0 . "||Test Not Deleted";
                 }
             }
         } else {
@@ -230,8 +227,8 @@ class Question_operation extends Test_operation
                 $options = explode('||', $row['options']);
                 // return $options[2];
                 $str .=
-                        '<tr>
-                            <td>' . $i++ .'</td>
+                    '<tr>
+                            <td>' . $i++ . '</td>
                             <td>' . $row['question'] . '</td>';
                 $a = 0;
                 while ($a <  count($options)) {
@@ -239,8 +236,8 @@ class Question_operation extends Test_operation
                     $a++;
                 }
 
-                $str .= '<td>'.$row['answer'].'</td><td> <button class="edit-que" id="' . $row['id'] .
-                    '">Edit</button> </td>
+                $str .= '<td>' . $row['answer'] . '</td>
+                        <td> <button class="edit-que" id="' . $row['id'] .'">Edit</button> </td>
                             <td> <button class="delete-que" id="' . $row['id'] . '">Delete</button> </td>
                         </tr>';
             }
