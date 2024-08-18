@@ -14,9 +14,9 @@ console.log(id_arr);
 for(let i=0;i<max;i++)
 {
     var j=i+1;
-    const list = document.createElement('li');
+    const list = document.createElement('li'); 
     const link = document.createElement('a');
-    link.id = "a"+id_arr[i];
+    link.id = "a"+id_arr[i];    
     link.className = "radio_val";
     link.setAttribute('href','javascript:void(0)');
     link.setAttribute('onclick','link('+id_arr[i]+')');
@@ -30,7 +30,18 @@ var id=0;
 function link(number)
 {
     id=id_arr.indexOf(number);
-    jQuery('#container').load('question_display.php',{id:number,que_no: id+1});
+    if(id_arr.lastIndexOf(number))
+    {
+        jQuery('#container').load('question_display.php',{id:number,que_no: id+1,last:1});
+    }
+    else if(number == id_arr[0])
+    {
+        jQuery('#container').load('question_display.php',{id:number,que_no: id+1,first:1});
+    }
+    else
+    {
+        jQuery('#container').load('question_display.php',{id:number,que_no: id+1});
+    }
     valid();
     answer_count();
 }
@@ -100,7 +111,7 @@ function go(element)
             case "Next":
             {
                 
-                if(id<max-1)
+                if(id<max-2)
                 {
                     id++;
                     console.log("next:"+id);
@@ -110,8 +121,11 @@ function go(element)
                 }
                 else
                 {
-                    // element.disabled = true;
-                    element.style.display = 'none';
+                    id++;
+                    console.log("next:"+id);
+                    jQuery('#container').load('question_display.php',{id:id_arr[id] , que_no:id+1, last:1});
+                    valid();
+                    answer_count();
                 }
                 break;
             }
@@ -135,7 +149,7 @@ function go(element)
     else
     {
         valid();
-        jQuery('#container').load('question_display.php',{id:id_arr[0] , que_no:id+1});
+        jQuery('#container').load('question_display.php',{id:id_arr[0] , que_no:id+1, first: 1});
         answer_count();
     }
 }

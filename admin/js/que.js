@@ -11,7 +11,11 @@ function que_delete(que_id) {
   }
 }
 
+// $('#edit-que-container').show();
+
+// ----------Edit pop-up Show-----------//
 $("#que-table").on("click", ".edit-que", function () {
+  console.log("hello");
   $("#edit-que-container").show();
 });
 // ----------close pop-up------------ //
@@ -119,11 +123,8 @@ $("#que-table").on("click", ".edit-que", function () {
       $("#edit_que_form .option_b").val(data['option_2']);
       $("#edit_que_form .option_c").val(data['option_3']);
       $("#edit_que_form .option_d").val(data['option_4']);
-      var answer= $("<option>");
-      answer.val(data['answer']);
-      answer.text(data['answer']);
-      $("#edit_que_form .answer").append(answer);
-      $("#edit_que_form .answer option:contains("+data['answer']+")").prop('selected',true);
+      listOptionsInEditQue();
+      $("#edit_que_form .answer option:contains("+data['answer']+")").prop('selected' , true);
     });
 });
 //------------- Delete Question------------------//
@@ -210,3 +211,40 @@ $(".search .reset").on("click",function(){
     $(".search .search_input").val('');
     list_all_ques();
 });
+
+
+function listOptionsInEditQue()
+{
+  $("#edit_que_form .answer option").remove();
+  if($("#edit_que_form .answer option").length == 0)
+  {
+      let a = $("#edit_que_form .option_a").val();
+      let b = $("#edit_que_form .option_b").val();
+      let c = $("#edit_que_form .option_c").val();
+      let d = $("#edit_que_form .option_d").val();
+      if (a != "") {
+        var option_a = $("<option>");
+        option_a.val(a);
+        option_a.text(a);
+        $("#edit_que_form .answer").append(option_a);
+      }
+      if (b != "") {
+        var option_b = $("<option>");
+        option_b.val(b);
+        option_b.text(b);
+        $("#edit_que_form .answer").append(option_b);
+      }
+      if (c != "") {
+        var option_c = $("<option>");
+        option_c.val(c);
+        option_c.text(c);
+        $("#edit_que_form .answer").append(option_c);
+      }
+      if (d != "") {
+        var option_d = $("<option>");
+        option_d.val(d);
+        option_d.text(d);
+        $("#edit_que_form .answer").append(option_d);
+      }
+  }
+}

@@ -44,10 +44,17 @@ $link = mysqli_connect('localhost','root','','exam_test');
      </span>
  </div>
  <div class="button">
-  <span>
-      <input type="button" id="back" value="Back" onclick="go(this)">
-      <input type="button" id="next" value="Next" onclick="go(this)">
-  </span>
+  <span>';
+    if(!isset($_POST['first']))
+    {
+        $html .=  '<input type="button" id="back" value="Back" onclick="go(this)">';
+    }
+    if(!isset($_POST['last']))
+    {
+        $html.= '<input type="button" id="next" value="Next" onclick="go(this)">';
+    }
+
+ $html.=' </span>
   <span><input type="submit" value="Submit" name="submit" onclick="redirect(this.value)"></span>
  </div>
 </div>
