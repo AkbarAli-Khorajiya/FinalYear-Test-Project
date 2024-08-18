@@ -205,9 +205,20 @@ class Question_operation extends Test_operation
 
     function all_ques($post)
     {
-        $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.test_id =" . $post['id'] . " GROUP BY q.id ORDER BY q.id";
-        $result = mysqli_query($this->conn, $query);
-        $num = mysqli_num_rows($result);
+        $search = $post['data']['search'];
+        $testId = $post['data']['testId'];
+        // return $testId;
+        // SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.question LIKE "%s%" && q.test_id = 93 GROUP BY q.id ORDER BY q.id;
+        
+        if (!empty($search)) {
+            $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.question LIKE '%".$search."%' && q.test_id =".$testId." GROUP BY q.id ORDER BY q.id";
+            $result = mysqli_query($this->conn, $query);
+            $num = mysqli_num_rows($result);
+        } else {
+            $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.test_id =".$testId." GROUP BY q.id ORDER BY q.id";
+            $result = mysqli_query($this->conn, $query);
+            $num = mysqli_num_rows($result);
+        }
         if ($num > 0) {
             $str = '<thead>
                 <tr>
@@ -361,6 +372,9 @@ switch ($ch) {
         echo $que_obj->get_edit_que($_POST);
         break;
     case "14":
+        echo $que_obj->all_ques($_POST);
+        break;
+    case "15":
         echo $que_obj->all_ques($_POST);
         break;
 }

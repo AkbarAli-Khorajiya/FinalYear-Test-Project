@@ -217,7 +217,6 @@ $(".search .search_input").keyup(function(){
   let data = $(".search_input").val();
   $.post("include/operation.php?ch=6",
     {
-        ch: "6",
         data: data
     }, 
     function (response) {

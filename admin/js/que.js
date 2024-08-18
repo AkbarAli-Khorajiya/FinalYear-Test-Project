@@ -48,7 +48,7 @@ function list_all_ques(test_id) {
   $.post("include/operation.php?ch=14",
     {
       ch: "14",
-      id: test_id,
+      data: {testId:test_id},
     },
     function (response) {
       $("#que-table").html(response);
@@ -193,16 +193,18 @@ $("#create_question_form .answer").click(function () {
     }
   }
 });
-//-----------Search Test in js------------//
+//-----------Search Question in js------------//
 $(".search .search_input").keyup(function(){
-  let data = $(".search_input").val();
-  $.post("include/operation.php?ch=6",
+  let searchQue = $(".search_input").val();
+  let tId = $('#test_id').val();
+  let data = {search: searchQue,testId:tId};
+  console.log(data);
+  $.post("include/operation.php?ch=15",
     {
-        ch: "6",
-        data: data
+        data:data
     }, 
     function (response) {
-      $("#test-table").html(response);
+      $("#que-table").html(response);
     });
 });
 
