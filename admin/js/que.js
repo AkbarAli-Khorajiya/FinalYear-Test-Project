@@ -123,8 +123,10 @@ $("#que-table").on("click", ".edit-que", function () {
       $("#edit_que_form .option_b").val(data['option_2']);
       $("#edit_que_form .option_c").val(data['option_3']);
       $("#edit_que_form .option_d").val(data['option_4']);
-      listOptionsInEditQue();
-      $("#edit_que_form .answer option:contains("+data['answer']+")").prop('selected' , true);
+      var answer = $("<option>");
+      answer.val(data['answer']);
+      answer.text(data['answer']); 
+      $("#edit_que_form .answer").append(answer);
     });
 });
 //------------- Delete Question------------------//
@@ -215,8 +217,7 @@ $(".search .reset").on("click",function(){
 });
 
 
-function listOptionsInEditQue()
-{
+$("#edit_que_form .answer").click(function(){
   $("#edit_que_form .answer option").remove();
   if($("#edit_que_form .answer option").length == 0)
   {
@@ -249,7 +250,7 @@ function listOptionsInEditQue()
         $("#edit_que_form .answer").append(option_d);
       }
   }
-}
+});
 
 //-----------Update Test------------//
 $("#edit_que_form").submit(function (e) {
