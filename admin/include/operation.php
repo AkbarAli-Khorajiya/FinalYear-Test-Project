@@ -348,6 +348,73 @@ class Question_operation extends Test_operation
             return "Error";
         }
     }
+    function update_que($post)
+    {
+        $que_id = $post["que_id"];
+        $test_id = $post['test_id'];
+        $que = $post['question'];
+        $opt_arr[0] = $post['option_a'];
+        $opt_arr[1] = $post['option_b'];
+        $opt_arr[2] = $post['option_c'];
+        $opt_arr[3] = $post['option_d'];
+        $answer = $post['answer'];
+        $query = "UPDATE `question` SET `question` = '$que' where id = $que_id and test_id = $test_id";
+        $result = mysqli_query($this->conn,$query);
+        if($result)
+        {
+            if($this->update_option($que_id,$opt_arr) == 1)
+            {
+                if($this->update_answer($que_id,$answer) == 1)
+                {
+                    return 1 ."||Question Updated Successfully";
+                }
+            }            
+        }
+        else
+        {
+            return 0 ."|| Question Not Updated";
+        }
+    }
+    function update_option($queid, $opt_arr)
+    {
+        $opt_id_arr = $this->get_opt_id($queid);
+        $count = 0;
+        for($i = 0; $i < count($opt_arr); $i++)
+        {
+            $query = "UPDATE options set `options` = '$opt_arr[$i]' where id= $opt_id_arr[$i] and que_id = $queid";
+            $result = mysqli_query($this->conn, $query);
+            if($result)
+            {
+                $count++;
+            }
+        }
+        if($count == 4)
+        {
+            return 1;
+        }
+    }
+    function update_answer($queid,$answer)
+    {
+        $query = "UPDATE answer SET `answer` = '$answer' where que_id = $queid";
+        $result = mysqli_query($this->conn, $query);
+        if($result)
+        {
+            return 1;
+        }
+    }
+    function get_opt_id($queid)
+    {
+        $query = "select id from options where que_id = $queid";
+        $result = mysqli_query($this->conn, $query);
+        $i = 0;
+        $arr = array();
+        while($row = mysqli_fetch_array($result))
+        {   
+            $arr[$i] = $row['id'];
+            $i++;
+        }
+        return $arr;
+    }
     function get_id()
     {
         $id_query = "select id from question order by id desc limit 1";
@@ -376,5 +443,8 @@ switch ($ch) {
         break;
     case "15":
         echo $que_obj->all_ques($_POST);
+        break;
+    case "16":
+        echo $que_obj->update_que($_POST);
         break;
 }

@@ -202,7 +202,7 @@ $("#edit_test_form").submit(function (e) {
           alert_show(dataArr[0] , dataArr[1]);
           list_all_test();
           setTimeout(function(){
-            $("#alert-test-container").fadeOut();
+            $("#alert-container").fadeOut();
           }, 3000);
         } else 
         {

@@ -250,3 +250,56 @@ function listOptionsInEditQue()
       }
   }
 }
+
+//-----------Update Test------------//
+$("#edit_que_form").submit(function (e) {
+  e.preventDefault();
+  let testid = $("#edit_que_form .test_id").val();
+  let queid = $("#edit_que_form .que_id").val();
+  let question = $("#edit_que_form .question").val();
+  let option_a = $("#edit_que_form .option_a").val();
+  let option_b = $("#edit_que_form .option_b").val();
+  let option_c = $("#edit_que_form .option_c").val();
+  let option_d = $("#edit_que_form .option_d").val();
+  let answer = $("#edit_que_form .answer").val();
+  
+
+  
+  let testTotalQues = $("#edit_test_form .test_question").val();
+  if (
+    testid == "" ||
+    queid == "" ||
+    question == "" ||
+    option_a == "" ||
+    option_b == "" ||
+    option_c == "" ||
+    option_d == "" ||
+    answer == ""
+  ) {
+    $(".edit_que_title").html("* Fill all field");
+  } else {
+    let data = $("#edit_que_form").serialize();
+    $.ajax({
+      type: "POST",
+      url: "include/operation.php?ch=16",
+      data: data,
+      encode: true,
+      success: function (response) {
+        console.log(response);
+        let dataArr = response.split("||");
+        if (dataArr[0] == 1) {
+          $("#edit_que_form")[0].reset();
+          $("#edit-que-container").fadeOut();
+          alert_show(dataArr[0] , dataArr[1]);
+          list_all_ques(testid);
+          setTimeout(function(){
+            $("#alert-container").fadeOut();
+          }, 3000);
+        } else 
+        {
+          alert_show(dataArr[0] , dataArr[1]);
+        }
+      },
+    });
+  }
+});
