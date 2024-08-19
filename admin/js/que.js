@@ -15,7 +15,6 @@ function que_delete(que_id) {
 
 // ----------Edit pop-up Show-----------//
 $("#que-table").on("click", ".edit-que", function () {
-  console.log("hello");
   $("#edit-que-container").show();
 });
 // ----------close pop-up------------ //
