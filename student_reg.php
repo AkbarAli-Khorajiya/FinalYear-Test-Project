@@ -17,10 +17,10 @@
         <form action="#" method="post">
             <ul>
                 <li> <h3>Registration</h3> </li>
-                <li> <input type="text" class="style" name="name" placeholder="Enter your name" required> </li>
-                <li> <input type="email" class="style" name="password" placeholder="Enter your email" required> </li>
+                <li> <input type="text" class="style" id="name" name="name" placeholder="Enter your name" required> </li>
+                <li> <input type="email" class="style" id="email" name="email" placeholder="Enter your email" required> </li>
                 <li> 
-                    <select name="gender" class="style"> 
+                    <select name="gender" id="gender" class="style"> 
                         <option value="">Gender</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
