@@ -92,10 +92,10 @@ $("#create_question_form").submit(function (e) {
           $("#create_question_form")[0].reset();
           alert_show(dataArr[0], dataArr[2]);
           setTimeout(function () {
-            $("#alert-test-container").fadeOut();
+            $("#alert-container").fadeOut();
           }, 900);
           setTimeout(function () {
-            $("#container").load("que.php?id=" + dataArr[1]);
+            list_all_ques(dataArr[1]);
           }, 1400);
         } else {
           alert_show(dataArr[0], dataArr[1]);
@@ -142,10 +142,13 @@ $("#que-table").on("click", ".delete-que", function () {
         let dataArr = response.split("||");
         // console.log(dataArr);
         if (dataArr[0] == 1) {
+          alert_show(dataArr[0],dataArr[1]);
           setTimeout(function () {
-            alert_show(dataArr[0], dataArr[1]);
-          }, 1500);
-          // alert("Test deleted Successfully");
+            $("#alert-container").fadeOut();
+          }, 900);
+          setTimeout(function () {
+            list_all_ques(testId);
+          }, 1400);
         }
         else {
           alert_show(dataArr[0], dataArr[1]);

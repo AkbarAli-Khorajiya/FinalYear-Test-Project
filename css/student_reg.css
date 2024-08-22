@@ -51,7 +51,9 @@ header img
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 48vh;
+    flex-direction: column;
+    /* height: 48vh; */
+    padding: 15px 20px 20px 20px;
     width: 28vw;
     background-color: white;
     border: 1px solid rgba(94, 93, 93, 0.342);
@@ -94,7 +96,30 @@ header img
     background-color: rgb(67, 119, 197);
 
 }
-.container form ul .success
+.container form .msg
 {
-    color: rgb(63, 192, 63);
+    align-self: self-start;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.container form .msg .success
+{
+    background: #3db952;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.container form .msg .error
+{
+    background: #eb5151;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
 }
