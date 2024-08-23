@@ -11,35 +11,68 @@
     </script>
 </head>
 <body>
-    <header>
-        <span onclick="window.location.href = 'index.php';">Exam25</span>
-        <img src="image/3.png" alt="">
-    </header>
     <div class="container">
-        <form action="javascript:void(0)" id="std-reg-form">
-            <div class="msg">
-                <div>
-                </div>
+        <!--Data or Content-->
+        <div class="box-1">
+            <div class="content-holder">
+                <h2>Exam25</h2>
+                <p class="sub-content">Already Registered?<br/>Then login</p>
+                <button class="button-1" onclick="register()">Register</button>
+                <button class="button-2" onclick="login()">Login</button>
             </div>
-            <ul>
-                <li> <h3>Registration</h3> </li>
-                <li> <input type="text" class="style" id="name" name="name" placeholder="Enter your name" required> </li>
-                <li> <input type="email" class="style" id="email" name="email" placeholder="Enter your email" required> </li>
-                <li> 
-                    <select name="gender" id="gender" class="style" required> 
+        </div>
+        <!--Forms-->
+        <div class="box-2">
+            <!--Create Container for Signup form-->
+            <div class="register-form-container">
+                <div class="msg">
+                    <div></div>
+                </div>
+                <h1>Register</h1>
+                <form id="std-reg-form">
+                    <input type="text" name="name" placeholder="Name" class="input-field" required>
+                    <input type="email" name="email" placeholder="Email" class="input-field" required>
+                    <input type="password" name="password" placeholder="Password" class="input-field" required>
+                    <input type="password" name="confirm-password" placeholder="Confirm Password" class="input-field" required>
+                    <select name="gender" name="gender" class="input-field" required>
                         <option value="">Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="Others">Others</option>
-                    </select> 
-                </li>
-                <li> <input type="submit" value="Register" name="register"></li>
-                <li class="msg"></li>
-            </ul>
-        </form>
-    </div>
-</body>
+                        <option value="Other">Other</option>
+                    </select>
+                    <button class="register-button" id="submit-reg" type="submit">Register</button>
+                </form>
+            </div>
+            <div class="login-form-container">
+                <h1>Login</h1>
+                <input type="text" placeholder="Email" class="input-field">
+                <br><br>
+                <input type="password" placeholder="Password" class="input-field">
+                <br><br>
+                <button class="login-button" type="button">Login</button>
+            </div>
+        </div>
+    </div>    
+</body>   
 <script>
     <?php include_once "js/stdOperation.js"; ?>
+    function register()
+    {
+        document.querySelector(".login-form-container").style.cssText = "display: none;";
+        document.querySelector(".register-form-container").style.cssText = "display: block;";
+        document.querySelector(".container").style.cssText = "background:linear-gradient(rgb(0,123,167), rgb(8,69,126))";
+        document.querySelector(".button-1").style.cssText = "display: none";
+        document.querySelector(".button-2").style.cssText = "display: block";
+        document.querySelector(".sub-content").innerHTML = "Already Registered?<br/>Then login";
+    };
+    function login()
+    {
+        document.querySelector(".register-form-container").style.cssText = "display: none;";
+        document.querySelector(".login-form-container").style.cssText = "display: block;";
+        document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom,rgb(0,109,176), rgb(0,147,175))";
+        document.querySelector(".button-2").style.cssText = "display: none";
+        document.querySelector(".button-1").style.cssText = "display: block";
+        document.querySelector(".sub-content").innerHTML = "Not Register yet?<br/>Then Register";
+    };
 </script>
 </html>
