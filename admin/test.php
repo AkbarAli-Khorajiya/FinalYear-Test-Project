@@ -120,7 +120,7 @@ if (isset($_POST['edit_id'])) {
             </tr>
             <tr>
                 <td> <input type="text" name="test_time" class="test_time"  placeholder="Test time (in minutes )" value="<?php echo $test_time; ?>"> </td>
-                <td> <input type="text" name="test_marks" class="test_marks"  placeholder="Test marks" value="<?php echo $test_marks; ?>"> </td>
+                <td> <input type="text" name="test_marks" class="test_marks"  placeholder="Each Question marks" value="<?php echo $test_marks; ?>"> </td>
             </tr>
             <tr>
                 <td> <input type="text" name="test_question" class="test_question"  placeholder="Total number of Question" value="<?php echo $test_question; ?>"> </td>

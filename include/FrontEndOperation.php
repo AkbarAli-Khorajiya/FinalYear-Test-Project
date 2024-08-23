@@ -16,8 +16,21 @@
         }
         function addUser($post)
         {
-            if($post = $this->validData($post)) 
-            {   
+            if($this->validData($post) == 0){
+                return 0 ."||Fill all fields";
+            }
+            else if ($this->validData($post) == 2) {
+                return 0 ."||Enter Valid Name";
+            }
+            else if ($this->validData($post) == 3) {
+                return 0 ."||Enter Valid Email";
+                
+            }
+            else if ($this->validData($post) == 4) {
+                return 0 ."||Select Gender";
+                
+            }
+            else{   
                 $name = $post['name'];
                 $email = $post['email'];
                 $gender = $post['gender'];
@@ -30,10 +43,6 @@
                 {
                     return 0 ."||Not Registered";
                 }
-            }  
-            else
-            {
-                return 0 ."|| Enter Valid Data";
             }
         }
         function validData($data)
@@ -43,12 +52,12 @@
             }
             // validate name
             if(empty($data['name'])) {
-                return 0;
+                return 2;
             }
             else{
                 $name = $this->cleanData($data['name']);
                 if(!preg_match("/^[a-zA-Z ]*$/",$name)) {
-                    return 0;
+                    return 2;
                 }
                 else
                 {
@@ -57,12 +66,12 @@
             }
             // validate email
             if(empty($data['email'])) {
-                return 0;
+                return 3;
             }
             else{
                 $email = $this->cleanData($data['email']);
                 if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    return 0;
+                    return 3;
                 }
                 else
                 {
@@ -71,7 +80,7 @@
             }
             // validate gender
             if(empty($data['gender'])) {
-                return 0;
+                return 4;
             }
             else{
                 $gender = $this->cleanData($data['gender']);
