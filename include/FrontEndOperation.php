@@ -1,4 +1,5 @@
 <?php
+    session_start();
     class Student
     {
         private $host = 'localhost';
@@ -64,6 +65,34 @@
                 }
             }
         }
+        function loginUser($post)
+        {
+            $email = $post['email'];
+            $password = $post['password'];
+            $query = "select * from user where email = '$email'"; 
+            $result = mysqli_query($this->conn,$query);
+            if(mysqli_num_rows($result)>0)
+            {
+                $row = mysqli_fetch_assoc($result);
+                $user_password = $row['password'];
+                $user_id = $row['id'];
+                $user_name = $row['name'];
+                if(password_verify($password , $user_password))
+                {
+                    $_SESSION['userId'] = $user_id;
+                    $_SESSION['userName'] = $user_name;
+                    return 1 ."||Login Success";
+                }  
+                else
+                {
+                    return 0 ."||Invalid Credential";
+                }
+            }
+            else
+            {
+                return 0 ."||Invalid Credential";
+            }
+        }
         function checkUser($data)
         {
             $email = $data['email'];
@@ -73,7 +102,9 @@
             {
                 return 0;
             }
+            return 1;
         }
+        //Check user input Data
         function validData($data)
         {
             if(empty($data)) {
@@ -155,6 +186,9 @@
     switch ($ch) {
         case '1':
             echo $stdObj->addUser($_POST);
+            break;
+        case '2':
+            echo $stdObj->loginUser($_POST);
             break;
     }
 ?>

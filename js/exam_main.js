@@ -210,6 +210,7 @@ function option_check()
                 break;
             }
         }
+        valid({value:element[i].value});
     }
 }
 

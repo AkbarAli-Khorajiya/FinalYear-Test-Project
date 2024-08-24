@@ -1,3 +1,7 @@
+<?php
+    session_start();
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +19,20 @@
             <a href="student_login.php">EXAM</a>
             <a href="#">RESULT</a>
             <a href="exam25_about.php">ABOUT</a>
-            <a href="student_reg.php">REGISTER</a>
+            <?php 
+                if(isset($_SESSION['userId']) && !empty($_SESSION['userId']))
+                {
+            ?>
+                <a href="#">USER</a>
+            <?php
+                }
+                else
+                {
+            ?>
+                <a href="student_reg.php">Register</a>
+            <?php
+                }
+            ?>    
         </nav>
     </header>
     <section>

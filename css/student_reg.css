@@ -18,17 +18,21 @@ body
 .container
 {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     background-color: red;
-    background: linear-gradient(to bottom,rgb(0,123,167), rgb(8,69,126));
+    background: linear-gradient(to top,rgb(0,109,176), rgb(0,147,175));
     width: 800px;
-    height: 400px;
+    height: 450px;
     margin: 10% auto;;
     border-radius: 5px;
     box-shadow: 0px 0px 15px rgba(70, 70, 70, 0.445);
 }
 .content-holder
 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
     text-align: center;
     color: white;
     font-size: 14px;
@@ -41,11 +45,6 @@ body
 {
     font-size: 34px;
     margin: 20px auto;
-}
-
-.content-holder p
-{
-    margin: 30px auto;
 }
 .content-holder button
 {
@@ -76,11 +75,54 @@ body
     margin-top: 10%;
     display: none;
 }
+.login-form-container form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-form-container .msg
+{
+    align-self: self-start;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.login-form-container .msg .success
+{
+    background: #3db952;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.login-form-container .msg .error
+{
+    background: #eb5151;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
 .login-form-container h1
 {
     color: black;
     font-size: 24px;
     padding: 20px;
+}
+.login-form-container .input-group
+{
+    display: flex;
+    flex-direction: column;
+}
+.login-form-container .input-group label
+{
+    text-align: start;
+    margin-left: 5px;
 }
 .input-field
 {
@@ -94,6 +136,7 @@ body
     outline: none;
 }
 .login-button{
+    margin: 15px auto;
     box-sizing: border-box;
     color: white;
     font-size: 14px;
@@ -126,10 +169,11 @@ body
 {
     color: black;
     font-size: 24px;
-    padding: 20px;
+    padding: 8px;
 }
 .register-button
 {
+    margin: 15px auto;
     box-sizing: border-box;
     color: white;
     font-size: 14px;
@@ -147,6 +191,8 @@ body
 }
 .register-form-container .msg
 {
+    position: relative;
+    top: 20;
     align-self: self-start;
     width: 100%;
     border-radius: 4px;
