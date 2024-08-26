@@ -16,3 +16,11 @@ document.addEventListener("click",()=>{
         menu.style.display = "none";
     }
 });
+//--------- Test detail show---------//
+$(".test-detail").click(()=>{
+    $(".popup").css('display', 'flex');
+})
+// --------Test detail hide---------//
+$(".popup").click(()=>{
+    $(".popup").hide();
+});

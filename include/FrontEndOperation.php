@@ -77,10 +77,12 @@
                 $user_password = $row['password'];
                 $user_id = $row['id'];
                 $user_name = $row['name'];
+                $user_mail = $row['email'];
                 if(password_verify($password , $user_password))
                 {
                     $_SESSION['userId'] = $user_id;
                     $_SESSION['userName'] = $user_name;
+                    $_SESSION['userMail'] = $user_mail; 
                     return 1 ."||Login Success";
                 }  
                 else
