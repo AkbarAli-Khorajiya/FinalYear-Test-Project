@@ -115,7 +115,7 @@
                 return 0;
             }
             // validate name
-            if(empty($data['surName']) || empty($data['firstName'] || empty($data['lastName']))) {
+            if(empty($data['surName']) || empty($data['firstName']) || empty($data['lastName'])) {
                 return 2;
             }
             else{

@@ -12,6 +12,7 @@ $("#std-reg-form").submit(function (e) {
             dataArr = response.split("||");
             if(dataArr[0] == 1)
             {
+                $("#std-reg-form")[0].reset();
                 $(".register-form-container .msg div").addClass("success");
                 $(".register-form-container .msg .success").text(dataArr[1]);
                 setTimeout(()=>{
