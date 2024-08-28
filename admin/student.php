@@ -1,10 +1,10 @@
-<div class="student-title">
+<div class="breadcrum">
     <p>Dashboard/<span>Student</span></p>
 </div>
 <div class="student-container">
     <div class="add-std">
         <div class="heading">
-            <h3>Students Registered List</h3>
+            <h3 class="page-title">Students Registered List</h3>
         </div>
         <button id="add-student">
             <span class="icon">+</span>
@@ -12,6 +12,10 @@
         </button>
     </div>
     <div class="student-display">
+        <div class="search">
+
+            <input type="text" placeholder=" &#x1F50D;search" name="search" class="search" id="search">
+        </div>
         <table>
             <thead>
                 <tr>
@@ -134,9 +138,28 @@
                         <button class="edit">Edit</button><button class="delete">Delete</button>
                     </td>
                 </tr>
-                
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
+        <div class="pagination" style="display: flex;justify-content: space-between;">
+            <div class="total-list">
+                1 snds sd 2 sd
+            </div>
+            <div class="page-btn">
+                <button>12</button><button>12</button><button>12</button><button>12</button><button>12</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- ---------Add student modal--------------  -->
@@ -152,7 +175,17 @@
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="name" class="">Name</label>
+                <label for="firstname" class="">Firstname</label>
+                <input type="text" id="firstname" placeholder="eg:-xyz">
+            </div>
+            <div class="inp-group">
+                <label for="middlename" class="">Middlename</label>
+                <input type="text" id="middlename" placeholder="eg:-xyz">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="name" class="">Lastname</label>
                 <input type="text" id="name" placeholder="eg:-xyz">
             </div>
             <div class="inp-group">
