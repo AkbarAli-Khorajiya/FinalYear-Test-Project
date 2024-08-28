@@ -30,16 +30,25 @@
                         <div></div>
                     </div>
                     <h1>Register</h1>
-                    <input type="text" name="name" placeholder="Name" class="input-field" required> <br>
+                    <input type="text" name="surName" placeholder="Surname"  class="input-field name" required> 
+                    <input type="text" name="firstName" placeholder="First name"  class="input-field name" required>
+                    <input type="text" name="lastName" placeholder="Last name"  class="input-field name" required>
+                    <br>
                     <input type="email" name="email" placeholder="Email" class="input-field" required> <br>
-                    <input type="password" name="password" placeholder="Password" class="input-field" required> <br>
-                    <input type="password" name="confirm-password" placeholder="Confirm Password" class="input-field" required> <br>
-                    <select name="gender" name="gender" class="input-field" required>
+                    <input type="password" name="password" placeholder="Password" class="input-field password" required>
+                    <input type="password" name="confirm-password" placeholder="Confirm Password" class="input-field password" required> <br>
+                    <select name="gender"  class="input-field dropdownlist" required>
                         <option value="">Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
-                    </select><br>
+                    </select>
+                    <select name="class" class="input-field dropdownlist" required>
+                        <option value="">Class</option>
+                        <option value="First-year">First-year</option>
+                        <option value="Second-year">Second-year</option>
+                        <option value="Third-year">Third-year</option>
+                    </select>
                     <button class="register-button" id="submit-reg" type="submit">Register</button>
                 </form>
             </div>
@@ -51,11 +60,11 @@
                     <h1>Login</h1>
                     <div class="input-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" placeholder="Email" class="input-field" required>
+                        <input type="email" name="email" placeholder="Email" class="input-field login" required>
                     </div>
                     <div class="input-group">
                         <label for="password"> password</label>
-                        <input type="password" name="password" placeholder="Password" class="input-field" requ>
+                        <input type="password" name="password" placeholder="Password" class="input-field login" requ>
                     </div>
                     <button class="login-button" id="submit-login" type="submit">Login</button>
                 </form>

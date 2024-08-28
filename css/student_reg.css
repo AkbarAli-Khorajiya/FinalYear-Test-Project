@@ -18,7 +18,7 @@ body
 .container
 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.7fr 1fr;
     background-color: red;
     background: linear-gradient(to top,rgb(0,109,176), rgb(0,147,175));
     width: 800px;
@@ -74,6 +74,15 @@ body
     text-align: center;
     margin-top: 10%;
     display: none;
+    animation: visible 300ms linear;
+}
+@keyframes visible {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 .login-form-container form
 {
@@ -132,8 +141,27 @@ body
     padding: 10px;
     border-radius: 7px;
     border: 1px solid rgb(168, 168, 168);
-    width: 250px;
+    width: 350px;
     outline: none;
+}
+.name
+{
+    width: 112px;
+    margin: 5px 0px;
+}
+.password
+{
+    width: 175px;
+    margin: 5px 0px;
+}
+.dropdownlist
+{
+    width: 175px;
+    margin: 5px 0px;
+}
+.login
+{
+    width: 250px;
 }
 .login-button{
     margin: 15px auto;
@@ -163,6 +191,7 @@ body
     left: 50%;
     transform: translate(-50%,-60%);
     text-align: center;
+    animation: visible 300ms linear;
     /* display: none; */
 }
 .register-form-container h1
@@ -180,7 +209,7 @@ body
     padding: 13px;
     border-radius: 7px;
     border: none;
-    width: 250px;
+    width: 350px;
     outline: none;
     background-color:rgb(1 112 159);  
     transition:200ms linear 0s all;
