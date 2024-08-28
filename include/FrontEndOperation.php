@@ -23,31 +23,32 @@
                 return 0 ."||Already Registered";
             }
             // check for valid data
-            if($this->validData($post) === 0){
+            $post = $this->validData($post);
+            if($post === 0){
                 return 0 ."||Fill all fields";
             }
-            else if ($this->validData($post) === 2) {
+            else if ($post === 2) {
                 return 0 . "||Enter valid Name";
             }
-            else if ($this->validData($post) === 3) {
+            else if ($post === 3) {
                 return 0 ."||Enter Valid Email";     
             }
-            else if($this->validData($post) === 4) {
+            else if($post === 4) {
                 return 0 ."||Password is required";
             }
-            else if($this->validData($post) === 4.1) {
+            else if($post === 4.1) {
                 return 0 ."||Password must be between 8 and 20 characters";
             }
-            else if($this->validData($post) === 5) {
+            else if($post === 5) {
                 return 0 ."||Confirm password is required";
             }
-            else if($this->validData($post) === 5.1) {
+            else if($post === 5.1) {
                 return 0 ."||Passwords do not match";
             }
-            else if ($this->validData($post) === 6) {
+            else if ($post === 6) {
                 return 0 ."||Select Gender";
             }
-            else if ($this->validData($post) === 7){
+            else if ($post === 7){
                 return 0 ."||Select Class";
             }
             else{  
