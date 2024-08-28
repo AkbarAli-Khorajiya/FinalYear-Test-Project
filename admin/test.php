@@ -129,7 +129,7 @@ if (isset($_POST['edit_id'])) {
     </div>
     <div class="data-display">
         <div class="search">
-            <input type="text" placeholder=" &#x1F50D;search" name="search" class="search" id="search">
+            <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
         <table cellspacing="10px" id="test-table">
 
@@ -138,7 +138,8 @@ if (isset($_POST['edit_id'])) {
         </table>
         <div class="pagination" style="display: flex;justify-content: space-between;">
             <div class="total-list">
-                1 snds sd 2 sd
+                <p>Showing 1 to 10 of 50 entries</p>
+
             </div>
             <div class="page-btn">
                 <button class="previous">Previous</button>
