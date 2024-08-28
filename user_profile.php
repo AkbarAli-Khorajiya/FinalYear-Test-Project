@@ -61,7 +61,7 @@
                 <span class="profile"> <img src="image/userprofile/profile.png"> My profile</span>
                 <hr width="100%">
                 <span class="user-data">
-                    <span class="user-name"><?php echo $_SESSION['userName'];?></span>
+                    <span class="user-name"><?php echo $_SESSION['userName'][1];?></span>
                     <span class="user-email"><?php echo $_SESSION['userMail'];?></span>
                 </span>
                 <hr width="100%">
@@ -80,13 +80,41 @@
                         <img src="image/userprofile/MALE.jpg" alt="">
                     </div>
                     <div class="bio-data">
-                            <span class="name"><?php echo $_SESSION['userName']; ?></span>
+                            <span class="name"><?php echo $_SESSION['userName'][1]; ?></span>
                             <span class="email"><?php echo $_SESSION['userMail']; ?></span>
                     </div>
                 </div>
             </div>
             <div class="test-container">
                 <span class="heading">--- Given Test ---</span>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
+                <div class="test-detail">
+                    <span class="test-name">PHP TEST</span>
+                    <span class="test-date">22/09/2024</span>
+                </div>
                 <div class="test-detail">
                     <span class="test-name">PHP TEST</span>
                     <span class="test-date">22/09/2024</span>

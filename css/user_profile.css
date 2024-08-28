@@ -219,6 +219,7 @@ section .container
 {
     font-size: 40px;
     font-weight: 500;
+    text-transform: capitalize;
     text-decoration-thickness: 2px;
 }
 .profile-content .bio-data .email
@@ -337,3 +338,22 @@ table td:last-child
 {
     text-align: right;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

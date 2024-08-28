@@ -78,7 +78,7 @@
                 $row = mysqli_fetch_assoc($result);
                 $user_password = $row['password'];
                 $user_id = $row['id'];
-                $user_name = $row['name'];
+                $user_name = explode(" ",$row['name']);
                 $user_mail = $row['email'];
                 if(password_verify($password , $user_password))
                 {

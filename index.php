@@ -39,7 +39,7 @@
                 <span class="profile"> <img src="image/userprofile/profile.png"> My profile</span>
                 <hr width="100%">
                 <span class="user-data">
-                    <span class="user-name"><?php echo $_SESSION['userName']; ?></span>
+                    <span class="user-name"><?php echo $_SESSION['userName'][1]; ?></span>
                     <span class="user-email"><?php echo $_SESSION['userMail']; ?></span>
                 </span>
                 <hr width="100%">
