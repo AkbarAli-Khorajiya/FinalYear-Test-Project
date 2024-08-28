@@ -13,7 +13,7 @@
     </div>
     <div class="data-display">
         <div class="search">
-            <input type="text" placeholder=" &#x1F50D;search" name="search" class="search" id="search">
+            <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
         <table>
             <thead>
@@ -143,7 +143,7 @@
         </table>
         <div class="pagination">
             <div class="total-list">
-                1 snds sd 2 sd
+                <p>Showing 1 to 10 of 50 entries</p>
             </div>
             <div class="page-btn">
                 <button class="previous">Previous</button>
@@ -188,7 +188,7 @@
 
             <div class="inp-group">
                 <label for="password" class="">Password</label>
-                <input type="text" id="password" placeholder="eg:-xyzstudent">
+                <input type="password" id="password" placeholder="eg:-xyzstudent">
             </div>
             <div class="inp-group">
                 <label for="gender" class="">Gender</label>
