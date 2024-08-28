@@ -23,35 +23,36 @@
                 return 0 ."||Already Registered";
             }
             // check for valid data
-            if(($post = $this->validData($post)) == 0){
+            if($this->validData($post) === 0){
                 return 0 ."||Fill all fields";
             }
-            else if (($post = $this->validData($post)) == 2) {
-                return 0 ."||Enter Valid Name";
+            else if ($this->validData($post) === 2) {
+                return 0 . "||Enter valid Name";
             }
-            else if (($post = $this->validData($post)) == 3) {
+            else if ($this->validData($post) === 3) {
                 return 0 ."||Enter Valid Email";     
             }
-            else if(($post = $this->validData($post)) == 4) {
+            else if($this->validData($post) === 4) {
                 return 0 ."||Password is required";
             }
-            else if(($post = $this->validData($post)) == 4.1) {
+            else if($this->validData($post) === 4.1) {
                 return 0 ."||Password must be between 8 and 20 characters";
             }
-            else if(($post = $this->validData($post)) == 5) {
+            else if($this->validData($post) === 5) {
                 return 0 ."||Confirm password is required";
             }
-            else if(($post = $this->validData($post)) == 5.1) {
+            else if($this->validData($post) === 5.1) {
                 return 0 ."||Passwords do not match";
             }
-            else if (($post = $this->validData($post)) == 6) {
+            else if ($this->validData($post) === 6) {
                 return 0 ."||Select Gender";
             }
-            else if (($post = $this->validData($post)) == 7){
+            else if ($this->validData($post) === 7){
                 return 0 ."||Select Class";
             }
             else{   
-                $name = $post['surName'] ." ". $post['firstName'] ." ". $post['lastName'];
+                return $post['email'];
+                $name = $post['surName'] .' '. $post['firstName'] .' '. $post['lastName'];
                 $email = $post['email'];
                 $password = password_hash($post['password'] , PASSWORD_DEFAULT);
                 $gender = $post['gender'];
@@ -115,7 +116,8 @@
                 return 0;
             }
             // validate name
-            if(empty($data['surName']) || empty($data['firstName']) || empty($data['lastName'])) {
+            if($data['surName'] == "" || $data['firstName'] == "" || $data['lastName'] == "") 
+            {
                 return 2;
             }
             else{
@@ -125,18 +127,15 @@
                 if(!preg_match("/^[a-zA-Z ]*$/",$surName)) {
                     return 2;
                 }
-                else if(!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
+                if(!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
                     return 2;
                 }
                 if(!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
                     return 2;
                 }
-                else
-                {
-                    $data['surName'] = $surName;
-                    $data['firstName'] = $firstName;
-                    $data['lastName'] = $lastName;
-                }
+                $data['surName'] = $surName;
+                $data['firstName'] = $firstName;
+                $data['lastName'] = $lastName;
             }
             // validate email
             if(empty($data['email'])) {
@@ -149,11 +148,11 @@
                 }
                 else
                 {
-                    $data['email'] = $email;
+                    $data['email'] = "my pass";
                 }
             }
             // validate Password
-            if (empty($data["password"])) {
+            if (empty($data['password'])) {
                 return 4;
             } 
             else{
