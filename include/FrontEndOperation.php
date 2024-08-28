@@ -50,8 +50,7 @@
             else if ($this->validData($post) === 7){
                 return 0 ."||Select Class";
             }
-            else{   
-                return $post['email'];
+            else{  
                 $name = $post['surName'] .' '. $post['firstName'] .' '. $post['lastName'];
                 $email = $post['email'];
                 $password = password_hash($post['password'] , PASSWORD_DEFAULT);
@@ -148,7 +147,7 @@
                 }
                 else
                 {
-                    $data['email'] = "my pass";
+                    $data['email'] = $email;
                 }
             }
             // validate Password
