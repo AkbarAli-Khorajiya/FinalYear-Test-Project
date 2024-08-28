@@ -9,11 +9,13 @@
   /* font-weight: 500; */
   font-style: normal;
 }
+
 body {
   height: 100vh;
   width: 100vw;
   background-color: rgb(245, 247, 255);
 }
+
 header {
   position: relative;
   display: flex;
@@ -25,6 +27,7 @@ header {
   box-shadow: -1px -5px 8px 5px #4b49ac8f;
   z-index: 1;
 }
+
 header span {
   margin-left: 3vw;
   align-self: center;
@@ -33,6 +36,7 @@ header span {
   font-weight: 400;
   color: rgb(50, 50, 102);
 }
+
 header button {
   margin-right: 10px;
   align-self: center;
@@ -45,9 +49,11 @@ header button {
   border: 1px solid black;
   cursor: pointer;
 }
+
 header button:hover {
   background-color: rgb(78, 78, 160);
 }
+
 section {
   position: relative;
   display: grid;
@@ -57,6 +63,7 @@ section {
   /* background-color: aquamarine; */
   z-index: 0;
 }
+
 section aside {
   display: flex;
   justify-content: flex-start;
@@ -65,6 +72,7 @@ section aside {
   background-color: white;
   border-right: 2px solid black;
 }
+
 section aside ul {
   display: flex;
   justify-content: flex-start;
@@ -72,6 +80,7 @@ section aside ul {
   padding: 10px 0;
   list-style: none;
 }
+
 section aside ul li {
   display: inline-flex;
   justify-content: space-around;
@@ -85,19 +94,23 @@ section aside ul li {
   transition: all 200ms linear 0s;
   cursor: pointer;
 }
+
 section aside ul li:hover {
   background-color: #7978e9;
 }
+
 section aside ul li a {
   text-decoration: none;
   color: white;
 }
+
 section aside ul li img {
   height: 2.5vw;
   width: auto;
   aspect-ratio: 1/1;
   object-fit: contain;
 }
+
 section #container {
   height: 100%;
   /* background-color: rgb(245, 247, 255); */
@@ -116,6 +129,7 @@ section #container .box-container {
   height: 30%;
   /* background-color: red; */
 }
+
 section #container .box-container .box {
   height: 130px;
   width: 230px;
@@ -129,61 +143,71 @@ section #container .box-container .box {
   transition: all 200ms linear 0s;
   font-weight: 400;
 }
+
 section #container .box-container .box .info-dis {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 section #container .box-container .box .info-dis span {
   font-size: 10vh;
   color: white;
 }
+
 section #container .box-container .box .info-dis img {
   height: 12vh;
   width: auto;
   aspect-ratio: 1/1;
   object-fit: contain;
 }
+
 section #container .box-container .box span {
   margin-top: 5px;
   font-size: 1.4vw;
   color: white;
 }
+
 section #container .box-container .box:nth-child(odd) {
   background-color: rgb(125, 160, 250);
 }
+
 section #container .box-container .box:nth-child(even) {
   background-color: rgb(121, 120, 233);
 }
+
 section #container .box-container .box:hover {
   scale: 1.1;
 }
+
 /*------------------------STUDENT STYLE-------------------------------- */
-section #container .student-title {
-    display: flex;
-    border-bottom: 1px solid #000;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 18px;
-    cursor: pointer;
+section #container .breadcrum {
+  display: flex;
+  border-bottom: 1px solid #000;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 18px;
+  cursor: pointer;
+
   p {
     margin: 10px 10px 5px 10px;
     color: #4b49ac;
+
     span {
       color: #7b7b7b;
     }
   }
 }
+
 section #container .student-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 10px 50px;
-  /* height: 85%;
-    width: 100%; */
 }
+
 section #container .student-container .add-std {
   display: flex;
   justify-content: space-between;
@@ -191,6 +215,7 @@ section #container .student-container .add-std {
   width: 100%;
   gap: 10px;
   margin-bottom: 15px;
+
   button {
     display: flex;
     align-items: center;
@@ -206,6 +231,7 @@ section #container .student-container .add-std {
     &:hover {
       background-color: #fff;
       color: #4b49ac;
+
       .icon {
         background-color: #4b49ac;
         border-radius: 5px;
@@ -214,6 +240,7 @@ section #container .student-container .add-std {
         margin: -2px 0px -2px 3px;
       }
     }
+
     .icon {
       background-color: #fff;
       border-radius: 5px;
@@ -222,83 +249,66 @@ section #container .student-container .add-std {
       margin: -2px 0px -2px 3px;
       font-weight: bold;
     }
+
     span {
       font-size: 16px;
       margin-left: 10px;
     }
   }
 }
+
 section #container .student-container .student-display {
   overflow: auto;
+  display: flex;
+    background-color: #fff;
+    flex-direction: column;
+    gap: 10px;
   border-radius: 10px;
+  box-shadow: 0px 0px 10px #cccccc7d;
+    padding: 10px;
 }
+
 section #container .student-container .student-display table {
   background-color: #fff;
   height: auto;
   width: 100%;
   text-align: left;
   white-space: nowrap;
-}
-section #container .student-container .student-display table thead tr th {
-  padding: 10px 5px;
-  font-size: 1.5vw;
-  border-bottom: 2px solid #000;
-  color: #fff;
-  background-color: #4b49ac;
+  border-collapse: collapse;
 }
 
-section
-  #container
-  .student-container
-  .student-display
-  table
-  thead
-  tr
-  th:first-child {
+section #container .student-container .student-display table thead tr th {
+  padding: 10px 5px 10px 10px;
+  color: #fff;
+  background-color: #1c1c38;
+    border-right: 1px solid #fff;
+}
+
+section #container .student-container .student-display table thead tr th:first-child {
   border-top-left-radius: 4px;
 }
 
-section
-  #container
-  .student-container
-  .student-display
-  table
-  thead
-  tr
-  th:last-child {
+section #container .student-container .student-display table thead tr th:last-child {
   border-top-right-radius: 4px;
 }
 
 section #container .student-container .student-display table tbody tr td {
   padding: 10px 10px;
-  font-size: 1.3vw;
   font-weight: 400;
   border-right: 1px solid #000;
   border-bottom: 1px solid #000;
   box-shadow: 0px 1px 1px #ccc;
+  border-collapse: collapse;
 }
-section
-  #container
-  .student-container
-  .student-display
-  table
-  tbody
-  tr
-  td:first-child {
+section #container .student-container .student-display table tbody tr td:first-child {
   border-left: 1px solid #000;
   font-weight: bold;
   text-align: center;
 }
-section
-  #container
-  .student-container
-  .student-display
-  table
-  tbody
-  tr
-  td:last-child {
-  padding: 10px 0px 10px 10px;
+section #container .student-container .student-display table tbody tr td:last-child {
+  padding: 4px 0px 4px 10px;
 }
+
 section #container .student-container .student-display table tbody tr td .edit {
   color: #fff;
   background: #ffbb01;
@@ -312,15 +322,7 @@ section #container .student-container .student-display table tbody tr td .edit {
   cursor: pointer;
   margin-right: 10px;
 }
-section
-  #container
-  .student-container
-  .student-display
-  table
-  tbody
-  tr
-  td
-  .delete {
+section #container .student-container .student-display table tbody tr td .delete {
   color: #fff;
   background: red;
   outline: none;
@@ -332,6 +334,7 @@ section
   letter-spacing: 1px;
   cursor: pointer;
 }
+
 /* ---------------------Add Student Modal------------------------------ */
 .modal-container {
   position: absolute;
@@ -342,36 +345,43 @@ section
   left: 0;
   justify-content: center;
   background: #00000080;
+
   .std-form {
     background: #fff;
     border-radius: 5px;
     width: auto;
     margin-top: 50px;
     height: fit-content;
+
     .head {
       padding: 5px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #000;
+
       .close {
         margin-right: 5px;
         font-weight: 500;
         font-size: 20px;
         cursor: pointer;
+
         &:hover {
-            transform: scale(1.2);
+          transform: scale(1.2);
         }
       }
     }
+
     .msg {
       padding: 5px 20px 0px 20px;
+
       .success {
         background: #38b138;
         color: #fff;
         padding: 3px 7px;
         border-radius: 5px;
       }
+
       .error {
         background: #f72e2e;
         color: #fff;
@@ -379,11 +389,13 @@ section
         border-radius: 5px;
       }
     }
+
     .col-2 {
       display: flex;
       margin: 10px 20px;
       gap: 15px;
       width: 100%;
+
       .inp-group {
         margin: 0px;
         display: flex;
@@ -391,11 +403,13 @@ section
         display: flex;
         gap: 3px;
         flex-direction: column;
+
         label {
           font-size: 13px;
           text-shadow: 0px 0px 0px #000;
           letter-spacing: 1;
         }
+
         input {
           border: 1px solid #7978e9;
           padding: 8px 5px;
@@ -405,6 +419,7 @@ section
           border-bottom: 2px solid #7978e9;
           width: 200px;
         }
+
         select {
           width: 200px;
           border: 1px solid #7978e9;
@@ -416,6 +431,7 @@ section
         }
       }
     }
+
     .bottom {
       border-top: 1px solid #000;
       padding: 10px 20px;
@@ -433,10 +449,12 @@ section
         border-radius: 5px;
         background: #ab9e9e8c;
         box-shadow: 0px 0px 10px #00000021;
+
         &:hover {
           box-shadow: inset 0px 0px 3px #000;
         }
       }
+
       #save {
         padding: 5px 15px;
         font-size: 15px;
@@ -447,6 +465,7 @@ section
         border-radius: 5px;
         background: #4b49ac;
         box-shadow: 0px 0px 10px #00000021;
+
         &:hover {
           box-shadow: inset 0px 0px 3px #000;
         }
@@ -454,6 +473,7 @@ section
     }
   }
 }
+
 /*------------------------QUESTION STYLE-------------------------------- */
 section #container .que-container {
   display: flex;
@@ -467,6 +487,7 @@ section #container .que-container {
   border-bottom: 2px solid black;
   padding: 20px 0px;
 }
+
 section #container .que-container form {
   height: 100%;
   width: auto;
@@ -475,29 +496,35 @@ section #container .que-container form {
   background: #2212fb43;
   border-radius: 10px;
 }
+
 section #container .que-container form table {
   height: auto;
   width: auto;
 }
+
 section #container .que-container form table th {
   text-align: left;
 }
+
 section #container .que-container form table tr th input[type="text"] {
   width: 400px;
   /* border: none; */
   outline: none;
 }
+
 section #container .que-container form input[type="text"] {
   height: 25px;
   border-radius: 5px;
   border: 1px solid black;
   padding: 10px;
 }
+
 section #container .que-container form table tr td input[type="text"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
+
 section #container .que-container form table tr td .answer {
   width: 190px;
   height: 25px;
@@ -505,6 +532,7 @@ section #container .que-container form table tr td .answer {
   border-radius: 5px;
   border: 1px solid black;
 }
+
 section #container .que-container form table tr td input[type="submit"] {
   width: 75px;
   height: 30px;
@@ -530,12 +558,15 @@ section #container .que-container form table tr td input[type="reset"] {
   margin-right: 10px;
   transition: all 200ms linear 0s;
 }
+
 section #container .que-container form table tr td input[type="submit"]:hover {
   background-color: #7978e9;
 }
+
 section #container .que-container form table tr .button {
   text-align: center;
 }
+
 section #container .que-display {
   width: 100%;
   /* height: 100%;    */
@@ -545,6 +576,7 @@ section #container .que-display {
   flex-flow: column wrap;
   /* background-color: blueviolet; */
 }
+
 section #container .que-display .que-title {
   display: flex;
   justify-content: space-between;
@@ -553,11 +585,13 @@ section #container .que-display .que-title {
   height: 8%;
   padding: 10px 0px;
 }
+
 section #container .que-display .que-title span {
   font-size: 1.5vw;
   font-weight: bold;
   /* margin-left: 10px; */
 }
+
 section #container .que-display .display-container {
   overflow: auto;
   display: flex;
@@ -572,6 +606,7 @@ section #container .que-display .display-container {
   /* border-radius: 25px; */
   /* margin-top: 4%; */
 }
+
 section #container .que-display .display-container table {
   /* display: flow; */
   height: auto;
@@ -581,17 +616,20 @@ section #container .que-display .display-container table {
   text-transform: capitalize;
   border-collapse: collapse;
 }
+
 section #container .que-display .display-container table thead tr th {
   padding: 10px 5px;
   font-size: 1.6vw;
   border: 1px solid black;
 }
+
 section #container .que-display .display-container table tbody tr td {
   padding: 5px 10px;
   font-size: 1.3vw;
   font-weight: 400;
   border: 1px solid black;
 }
+
 section #container .que-display .display-container table tbody tr td button {
   width: 70px;
   font-size: 1.3vw;
@@ -601,57 +639,39 @@ section #container .que-display .display-container table tbody tr td button {
   border-radius: 5px;
   cursor: pointer;
 }
+
 section #container .que-display .display-container table tbody tr td .edit-que {
   background-color: rgb(50, 50, 102);
   transition: 200ms linear 0s all;
 }
-section
-  #container
-  .que-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .edit-que:hover {
+section #container .que-display .display-container table tbody tr td .edit-que:hover {
   background-color: rgb(78, 78, 160);
 }
-section
-  #container
-  .que-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-que {
+section #container .que-display .display-container table tbody tr td .delete-que {
   background-color: rgb(206, 46, 46);
   transition: 200ms linear 0s all;
 }
-section
-  #container
-  .que-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-que:hover {
+section #container .que-display .display-container table tbody tr td .delete-que:hover {
   background-color: rgb(255, 0, 0);
 }
+
 section #container .que-display .display-container table tr td:nth-child(1) {
   text-align: center;
   border-left: none;
 }
+
 section #container .que-display .display-container table tr td:last-child {
   border-right: none;
 }
+
 section #container .que-display .display-container table tr th:first-child {
   border-left: none;
 }
+
 section #container .que-display .display-container table tr th:last-child {
   border-right: none;
 }
+
 /* //edit pop up //   */
 section #container #edit-que-container {
   position: fixed;
@@ -664,6 +684,7 @@ section #container #edit-que-container {
   z-index: 1;
   display: none;
 }
+
 section #container #edit-que-container #edit-que-content {
   margin: 10% auto;
   width: 500px;
@@ -673,6 +694,7 @@ section #container #edit-que-container #edit-que-content {
   border-radius: 5px;
   padding: 0 15px;
 }
+
 section #container #edit-que-container #edit-que-content form {
   height: auto;
   width: auto;
@@ -681,32 +703,21 @@ section #container #edit-que-container #edit-que-content form {
   align-items: center;
   flex-flow: wrap;
 }
+
 section #container #edit-que-container #edit-que-content form table {
   height: auto;
   width: auto;
 }
+
 section #container #edit-que-container #edit-que-content form table th {
   text-align: left;
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  th
-  input[type="text"] {
+section #container #edit-que-container #edit-que-content form table tr th input[type="text"] {
   width: 400px;
   /* border: none; */
   outline: none;
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  input[type="text"],
+section #container #edit-que-container #edit-que-content form input[type="text"],
 input[type="date"],
 input[type="time"] {
   height: 30px;
@@ -714,57 +725,25 @@ input[type="time"] {
   border: 1px solid black;
   padding: 10px;
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="text"] {
+section #container #edit-que-container #edit-que-content form table tr td input[type="text"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="time"],
+section #container #edit-que-container #edit-que-content form table tr td input[type="time"],
 input[type="date"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  .answer {
+section #container #edit-que-container #edit-que-content form table tr td .answer {
   width: 190px;
   height: 25px;
   text-align: center;
   border-radius: 5px;
   border: 1px solid black;
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="reset"] {
+section #container #edit-que-container #edit-que-content form table tr td input[type="reset"] {
   width: 75px;
   height: 30px;
   border: 1px solid #4b49ac;
@@ -776,15 +755,7 @@ section
   margin-right: 10px;
   transition: all 200ms linear 0s;
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="submit"] {
+section #container #edit-que-container #edit-que-content form table tr td input[type="submit"] {
   width: 90px;
   height: 30px;
   border: 1px solid black;
@@ -796,23 +767,18 @@ section
   font-weight: 500;
   transition: all 200ms linear 0s;
 }
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="submit"]:hover {
+section #container #edit-que-container #edit-que-content form table tr td input[type="submit"]:hover {
   background-color: #7978e9;
 }
+
 section #container #edit-que-container #edit-que-content form table tr .button {
   text-align: center;
 }
+
 section #container #edit-que-container #edit-que-content .edit-que-title {
   margin: 20px 0px 0px 5px;
 }
+
 section #container #edit-que-container #edit-que-content .close {
   float: right;
   color: #454534;
@@ -821,20 +787,24 @@ section #container #edit-que-container #edit-que-content .close {
   background-color: transparent;
   border: none;
 }
+
 section #container #edit-que-container .slidedown {
   position: relative;
   animation: slidedown 0.5s;
 }
+
 @keyframes slidedown {
   from {
     top: -300px;
     opacity: 0;
   }
+
   to {
     top: 0;
     opacity: 1;
   }
 }
+
 /* // end edit pop up //   */
 
 /*------------------------TEST STYLE------------------------------------*/
@@ -850,6 +820,7 @@ section #container #edit-test-container {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
+
 section #container #edit-test-container #edit-test-content {
   margin: 10% auto;
   width: 500px;
@@ -859,6 +830,7 @@ section #container #edit-test-container #edit-test-content {
   border-radius: 5px;
   padding: 0 15px;
 }
+
 section #container #edit-test-container #edit-test-content form {
   height: auto;
   width: auto;
@@ -867,32 +839,21 @@ section #container #edit-test-container #edit-test-content form {
   align-items: center;
   flex-flow: wrap;
 }
+
 section #container #edit-test-container #edit-test-content form table {
   height: auto;
   width: auto;
 }
+
 section #container #edit-test-container #edit-test-content form table th {
   text-align: left;
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  th
-  input[type="text"] {
+section #container #edit-test-container #edit-test-content form table tr th input[type="text"] {
   width: 400px;
   /* border: none; */
   outline: none;
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  input[type="text"],
+section #container #edit-test-container #edit-test-content form input[type="text"],
 input[type="date"],
 input[type="time"] {
   height: 30px;
@@ -900,42 +861,18 @@ input[type="time"] {
   border: 1px solid black;
   padding: 10px;
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="text"] {
+section #container #edit-test-container #edit-test-content form table tr td input[type="text"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="time"],
+section #container #edit-test-container #edit-test-content form table tr td input[type="time"],
 input[type="date"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="reset"] {
+section #container #edit-test-container #edit-test-content form table tr td input[type="reset"] {
   width: 95px;
   height: 30px;
   border: 1px solid #4b49ac;
@@ -946,15 +883,7 @@ section
   font-weight: 500;
   transition: all 200ms linear 0s;
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="submit"] {
+section #container #edit-test-container #edit-test-content form table tr td input[type="submit"] {
   width: 95px;
   height: 30px;
   border: 1px solid black;
@@ -966,30 +895,17 @@ section
   font-weight: 500;
   transition: all 200ms linear 0s;
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="submit"]:hover {
+section #container #edit-test-container #edit-test-content form table tr td input[type="submit"]:hover {
   background-color: #7978e9;
 }
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  .button {
+section #container #edit-test-container #edit-test-content form table tr .button {
   text-align: center;
 }
+
 section #container #edit-test-container #edit-test-content .edit-test-title {
   margin: 20px 0px 0px 5px;
 }
+
 section #container #edit-test-container #edit-test-content .close {
   float: right;
   color: #454534;
@@ -998,20 +914,24 @@ section #container #edit-test-container #edit-test-content .close {
   background-color: transparent;
   border: none;
 }
+
 section #container #edit-test-container .slidedown {
   position: relative;
   animation: slidedown 0.5s;
 }
+
 @keyframes slidedown {
   from {
     top: -300px;
     opacity: 0;
   }
+
   to {
     top: 0;
     opacity: 1;
   }
 }
+
 /* // end edit pop up //   */
 
 section #container .test-container {
@@ -1026,6 +946,7 @@ section #container .test-container {
   border-bottom: 2px solid black;
   padding: 20px 0px;
 }
+
 section #container .test-container form {
   height: auto;
   width: auto;
@@ -1034,18 +955,22 @@ section #container .test-container form {
   background: #2212fb43;
   border-radius: 10px;
 }
+
 section #container .test-container form table {
   height: auto;
   width: auto;
 }
+
 section #container .test-container form table th {
   text-align: left;
 }
+
 section #container .test-container form table tr th input[type="text"] {
   width: 400px;
   /* border: none; */
   outline: none;
 }
+
 section #container .test-container form input[type="text"],
 input[type="date"],
 input[type="time"] {
@@ -1054,21 +979,25 @@ input[type="time"] {
   border: 1px solid black;
   padding: 10px;
 }
+
 #Que input {
   padding: 5px 0px;
   height: 60px;
 }
+
 section #container .test-container form table tr td input[type="text"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
+
 section #container .test-container form table tr td input[type="time"],
 input[type="date"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
+
 section #container .test-container form table tr td input[type="submit"] {
   width: 75px;
   height: 30px;
@@ -1081,6 +1010,7 @@ section #container .test-container form table tr td input[type="submit"] {
   font-weight: 500;
   transition: all 200ms linear 0s;
 }
+
 section #container .test-container form table tr td input[type="reset"] {
   width: 75px;
   height: 30px;
@@ -1093,17 +1023,21 @@ section #container .test-container form table tr td input[type="reset"] {
   margin-right: 10px;
   transition: all 200ms linear 0s;
 }
+
 section #container .test-container form table tr td input[type="reset"]:hover {
   color: #ffffff;
   background-color: #7978e9;
   border: 1px solid black;
 }
+
 section #container .test-container form table tr td input[type="submit"]:hover {
   background-color: #7978e9;
 }
+
 section #container .test-container form table tr .button {
   text-align: center;
 }
+
 section #container .test-display {
   width: 100%;
   height: 100%;
@@ -1113,6 +1047,7 @@ section #container .test-display {
   flex-flow: column wrap;
   /* background-color: blueviolet; */
 }
+
 section #container .test-display .test-title {
   display: flex;
   justify-content: space-between;
@@ -1121,12 +1056,14 @@ section #container .test-display .test-title {
   height: 8%;
   /* background-color: red; */
 }
+
 section #container .test-title span {
   font-size: 1.5vw;
   font-weight: bold;
   /* margin-left: 10px; */
   /* color:white; */
 }
+
 section #container .test-display .display-container {
   overflow: auto;
   display: flex;
@@ -1138,6 +1075,7 @@ section #container .test-display .display-container {
   /* border: 1px solid black; */
   /* border-radius: 25px; */
 }
+
 section #container .test-display .display-container table {
   /* display: flow; */
   height: auto;
@@ -1147,21 +1085,25 @@ section #container .test-display .display-container table {
   text-transform: capitalize;
   border-collapse: collapse;
 }
+
 section #container .test-display .display-container .slidedown {
   position: relative;
   /* animation:  slidedown  0.5; */
 }
+
 section #container .test-display .display-container table thead tr th {
   padding: 10px 5px;
   font-size: 1.6vw;
   border: 1px solid black;
 }
+
 section #container .test-display .display-container table tbody tr td {
   padding: 5px 10px;
   font-size: 1.3vw;
   font-weight: 400;
   border: 1px solid black;
 }
+
 section #container .test-display .display-container table tbody tr td button {
   width: 70px;
   font-size: 1.3vw;
@@ -1171,58 +1113,29 @@ section #container .test-display .display-container table tbody tr td button {
   border-radius: 5px;
   cursor: pointer;
 }
-section
-  #container
-  .test-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .edit-test {
+section #container .test-display .display-container table tbody tr td .edit-test {
   background-color: rgb(50, 50, 102);
   transition: 200ms linear 0s all;
 }
-section
-  #container
-  .test-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .edit-test:hover {
+section #container .test-display .display-container table tbody tr td .edit-test:hover {
   background-color: rgb(78, 78, 160);
 }
-section
-  #container
-  .test-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-test {
+section #container .test-display .display-container table tbody tr td .delete-test {
   background-color: rgb(206, 46, 46);
   transition: 200ms linear 0s all;
 }
-section
-  #container
-  .test-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-test:hover {
+section #container .test-display .display-container table tbody tr td .delete-test:hover {
   background-color: rgb(255, 0, 0);
 }
+
 section #container .test-display .display-container table tr td:nth-child(1) {
   text-align: center;
 }
+
 section #container .test-display .display-container table tr td:nth-child(2) {
   cursor: pointer;
 }
+
 /*------------------------RESULT STYLE-------------------------------- */
 section #container .title {
   display: flex;
@@ -1232,10 +1145,12 @@ section #container .title {
   height: 15%;
   /* background-color: red; */
 }
+
 section #container .title span {
   font-size: 3vw;
   /* color:white; */
 }
+
 section #container .result-container {
   display: flex;
   justify-content: center;
@@ -1244,6 +1159,7 @@ section #container .result-container {
   width: 100%;
   /* background-color: lightblue; */
 }
+
 section #container .result-container .result-display {
   height: 90%;
   width: 95%;
@@ -1268,6 +1184,7 @@ section #container #alert-container {
   z-index: 1;
   box-sizing: border-box;
 }
+
 section #container #alert-container .alert {
   width: 300px;
   margin: 20px 20px;
@@ -1276,9 +1193,11 @@ section #container #alert-container .alert {
   border-radius: 5px;
   box-shadow: 0 0 15px 5px #ccc;
 }
+
 section #container #alert-container .alert h3 {
   font-family: Quicksand;
 }
+
 section #container #alert-container .alert .close-alert {
   position: absolute;
   width: 25px;
@@ -1293,31 +1212,38 @@ section #container #alert-container .alert .close-alert {
   font-size: 1.3em;
   cursor: pointer;
 }
+
 section #container #alert-container .success-alert {
   background-color: #a8f0c6;
   border-left: 5px solid #178344;
 }
+
 section #container #alert-container .success-alert .close-alert {
   border-color: #178344;
   color: #178344;
 }
+
 section #container #alert-container .danger-alert {
   background-color: #f7a7a3;
   border-left: 5px solid #8f130c;
 }
+
 section #container #alert-container .danger-alert .close-alert {
   border-color: #8f130c;
   color: #8f130c;
 }
+
 section #container #alert-container .slideright {
   position: relative;
   animation: slideright 0.5s;
 }
+
 @keyframes slideright {
   from {
     right: -280px;
     opacity: 0;
   }
+
   to {
     right: 0;
     opacity: 1;
@@ -1325,82 +1251,16 @@ section #container #alert-container .slideright {
 }
 
 /*----------------------Search Box Style--------------------------*/
-.search button {
-  border: none;
-  background: none;
-  color: #8b8ba7;
-}
-/* styling of whole input container */
 .search {
-  --timing: 0.3s;
-  --width-of-input: 150px;
-  --height-of-input: 35px;
-  --border-height: 2px;
-  --input-bg: #d9d9d9ba;
-  --border-color: #4b49ac;
-  --border-radius: 30px;
-  --after-border-radius: 1px;
-  position: relative;
-  width: var(--width-of-input);
-  height: var(--height-of-input);
-  display: flex;
-  align-items: center;
-  padding-inline: 0.8em;
-  border-radius: var(--border-radius);
-  transition: border-radius 0.5s ease;
-  background: var(--input-bg, #fff);
-}
-/* styling of Input */
-.search .search_input {
-  font-size: 0.9rem;
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
-  padding-inline: 0.5em;
-  padding-block: 0.7em;
-  border: none;
-}
-/* styling of animated border */
-.search:before {
-  content: "";
-  position: absolute;
-  background: var(--border-color);
-  transform: scaleX(0);
-  transform-origin: center;
-  width: 100%;
-  height: var(--border-height);
-  left: 0;
-  bottom: 0;
-  border-radius: 1px;
-  transition: transform var(--timing) ease;
-}
-/* Hover on Input */
-.search:focus-within {
-  border-radius: var(--after-border-radius);
-}
-
-.search input:focus {
-  outline: none;
-}
-/* here is code of animated border */
-.search:focus-within:before {
-  transform: scale(1);
-}
-/* styling of close button */
-/* == you can click the close button to remove text == */
-.search .reset {
-  border: none;
-  background: none;
-  opacity: 0;
-  visibility: hidden;
-}
-/* close button shown when typing */
-.search input:not(:placeholder-shown) ~ .reset {
-  opacity: 1;
-  visibility: visible;
-}
-/* sizing svg icons */
-.search svg {
-  width: 17px;
-  /* margin-top: 3px; */
+  float: right;
+  
+    input {
+      padding: 6px 10px 6px 6px;
+      font-size: 15px;
+      outline: none;
+    border: none;
+    border-radius: 3px;
+      box-shadow: 0px 0px 5px #b3ababb5;
+      border-bottom: 2.5px solid #5b5bc5;
+    }
 }

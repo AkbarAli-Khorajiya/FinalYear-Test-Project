@@ -1,4 +1,4 @@
-<div class="student-title">
+<div class="breadcrum">
     <p>Dashboard/<span>Student</span></p>
 </div>
 <div class="student-container">
@@ -12,6 +12,10 @@
         </button>
     </div>
     <div class="student-display">
+        <div class="search">
+
+            <input type="text" placeholder=" &#x1F50D;search" name="search" class="search" id="search">
+        </div>
         <table>
             <thead>
                 <tr>
@@ -134,9 +138,28 @@
                         <button class="edit">Edit</button><button class="delete">Delete</button>
                     </td>
                 </tr>
-                
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
+        <div class="pagination" style="display: flex;justify-content: space-between;">
+            <div class="total-list">
+                1 snds sd 2 sd
+            </div>
+            <div class="page-btn">
+                <button>12</button><button>12</button><button>12</button><button>12</button><button>12</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- ---------Add student modal--------------  -->

@@ -3,21 +3,7 @@ include_once 'include/operation.php';
 $dbobj = new DB_conn();
 //declare object to do operation on test
 $TEST_OBJ = new Test_operation();
-//To insert record in database
-// if(isset($_POST['create_test']) && $_POST['create_test']==1 )
-// {
-//     $TEST_OBJ->insert_value($_POST['test_name'],$_POST['test_date'],$_POST['test_start_time'],$_POST['test_time'],$_POST['test_marks'],$_POST['test_question']);
-//     if($TEST_OBJ->insert_test()==1)
-//     {
-//         echo "<script>alert('Test Created');</script>";
-//         // header("location:que.php");
-//     }
-//     else
-//     {
-//         echo "<script>alert('Test not created');</script>";
-//     }
-// }
-// //display_record in add/modify Qeustion
+
 if (isset($_POST['edit_id'])) {
     $test_id = $_POST['edit_id'];
     $id_query = "select *from test where id =" . $test_id;
@@ -34,31 +20,7 @@ if (isset($_POST['edit_id'])) {
 } else {
     $test_id = $test_name = $test_date = $test_start_time = $test_time = $test_marks = $test_question = "";
 }
-// //to delete test from databse
-// if(isset($_POST['del_id']))
-// {
-//     if($TEST_OBJ->delete_test($_POST['del_id']) == 1)
-//     {
-//         echo "<script>alert('Test Deleted')</script>";
-//     }
-//     else
-//     {
-//         echo "<script>alert('Test Not Deleted')</script>";
-//     }
-// }
-// //to upadte/modify record in database
-// if(isset($_POST['update_test']) && $_POST['update_test'] == 1)
-// {
-//     $TEST_OBJ->update_value($_POST['test_id'],$_POST['test_name'],$_POST['test_date'],$_POST['test_start_time'],$_POST['test_time'],$_POST['test_marks'],$_POST['test_question']);
-//     if($TEST_OBJ->update_test() == 1)
-//     {
-//         echo "<script>alert('Test Updated');</script>";
-//     }
-//     else
-//     {
-//         echo "<script>alert('Test Not Updated');</script>";
-//     }
-// }
+
 ?>
 <!-- Test Alert -->
 <div id="alert-container">
@@ -71,26 +33,35 @@ if (isset($_POST['edit_id'])) {
 <div id="edit-test-container">
     <div id="edit-test-content" class="slidedown">
         <button type="button" class="close">x</button>
-        <h3 class="edit-test-title">Edit Test</h3> <span class="edit_test" style="color:red;font-size: 15px;text-align:end;"></span>
+        <h3 class="edit-test-title">Edit Test</h3> <span class="edit_test"
+            style="color:red;font-size: 15px;text-align:end;"></span>
         <form id="edit_test_form" name="edit_test_form">
             <table cellspacing="20px">
                 <tr>
-                    <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name" value="" required> </th>
+                    <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name"
+                            value="" required> </th>
                 </tr>
                 <tr>
-                    <td> <input type="text" name="test_date" class="test_date" placeholder="Test date" value="" onfocus="if(this.type !='date'){this.type = 'date'; this.showPicker()}" onblur="if(this.value==''){this.type='text'}" required> </td>
-                    <td> <input type="text" name="test_start_time" class="test_start_time" placeholder="Test start time" value="" onfocus="if(this.type !='time'){this.type = 'time'; this.showPicker()}" onblur="if(this.value==''){this.type='text'}" required></td>
+                    <td> <input type="text" name="test_date" class="test_date" placeholder="Test date" value=""
+                            onfocus="if(this.type !='date'){this.type = 'date'; this.showPicker()}"
+                            onblur="if(this.value==''){this.type='text'}" required> </td>
+                    <td> <input type="text" name="test_start_time" class="test_start_time" placeholder="Test start time"
+                            value="" onfocus="if(this.type !='time'){this.type = 'time'; this.showPicker()}"
+                            onblur="if(this.value==''){this.type='text'}" required></td>
                 </tr>
                 <tr>
-                    <td> <input type="text" name="test_time" class="test_time" placeholder="Test time (in minutes )" value="" required> </td>
-                    <td> <input type="text" name="test_marks" class="test_marks" placeholder="Test marks" value="" required> </td>
+                    <td> <input type="text" name="test_time" class="test_time" placeholder="Test time (in minutes )"
+                            value="" required> </td>
+                    <td> <input type="text" name="test_marks" class="test_marks" placeholder="Test marks" value=""
+                            required> </td>
                 </tr>
                 <tr>
-                    <td> <input type="text" name="test_question" class="test_question" placeholder="Total number of Question" value="" required> </td>
+                    <td> <input type="text" name="test_question" class="test_question"
+                            placeholder="Total number of Question" value="" required> </td>
                     <td style="display:none;"> <input type="text" name="test_id" class="test_id" value="" hidden> </td>
                     <td class="button">
                         <input type="reset" value="Clear">
-                        <input type="submit"  value="Update">
+                        <input type="submit" value="Update">
                     </td>
                 </tr>
             </table>
@@ -99,12 +70,13 @@ if (isset($_POST['edit_id'])) {
 </div>
 
 <!-- ------------create test------------ -->
-<div class="test-container">
+<!-- <div class="test-container">
     <h2> Create Test Panel</h2>
     <form id="test_form" name="test_form">
         <table cellspacing="20px">
             <tr>
-                <th colspan="" style="display: flex;flex-direction:column;gap:10px;align-items:center;width:fit-content">
+                <th colspan=""
+                    style="display: flex;flex-direction:column;gap:10px;align-items:center;width:fit-content">
                     <h2>Add Test</h2>
                 </th>
                 <th>
@@ -112,40 +84,55 @@ if (isset($_POST['edit_id'])) {
                 </th>
             </tr>
             <tr>
-                <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name" value="<?php echo $test_name; ?>"> </th>
+                <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name"
+                        value="<?php echo $test_name; ?>"> </th>
             </tr>
             <tr>
-                <td> <input type="text" name="test_date" class="test_date" placeholder="Test date" value="<?php echo $test_date; ?>" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"> </td>
-                <td> <input type="text" name="test_start_time" class="test_start_time"  placeholder="Test start time" value="<?php echo $test_start_time; ?>" onfocus="(this.type='time')" onblur="if(this.value==''){this.type='text'}"></td>
+                <td> <input type="text" name="test_date" class="test_date" placeholder="Test date"
+                        value="<?php echo $test_date; ?>" onfocus="(this.type='date')"
+                        onblur="if(this.value==''){this.type='text'}"> </td>
+                <td> <input type="text" name="test_start_time" class="test_start_time" placeholder="Test start time"
+                        value="<?php echo $test_start_time; ?>" onfocus="(this.type='time')"
+                        onblur="if(this.value==''){this.type='text'}"></td>
             </tr>
             <tr>
-                <td> <input type="text" name="test_time" class="test_time"  placeholder="Test time (in minutes )" value="<?php echo $test_time; ?>"> </td>
-                <td> <input type="text" name="test_marks" class="test_marks"  placeholder="Each Question marks" value="<?php echo $test_marks; ?>"> </td>
+                <td> <input type="text" name="test_time" class="test_time" placeholder="Test time (in minutes )"
+                        value="<?php echo $test_time; ?>"> </td>
+                <td> <input type="text" name="test_marks" class="test_marks" placeholder="Each Question marks"
+                        value="<?php echo $test_marks; ?>"> </td>
             </tr>
             <tr>
-                <td> <input type="text" name="test_question" class="test_question"  placeholder="Total number of Question" value="<?php echo $test_question; ?>"> </td>
-                <!-- <td style="display:none;"> <input type="text" name="test_id" value="" hidden> </td> -->
-                <td class="button">
-                    <input type="reset" value="Clear">
-                    <input type="submit" name="create" value="Create">
-                    <!-- <button type="button" name="create" >Create</button> -->
-                </td>
-            </tr>
-        </table>
-    </form>
+                <td> <input type="text" name="test_question" class="test_question"
+                        placeholder="Total number of Question" value="<?php echo $test_question; ?>"> </td>
+                 <td style="display:none;"> <input type="text" name="test_id" value="" hidden> </td> -->
+<!-- <td class="button">
+    <input type="reset" value="Clear">
+    <input type="submit" name="create" value="Create"> -->
+<!-- <button type="button" name="create" >Create</button> -->
+<!-- </td>
+</tr>
+</table>
+</form>
+</div> -->
+<div class="breadcrum">
+    <p>Dashboard/<span>Test</span></p>
 </div>
 <div class="test-display">
     <div class="test-title">
         <span>Dashboard \ Test</span>
         <span class="search">
             <button class="search_btn">
-                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
-                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+                    aria-labelledby="search">
+                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                        stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round">
+                    </path>
                 </svg>
             </button>
             <input class="search_input" placeholder="Type your text" required="" type="text">
             <button class="reset">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
@@ -161,14 +148,14 @@ if (isset($_POST['edit_id'])) {
 </div>
 <script>
     <?php include 'js/test.js'; ?>
-    $(function(){
-        $(".close-alert").click(function(){
+    $(function() {
+        $(".close-alert").click(function() {
             $("#alert-container").fadeOut();
-        });  
+        });
 
-        $("#alert-container").click(function () {
+        $("#alert-container").click(function() {
             $("#alert-container").fadeOut();
-        }).children().click(function () {
+        }).children().click(function() {
             return false;
         });
     });

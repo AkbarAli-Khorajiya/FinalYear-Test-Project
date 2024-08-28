@@ -8,7 +8,7 @@ class Test_operation
     private $username = 'root';
     private $password = '';
     private $database = 'exam_test';
-    private $conn = '';
+    private $conn;
 
     function __construct()
     {
