@@ -4,7 +4,7 @@
 <div class="student-container">
     <div class="add-std">
         <div class="heading">
-            <h3>Students Registered List</h3>
+            <h3 class="page-title">Students Registered List</h3>
         </div>
         <button id="add-student">
             <span class="icon">+</span>
@@ -175,7 +175,17 @@
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="name" class="">Name</label>
+                <label for="firstname" class="">Firstname</label>
+                <input type="text" id="firstname" placeholder="eg:-xyz">
+            </div>
+            <div class="inp-group">
+                <label for="middlename" class="">Middlename</label>
+                <input type="text" id="middlename" placeholder="eg:-xyz">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="name" class="">Lastname</label>
                 <input type="text" id="name" placeholder="eg:-xyz">
             </div>
             <div class="inp-group">
