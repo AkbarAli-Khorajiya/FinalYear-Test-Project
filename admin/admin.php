@@ -46,17 +46,18 @@ session_start();
     </section>
 </body>
 <script>
-    jQuery('#container').load('student.php');
+    jQuery('#container').load('test.php');
     const listItems = document.querySelectorAll('li');
     let prevSelectedItem = null;
     listItems.forEach(item => {
         item.addEventListener('click', function() {
+            console.log(item)
             // Reset background color of the previously selected item
             if (prevSelectedItem) {
-                prevSelectedItem.style.backgroundColor = '#4B49AC';
+                prevSelectedItem.style.backgroundColor = '#1c1c38';
             }
             // Set background color of the clicked item
-            this.style.backgroundColor = '#7978E9';
+            this.style.backgroundColor = '#ccc';
             // Update the previously selected item
             prevSelectedItem = this;
         });

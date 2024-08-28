@@ -1,8 +1,8 @@
 <div class="breadcrum">
     <p>Dashboard/<span>Student</span></p>
 </div>
-<div class="student-container">
-    <div class="add-std">
+<div class="sub-container">
+    <div class="add-title-btn">
         <div class="heading">
             <h3 class="page-title">Students Registered List</h3>
         </div>
@@ -11,9 +11,8 @@
             <span>Add Student</span>
         </button>
     </div>
-    <div class="student-display">
+    <div class="data-display">
         <div class="search">
-
             <input type="text" placeholder=" &#x1F50D;search" name="search" class="search" id="search">
         </div>
         <table>
@@ -22,11 +21,10 @@
                     <th>Reg_id</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Status</th>
                     <th>Gender</th>
                     <th>Class</th>
-                    <th colspan="2" align="center">Action</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,137 +32,129 @@
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
                     <td>Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="de-activate">De-Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
-                    <td>Active</td>
+                    <td>De-Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="activate">Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
                     <td>Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="de-activate">De-Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
-                    <td>Active</td>
+                    <td>De-Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="activate">Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
                     <td>Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="de-activate">De-Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
-                    <td>Active</td>
+                    <td>De-Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="activate">Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
                     <td>Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="de-activate">De-Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
-                    <td>Active</td>
+                    <td>De-Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="activate">Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
                     <td>Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="de-activate">De-Activate</button>
                     </td>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>AkbarAli</td>
                     <td>akb@gmail.com</td>
-                    <td>admin</td>
-                    <td>Active</td>
+                    <td>De-Active</td>
                     <td>Male</td>
-                    <td>TY</td>
+                    <td>Third-Year</td>
                     <td>
-                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                        <button class="activate">Activate</button>
                     </td>
                 </tr>
+
             </tbody>
         </table>
-        <div class="pagination" style="display: flex;justify-content: space-between;">
+        <div class="pagination">
             <div class="total-list">
                 1 snds sd 2 sd
             </div>
             <div class="page-btn">
-                <button>12</button><button>12</button><button>12</button><button>12</button><button>12</button>
+                <button class="previous">Previous</button>
+                <button class="next">Next</button>
             </div>
         </div>
     </div>
 </div>
 <!-- ---------Add student modal--------------  -->
 <div class="modal-container">
-    <form class="std-form" action="javascript:void(0)">
+    <form class="form" action="javascript:void(0)">
         <div class="head">
             <h3>Add Student</h3>
             <div class="close">x</div>
@@ -173,21 +163,22 @@
             <!-- <p class="success">*name is required</p> -->
             <!-- <p class="error">*name is required</p> -->
         </div>
-        <div class="col-2">
+        <div class="col-3">
             <div class="inp-group">
-                <label for="firstname" class="">Firstname</label>
+                <label for="firstname" class="">Surname</label>
                 <input type="text" id="firstname" placeholder="eg:-xyz">
             </div>
             <div class="inp-group">
-                <label for="middlename" class="">Middlename</label>
+                <label for="middlename" class="">Firstname</label>
                 <input type="text" id="middlename" placeholder="eg:-xyz">
             </div>
-        </div>
-        <div class="col-2">
             <div class="inp-group">
                 <label for="name" class="">Lastname</label>
                 <input type="text" id="name" placeholder="eg:-xyz">
             </div>
+        </div>
+        <div class="col">
+
             <div class="inp-group">
                 <label for="email" class="">Email</label>
                 <input type="text" id="email" placeholder="eg:-xyz@gmail.com">

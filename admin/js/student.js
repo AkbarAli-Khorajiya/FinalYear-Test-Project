@@ -1,14 +1,14 @@
-$(document).ready(function () {
+$(document).ready(function() {
     $('.modal-container').hide()
 
-    $('#add-student').on('click',()=>{
+    $('#add-student').on('click', () => {
         $('.modal-container').show()
     })
-    $('.close').on('click',()=>{
+    $('.close').on('click', () => {
         $('.modal-container').hide()
     })
 
-    $('.std-form').submit(()=>{
+    $('.form').submit(() => {
         $('.msg').html('<p class="error">*name is required</p>')
     })
 
