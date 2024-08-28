@@ -47,13 +47,18 @@
             }
             else if ($this->validData($post) == 6) {
                 return 0 ."||Select Gender";
-                
+            }
+            else if ($this->validData($post) == 7){
+                return 0 ."||Select Class";
             }
             else{   
                 $name = $post['name'];
                 $email = $post['email'];
                 $password = password_hash($post['password'] , PASSWORD_DEFAULT);
                 $gender = $post['gender'];
+                $class = $post['class'];
+                $status = 1;
+                $created_at = 
                 $query = "insert into user (`name`,`email`,`password`,`gender`) VALUES('$name','$email','$password','$gender')";
                 $result = mysqli_query($this->conn, $query);
                 if ($result) {
@@ -170,6 +175,14 @@
                 $gender = $this->cleanData($data['gender']);
                 $data['gender'] = $gender;
             };
+             //validate class
+            if(empty($dara['class'])){
+                return 7;
+            }
+            else{
+                $class = $this->cleanData($data['class']);
+                $data['class'] = $class;
+            }
             return $data;
         }
         // Function to sanatize data
