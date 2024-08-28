@@ -1,50 +1,204 @@
-<?php
-    include 'include/database.php';
-    if(isset($_POST['reg_id']))
-    {
-        $del_query = 'delete from student_reg where reg_id='.$_POST['reg_id'];
-        $result = mysqli_query($link,$del_query);
-    }
-    $query = 'select *from student_reg';
-    $result = mysqli_query($link,$query);
-?>
 <div class="student-title">
-    <span>STUDENT DETAILS</span>
+    <p>Dashboard/<span>Student</span></p>
 </div>
 <div class="student-container">
+    <div class="add-std">
+        <div class="heading">
+            <h3>Students Registered List</h3>
+        </div>
+        <button id="add-student">
+            <span class="icon">+</span>
+            <span>Add Student</span>
+        </button>
+    </div>
     <div class="student-display">
         <table>
             <thead>
                 <tr>
-                    <th>Reg_id</th><th>First Name</th><th>Username</th><th>Email</th><th>Phone_number</th><th>Gender</th><th>Collage</th><th>Course</th><th>Semester</th><th colspan="2" align="center">Action</th>
+                    <th>Reg_id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Status</th>
+                    <th>Gender</th>
+                    <th>Class</th>
+                    <th colspan="2" align="center">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                    while($row = mysqli_fetch_assoc($result))
-                    {
-                ?>
                 <tr>
-                    <td><?php echo $row['reg_id']?></td>
-                    <td> <?php echo $row['f_name']?> </td>
-                    <td><?php echo $row['u_name']?></td>
-                    <td><?php echo $row['email']?></td>
-                    <td><?php echo $row['phone_number']?></td>
-                    <td><?php echo $row['gender']?></td>
-                    <td><?php echo $row['collage']?></td>
-                    <td><?php echo $row['course']?></td>
-                    <td><?php echo $row['semester']?></td>
-                    <td><button class="edit" onclick="">Edit</button></td>
-                    <td><button class="delete" onclick="stud_del(<?php echo $row['reg_id'];?>)">Delete</button></td>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
                 </tr>
-                <?php
-                    }
-                ?>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>AkbarAli</td>
+                    <td>akb@gmail.com</td>
+                    <td>admin</td>
+                    <td>Active</td>
+                    <td>Male</td>
+                    <td>TY</td>
+                    <td>
+                        <button class="edit">Edit</button><button class="delete">Delete</button>
+                    </td>
+                </tr>
+                
             </tbody>
         </table>
     </div>
 </div>
-<?php mysqli_close($link);?>
+<!-- ---------Add student modal--------------  -->
+<div class="modal-container">
+    <form class="std-form" action="javascript:void(0)">
+        <div class="head">
+            <h3>Add Student</h3>
+            <div class="close">x</div>
+        </div>
+        <div class="msg">
+            <!-- <p class="success">*name is required</p> -->
+            <!-- <p class="error">*name is required</p> -->
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="name" class="">Name</label>
+                <input type="text" id="name" placeholder="eg:-xyz">
+            </div>
+            <div class="inp-group">
+                <label for="email" class="">Email</label>
+                <input type="text" id="email" placeholder="eg:-xyz@gmail.com">
+            </div>
+        </div>
+        <div class="col-2">
+
+            <div class="inp-group">
+                <label for="password" class="">Password</label>
+                <input type="text" id="password" placeholder="eg:-xyzstudent">
+            </div>
+            <div class="inp-group">
+                <label for="gender" class="">Gender</label>
+                <select name="gender" id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-2">
+
+            <div class="inp-group">
+                <label for="class" class="">Class</label>
+                <select name="class" id="class">
+                    <option value="First-Year">First-Year</option>
+                    <option value="Second-Year">Second-Year</option>
+                    <option value="Third-Year">Third-Year</option>
+                </select>
+            </div>
+            <div class="inp-group">
+                <label for="status" class="">Status</label>
+                <select name="status" id="status">
+                    <option value="0">Active</option>
+                    <option value="1">InActive</option>
+                </select>
+            </div>
+        </div>
+        <div class="bottom">
+            <input type="reset" name="reset" id="reset" value="Reset">
+            <input type="submit" name="submit" id="save" value="Save">
+        </div>
+    </form>
+</div>
 <script>
-    <?php include 'js/student.js';?>
+    <?php include 'js/student.js'; ?>
 </script>

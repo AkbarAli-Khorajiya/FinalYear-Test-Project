@@ -8,6 +8,7 @@ $("#std-reg-form").submit(function (e) {
         data:data,
         encode:true,
         success:(response)=>{
+            console.log(response)
             dataArr = response.split("||");
             if(dataArr[0] == 1)
             {

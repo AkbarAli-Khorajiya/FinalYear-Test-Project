@@ -1,8 +1,15 @@
-function stud_del(reg_id)
-{
-    if(confirm('Are you sure want to delete record?'))
-    {
-        jQuery('#container').load('student.php',{reg_id:reg_id});
-        // console.log('done');
-    }
-}
+$(document).ready(function () {
+    $('.modal-container').hide()
+
+    $('#add-student').on('click',()=>{
+        $('.modal-container').show()
+    })
+    $('.close').on('click',()=>{
+        $('.modal-container').hide()
+    })
+
+    $('.std-form').submit(()=>{
+        $('.msg').html('<p class="error">*name is required</p>')
+    })
+
+})

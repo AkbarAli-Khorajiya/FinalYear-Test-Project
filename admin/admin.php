@@ -39,7 +39,7 @@
    </section>
 </body>
 <script>
-    jQuery('#container').load('dash.php');
+    jQuery('#container').load('student.php');
     const listItems = document.querySelectorAll('li');
     let prevSelectedItem = null;
     listItems.forEach(item => {

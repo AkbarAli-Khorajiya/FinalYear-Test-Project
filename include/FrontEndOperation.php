@@ -6,7 +6,7 @@
         private $username = 'root';
         private $password = '';
         private $database = 'exam_test';
-        private $conn = '';
+        private $conn;
         function __construct()
         {
             $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
