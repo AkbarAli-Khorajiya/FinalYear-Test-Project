@@ -54,8 +54,8 @@ class Test_operation
                         <td>' . date("d-m-Y", strtotime($row['test_date'])) . '</td>
                         <td>' . $row['test_question'] . '</td>
                         <td>' . $row['test_marks'] . '</td>
-                        <td> <button class="edit-test edit" id="' . $row['id'] . '">Edit</button>   
-                        <button class="delete-test delete" id="' . $row['id'] . '">Delete</button> </td>
+                        <td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
+                        <button class="delete-test delete-m" id="' . $row['id'] . '">Delete</button> </td>
                     </tr>';
             }
             $str .= '</tbody>';

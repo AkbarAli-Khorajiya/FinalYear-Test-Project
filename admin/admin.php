@@ -24,7 +24,7 @@ session_start();
 <body>
     <header>
         <span>Exam25 </span>
-        <button onclick="window.location.href='admin_logout.php'">Log Out</button>
+        <button onclick="window.location.href='admin_logout.php'"><img src="../image/userprofile/logout.png" >Log Out</button>
     </header>
     <section>
         <aside>
