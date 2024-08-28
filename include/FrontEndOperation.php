@@ -22,44 +22,41 @@
             {
                 return 0 ."||Already Registered";
             }
-            //check for valid Data
-            if($this->validData($post) == 0){
+            // check for valid data
+            if(($post = $this->validData($post)) == 0){
                 return 0 ."||Fill all fields";
             }
-            else if ($this->validData($post) == 2) {
+            else if (($post = $this->validData($post)) == 2) {
                 return 0 ."||Enter Valid Name";
             }
-            else if ($this->validData($post) == 3) {
-                return 0 ."||Enter Valid Email";
-                
+            else if (($post = $this->validData($post)) == 3) {
+                return 0 ."||Enter Valid Email";     
             }
-            else if($this->validData($post) == 4) {
+            else if(($post = $this->validData($post)) == 4) {
                 return 0 ."||Password is required";
             }
-            else if($this->validData($post) == 4.1) {
+            else if(($post = $this->validData($post)) == 4.1) {
                 return 0 ."||Password must be between 8 and 20 characters";
             }
-            else if($this->validData($post) == 5) {
+            else if(($post = $this->validData($post)) == 5) {
                 return 0 ."||Confirm password is required";
             }
-            else if($this->validData($post) == 5.1) {
+            else if(($post = $this->validData($post)) == 5.1) {
                 return 0 ."||Passwords do not match";
             }
-            else if ($this->validData($post) == 6) {
+            else if (($post = $this->validData($post)) == 6) {
                 return 0 ."||Select Gender";
             }
-            else if ($this->validData($post) == 7){
+            else if (($post = $this->validData($post)) == 7){
                 return 0 ."||Select Class";
             }
             else{   
-                $name = $post['name'];
+                $name = $post['surName'] ." ". $post['firstName'] ." ". $post['lastName'];
                 $email = $post['email'];
                 $password = password_hash($post['password'] , PASSWORD_DEFAULT);
                 $gender = $post['gender'];
                 $class = $post['class'];
-                $status = 1;
-                $created_at = 
-                $query = "insert into user (`name`,`email`,`password`,`gender`) VALUES('$name','$email','$password','$gender')";
+                $query = "insert into user (`name`,`email`,`password`,`gender`,`class`) VALUES('$name','$email','$password','$gender','$class')";
                 $result = mysqli_query($this->conn, $query);
                 if ($result) {
                     return 1 ."||Successfully Registered";
@@ -118,17 +115,27 @@
                 return 0;
             }
             // validate name
-            if(empty($data['name'])) {
+            if(empty($data['surName']) || empty($data['firstName'] || empty($data['lastName']))) {
                 return 2;
             }
             else{
-                $name = $this->cleanData($data['name']);
-                if(!preg_match("/^[a-zA-Z ]*$/",$name)) {
+                $surName = $this->cleanData($data['surName']);
+                $firstName = $this->cleanData($data['firstName']);
+                $lastName = $this->cleanData($data['lastName']);
+                if(!preg_match("/^[a-zA-Z ]*$/",$surName)) {
+                    return 2;
+                }
+                else if(!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
+                    return 2;
+                }
+                if(!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
                     return 2;
                 }
                 else
                 {
-                    $data['name'] = $name;
+                    $data['surName'] = $surName;
+                    $data['firstName'] = $firstName;
+                    $data['lastName'] = $lastName;
                 }
             }
             // validate email
@@ -176,7 +183,7 @@
                 $data['gender'] = $gender;
             };
              //validate class
-            if(empty($dara['class'])){
+            if(empty($data['class'])){
                 return 7;
             }
             else{
