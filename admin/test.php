@@ -186,7 +186,7 @@ if (isset($_POST['edit_id'])) {
             </div>
         </div>
         <div class="bottom">
-            <input type="reset" name="reset" id="reset" value="Reset">
+            <input type="reset" name="reset" id="clear" value="Reset">
             <input type="submit" name="submit" id="save" value="Save">
         </div>
     </form>
