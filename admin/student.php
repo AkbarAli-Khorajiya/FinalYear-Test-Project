@@ -166,29 +166,28 @@
         <div class="col-3">
             <div class="inp-group">
                 <label for="firstname" class="">Surname</label>
-                <input type="text" name="firstName" id="firstname" placeholder="eg:-xyz">
+                <input type="text" name="surName" id="firstname" placeholder="eg:-xyz" required>
             </div>
             <div class="inp-group">
                 <label for="middlename" class="">Firstname</label>
-                <input type="text" id="middlename" placeholder="eg:-xyz">
+                <input type="text" name="firstName" id="middlename" placeholder="eg:-xyz" required>
             </div>
             <div class="inp-group">
                 <label for="name" class="">Lastname</label>
-                <input type="text" id="name" placeholder="eg:-xyz">
+                <input type="text" name="lastName" id="name" placeholder="eg:-xyz" required>
             </div>
         </div>
         <div class="col">
 
             <div class="inp-group">
                 <label for="email" class="">Email</label>
-                <input type="text" id="email" placeholder="eg:-xyz@gmail.com">
+                <input type="text" name="email" id="email" placeholder="eg:-xyz@gmail.com" required>
             </div>
         </div>
         <div class="col-2">
-
             <div class="inp-group">
                 <label for="password" class="">Password</label>
-                <input type="password" id="password" placeholder="eg:-xyzstudent">
+                <input type="password" name="password" id="password" placeholder="eg:-xyzstudent" required>
             </div>
             <div class="inp-group">
                 <label for="gender" class="">Gender</label>

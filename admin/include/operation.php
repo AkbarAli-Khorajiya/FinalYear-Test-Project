@@ -507,7 +507,8 @@ class Student_operation
             $password = password_hash($post['password'] , PASSWORD_DEFAULT);
             $gender = $post['gender'];
             $class = $post['class'];
-            $query = "insert into user (`name`,`email`,`password`,`gender`,`class`) VALUES('$name','$email','$password','$gender','$class')";
+            $status = $post['status'];
+            $query = "insert into user (`name`,`email`,`password`,`gender`,`class`,`status`) VALUES('$name','$email','$password','$gender','$class','$status')";
             $result = mysqli_query($this->conn, $query);
             if ($result) {
                 return 1 ."||Successfully Registered";
@@ -619,4 +620,12 @@ class Student_operation
         $data = htmlspecialchars($data);
         return $data;
     }
+}
+
+$std_obj = new Student_operation();
+switch($ch)
+{
+    case '20':
+        echo $std_obj->addUser($_POST);
+        break;
 }
