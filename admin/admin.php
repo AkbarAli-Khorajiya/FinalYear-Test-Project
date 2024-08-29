@@ -57,7 +57,7 @@ session_start();
                 prevSelectedItem.style.backgroundColor = '#1c1c38';
             }
             // Set background color of the clicked item
-            this.style.backgroundColor = '#ccc';
+            this.style.backgroundColor = '#3e3e77';
             // Update the previously selected item
             prevSelectedItem = this;
         });

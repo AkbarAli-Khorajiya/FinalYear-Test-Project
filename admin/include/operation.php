@@ -473,35 +473,36 @@ class Student_operation
             return 0 ."||Already Registered";
         }
         // check for valid data
-        if(($post = $this->validData($post)) == 0){
+        $post = $this->validData($post);
+        if($post === 0){
             return 0 ."||Fill all fields";
         }
-        else if (($post = $this->validData($post)) == 2) {
-            return 0 ."||Enter Valid Name";
+        else if ($post === 2) {
+            return 0 . "||Enter valid Name";
         }
-        else if (($post = $this->validData($post)) == 3) {
+        else if ($post === 3) {
             return 0 ."||Enter Valid Email";     
         }
-        else if(($post = $this->validData($post)) == 4) {
+        else if($post === 4) {
             return 0 ."||Password is required";
         }
-        else if(($post = $this->validData($post)) == 4.1) {
+        else if($post === 4.1) {
             return 0 ."||Password must be between 8 and 20 characters";
         }
-        else if(($post = $this->validData($post)) == 5) {
+        else if($post === 5) {
             return 0 ."||Confirm password is required";
         }
-        else if(($post = $this->validData($post)) == 5.1) {
+        else if($post === 5.1) {
             return 0 ."||Passwords do not match";
         }
-        else if (($post = $this->validData($post)) == 6) {
+        else if ($post === 6) {
             return 0 ."||Select Gender";
         }
-        else if (($post = $this->validData($post)) == 7){
+        else if ($post === 7){
             return 0 ."||Select Class";
         }
-        else{   
-            $name = $post['surName'] ." ". $post['firstName'] ." ". $post['lastName'];
+        else{  
+            $name = $post['surName'] .' '. $post['firstName'] .' '. $post['lastName'];
             $email = $post['email'];
             $password = password_hash($post['password'] , PASSWORD_DEFAULT);
             $gender = $post['gender'];
@@ -517,76 +518,6 @@ class Student_operation
             }
         }
     }
-    //function to update student
-    function updateUser($post)
-    {
-        if($this->checkUser($post) == 0)
-        {
-            return 0 ."||Already Exist";
-        }
-        // check for valid data
-        if(($post = $this->validData($post)) == 0){
-            return 0 ."||Fill all fields";
-        }
-        else if (($post = $this->validData($post)) == 2) {
-            return 0 ."||Enter Valid Name";
-        }
-        else if (($post = $this->validData($post)) == 3) {
-            return 0 ."||Enter Valid Email";     
-        }
-        else if(($post = $this->validData($post)) == 4) {
-            return 0 ."||Password is required";
-        }
-        else if(($post = $this->validData($post)) == 4.1) {
-            return 0 ."||Password must be between 8 and 20 characters";
-        }
-        else if(($post = $this->validData($post)) == 5) {
-            return 0 ."||Confirm password is required";
-        }
-        else if(($post = $this->validData($post)) == 5.1) {
-            return 0 ."||Passwords do not match";
-        }
-        else if (($post = $this->validData($post)) == 6) {
-            return 0 ."||Select Gender";
-        }
-        else if (($post = $this->validData($post)) == 7){
-            return 0 ."||Select Class";
-        }
-        else{   
-            $id = $post['userId'];
-            $name = $post['surName'] ." ". $post['firstName'] ." ". $post['lastName'];
-            $email = $post['email'];
-            $password = password_hash($post['password'] , PASSWORD_DEFAULT);
-            $gender = $post['gender'];
-            $status = $post['status'];
-            $class = $post['class'];
-            $query = "UPDATE `user` SET `name` = '$name', `email` = '$email', `password` = '$password', `gender` = '$gender',`status` = $status, `class` = '$class' where `id` = $id";
-            $result = mysqli_query($this->conn, $query);
-            if ($result) {
-                return 1 ."||Updated Successfully";
-            }
-            else
-            {
-                return 0 ."||Not Updated";
-            }
-        }
-    }
-    // function to delete user
-    function removeUser($post)
-    {
-        $id = $post['id'];
-        $query = "DELETE FROM `user` WHERE `id` = $id";
-        $result = mysqli_query($this->conn , $query);
-        if($result)
-        {
-            return 1 ."||User removed";
-        }
-        else
-        {
-            return 0 ."||User Not Removed";
-        }
-    }
-    // function that check user is exist or not
     function checkUser($data)
     {
         $email = $data['email'];
@@ -605,7 +536,8 @@ class Student_operation
             return 0;
         }
         // validate name
-        if(empty($data['surName']) || empty($data['firstName'] || empty($data['lastName']))) {
+        if($data['surName'] == "" || $data['firstName'] == "" || $data['lastName'] == "") 
+        {
             return 2;
         }
         else{
@@ -615,18 +547,15 @@ class Student_operation
             if(!preg_match("/^[a-zA-Z ]*$/",$surName)) {
                 return 2;
             }
-            else if(!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
+            if(!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
                 return 2;
             }
             if(!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
                 return 2;
             }
-            else
-            {
-                $data['surName'] = $surName;
-                $data['firstName'] = $firstName;
-                $data['lastName'] = $lastName;
-            }
+            $data['surName'] = $surName;
+            $data['firstName'] = $firstName;
+            $data['lastName'] = $lastName;
         }
         // validate email
         if(empty($data['email'])) {
@@ -643,7 +572,7 @@ class Student_operation
             }
         }
         // validate Password
-        if (empty($data["password"])) {
+        if (empty($data['password'])) {
             return 4;
         } 
         else{
@@ -690,5 +619,4 @@ class Student_operation
         $data = htmlspecialchars($data);
         return $data;
     }
-    
 }

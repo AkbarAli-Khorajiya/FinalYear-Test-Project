@@ -95,7 +95,7 @@ section aside ul li {
 }
 
 section aside ul li:hover {
-    background-color: #1a1a4cc0;
+    background-color: #3e3e77;
 }
 
 section aside ul li a {
@@ -232,6 +232,7 @@ section #container .sub-container .add-title-btn {
         outline: 3px solid #1c1c38;
         border: 1px solid #fff;
         cursor: pointer;
+        transition: 200ms linear 0s all;
         &:hover {
             background-color: #fff;
             color: #1c1c38;

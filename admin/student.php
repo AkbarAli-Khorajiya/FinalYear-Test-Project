@@ -154,7 +154,7 @@
 </div>
 <!-- ---------Add student modal--------------  -->
 <div class="modal-container">
-    <form class="form" action="javascript:void(0)">
+    <form class="form" id="std-add-form" action="javascript:void(0)">
         <div class="head">
             <h3>Add Student</h3>
             <div class="close">x</div>
@@ -166,7 +166,7 @@
         <div class="col-3">
             <div class="inp-group">
                 <label for="firstname" class="">Surname</label>
-                <input type="text" id="firstname" placeholder="eg:-xyz">
+                <input type="text" name="firstName" id="firstname" placeholder="eg:-xyz">
             </div>
             <div class="inp-group">
                 <label for="middlename" class="">Firstname</label>
