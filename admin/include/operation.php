@@ -481,7 +481,8 @@ class Student_operation
                         <th>Status</th>
                         <th>Gender</th>
                         <th>Class</th>
-                        <th colspan='2'>Action</th>
+                        <th>Created at</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -495,7 +496,7 @@ class Student_operation
                         <td class='status'>".($row['status'] == 1 ? "Active" : "De-Active")."</td>
                         <td>".$row['gender']."</td>
                         <td>".$row['class']."</td>
-                        <td>". $row['created_at'] ."</td>
+                        <td>". date('d/m/Y',strtotime($row['created_at']))."</td>
                         <td>
                             <button onclick='updateStatus(this)' id=".$row['id']." ".($row['status'] == 1 ?" class='de-activate'>De-Activate</button>":" class='activate'>Activate</button>").
                         "</td>
