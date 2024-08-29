@@ -50,7 +50,7 @@ header button {
     border-radius: 3px;
     transition: all 300ms linear 0s;
     cursor: pointer;
-    img{
+    img {
         width: 17px;
         height: 17px;
         margin-right: 5px;
@@ -282,7 +282,7 @@ section #container .sub-container .data-display {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        p{
+        p {
             font-size: 13px;
         }
         button {
@@ -339,6 +339,7 @@ section #container .sub-container .data-display table tbody tr td {
 section #container .sub-container .data-display table tbody tr:nth-child(even) {
     background-color: #ded2d251;
 }
+
 section #container .sub-container .data-display table tbody tr:hover {
     background-color: #a8a6a634;
 }
@@ -347,12 +348,11 @@ section #container .sub-container .data-display table tbody tr td:first-child {
     border-left: 1px solid #ded2d2;
     font-weight: bold;
     text-align: center;
-}    
-section #container .sub-container .data-display table tbody tr .testlink{
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+}
+
+section #container .sub-container .data-display table tbody tr .testlink {
     cursor: pointer;
-    color: blue;
+    color: rgb(74, 139, 245);
 }
 
 section #container .sub-container .data-display table tbody tr td:last-child {
@@ -385,7 +385,8 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
     letter-spacing: 1px;
     cursor: pointer;
 }
-.delete-m{
+
+.delete-m {
     color: #fff;
     background: #a92424;
     outline: none;
@@ -397,7 +398,8 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
     letter-spacing: 1px;
     cursor: pointer;
 }
-.edit-m{
+
+.edit-m {
     color: #fff;
     background-color: #e4b419;
     outline: none;

@@ -150,7 +150,7 @@ if (isset($_POST['edit_id'])) {
 </div>
 <!-- ---------Add Test modal--------------  -->
 <div class="modal-container">
-    <form class="form" action="javascript:void(0)">
+    <form class="form" action="javascript:void(0)" id="test-submit-form">
         <div class="head">
             <h3>Add Test</h3>
             <div class="close">x</div>
@@ -159,30 +159,40 @@ if (isset($_POST['edit_id'])) {
             <!-- <p class="success">*name is required</p> -->
             <!-- <p class="error">*name is required</p> -->
         </div>
-        <div class="col">
+        <div class="col-2">
             <div class="inp-group">
-                <label for="test-name" class="">Test name</label>
-                <input type="text" id="test-name" placeholder="eg:-xyz">
+                <label for="test-name">Test name</label>
+                <input type="text" id="test-name" value="" name="test-name" placeholder="eg:-xyz">
+            </div>
+            <div class="inp-group">
+                <label for="created-for" class="">Create For</label>
+                <select name="created-for" id="created-for">
+                    <option value="">----Select----</option>
+                    <option value="First-Year">First-Year</option>
+                    <option value="Second-Year">Second-Year</option>
+                    <option value="Third-Year">Third-Year</option>
+                    <option value="All">All</option>
+                </select>
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="duration" class="">Test duration(min)</label>
-                <input type="number" id="duration" placeholder="eg:-10">
+                <label for="duration">Test duration(min)</label>
+                <input type="number" id="duration" value="" name="duration" placeholder="eg:-10">
             </div>
             <div class="inp-group">
-                <label for="marks" class="">Marks(per question)</label>
-                <input type="text" id="marks" placeholder="eg:-3">
+                <label for="marks">Marks(per question)</label>
+                <input type="text" id="marks" value="" name="marks" placeholder="eg:-3">
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="date" class="">Test Start(Date)</label>
-                <input type="date" id="date">
+                <label for="date">Test Start(Date)</label>
+                <input type="date" id="date" name="date" value="">
             </div>
             <div class="inp-group">
-                <label for="time" class="">Test Start(Time)</label>
-                <input type="time" id="time">
+                <label for="time">Test Start(Time)</label>
+                <input type="time" id="time" name="time" value="">
             </div>
         </div>
         <div class="bottom">
