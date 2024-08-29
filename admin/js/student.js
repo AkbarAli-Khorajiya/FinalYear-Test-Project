@@ -7,6 +7,8 @@ $(document).ready(function() {
     $('.close').on('click', () => {
         $('.modal-container').hide()
     })
+    // hide msg p tag
+    $(".msg p").hide();
     //add user 
     $("#std-add-form").submit((e)=> { 
         e.preventDefault();
@@ -21,13 +23,39 @@ $(document).ready(function() {
                 let dataArr = response.split("||");
                 if(dataArr[0] == 1)
                 {
-                    $(".msg").html("<p class='success'>"+dataArr[1]+"</p>");
+                    $("#std-add-form")[0].reset();
+                    $(".msg .success").text(dataArr[1]);
+                    $(".msg .success").show();
+                    setTimeout(()=>{
+                        $(".msg .success").hide();
+                    },2000);
+                    $('.modal-container').hide()
+                    listUser();
                 }
                 else
                 {
-                    $(".msg").html("<p class='error'>"+dataArr[1]+"</p>");
+                    $(".msg .error").text(dataArr[1]);
+                    $(".msg .error").show();
+                    setTimeout(()=>{
+                        $(".msg .error").hide();
+                    },2000);
                 }
             }
         });
     });
+    function listUser()
+    {
+        $.post("include/operation.php?ch=21",
+            {
+              ch: "21",
+            },
+            function (response) {
+                $("#user-table").html(response);
+                $("table .status").each(function (){;
+                    $(this).text() == "De-Active" ? $(this).css("color", "red") : $(this).css("color", "green");
+                });
+            }
+          )
+    }
+    listUser();
 })

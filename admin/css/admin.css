@@ -551,7 +551,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
             justify-content: space-between;
             align-items: center;
             margin-top: 20px;
-            #reset {
+            #clear {
                 padding: 5px 15px;
                 font-size: 15px;
                 outline: none;

@@ -465,6 +465,61 @@ class Student_operation
         }
         return $this->conn = $conn;
     }
+    function listUser()
+    {
+        $query = "select id,name,email,status,gender,class from user";
+        $result = mysqli_query($this->conn , $query);
+        $str = "";
+        if(mysqli_num_rows($result) > 0)
+        {
+            $str = "
+                <thead>
+                    <tr>
+                        <th>Reg_id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Gender</th>
+                        <th>Class</th>
+                        <th colspan='2'>Action</th>
+                    </tr>
+                </thead>
+                <tbody>";
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    $str .= "<tr>
+                        <td>".$i."</td>
+                        <td>".$row['name']."</td>
+                        <td>".$row['email']."</td>
+                        <td class='status'>".($row['status'] == 1 ? "Active" : "De-Active")."</td>
+                        <td>".$row['gender']."</td>
+                        <td>".$row['class']."</td>
+                        <td>
+                            <button id=".$row['id']." ".($row['status'] == 1 ?" class='de-activate'>De-Activate</button>":" class='activate'>Activate</button>").
+                        "</td>
+                    </tr>";
+                    $i++;
+                }
+                $str .= "</tbody>";
+        }
+        else
+        {
+            $str = "data not found";
+        }
+        return $str;
+    }
+    function updateStatus($post)
+    {
+        $id = $post['id'];
+        $status = $post['status'];
+        $query = "UPDATE `user` SET `status` ='$status' where `id` = '$id'";
+        $result = mysqli_query($this->conn , $query);
+        if($result)
+        {
+            return 1;
+        }
+    }
     function addUser($post)
     {
         //check for existing user
@@ -628,4 +683,8 @@ switch($ch)
     case '20':
         echo $std_obj->addUser($_POST);
         break;
+    case '21':
+        echo $std_obj->listUser();
+    case '22':
+        echo $std_obj->updateStatus($_POST);
 }

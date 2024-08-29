@@ -15,131 +15,8 @@
         <div class="search">
             <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Reg_id</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Gender</th>
-                    <th>Class</th>
-                    <th colspan="2">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="de-activate">De-Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>De-Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="activate">Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="de-activate">De-Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>De-Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="activate">Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="de-activate">De-Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>De-Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="activate">Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="de-activate">De-Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>De-Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="activate">Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="de-activate">De-Activate</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>AkbarAli</td>
-                    <td>akb@gmail.com</td>
-                    <td>De-Active</td>
-                    <td>Male</td>
-                    <td>Third-Year</td>
-                    <td>
-                        <button class="activate">Activate</button>
-                    </td>
-                </tr>
-
-            </tbody>
+        <table id="user-table">
+           <!-- displaying all user -->
         </table>
         <div class="pagination">
             <div class="total-list">
@@ -160,8 +37,8 @@
             <div class="close">x</div>
         </div>
         <div class="msg">
-            <!-- <p class="success">*name is required</p> -->
-            <!-- <p class="error">*name is required</p> -->
+            <p class="success"></p>
+            <p class="error"></p>
         </div>
         <div class="col-3">
             <div class="inp-group">
@@ -190,16 +67,19 @@
                 <input type="password" name="password" id="password" placeholder="eg:-xyzstudent" required>
             </div>
             <div class="inp-group">
-                <label for="gender" class="">Gender</label>
-                <select name="gender" id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+                <label for="confirmpassword" class="">Confirm Password</label>
+                <input type="password" name="confirm-password" id="confirmpassword" placeholder="eg:-xyzstudent" required>
             </div>
         </div>
         <div class="col-2">
-
+            <div class="inp-group">
+                <label for="gender" class="">Gender</label>
+                    <select name="gender" id="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+            </div>
             <div class="inp-group">
                 <label for="class" class="">Class</label>
                 <select name="class" id="class">
@@ -211,13 +91,13 @@
             <div class="inp-group">
                 <label for="status" class="">Status</label>
                 <select name="status" id="status">
-                    <option value="0">Active</option>
-                    <option value="1">InActive</option>
+                    <option value="1">Active</option>
+                    <option value="0">InActive</option>
                 </select>
             </div>
         </div>
         <div class="bottom">
-            <input type="reset" name="reset" id="reset" value="Reset">
+            <input type="reset" name="clear" id="clear" value="Reset">
             <input type="submit" name="submit" id="save" value="Save">
         </div>
     </form>
