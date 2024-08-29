@@ -35,9 +35,9 @@ class Test_operation
                 <tr>
                     <th>Test Id</th>
                     <th>Test Name</th>
-                    <th>Test Time</th>
-                    <th>Starting Time</th>
-                    <th>Test Date</th>
+                    <th>Test Duration(min)</th>
+                    <th>Test Start(Date)</th>
+                    <th>Test Start(Time)</th>
                     <th>Total Question</th>
                     <th>Test marks</th>
                     <th colspan="2" align="center">Action</th>
@@ -50,8 +50,8 @@ class Test_operation
                         <td>' . $i++ . '</td>
                         <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
                         <td>' . $row['test_time'] . '</td>
-                        <td>' . $row['test_start_time'] . '</td>
                         <td>' . date("d-m-Y", strtotime($row['test_date'])) . '</td>
+                        <td>' . $row['test_start_time'] . '</td>
                         <td>' . $row['test_question'] . '</td>
                         <td>' . $row['test_marks'] . '</td>
                         <td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
