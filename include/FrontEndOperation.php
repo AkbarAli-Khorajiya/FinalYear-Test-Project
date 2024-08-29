@@ -83,6 +83,7 @@
                 $user_mail = $row['email'];
                 if(password_verify($password , $user_password))
                 {
+                    $_SESSION['stdLogin'] = 1;
                     $_SESSION['userId'] = $user_id;
                     $_SESSION['userName'] = $user_name;
                     $_SESSION['userMail'] = $user_mail; 
@@ -96,6 +97,20 @@
             else
             {
                 return 0 ."||Invalid Credential";
+            }
+        }
+        function logoutUser($post)
+        {
+            if($post['logout'] == 1)
+            {
+                if(isset($_SESSION['stdLogin']))
+                {
+                    unset($_SESSION['stdLogin']);
+                    unset($_SESSION['userId']);
+                    unset($_SESSION['userName']);
+                    unset($_SESSION['userMail']);
+                    return 1;
+                }
             }
         }
         function checkUser($data)
@@ -210,6 +225,9 @@
             break;
         case '2':
             echo $stdObj->loginUser($_POST);
+            break;
+        case '3':
+            echo $stdObj->logoutUser($_POST);
             break;
     }
 ?>
