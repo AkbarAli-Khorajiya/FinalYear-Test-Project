@@ -43,19 +43,55 @@ $(document).ready(function() {
             }
         });
     });
-    function listUser()
-    {
-        $.post("include/operation.php?ch=21",
-            {
-              ch: "21",
-            },
-            function (response) {
-                $("#user-table").html(response);
-                $("table .status").each(function (){;
-                    $(this).text() == "De-Active" ? $(this).css("color", "red") : $(this).css("color", "green");
-                });
-            }
-          )
+    //update  status
+});
+function listUser()
+{
+    $.post("include/operation.php?ch=21",
+        {
+          ch: "21",
+        },
+        function (response) {
+            $("#user-table").html(response);
+            $("table .status").each(function (){;
+                $(this).text() == "De-Active" ? $(this).css("color", "red") : $(this).css("color", "green");
+            });
+        }
+      )
+}
+listUser();
+function updateStatus(element)
+{
+
+        let id = element.id;
+        if(element.className == "activate")
+        {
+            $.ajax({
+                type: "POST",
+                url: "include/operation.php?ch=22",
+                data: {id : id, status : 1},
+                encode : true,
+                success: function (response) {
+                    if(response == 1)
+                    {
+                        listUser();
+                    }
+                }
+            });
+        }
+        else if(element.className == "de-activate")
+        {
+            $.ajax({
+                type: "POST",
+                url: "include/operation.php?ch=22",
+                data: {id : id, status : 0},
+                encode : true,
+                success: function (response) {
+                    if(response == 1)
+                    {
+                        listUser();
+                    }
+                }
+            });
+        }
     }
-    listUser();
-})

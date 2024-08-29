@@ -467,7 +467,7 @@ class Student_operation
     }
     function listUser()
     {
-        $query = "select id,name,email,status,gender,class from user";
+        $query = "select id,name,email,status,gender,class,created_at from user";
         $result = mysqli_query($this->conn , $query);
         $str = "";
         if(mysqli_num_rows($result) > 0)
@@ -495,8 +495,9 @@ class Student_operation
                         <td class='status'>".($row['status'] == 1 ? "Active" : "De-Active")."</td>
                         <td>".$row['gender']."</td>
                         <td>".$row['class']."</td>
+                        <td>". $row['created_at'] ."</td>
                         <td>
-                            <button id=".$row['id']." ".($row['status'] == 1 ?" class='de-activate'>De-Activate</button>":" class='activate'>Activate</button>").
+                            <button onclick='updateStatus(this)' id=".$row['id']." ".($row['status'] == 1 ?" class='de-activate'>De-Activate</button>":" class='activate'>Activate</button>").
                         "</td>
                     </tr>";
                     $i++;
