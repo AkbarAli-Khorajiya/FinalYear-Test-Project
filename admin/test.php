@@ -152,65 +152,37 @@ if (isset($_POST['edit_id'])) {
 <div class="modal-container">
     <form class="form" action="javascript:void(0)">
         <div class="head">
-            <h3>Add Student</h3>
+            <h3>Add Test</h3>
             <div class="close">x</div>
         </div>
         <div class="msg">
             <!-- <p class="success">*name is required</p> -->
             <!-- <p class="error">*name is required</p> -->
         </div>
-        <div class="col-3">
-            <div class="inp-group">
-                <label for="firstname" class="">Surname</label>
-                <input type="text" id="firstname" placeholder="eg:-xyz">
-            </div>
-            <div class="inp-group">
-                <label for="middlename" class="">Firstname</label>
-                <input type="text" id="middlename" placeholder="eg:-xyz">
-            </div>
-            <div class="inp-group">
-                <label for="name" class="">Lastname</label>
-                <input type="text" id="name" placeholder="eg:-xyz">
-            </div>
-        </div>
         <div class="col">
-
             <div class="inp-group">
-                <label for="email" class="">Email</label>
-                <input type="text" id="email" placeholder="eg:-xyz@gmail.com">
+                <label for="test-name" class="">Test name</label>
+                <input type="text" id="test-name" placeholder="eg:-xyz">
             </div>
         </div>
         <div class="col-2">
-
             <div class="inp-group">
-                <label for="password" class="">Password</label>
-                <input type="text" id="password" placeholder="eg:-xyzstudent">
+                <label for="password" class="">Time duration(min)</label>
+                <input type="number" id="password" placeholder="eg:-10">
+            </div>
+            <div class="inp-group">
+                <label for="marks" class="">Marks(per question)</label>
+                <input type="text" id="marks" placeholder="eg:-3">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="date" class="">Held on</label>
+                <input type="date" id="date">
             </div>
             <div class="inp-group">
                 <label for="gender" class="">Gender</label>
-                <select name="gender" id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-2">
-
-            <div class="inp-group">
-                <label for="class" class="">Class</label>
-                <select name="class" id="class">
-                    <option value="First-Year">First-Year</option>
-                    <option value="Second-Year">Second-Year</option>
-                    <option value="Third-Year">Third-Year</option>
-                </select>
-            </div>
-            <div class="inp-group">
-                <label for="status" class="">Status</label>
-                <select name="status" id="status">
-                    <option value="0">Active</option>
-                    <option value="1">InActive</option>
-                </select>
+                <input type="time" id="date">
             </div>
         </div>
         <div class="bottom">
