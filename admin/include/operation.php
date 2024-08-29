@@ -39,7 +39,7 @@ class Test_operation
                     <th>Test Start(Date)</th>
                     <th>Test Start(Time)</th>
                     <th>Total Question</th>
-                    <th>Test marks</th>
+                    <th>Marks(per question)</th>
                     <th colspan="2" align="center">Action</th>
                 </tr>
             </thead>
