@@ -500,7 +500,6 @@ class Student_operation
             $result = mysqli_query($this->conn , $query);
             $num = mysqli_num_rows($result);
         }
-            $str = "";
         if($num > 0)
         {
             $str = "
@@ -720,7 +719,4 @@ switch($ch)
         echo $std_obj->listUser($_POST);
     case '22':
         echo $std_obj->updateStatus($_POST);
-    case '23':
-        echo $std_obj->listUser($_POST);
-        break;
 }

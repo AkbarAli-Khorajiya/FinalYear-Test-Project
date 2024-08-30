@@ -75,7 +75,6 @@ session_start();
                 $("#alert-container div").addClass("danger-alert");
                 $("#alert-container").show().css('display', 'flex');
                 break;
-
         }
     }
 </script>

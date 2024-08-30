@@ -43,7 +43,7 @@ $(document).ready(function() {
     $("#search").keyup(function() {
         let data = $("#search").val();
         $.post(
-            "include/operation.php?ch=23", {
+            "include/operation.php?ch=21", {
                 data: data,
             },
             function(response) {
@@ -51,9 +51,7 @@ $(document).ready(function() {
             }
         );
     });
-    
 });
-
 function listUser() {
     $.post("include/operation.php?ch=21", {
             ch: "21",
