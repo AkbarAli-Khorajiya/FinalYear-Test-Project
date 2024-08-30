@@ -110,8 +110,10 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
     </div>
 </div>
 
-<div class="que-container">
-    <h1><?php echo "<font style='color:red'>" . $result['test_name'] . "</font>"; ?> Questions</h1>
+<!-- <div class="que-container">
+    <h1>
+        //  echo "<font style='color:red'>" . $result['test_name'] . "</font>";
+           Questions</h1>
     <form id="create_question_form" name="create_question_form">
         <table cellspacing="15px">
             <tr>
@@ -143,8 +145,13 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             </tr>
         </table>
     </form>
-</div>
-<div class="que-display">
+</div> -->
+
+<!-- getting test id to render all questions -->
+<input type="text" class="test_id" id="test_id" name="test_id" value="<?php echo $_GET['id']; ?>" hidden> </input>
+<!-- ----------------- -->
+
+<!-- <div class="que-display">
     <div class="que-title">
         <span>Dashboard \ Test \ Question</span>
         <span class="search">
@@ -159,15 +166,51 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-        </span>        
+        </span>
+    </div> -->
+
+<!-- ----------------- -->
+<div class="breadcrum">
+    <p>Dashboard/Test/<span>Question</span></p>
+</div>
+<div class="sub-container">
+    <div class="add-title-btn">
+        <div class="heading">
+            <h3 class="page-title">Created Question List</h3>
+        </div>
+        <button id="add-btn">
+            <span class="icon">+</span>
+            <span>Add Question</span>
+        </button>
     </div>
-    <div class="display-container">
+    <div class="data-display">
+        <div class="search">
+            <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
+        </div>
         <table cellspacing="10px" id="que-table">
 
-            <!-- ///////all question//////// -->
+            <!-- ///// created test list ///// -->
 
         </table>
+        <div class="pagination" style="display: flex;justify-content: space-between;">
+            <div class="total-list">
+                <p>Showing 1 to 10 of 50 entries</p>
+
+            </div>
+            <div class="page-btn">
+                <button class="previous">Previous</button>
+                <button class="next">Next</button>
+            </div>
+        </div>
     </div>
+    <!-- ------------------------ -->
+    <!-- <div class="display-container">
+        <table cellspacing="10px" id="que-table"> -->
+
+    <!-- ///////all question//////// -->
+
+    <!-- </table>
+    </div> -->
 </div>
 <script>
     <?php include_once 'js/que.js'; ?>

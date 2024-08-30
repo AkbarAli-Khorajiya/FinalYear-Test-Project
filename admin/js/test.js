@@ -132,6 +132,7 @@ $("#test-submit-form").submit(function(e) {
         $(".msg").html("<p class='error'>*Fill all field</p>");
     } else {
         let data = $("#test-submit-form").serialize();
+        console.log(data)
         $.ajax({
             type: "POST",
             url: "include/operation.php?ch=2",
