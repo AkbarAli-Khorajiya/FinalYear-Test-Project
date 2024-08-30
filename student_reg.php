@@ -30,9 +30,9 @@
                         <div></div>
                     </div>
                     <h1>Register</h1>
-                    <input type="text" name="surName" placeholder="Surname"  class="input-field name" required> 
-                    <input type="text" name="firstName" placeholder="First name"  class="input-field name" required>
-                    <input type="text" name="lastName" placeholder="Last name"  class="input-field name" required>
+                    <input type="text" name="surName" id="sname" placeholder="Surname"  class="input-field name " required> 
+                    <input type="text" name="firstName" id="fname" placeholder="First name"  class="input-field name " required>
+                    <input type="text" name="lastName" id="lname" placeholder="Last name"  class="input-field name " required>
                     <br>
                     <input type="email" name="email" placeholder="Email" class="input-field" required> <br>
                     <input type="password" name="password" placeholder="Password" class="input-field password" required>
@@ -92,5 +92,23 @@
         document.querySelector(".button-1").style.cssText = "display: block";
         document.querySelector(".sub-content").innerHTML = "Not Register yet?<br/>Then Register";
     };
+    $("#sname").focus(()=> {
+        $("#sname").css('width', '222px');
+        $("#fname").css('width', '58px');
+        $("#lname").css('width', '58px');
+    });
+    $("#fname").focus(()=> {
+        $("#sname").css('width', '58px');
+        $("#fname").css('width', '222px');
+        $("#lname").css('width', '58px');
+    });
+    $("#lname").focus(()=> {
+        $("#sname").css('width', '58px');
+        $("#fname").css('width', '58px');
+        $("#lname").css('width', '222px');
+    });
+    $(".name").blur(()=>{
+        $(".name").css('width','113px');
+    });
 </script>
 </html>

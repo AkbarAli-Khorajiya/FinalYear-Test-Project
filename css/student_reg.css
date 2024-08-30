@@ -146,8 +146,9 @@ body
 }
 .name
 {
-    width: 112px;
+    width: 113px;
     margin: 5px 0px;
+    transition: 200ms ease-in-out 0s all;
 }
 .password
 {
