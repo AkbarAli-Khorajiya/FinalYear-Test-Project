@@ -230,7 +230,10 @@ class Question_operation extends Test_operation
                 <tr>
                     <th>Que Id</th>
                     <th>Questions</th>
-                   
+                    <th>Option A</th>
+                    <th>Option B</th>
+                    <th>Option C</th>
+                    <th>Option D</th>
                     <th>Right Answer</th>
                     <th colspan="2" align="center">Action</th>
                 </tr>
@@ -245,10 +248,10 @@ class Question_operation extends Test_operation
                             <td>' . $i++ . '</td>
                             <td>' . $row['question'] . '</td>';
                 $a = 0;
-                // while ($a <  count($options)) {
-                //     $str .= '<td>' . $options[$a] . '</td>';
-                //     $a++;
-                // }
+                while ($a <  count($options)) {
+                    $str .= '<td>' . $options[$a] . '</td>';
+                    $a++;
+                }
 
                 $str .= '<td>' . $row['answer'] . '</td>
                         <td> <button class="edit-que edit-m" id="' . $row['id'] .'">Edit</button>
