@@ -55,7 +55,14 @@ function list_all_ques(test_id) {
 }
 var testId = $('#test_id').val();
 list_all_ques(testId);
-
+//-------- Question Modal -------------//
+$(".modal-container").hide();
+$("#add-btn").on("click", () => {
+    $(".modal-container").show();
+});
+$(".close").on("click", () => {
+    $(".modal-container").hide();
+});
 //---------- Insert Question ---------//
 $("#que-submit-form").submit(function(e) {
     e.preventDefault();
@@ -88,7 +95,6 @@ $("#que-submit-form").submit(function(e) {
                 console.log(response);
                 let dataArr = response.split("||");
                 if (dataArr[0] == 1) {
-                    $("#que-submit-form")[0].reset();
                     alert_show(dataArr[0], dataArr[2]);
                     setTimeout(function() {
                         $("#alert-container").fadeOut();
@@ -149,54 +155,94 @@ $("#que-table").on("click", ".delete-que", function() {
     }
 });
 
+//------- dynamic option select-----------//
 
+$("#option_a,#option_b,#option_c,#option_d").keyup(() => {
+    $("#que-submit-form .answer option").remove();
+
+    $("#que-submit-form .answer").append('<option value="">----Select Answer----</option>');
+
+
+    console.log($("#option_a").val());
+    let a = $("#option_a").val();
+    let b = $("#option_b").val();
+    let c = $("#option_c").val();
+    let d = $("#option_d").val();
+
+    if (a != "") {
+        var option_a = $("<option>");
+        option_a.val(a);
+        option_a.text(a);
+        $("#que-submit-form .answer").append(option_a);
+    }
+    if (b != "") {
+        var option_b = $("<option>");
+        option_b.val(b);
+        option_b.text(b);
+        $("#que-submit-form .answer").append(option_b);
+    }
+    if (c != "") {
+        var option_c = $("<option>");
+        option_c.val(c);
+        option_c.text(c);
+        $("#que-submit-form .answer").append(option_c);
+    }
+    if (d != "") {
+        var option_d = $("<option>");
+        option_d.val(d);
+        option_d.text(d);
+        $("#que-submit-form .answer").append(option_d);
+    }
+})
+$('#que-submit-form .answer').on('change', function() {
+    let selectedValue = $(this).val();
+})
 
 //------- dynamic option select-----------//
-$("#que-submit-form .answer").click(function() {
-    // $("#que-submit-form .answer").val("");
-    // if ($("#que-submit-form .answer option").length >= 2) {
-    //   $("#que-submit-form .answer option").remove();
-    // }
-    if ($("#que-submit-form .answer option").length == 0) {
-        $("#que-submit-form .answer option").remove();
+// $("#que-submit-form .answer").click(function() {
+//     // $("#que-submit-form .answer").val("");
+//     // if ($("#que-submit-form .answer option").length >= 2) {
+//     $("#que-submit-form .answer ").empty();
+
+//     // }
+//     // if ($("#que-submit-form .answer option").length == 1) {
+//     // $("#que-submit-form .answer option").remove();
 
 
-        let a = $("#que-submit-form .option_a").val();
-        let b = $("#que-submit-form .option_b").val();
-        let c = $("#que-submit-form .option_c").val();
-        let d = $("#que-submit-form .option_d").val();
-        if (a == "" && b == "" && c == "" && d == "") {
-            let defaultOption = $("<option>");
-            defaultOption.val('');
-            defaultOption.text('----Select Answer----');
-            $("#que-submit-form .answer").append(defaultOption);
-        }
-        if (a != "") {
-            var option_a = $("<option>");
-            option_a.val(a);
-            option_a.text(a);
-            $("#que-submit-form .answer").append(option_a);
-        }
-        if (b != "") {
-            var option_b = $("<option>");
-            option_b.val(b);
-            option_b.text(b);
-            $("#que-submit-form .answer").append(option_b);
-        }
-        if (c != "") {
-            var option_c = $("<option>");
-            option_c.val(c);
-            option_c.text(c);
-            $("#que-submit-form .answer").append(option_c);
-        }
-        if (d != "") {
-            var option_d = $("<option>");
-            option_d.val(d);
-            option_d.text(d);
-            $("#que-submit-form .answer").append(option_d);
-        }
-    }
-});
+//     let a = $("#que-submit-form .option_a").val();
+//     let b = $("#que-submit-form .option_b").val();
+//     let c = $("#que-submit-form .option_c").val();
+//     let d = $("#que-submit-form .option_d").val();
+//     if (a != "") {
+//         var option_a = $("<option>");
+//         option_a.val(a);
+//         option_a.text(a);
+//         $("#que-submit-form .answer").append(option_a);
+//     }
+//     if (b != "") {
+//         var option_b = $("<option>");
+//         option_b.val(b);
+//         option_b.text(b);
+//         $("#que-submit-form .answer").append(option_b);
+//     }
+//     if (c != "") {
+//         var option_c = $("<option>");
+//         option_c.val(c);
+//         option_c.text(c);
+//         $("#que-submit-form .answer").append(option_c);
+//     }
+//     if (d != "") {
+//         var option_d = $("<option>");
+//         option_d.val(d);
+//         option_d.text(d);
+//         $("#que-submit-form .answer").append(option_d);
+//     }
+//     $("#que-submit-form .answer ").change(() => {
+//             console.log($(this).val())
+
+//         })
+//         // }
+// });
 //-----------Search Question in js------------//
 $(".search .search_input").keyup(function() {
     let searchQue = $(".search_input").val();
