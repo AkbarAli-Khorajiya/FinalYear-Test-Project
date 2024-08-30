@@ -335,7 +335,6 @@ section #container .sub-container .data-display table tbody tr td {
     border-bottom: 1px solid #ded2d2;
     border-collapse: collapse;
 }
-
 section #container .sub-container .data-display table tbody tr:nth-child(even) {
     background-color: #ded2d251;
 }

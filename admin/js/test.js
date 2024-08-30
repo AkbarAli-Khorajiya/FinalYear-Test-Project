@@ -1,15 +1,15 @@
-
-$(document).ready(function() {
-    var today = new Date();
-    var day = String(today.getDate()).padStart(2, '0');
-    var month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-    var year = today.getFullYear();
-
-    var formattedDate = day + '-' + month + '-' + year;
-    $('#currentDate').text(formattedDate);
+$(document).ready(function(){
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+     day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    $('.date').attr('min', maxDate);
 });
-
-
 // ---------Displaying created test------------- //
 function list_all_test() {
     $.ajax({

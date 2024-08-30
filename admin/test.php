@@ -45,7 +45,7 @@
         <div class="col-2">
             <div class="inp-group">
                 <label for="date">Test Start(Date)</label>
-                <input type="date" id="date" name="date" value="">
+                <input type="date" id="date" class="date" name="date" value="">
             </div>
             <div class="inp-group">
                 <label for="time">Test Start(Time)</label>
@@ -179,7 +179,7 @@
         <div class="col-2">
             <div class="inp-group">
                 <label for="date">Test Start(Date)</label>
-                <input type="date" id="date" name="date" value="">
+                <input type="date" id="date" class="date" name="date" value=""> 
             </div>
             <div class="inp-group">
                 <label for="time">Test Start(Time)</label>
