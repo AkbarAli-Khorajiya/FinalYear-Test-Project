@@ -40,7 +40,18 @@ $(document).ready(function() {
             }
         });
     });
-    //update  status
+    $("#search").keyup(function() {
+        let data = $("#search").val();
+        $.post(
+            "include/operation.php?ch=23", {
+                data: data,
+            },
+            function(response) {
+                $("#user-table").html(response);
+            }
+        );
+    });
+    
 });
 
 function listUser() {
