@@ -38,8 +38,9 @@ class Test_operation
                     <th>Test Duration(min)</th>
                     <th>Test Start(Date)</th>
                     <th>Test Start(Time)</th>
+                    <th>Created For</th>
                     <th>Total Question</th>
-                    <th>Test marks</th>
+                    <th>Marks(per question)</th>
                     <th colspan="2" align="center">Action</th>
                 </tr>
             </thead>
@@ -49,11 +50,12 @@ class Test_operation
                 $str .= '<tr>
                         <td>' . $i++ . '</td>
                         <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
-                        <td>' . $row['test_time'] . '</td>
-                        <td>' . date("d-m-Y", strtotime($row['test_date'])) . '</td>
+                        <td>' . $row['duration'] . '</td>
+                        <td>' . date("d-m-Y", strtotime($row['test_start_date'])) . '</td>
                         <td>' . $row['test_start_time'] . '</td>
-                        <td>' . $row['test_question'] . '</td>
-                        <td>' . $row['test_marks'] . '</td>
+                        <td>' . $row['created_for'] . '</td>
+                        <td>' . $row['created_for'] . '</td>
+                        <td>' . $row['marks_per_ques'] . '</td>
                         <td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
                         <button class="delete-test delete-m" id="' . $row['id'] . '">Delete</button> </td>
                     </tr>';
@@ -66,14 +68,14 @@ class Test_operation
     }
     function insert_test($post)
     {
-        $test_name = $post['test_name'];
-        $test_date = $post['test_date'];
-        $test_start_time = $post['test_start_time'];
-        $test_time = $post['test_time'];
-        $test_marks = $post['test_marks'];
-        $test_question = $post['test_question'];
+        $test_name = $post['test-name'];
+        $duration = $post['duration'];
+        $testStartDate = $post['date'];
+        $testStartTime = $post['time'];
+        $createdFor = $post['created-for'];
+        $marksPerQues = $post['marks'];
 
-        $query = "INSERT INTO `test`(`test_name`, `test_time`, `test_start_time`, `test_date`, `test_question`, `test_marks`) VALUES ('$test_name',' $test_time','$test_start_time','$test_date','$test_question','$test_marks')";
+        $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_date`, `test_start_time`, `created_for`, `marks_per_ques`) VALUES ('$test_name',' $duration','$testStartDate','$testStartTime','$createdFor','$marksPerQues')";
         if (mysqli_query($this->conn, $query)) {
             $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
             $execute = mysqli_query($this->conn, $stmt);
