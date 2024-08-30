@@ -516,6 +516,14 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
                     outline: none;
                     border-bottom: 2px solid #1c1c38;
                 }
+                select {
+                    border: 1px solid #1c1c38;
+                    padding: 8px 5px;
+                    border-radius: 3px;
+                    border-right: 2px solid #1c1c38;
+                    outline: none;
+                    border-bottom: 2px solid #1c1c38;
+                }
             }
         }
         .col-2 {

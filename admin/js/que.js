@@ -57,15 +57,15 @@ var testId = $('#test_id').val();
 list_all_ques(testId);
 
 //---------- Insert Question ---------//
-$("#create_question_form").submit(function(e) {
+$("#que-submit-form").submit(function(e) {
     e.preventDefault();
-    let test_id = $("#create_question_form .test_id").val();
-    let question = $("#create_question_form .question").val();
-    let option_a = $("#create_question_form .option_a").val();
-    let option_b = $("#create_question_form .option_b").val();
-    let option_c = $("#create_question_form .option_c").val();
-    let option_d = $("#create_question_form .option_d").val();
-    let answer = $("#create_question_form .answer").val();
+    let test_id = $("#que-submit-form .test_id").val();
+    let question = $("#que-submit-form .question").val();
+    let option_a = $("#que-submit-form .option_a").val();
+    let option_b = $("#que-submit-form .option_b").val();
+    let option_c = $("#que-submit-form .option_c").val();
+    let option_d = $("#que-submit-form .option_d").val();
+    let answer = $("#que-submit-form .answer").val();
     if (
         test_id == "" ||
         question == "" ||
@@ -75,9 +75,9 @@ $("#create_question_form").submit(function(e) {
         option_d == "" ||
         answer == ""
     ) {
-        $(".que").html("* Fill all field");
+        $(".msg").html("<p class='success'>Fill all fields</p>");
     } else {
-        let data = $("#create_question_form").serialize();
+        let data = $("#que-submit-form").serialize();
         console.log(data);
         $.ajax({
             type: "POST",
@@ -88,7 +88,7 @@ $("#create_question_form").submit(function(e) {
                 console.log(response);
                 let dataArr = response.split("||");
                 if (dataArr[0] == 1) {
-                    $("#create_question_form")[0].reset();
+                    $("#que-submit-form")[0].reset();
                     alert_show(dataArr[0], dataArr[2]);
                     setTimeout(function() {
                         $("#alert-container").fadeOut();
@@ -141,9 +141,7 @@ $("#que-table").on("click", ".delete-que", function() {
                     setTimeout(function() {
                         $("#alert-container").fadeOut();
                     }, 900);
-                    setTimeout(function() {
-                        list_all_ques(testId);
-                    }, 1400);
+                    list_all_ques(testId);
                 } else {
                     alert_show(dataArr[0], dataArr[1]);
                 }
@@ -154,40 +152,48 @@ $("#que-table").on("click", ".delete-que", function() {
 
 
 //------- dynamic option select-----------//
-$("#create_question_form .answer").click(function() {
-    // $("#create_question_form .answer").val("");
-    // if ($("#create_question_form .answer option").length >= 2) {
+$("#que-submit-form .answer").click(function() {
+    // $("#que-submit-form .answer").val("");
+    // if ($("#que-submit-form .answer option").length >= 2) {
+    //   $("#que-submit-form .answer option").remove();
     // }
-        // $("#create_question_form .answer option").remove()
-    if ($("#create_question_form .answer option").length == 1) {
-        
-        let a = $("#create_question_form .option_a").val();
-        let b = $("#create_question_form .option_b").val();
-        let c = $("#create_question_form .option_c").val();
-        let d = $("#create_question_form .option_d").val();
+    if ($("#que-submit-form .answer option").length == 0) {
+        $("#que-submit-form .answer option").remove();
+
+
+        let a = $("#que-submit-form .option_a").val();
+        let b = $("#que-submit-form .option_b").val();
+        let c = $("#que-submit-form .option_c").val();
+        let d = $("#que-submit-form .option_d").val();
+        if (a == "" && b == "" && c == "" && d == "") {
+            let defaultOption = $("<option>");
+            defaultOption.val('');
+            defaultOption.text('----Select Answer----');
+            $("#que-submit-form .answer").append(defaultOption);
+        }
         if (a != "") {
             var option_a = $("<option>");
             option_a.val(a);
             option_a.text(a);
-            $("#create_question_form .answer").append(option_a);
+            $("#que-submit-form .answer").append(option_a);
         }
         if (b != "") {
             var option_b = $("<option>");
             option_b.val(b);
             option_b.text(b);
-            $("#create_question_form .answer").append(option_b);
+            $("#que-submit-form .answer").append(option_b);
         }
         if (c != "") {
             var option_c = $("<option>");
             option_c.val(c);
             option_c.text(c);
-            $("#create_question_form .answer").append(option_c);
+            $("#que-submit-form .answer").append(option_c);
         }
         if (d != "") {
             var option_d = $("<option>");
             option_d.val(d);
             option_d.text(d);
-            $("#create_question_form .answer").append(option_d);
+            $("#que-submit-form .answer").append(option_d);
         }
     }
 });

@@ -119,10 +119,10 @@
         </button>
     </div>
     <div class="data-display">
-        <div class="search">
-            <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
-        </div>
         <table cellspacing="10px" id="test-table">
+            <div class="search">
+                <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
+            </div>
 
             <!-- ///// created test list ///// -->
 

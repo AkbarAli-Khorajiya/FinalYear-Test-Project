@@ -223,6 +223,10 @@ class Question_operation extends Test_operation
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         }
+        // <th>Option A</th>
+        // <th>Option B</th>
+        // <th>Option C</th>
+        // <th>Option D</th>
         if ($num > 0) {
             $str = '<thead>
                 <tr>
@@ -252,8 +256,8 @@ class Question_operation extends Test_operation
                 }
 
                 $str .= '<td>' . $row['answer'] . '</td>
-                        <td> <button class="edit-que" id="' . $row['id'] .'">Edit</button> </td>
-                            <td> <button class="delete-que" id="' . $row['id'] . '">Delete</button> </td>
+                        <td> <button class="edit-que edit-m" id="' . $row['id'] .'">Edit</button>
+                            <button class="delete-que delete-m" id="' . $row['id'] . '">Delete</button> </td>
                         </tr>';
             }
             $str .= '</tbody>';
