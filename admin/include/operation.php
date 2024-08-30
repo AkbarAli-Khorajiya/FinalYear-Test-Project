@@ -20,9 +20,10 @@ class Test_operation
     }
     public function all_test($post)
     {
+        $que_obj = new Question_operation();
         if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
-            $query = "select * from test where test_name LIKE '%$val%' OR test_date LIKE '%$val%' OR test_question LIKE '%$val%' OR test_marks LIKE '%$val%'";
+            $query = "select * from test where test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR marks_per_ques LIKE '%$val%'";
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         } else {
@@ -30,7 +31,7 @@ class Test_operation
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         }
-        if ($num > 0) {
+        if ($num > 0) { 
             $str = '<thead>
                 <tr>
                     <th>Test Id</th>
@@ -47,6 +48,7 @@ class Test_operation
             <tbody>';
             $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
+                $total_que= $que_obj->countQue($row['id']);
                 $str .= '<tr>
                         <td>' . $i++ . '</td>
                         <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
@@ -54,7 +56,7 @@ class Test_operation
                         <td>' . date("d-m-Y", strtotime($row['test_start_date'])) . '</td>
                         <td>' . $row['test_start_time'] . '</td>
                         <td>' . $row['created_for'] . '</td>
-                        <td>' . $row['created_for'] . '</td>
+                        <td>' . $total_que. '</td>
                         <td>' . $row['marks_per_ques'] . '</td>
                         <td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
                         <button class="delete-test delete-m" id="' . $row['id'] . '">Delete</button> </td>
@@ -99,14 +101,14 @@ class Test_operation
     //Method used to upadte test in database
     function update_test($post)
     {
-        $test_id = $post['test_id'];
-        $test_name = $post['test_name'];
-        $test_date = $post['test_date'];
-        $test_start_time = $post['test_start_time'];
-        $test_time = $post['test_time'];
-        $test_marks = $post['test_marks'];
-        $test_question = $post['test_question'];
-        $query = "UPDATE `test` SET `test_name`='$test_name',`test_time`='$test_time',`test_start_time`='$test_start_time',`test_date`='$test_date',`test_question`='$test_question',`test_marks`='$test_marks' WHERE `id`= $test_id";
+        $test_id = $post['test-id'];
+        $test_name = $post['test-name'];
+        $test_duration = $post['duration'];
+        $test_marks = $post['marks'];
+        $test_start_date = $post['date'];
+        $test_start_time = $post['time'];
+        $created_for = $post['created-for'];
+        $query = "UPDATE `test` SET `test_name`='$test_name',`duration`='$test_duration',`test_start_date`='$test_start_date',`test_start_time`='$test_start_time',`created_for`='$created_for',`marks_per_ques`='$test_marks' WHERE `id` = $test_id";
         $result = mysqli_query($this->conn, $query);
         if ($result) {
             return 1 . "||Test Update Successfully.";
@@ -426,6 +428,20 @@ class Question_operation extends Test_operation
             return $id["id"];
         }
     }
+    function countQue($testId)
+    {
+        $query = "SELECT COUNT(*) from `question` where `test_id` = $testId";
+        $result = mysqli_query($this->conn , $query);
+        if(mysqli_num_rows($result) > 0)
+        {
+            $val = mysqli_fetch_array($result);
+            return $val[0];
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }
 $que_obj = new Question_operation();
 switch ($ch) {
@@ -467,12 +483,21 @@ class Student_operation
         }
         return $this->conn = $conn;
     }
-    function listUser()
+    function listUser($post)
     {
-        $query = "select id,name,email,status,gender,class,created_at from user";
-        $result = mysqli_query($this->conn , $query);
-        $str = "";
-        if(mysqli_num_rows($result) > 0)
+        if (isset($post['data']) && strlen($post['data']) > 0){
+            $val = $post['data'];
+            $query = "select id,name,email,status,gender,class,created_at from user where name LIKE '%$val%' OR email LIKE '%$val%' OR gender LIKE '%$val%' OR class LIKE '%$val%'";
+            $result = mysqli_query($this->conn , $query);
+            $num = mysqli_num_rows($result);
+        }
+        else{
+            $query = "select id,name,email,status,gender,class,created_at from user";
+            $result = mysqli_query($this->conn , $query);
+            $num = mysqli_num_rows($result);
+        }
+            $str = "";
+        if($num > 0)
         {
             $str = "
                 <thead>
@@ -688,7 +713,10 @@ switch($ch)
         echo $std_obj->addUser($_POST);
         break;
     case '21':
-        echo $std_obj->listUser();
+        echo $std_obj->listUser($_POST);
     case '22':
         echo $std_obj->updateStatus($_POST);
+    case '23':
+        echo $std_obj->listUser($_POST);
+        break;
 }

@@ -1,55 +1,14 @@
-function test_edit(test_id) {
-    $("#container").animate({ scrollTop: 0 }, "medium");
-    jQuery("#container").load("test.php?", { edit_id: test_id });
-}
 
-function test_delete(test_id) {
-    if (confirm("Are you sure want to delete record?")) {
-        jQuery("#container").load("test.php", { del_id: test_id });
-        // console.log('done');
-    }
-}
+$(document).ready(function() {
+    var today = new Date();
+    var day = String(today.getDate()).padStart(2, '0');
+    var month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    var year = today.getFullYear();
 
-function test_update() {
-    //get data from question_form
-    const update_test = 1;
-    var test_id = document.forms["test_form"]["test_id"].value;
-    var test_name = document.forms["test_form"]["test_name"].value;
-    var test_date = document.forms["test_form"]["test_date"].value;
-    var test_start_time = document.forms["test_form"]["test_start_time"].value;
-    var test_time = document.forms["test_form"]["test_time"].value;
-    var test_marks = document.forms["test_form"]["test_marks"].value;
-    var test_question = document.forms["test_form"]["test_question"].value;
-    var flag = check_test(
-        test_name,
-        test_date,
-        test_start_time,
-        test_time,
-        test_marks,
-        test_question
-    );
-    if (flag == 0) {
-        jQuery("#container").load("test.php", {
-            update_test: update_test,
-            test_id: test_id,
-            test_name: test_name,
-            test_date: test_date,
-            test_start_time: test_start_time,
-            test_time: test_time,
-            test_marks: test_marks,
-            test_question,
-        });
-    } else {
-        alert("field cant be null");
-    }
-}
-
-$("#edit-test-container").hide();
-
-// ----------close pop-up------------ //
-$(".close").click(function() {
-    $("#edit-test-container").hide();
+    var formattedDate = day + '-' + month + '-' + year;
+    $('#currentDate').text(formattedDate);
 });
+
 
 // ---------Displaying created test------------- //
 function list_all_test() {
@@ -59,18 +18,16 @@ function list_all_test() {
         encode: true,
         success: function(response) {
             $("#test-table").html(response);
+            //----- Update test show---//
+            $(".edit-test").on("click", () => {
+                $(".edit-modal-container").show();
+            });
         },
     });
 }
-
+//--- link for redirect to question----//
 $("#test-table").on("click", ".testlink", function() {
     $("#container").load("que.php?id=" + this.id);
-});
-
-// ------------edit test------------//
-
-$("#test-table").on("click", ".edit-test", function() {
-    $("#edit-test-container").show();
 });
 
 //-------------Delete Test------------//
@@ -103,6 +60,11 @@ $("#test-table").on("click", ".delete-test", function() {
 
 list_all_test(); // get all tests for first load
 
+//--------Edit Test Modal -----------//
+$(".edit-modal-container").hide();
+$(".close").on("click", () => {
+    $(".edit-modal-container").hide();
+});
 //-------- Test Modal -------------//
 $(".modal-container").hide();
 $("#add-btn").on("click", () => {
@@ -111,7 +73,6 @@ $("#add-btn").on("click", () => {
 $(".close").on("click", () => {
     $(".modal-container").hide();
 });
-
 // ----------Create test------------ //
 $("#test-submit-form").submit(function(e) {
     e.preventDefault();
@@ -155,6 +116,8 @@ $("#test-submit-form").submit(function(e) {
         });
     }
 });
+// --- hide update msg --------//
+$("#test-update-form .msg p").hide();
 //-----------Display Edit Test---------//
 $("#test-table").on("click", ".edit-test", function() {
     let data = this.id;
@@ -165,38 +128,40 @@ $("#test-table").on("click", ".edit-test", function() {
         },
         function(response) {
             let data = JSON.parse(response);
-            $("#edit_test_form .test_id").val(data["id"]);
-            $("#edit_test_form .test_name").val(data["test_name"]);
-            $("#edit_test_form .test_date").val(data["test_date"]);
-            $("#edit_test_form .test_start_time").val(data["test_start_time"]);
-            $("#edit_test_form .test_time").val(data["test_time"]);
-            $("#edit_test_form .test_marks").val(data["test_marks"]);
-            $("#edit_test_form .test_question").val(data["test_question"]);
+            $("#test-update-form input[name='test-id']").val(data["id"]);
+            $("#test-update-form input[name='test-name']").val(data["test_name"]);
+            $("#test-update-form input[name='duration']").val(data["duration"]);
+            $("#test-update-form input[name='marks']").val(data["marks_per_ques"]);
+            $("#test-update-form input[name='date']").val(data["test_start_date"]);
+            $("#test-update-form input[name='time']").val(data["test_start_time"]);
+            let created_for = data['created_for'];
+            $("#created-for option[value='"+created_for+"']").prop("selected", true);
         }
     );
 });
 //-----------Update Test------------//
-$("#edit_test_form").submit(function(e) {
+$("#test-update-form").submit(function(e) {
     e.preventDefault();
-    let testid = $("#edit_test_form .test_id").val();
-    let testName = $("#edit_test_form .test_name").val();
-    let testdate = $("#edit_test_form .test_date").val();
-    let testStartTime = $("#edit_test_form .test_start_time").val();
-    let testMinTime = $("#edit_test_form .test_time").val();
-    let testMarks = $("#edit_test_form .test_marks").val();
-    let testTotalQues = $("#edit_test_form .test_question").val();
+    let testId = $("#test-update-form input[name='test-id']").val();
+    let testName = $("#test-update-form input[name='test-name']").val();
+    let testDuration = $("#test-update-form input[name='duration']").val();
+    let testMarks = $("#test-update-form input[name='marks']").val();
+    let testDate = $("#test-update-form input[name='date']").val();
+    let testTime =  $("#test-update-form input[name='time']").val();
+    let createdFor =  $("#test-update-form #created-for").val();
     if (
-        testid == "" ||
+        testId == "" ||
         testName == "" ||
-        testdate == "" ||
-        testStartTime == "" ||
-        testMinTime == "" ||
+        testDuration == "" ||
         testMarks == "" ||
-        testTotalQues == ""
+        testDate == "" ||
+        testTime== "" ||
+        createdFor == ""
     ) {
-        $(".edit_test").html("* Fill all field");
+        $("#test-update-form .msg .error").text('* Fill all field');
+        $("#test-update-form .msg .error").show();
     } else {
-        let data = $("#edit_test_form").serialize();
+        let data = $("#test-update-form").serialize();
         $.ajax({
             type: "POST",
             url: "include/operation.php?ch=5",
@@ -206,23 +171,28 @@ $("#edit_test_form").submit(function(e) {
                 console.log(response);
                 let dataArr = response.split("||");
                 if (dataArr[0] == 1) {
-                    $("#edit_test_form")[0].reset();
-                    $("#edit-test-container").fadeOut();
-                    alert_show(dataArr[0], dataArr[1]);
+                    $("#test-update-form")[0].reset();
+                    $("#test-update-form .msg .success").text(dataArr[1]);
+                    $("#test-update-form .msg .success").show();
                     list_all_test();
                     setTimeout(function() {
-                        $("#alert-container").fadeOut();
-                    }, 3000);
+                        $(".edit-modal-container").fadeOut();
+                        $("#test-update-form .msg .success").hide();
+                    }, 2000);
                 } else {
-                    alert_show(dataArr[0], dataArr[1]);
+                    $("#test-update-form .msg .error").text(dataArr[1]);
+                    $("#test-update-form .msg .error").show();
+                    setTimeout(() => {
+                        $("#test-update-form .msg .error").hide();
+                    }, 2000);
                 }
             },
         });
     }
 });
 //-----------Search Test in js------------//
-$(".search .search_input").keyup(function() {
-    let data = $(".search_input").val();
+$("#search").keyup(function() {
+    let data = $("#search").val();
     $.post(
         "include/operation.php?ch=6", {
             data: data,

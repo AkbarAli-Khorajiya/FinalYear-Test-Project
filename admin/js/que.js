@@ -157,9 +157,10 @@ $("#que-table").on("click", ".delete-que", function() {
 $("#create_question_form .answer").click(function() {
     // $("#create_question_form .answer").val("");
     // if ($("#create_question_form .answer option").length >= 2) {
-    //   $("#create_question_form .answer option").remove();
     // }
+        // $("#create_question_form .answer option").remove()
     if ($("#create_question_form .answer option").length == 1) {
+        
         let a = $("#create_question_form .option_a").val();
         let b = $("#create_question_form .option_b").val();
         let c = $("#create_question_form .option_c").val();

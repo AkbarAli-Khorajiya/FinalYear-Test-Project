@@ -415,7 +415,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
 
 /* ---------------------Add Student Modal------------------------------ */
 
-.modal-container {
+.modal-container,.edit-modal-container {
     position: absolute;
     width: 100%;
     height: 100vh;
