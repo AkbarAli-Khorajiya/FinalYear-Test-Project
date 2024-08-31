@@ -15,9 +15,11 @@
         <div class="search">
             <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
+        <div class="table-container">
         <table id="user-table">
            <!-- displaying all user -->
         </table>
+        </div>
         <div class="pagination">
             <div class="total-list">
                 <p>Showing 1 to 10 of 50 entries</p>

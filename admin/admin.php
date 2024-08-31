@@ -29,15 +29,23 @@ session_start();
     <section>
         <aside>
             <ul>
-                <li onclick="$('#container').load('dash.php');"><img src="image/aside/monitor.png"><a
-                        href="javascript:void(0)"> Dashboard </a> </li>
-                <li onclick="jQuery('#container').load('student.php');"><img src="image/aside/profile.png"> <a
-                        href="javascript:void(0)"> Students </a> </li>
-                <li onclick="jQuery('#container').load('test.php');"><img src="image/aside/test.png"> <a
-                        href="javascript:void(0)"> Test </a> </li>
+                <li onclick="$('#container').load('dash.php');">
+                    <img src="image/aside/monitor.png">
+                    <a href="javascript:void(0)"> Dashboard </a>
+                </li>
+                <li onclick="jQuery('#container').load('student.php');">
+                    <img src="image/aside/profile.png"> 
+                    <a href="javascript:void(0)"> Students </a>
+                </li>
+                <li onclick="jQuery('#container').load('test.php');">
+                    <img src="image/aside/test.png"> 
+                    <a href="javascript:void(0)"> Test </a>
+                </li>
                 <!-- <li onclick="jQuery('#container').load('que.php');"> <img src="image/aside/test.png"><a href="javascript:void(0)" > Questions </a> </li> -->
-                <li onclick="jQuery('#container').load('result.php');"><img src="image/aside/student-grades.png"> <a
-                        href="javascript:void(0)"> Result </a> </li>
+                <li onclick="jQuery('#container').load('result.php');">
+                    <img src="image/aside/student-grades.png">
+                    <a href="javascript:void(0)"> Result </a>
+                </li>
             </ul>
         </aside>
         <div id="container">
@@ -51,15 +59,12 @@ session_start();
     let prevSelectedItem = null;
     listItems.forEach(item => {
         item.addEventListener('click', function() {
-            console.log(item)
-            // Reset background color of the previously selected item
-            if (prevSelectedItem) {
-                prevSelectedItem.style.backgroundColor = '#1c1c38';
-            }
-            // Set background color of the clicked item
-            this.style.backgroundColor = '#3e3e77';
-            // Update the previously selected item
-            prevSelectedItem = this;
+            listItems.forEach(item => {
+                item.style.boxShadow = 'none';
+                item.style.backgroundColor = '#fff';
+            })
+            this.style.boxShadow = '4px 2px 5px #3d3c3c21,7px 3px 20px #413c3c1a';
+            this.style.backgroundColor = '#ded2d251';
         });
     });
     //-----------Show Alert------------//
