@@ -5,7 +5,6 @@
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  /* font-weight: 500; */
   font-style: normal;
 }
 
@@ -22,7 +21,7 @@ header {
   justify-content: space-between;
   width: 100%;
   background-color: #ffffff;
-  box-shadow: -1px -5px 8px 5px #4b49ac8f;
+  box-shadow: -1px -5px 8px 5px #99999c2f;
   z-index: 1;
 }
 
@@ -35,7 +34,7 @@ header span {
   color: rgb(50, 50, 102);
 }
 
-header button {
+header .logout-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +49,7 @@ header button {
   border-radius: 3px;
   transition: all 300ms linear 0s;
   cursor: pointer;
-  img {
+  svg {
     width: 17px;
     height: 17px;
     margin-right: 5px;
@@ -66,7 +65,7 @@ header button:hover {
 section {
   position: relative;
   display: grid;
-  grid-template-columns: 15% auto;
+  grid-template-columns: 16% auto;
   height: 90%;
   width: 100%;
   background-color: #ded2d251;
@@ -94,28 +93,33 @@ section aside ul li {
   justify-content: flex-start;
   align-items: center;
   font-size: 1.3vw;
-  margin: 5px 7px ;
-  padding: 5px 5px 5px 10px;
+  margin: 1px 7px ;
+  height: 25px;
+  padding: 10px 5px 10px 10px;
   transition: all 200ms linear 0s;
   cursor: pointer;
   border-radius: 2px;
 }
 section aside ul li:hover {
-  background-color: #d6b8b851;
-  box-shadow: 0px 5px 10px 0 #dac0c0a8;
+  background-color: #d6b8b851 !important;
+  box-shadow: 0px 3px 10px 0 #dac0c0a8 !important;
 }
 
 section aside ul li a {
   text-decoration: none;
   color: #1c1c38;
 }
-
-section aside ul li img {
-  height: 2.5vw;
-  width: auto;
+section aside ul li .icon {
+  display: flex;
+  justify-content: center;
+  width: 36px;
+}
+section aside ul li .icon svg {
+  /* height: 2.5vw; */
+  /* width: auto;
   aspect-ratio: 1/1;
-  object-fit: contain;
-  filter: invert(1);
+  object-fit: contain; */
+  /* filter: invert(1); */
   margin-right: 10px;
 }
 
@@ -127,8 +131,78 @@ section #container {
 }
 
 /*------------------------DASHBOARD STYLE-------------------------------- */
+.blue-gradient{
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%) !important;
+}
+.pink-gradient{
+  background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
+}
+.green-gradient{
+  background: linear-gradient(45deg, #11998e, #38ef7d) !important;
+}
+.orange-gradient{
+  background: linear-gradient(45deg, #fa709a 0%, #fee140 100%) !important;
+}
 
-section #container .box-container {
+.mt-5{
+  margin-top: 5px !important;
+}
+.mt-10{
+  margin-top: 10px !important;
+}
+.mt-15{
+  margin-top: 15px !important;
+}
+.ml-15{
+  margin-left: 15px !important;
+  /* margin-right: 25px !important; */
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+.column-6{
+  flex: 1;
+}
+.card{
+  margin: 0px 20px;
+  margin-left: 0px;
+  box-shadow: 0 5px 15px rgba(57, 98, 254, 0.02), 0 3px 6px rgba(117, 108, 254, 0.12);
+  border: none;
+  border-radius: 5px;
+  /* border: 2px solid #c70e0e; */
+  background-color: #fff !important;
+  padding: 15px 18px;
+  cursor: pointer;
+  .card-body{
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    .icon{
+      width: 40px;
+      height: 40px;
+    }
+    .content{
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 3px;
+      border-left: 1px solid #ccc;
+      padding-left: 15px ;
+      p{
+        font-size: 13px;
+        color: #1c1c38;
+      }
+      h1{
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #1c1c38;
+        font-size: 29px;
+      }
+    }
+  }
+}
+/* section #container .box-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -136,7 +210,6 @@ section #container .box-container {
   gap: 20px;
   width: 100%;
   height: 30%;
-  /* background-color: red; */
 }
 
 section #container .box-container .box {
@@ -188,7 +261,7 @@ section #container .box-container .box:nth-child(even) {
 
 section #container .box-container .box:hover {
   scale: 1.1;
-}
+} */
 
 /*------------------------STUDENT STYLE-------------------------------- */
 
