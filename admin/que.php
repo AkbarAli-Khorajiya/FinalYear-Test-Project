@@ -76,104 +76,66 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
         <a class="close-alert">&times;</a>
     </div>
 </div>
-<!------------- edit popup menu -------------->
-<div id="edit-que-container">
-    <div id="edit-que-content" class="slidedown">
-        <button type="button" class="close">x</button>
-        <h3 class="edit-que-title">Edit Question</h3>
-        <form id="edit_que_form" name="edit_que_form">
-            <table cellspacing="20px">
-                <table cellspacing="20px">
-                    <tr>
-                        <th colspan="2" id="Que"> <input type="text" class="question" name="question"
-                                placeholder="Write Question" value="" required> </th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="option_a" name="option_a" placeholder="Option A" value=""
-                                required></td>
-                        <td><input type="text" class="option_b" name="option_b" placeholder="Option B" value=""
-                                required></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="option_c" name="option_c" placeholder="Option C" value=""
-                                required></td>
-                        <td><input type="text" class="option_d" name="option_d" placeholder="Option D" value=""
-                                required></td>
-                    </tr>
-                    <tr>
-                        <td> <select name="answer" class="answer" required></select> </td>
-                        <td style="display:none;"> <input type="text" class="que_id" name="que_id" value=" " hidden>
-                        </td>
-                        <td style="display:none;"> <input type="text" class="test_id" name="test_id"
-                                value="<?php echo $_GET['id']; ?>" hidden> </td>
-                        <td class="button">
-                            <input type="reset" value="Clear">
-                            <input type="submit" value="Update">
-                        </td>
-                    </tr>
-                </table>
-        </form>
-    </div>
+<!------------- edit question menu -------------->
+<div class="edit-modal-container">
+    <form class="form" action="javascript:void(0)" id="que-update-form">
+        <div class="head">
+            <h3>Edit Question</h3>
+            <div class="close">x</div>
+        </div>
+        <div class="msg">
+            <p class="success">*name is required</p>
+            <p class="error">*name is required</p>
+        </div>
+        <div class="col">
+            <div class="inp-group">
+                <label for="question">Question</label>
+                <input type="text" id="question" value="" name="question" class="question"
+                    placeholder="Enter question">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="option_a">Option A</label>
+                <input type="text" id="option_a" value="" class="option_a" name="option_a" placeholder="Enter Option"
+                    required>
+            </div>
+            <div class="inp-group">
+                <label for="option_b">Option B</label>
+                <input type="text" id="option_b" value="" class="option_b" name="option_b" placeholder="Enter Option"
+                    required>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="option_c">Option C</label>
+                <input type="text" id="option_c" value="" class="option_c" name="option_c" placeholder="Enter Option"
+                    required>
+            </div>
+            <div class="inp-group">
+                <label for="option_d">Option D</label>
+                <input type="text" id="option_d" value="" class="option_d" name="option_d" placeholder="Enter Option"
+                    required>
+            </div>
+        </div>
+        <div class="col">
+            <div class="inp-group">
+                <label for="answer">Answer</label>
+                <select name="answer" id="answer" class="answer" required>
+                    <option value="">----Select Answer----</option>
+                </select>
+            </div>
+        </div>
+        <div class="bottom">
+            <input type="reset" name="clear" id="clear" value="Reset">
+            <input type="submit" name="submit" id="save" value="Update">
+        </div>
+        <input type="text" class="test_id" id="test_id" name="test_id" value="<?php echo $_GET['id']; ?>" hidden>
+        <input type="text" class="que_id" id="que_id" name="que_id" value="" hidden>
+    </form>
 </div>
 
-<!-- <div class="que-container">
-    <h1>
-        //  echo "<font style='color:red'>" . $result['test_name'] . "</font>";
-           Questions</h1>
-    <form id="create_question_form" name="create_question_form">
-        <table cellspacing="15px">
-            <tr>
-                <th colspan="2">
-                    <h2>Add Questions</h2>
-                    <span class="que" style="color: red; font-size:15px"></span>
-                </th>
-            </tr>
-            <tr>
-                <th colspan="2"> <input type="text" name="question" class="question" placeholder="Write Question" style="height:35px;" value="" required> </th>
-            </tr>
-            <tr>
-                <td><input type="text" class="option_a" name="option_a" placeholder="Option A" value="" required></td>
-                <td><input type="text" class="option_b" name="option_b" placeholder="Option B" value="" required></td>
-            </tr>
-            <tr>
-                <td><input type="text" class="option_c" name="option_c" placeholder="Option C" value="" required></td>
-                <td><input type="text" class="option_d" name="option_d" placeholder="Option D" value="" required></td>
-            </tr>
-            <tr>
-                <td> <select name="answer" class="answer" required>
-                        <option value="">--Select Answer--</option>
-                    </select> </td>
-                <td style="display:none;"> <input type="text" class="test_id" id="test_id" name="test_id" value="<?php echo $_GET['id']; ?>" hidden> </td>
-                <td class="button">
-                    <input type="reset" value="Clear">
-                    <input type="submit" name="insert" value="Insert">
-                </td>
-            </tr>
-        </table>
-    </form>
-</div> -->
-
-<!-- getting test id to render all questions -->
-<!-- ----------------- -->
-
-<!-- <div class="que-display">
-    <div class="que-title">
-        <span>Dashboard \ Test \ Question</span>
-        <span class="search">
-            <button class="search_btn">
-                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
-                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-            </button>
-            <input class="search_input" placeholder="Type your text" required="" type="text">
-            <button class="reset">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </span>
-    </div> -->
-<!-- ---------Add Test modal--------------  -->
+<!-- ---------Add que modal--------------  -->
 <div class="modal-container">
     <form class="form" action="javascript:void(0)" id="que-submit-form">
         <div class="head">
@@ -181,36 +143,36 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             <div class="close">x</div>
         </div>
         <div class="msg">
-            <!-- <p class="success">*name is required</p> -->
-            <!-- <p class="error">*name is required</p> -->
+            <p class="success">*name is required</p>
+            <p class="error">*name is required</p>
         </div>
         <div class="col">
             <div class="inp-group">
-                <label for="test-name">Question</label>
-                <input type="text" id="test-name" value="" name="question" class="question"
+                <label for="question">Question</label>
+                <input type="text" id="question" value="" name="question" class="question"
                     placeholder="Enter question">
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="test-name">Option A</label>
+                <label for="option_a">Option A</label>
                 <input type="text" id="option_a" value="" class="option_a" name="option_a" placeholder="Enter Option"
                     required>
             </div>
             <div class="inp-group">
-                <label for="test-name">Option B</label>
+                <label for="option_b">Option B</label>
                 <input type="text" id="option_b" value="" class="option_b" name="option_b" placeholder="Enter Option"
                     required>
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="test-name">Option C</label>
+                <label for="option_c">Option C</label>
                 <input type="text" id="option_c" value="" class="option_c" name="option_c" placeholder="Enter Option"
                     required>
             </div>
             <div class="inp-group">
-                <label for="test-name">Option D</label>
+                <label for="option_d">Option D</label>
                 <input type="text" id="option_d" value="" class="option_d" name="option_d" placeholder="Enter Option"
                     required>
             </div>
@@ -224,7 +186,7 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             </div>
         </div>
         <div class="bottom">
-            <input type="reset" name="reset" id="clear" value="Reset">
+            <input type="reset" name="clear" id="clear" value="Reset">
             <input type="submit" name="submit" id="save" value="Save">
         </div>
         <input type="text" class="test_id" id="test_id" name="test_id" value="<?php echo $_GET['id']; ?>" hidden>

@@ -48,6 +48,9 @@ $(document).ready(function() {
             },
             function(response) {
                 $("#user-table").html(response);
+                $("table .status").each(function() {;
+                    $(this).text() == "De-Active" ? $(this).css("color", "red") : $(this).css("color", "green");
+                });
             }
         );
     });

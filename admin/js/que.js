@@ -1,46 +1,3 @@
-function que_edit(que_id) {
-    var test_id = document.getElementById('test_opt').value;
-    $('#container').animate({ scrollTop: 0 }, "medium");
-    jQuery('#container').load('que.php', { edit_id: que_id, test_id: test_id });
-}
-
-function que_delete(que_id) {
-    var test_id = document.getElementById('test_opt').value;
-    if (confirm('Are you sure want to delete record?')) {
-        jQuery('#container').load('que.php', { del_id: que_id, test_id: test_id });
-        // console.log('done');
-    }
-}
-
-// $('#edit-que-container').show();
-
-// ----------Edit pop-up Show-----------//
-$("#que-table").on("click", ".edit-que", function() {
-    $("#edit-que-container").show();
-});
-// ----------close pop-up------------ //
-$(".close").click(function() {
-    $('#edit-que-container').hide();
-});
-
-function que_update() {
-    //get data from question_form
-    const update_que = 1;
-    var que_id = document.forms['question_form']['que_id'].value;
-    var question = document.forms['question_form']['question'].value;
-    var option_a = document.forms['question_form']['option_a'].value;
-    var option_b = document.forms['question_form']['option_b'].value;
-    var option_c = document.forms['question_form']['option_c'].value;
-    var option_d = document.forms['question_form']['option_d'].value;
-    var right_answer = document.forms['question_form']['right_answer'].value;
-    var flag = check_que(question, option_a, option_b, option_c, option_d, right_answer);
-    if (flag == 0) {
-        jQuery('#container').load('que.php', { update_que: update_que, que_id: que_id, question: question, option_a: option_a, option_b: option_b, option_c: option_c, option_d: option_d, right_answer: right_answer });
-    } else {
-        alert('field cant be null');
-    }
-
-}
 
 // ---------Displaying all question------------- //
 function list_all_ques(test_id) {
@@ -50,6 +7,10 @@ function list_all_ques(test_id) {
         },
         function(response) {
             $("#que-table").html(response);
+            //edit-modal-container show
+            $(".edit-que").click(()=>{
+                $(".edit-modal-container").show();
+            });
         }
     )
 }
@@ -63,6 +24,8 @@ $("#add-btn").on("click", () => {
 $(".close").on("click", () => {
     $(".modal-container").hide();
 });
+// --------- Hide msg --------------//
+$(".msg p").hide();
 //---------- Insert Question ---------//
 $("#que-submit-form").submit(function(e) {
     e.preventDefault();
@@ -95,22 +58,34 @@ $("#que-submit-form").submit(function(e) {
                 console.log(response);
                 let dataArr = response.split("||");
                 if (dataArr[0] == 1) {
-                    alert_show(dataArr[0], dataArr[2]);
+                    $("#que-submit-form")[0].reset();
+                    $("#que-submit-form .msg .success").text(dataArr[2]);
+                    $("#que-submit-form .msg .success").show();
+                    list_all_ques(testId);
                     setTimeout(function() {
-                        $("#alert-container").fadeOut();
-                    }, 900);
-                    list_all_ques(dataArr[1]);
+                        $(".modal-container").fadeOut();
+                        $("#que-submit-form .msg .success").hide();
+                    }, 2000);
                 } else {
-                    alert_show(dataArr[0], dataArr[1]);
+                    $("#que-submit-form .msg .error").text(dataArr[1]);
+                    $("#que-submit-form .msg .error").show();
+                    setTimeout(() => {
+                        $("#que-submit-form .msg .error").hide();
+                    }, 2000);
                 }
             },
         });
     }
 });
+//-------- Edit Question Modal -------------//
+$(".edit-modal-container").hide();
+$(".close").on("click", () => {
+    $(".edit-modal-container").hide();
+});
 //-----------Display Edit Que---------//
 $("#que-table").on("click", ".edit-que", function() {
     let data = this.id;
-    let test_id = $("#edit_que_form .test_id").val();
+    let test_id = $("#que-update-form .test_id").val();
     $.post("include/operation.php?ch=13", {
             ch: "13",
             id: data,
@@ -118,16 +93,14 @@ $("#que-table").on("click", ".edit-que", function() {
         },
         function(response) {
             let data = JSON.parse(response);
-            $("#edit_que_form .que_id").val(data['que_id']);
-            $("#edit_que_form .question").val(data['question']);
-            $("#edit_que_form .option_a").val(data['option_1']);
-            $("#edit_que_form .option_b").val(data['option_2']);
-            $("#edit_que_form .option_c").val(data['option_3']);
-            $("#edit_que_form .option_d").val(data['option_4']);
-            var answer = $("<option>");
-            answer.val(data['answer']);
-            answer.text(data['answer']);
-            $("#edit_que_form .answer").append(answer);
+            $("#que-update-form .que_id").val(data['que_id']);
+            $("#que-update-form .question").val(data['question']);
+            $("#que-update-form .option_a").val(data['option_1']);
+            $("#que-update-form .option_b").val(data['option_2']);
+            $("#que-update-form .option_c").val(data['option_3']);
+            $("#que-update-form .option_d").val(data['option_4']);
+            appendEditQueOption();
+            $("#que-update-form .answer option[value='"+data['answer']+"']").prop("selected", true);
         });
 });
 //------------- Delete Question------------------//
@@ -143,13 +116,10 @@ $("#que-table").on("click", ".delete-que", function() {
                 let dataArr = response.split("||");
                 // console.log(dataArr);
                 if (dataArr[0] == 1) {
-                    alert_show(dataArr[0], dataArr[1]);
-                    setTimeout(function() {
-                        $("#alert-container").fadeOut();
-                    }, 900);
+                    alert("Question Deleted");
                     list_all_ques(testId);
                 } else {
-                    alert_show(dataArr[0], dataArr[1]);
+                    alert("Question Not Deleted");
                 }
             });
     }
@@ -157,17 +127,17 @@ $("#que-table").on("click", ".delete-que", function() {
 
 //------- dynamic option select-----------//
 
-$("#option_a,#option_b,#option_c,#option_d").keyup(() => {
+$("#que-submit-form input").on('input',() => {
     $("#que-submit-form .answer option").remove();
 
     $("#que-submit-form .answer").append('<option value="">----Select Answer----</option>');
 
 
     console.log($("#option_a").val());
-    let a = $("#option_a").val();
-    let b = $("#option_b").val();
-    let c = $("#option_c").val();
-    let d = $("#option_d").val();
+    let a = $("#que-submit-form input[name='option_a']").val();
+    let b = $("#que-submit-form input[name='option_b']").val();
+    let c = $("#que-submit-form input[name='option_c']").val();
+    let d = $("#que-submit-form input[name='option_d']").val();
 
     if (a != "") {
         var option_a = $("<option>");
@@ -198,54 +168,9 @@ $('#que-submit-form .answer').on('change', function() {
     let selectedValue = $(this).val();
 })
 
-//------- dynamic option select-----------//
-// $("#que-submit-form .answer").click(function() {
-//     // $("#que-submit-form .answer").val("");
-//     // if ($("#que-submit-form .answer option").length >= 2) {
-//     $("#que-submit-form .answer ").empty();
-
-//     // }
-//     // if ($("#que-submit-form .answer option").length == 1) {
-//     // $("#que-submit-form .answer option").remove();
-
-
-//     let a = $("#que-submit-form .option_a").val();
-//     let b = $("#que-submit-form .option_b").val();
-//     let c = $("#que-submit-form .option_c").val();
-//     let d = $("#que-submit-form .option_d").val();
-//     if (a != "") {
-//         var option_a = $("<option>");
-//         option_a.val(a);
-//         option_a.text(a);
-//         $("#que-submit-form .answer").append(option_a);
-//     }
-//     if (b != "") {
-//         var option_b = $("<option>");
-//         option_b.val(b);
-//         option_b.text(b);
-//         $("#que-submit-form .answer").append(option_b);
-//     }
-//     if (c != "") {
-//         var option_c = $("<option>");
-//         option_c.val(c);
-//         option_c.text(c);
-//         $("#que-submit-form .answer").append(option_c);
-//     }
-//     if (d != "") {
-//         var option_d = $("<option>");
-//         option_d.val(d);
-//         option_d.text(d);
-//         $("#que-submit-form .answer").append(option_d);
-//     }
-//     $("#que-submit-form .answer ").change(() => {
-//             console.log($(this).val())
-
-//         })
-//         // }
-// });
 //-----------Search Question in js------------//
-$(".search .search_input").keyup(function() {
-    let searchQue = $(".search_input").val();
+$("#search").keyup(function() {
+    let searchQue = $("#search").val();
     let tId = $('#test_id').val();
     let data = { search: searchQue, testId: tId };
     console.log(data);
@@ -263,56 +188,59 @@ $(".search .reset").on("click", function() {
     list_all_ques();
 });
 
-
-$("#edit_que_form .answer").click(function() {
-    $("#edit_que_form .answer option").remove();
-    if ($("#edit_que_form .answer option").length == 0) {
-        let a = $("#edit_que_form .option_a").val();
-        let b = $("#edit_que_form .option_b").val();
-        let c = $("#edit_que_form .option_c").val();
-        let d = $("#edit_que_form .option_d").val();
-        if (a != "") {
-            var option_a = $("<option>");
-            option_a.val(a);
-            option_a.text(a);
-            $("#edit_que_form .answer").append(option_a);
-        }
-        if (b != "") {
-            var option_b = $("<option>");
-            option_b.val(b);
-            option_b.text(b);
-            $("#edit_que_form .answer").append(option_b);
-        }
-        if (c != "") {
-            var option_c = $("<option>");
-            option_c.val(c);
-            option_c.text(c);
-            $("#edit_que_form .answer").append(option_c);
-        }
-        if (d != "") {
-            var option_d = $("<option>");
-            option_d.val(d);
-            option_d.text(d);
-            $("#edit_que_form .answer").append(option_d);
-        }
-    }
+// ----------dynamic option select for edit que ---------------//
+$("#que-update-form input").on('input',()=>{
+    appendEditQueOption();
 });
+function appendEditQueOption()
+{
+    $("#que-update-form .answer option").remove();
 
-//-----------Update Test------------//
-$("#edit_que_form").submit(function(e) {
+    $("#que-update-form .answer").append('<option value="">----Select Answer----</option>');
+
+
+    console.log($("#que-update-form #option_a").val());
+    let a = $("#que-update-form input[name='option_a']").val();
+    let b = $("#que-update-form input[name='option_b']").val();
+    let c = $("#que-update-form input[name='option_c']").val();
+    let d = $("#que-update-form input[name='option_d']").val();
+
+    if (a != "") {
+        var option_a = $("<option>");
+        option_a.val(a);
+        option_a.text(a);
+        $("#que-update-form .answer").append(option_a);
+    }
+    if (b != "") {
+        var option_b = $("<option>");
+        option_b.val(b);
+        option_b.text(b);
+        $("#que-update-form .answer").append(option_b);
+    }
+    if (c != "") {
+        var option_c = $("<option>");
+        option_c.val(c);
+        option_c.text(c);
+        $("#que-update-form .answer").append(option_c);
+    }
+    if (d != "") {
+        var option_d = $("<option>");
+        option_d.val(d);
+        option_d.text(d);
+        $("#que-update-form .answer").append(option_d);
+    }
+}
+//-----------Update que------------//
+$("#que-update-form").submit(function(e) {
     e.preventDefault();
-    let testid = $("#edit_que_form .test_id").val();
-    let queid = $("#edit_que_form .que_id").val();
-    let question = $("#edit_que_form .question").val();
-    let option_a = $("#edit_que_form .option_a").val();
-    let option_b = $("#edit_que_form .option_b").val();
-    let option_c = $("#edit_que_form .option_c").val();
-    let option_d = $("#edit_que_form .option_d").val();
-    let answer = $("#edit_que_form .answer").val();
-
-
-
-    let testTotalQues = $("#edit_test_form .test_question").val();
+    let testid = $("#que-update-form input[name='test_id']").val();
+    let queid = $("#que-update-form input[name='que_id']").val();
+    let question = $("#que-update-form input[name='question']").val();
+    let option_a = $("#que-update-form input[name='option_a']").val();
+    let option_b = $("#que-update-form input[name='option_b']").val();
+    let option_c = $("#que-update-form input[name='option_c']").val();
+    let option_d = $("#que-update-form input[name='option_d']").val();
+    let answer = $("#que-update-form .answer").val();
     if (
         testid == "" ||
         queid == "" ||
@@ -325,7 +253,8 @@ $("#edit_que_form").submit(function(e) {
     ) {
         $(".edit_que_title").html("* Fill all field");
     } else {
-        let data = $("#edit_que_form").serialize();
+        let data = $("#que-update-form").serialize();
+        console.log(data);
         $.ajax({
             type: "POST",
             url: "include/operation.php?ch=16",
@@ -335,15 +264,20 @@ $("#edit_que_form").submit(function(e) {
                 console.log(response);
                 let dataArr = response.split("||");
                 if (dataArr[0] == 1) {
-                    $("#edit_que_form")[0].reset();
-                    $("#edit-que-container").fadeOut();
-                    alert_show(dataArr[0], dataArr[1]);
-                    list_all_ques(testid);
+                    $("#que-update-form")[0].reset();
+                    $("#que-update-form .msg .success").text(dataArr[1]);
+                    $("#que-update-form .msg .success").show();
+                    list_all_ques(testId);
                     setTimeout(function() {
-                        $("#alert-container").fadeOut();
-                    }, 3000);
+                        $(".edit-modal-container").fadeOut();
+                        $("#que-update-form .msg .success").hide();
+                    }, 2000);
                 } else {
-                    alert_show(dataArr[0], dataArr[1]);
+                    $("#que-update-form .msg .error").text(dataArr[1]);
+                    $("#que-update-form .msg .error").show();
+                    setTimeout(() => {
+                        $("#que-update-form .msg .error").hide();
+                    }, 2000);
                 }
             },
         });
