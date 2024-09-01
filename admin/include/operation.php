@@ -490,10 +490,21 @@ class Student_operation
     function listUser($post)
     {
         if (isset($post['data']) && strlen($post['data']) > 0){
-            $val = $post['data'];
-            $query = "select id,name,email,status,gender,class,created_at from user where name LIKE '%$val%' OR email LIKE '%$val%' OR gender LIKE '%$val%' OR class LIKE '%$val%'";
-            $result = mysqli_query($this->conn , $query);
-            $num = mysqli_num_rows($result);
+           if($post['data'] == 'Active' || $post['data'] == 'active')
+           {
+                $query = "select id,name,email,status,gender,class,created_at from user where status = 1";
+           }
+           else if($post['data'] == 'De-Active' || $post['data'] == 'de-active' || $post['data'] == 'De-active' || $post['data'] == 'de-Active')
+           {
+                $query = "select id,name,email,status,gender,class,created_at from user where status = 0";
+           }
+           else
+           {
+                $val = $post['data'];
+                $query = "select id,name,email,status,gender,class,created_at from user where name LIKE '%$val%' OR email LIKE '%$val%' OR gender LIKE '%$val%' OR class LIKE '%$val%'";
+           }
+           $result = mysqli_query($this->conn , $query);
+           $num = mysqli_num_rows($result);
         }
         else{
             $query = "select id,name,email,status,gender,class,created_at from user";

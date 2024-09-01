@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <style>
+        <?php include 'css/font/font.css';?>
         <?php include 'css/student_reg.css'?>
     </style>
     <script>

@@ -1,5 +1,5 @@
 <style>
-    header
+header
 {
     display: flex;
     justify-content: space-between;
@@ -11,9 +11,9 @@
 header span
 {
     margin-left: 4vh;
-    font-family: 'Roboto', sans-serif;
+    font-family:'Roboto-Bold', sans-serif;
     font-size: 3.5vw;
-    font-weight: 700;
+    /* font-weight: 600; */
 }
 header span a
 {
@@ -22,11 +22,10 @@ header span a
 }
 header nav
 {
-    font-size: 1.7vw;
+    font-size: 1.6vw;
     align-self: center;
     margin-right: 4vh;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    font-family: 'Roboto-Regular', sans-serif;
 }
 header nav a
 {
