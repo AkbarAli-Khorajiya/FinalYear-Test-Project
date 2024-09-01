@@ -76,25 +76,31 @@
             </tr>
             <tr>
                 <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name"
-                        value="<?php //echo $test_name; ?>"> </th>
+                        value="<?php //echo $test_name; 
+                                ?>"> </th>
             </tr>
             <tr>
                 <td> <input type="text" name="test_date" class="test_date" placeholder="Test date"
-                        value="<?php //echo $test_date; ?>" onfocus="(this.type='date')"
+                        value="<?php //echo $test_date; 
+                                ?>" onfocus="(this.type='date')"
                         onblur="if(this.value==''){this.type='text'}"> </td>
                 <td> <input type="text" name="test_start_time" class="test_start_time" placeholder="Test start time"
-                        value="<?php //echo $test_start_time; ?>" onfocus="(this.type='time')"
+                        value="<?php //echo $test_start_time; 
+                                ?>" onfocus="(this.type='time')"
                         onblur="if(this.value==''){this.type='text'}"></td>
             </tr>
             <tr>
                 <td> <input type="text" name="test_time" class="test_time" placeholder="Test time (in minutes )"
-                        value="<?php //echo $test_time; ?>"> </td>
+                        value="<?php //echo $test_time; 
+                                ?>"> </td>
                 <td> <input type="text" name="test_marks" class="test_marks" placeholder="Each Question marks"
-                        value="<?php //echo $test_marks; ?>"> </td>
+                        value="<?php //echo $test_marks; 
+                                ?>"> </td>
             </tr>
             <tr>
                 <td> <input type="text" name="test_question" class="test_question"
-                        placeholder="Total number of Question" value="<?php //echo $test_question; ?>"> </td>
+                        placeholder="Total number of Question" value="<?php //echo $test_question; 
+                                                                        ?>"> </td>
                  <td style="display:none;"> <input type="text" name="test_id" value="" hidden> </td> -->
 <!-- <td class="button">
     <input type="reset" value="Clear">
@@ -119,14 +125,16 @@
         </button>
     </div>
     <div class="data-display">
-        <table cellspacing="10px" id="test-table">
-            <div class="search">
-                <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
-            </div>
+        <div class="search">
+            <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
+        </div>
+        <div class="table-container">
+            <table cellspacing="10px" id="test-table">
 
-            <!-- ///// created test list ///// -->
+                <!-- ///// created test list ///// -->
 
-        </table>
+            </table>
+        </div>
         <div class="pagination" style="display: flex;justify-content: space-between;">
             <div class="total-list">
                 <p>Showing 1 to 10 of 50 entries</p>
@@ -179,7 +187,7 @@
         <div class="col-2">
             <div class="inp-group">
                 <label for="date">Test Start(Date)</label>
-                <input type="date" id="date" class="date" name="date" value=""> 
+                <input type="date" id="date" class="date" name="date" value="">
             </div>
             <div class="inp-group">
                 <label for="time">Test Start(Time)</label>

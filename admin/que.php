@@ -250,11 +250,13 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
         <div class="search">
             <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
-        <table cellspacing="10px" id="que-table">
-
-            <!-- ///// created test list ///// -->
-
-        </table>
+        <div class="table-container">
+            <table cellspacing="10px" id="que-table">
+                
+                <!-- ///// created test list ///// -->
+                
+            </table>
+        </div>
         <div class="pagination" style="display: flex;justify-content: space-between;">
             <div class="total-list">
                 <p>Showing 1 to 10 of 50 entries</p>
