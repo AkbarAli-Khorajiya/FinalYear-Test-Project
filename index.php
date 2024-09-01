@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam25</title>
     <style>
+        <?php include 'css/font/font.css';?>
         <?php include 'css/exam25.css' ?>
     </style>
     <script>
