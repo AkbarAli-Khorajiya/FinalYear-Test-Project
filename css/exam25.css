@@ -1,86 +1,89 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Khand:wght@500&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
-*
+
+@import url('css/font/ubuntuFont.css');
+@import url('css/font/robotoFont.css');
+:root
 {
-    padding: 0;
+    --primary-color : #9D9FE6;
+    --secondary-color : #1A1A27;
+    --nav-color:rgba(26, 26, 39, 70%);
+}
+*{
     margin: 0;
+    padding: 0;
+    text-decoration: none;
 }
 body
 {
-    background-color: rgb(224, 224, 224);
+    background-color: #ffff;
+    height: 100%;
+    width: 100%;
+    color: var(--secondary-color);
 }
 section
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    width: 100vw;
-    font-family: 'Roboto-Regular' , sans-serif;
-}
-section .content
-{
-    margin: 4%;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    flex-direction: column;
-    height: 96%;
-    width: 41%;
-}
-section .content span
-{
-    color: rgb(41, 76, 127);
-    align-self: self-start;
-    font-size: 3vw;
-    font-family: 'Roboto-Medium', sans-serif;
-    margin-bottom: 5px;
-}
-section .content p
-{
-    color: rgb(53, 98, 165);
-    font-size: 1.5vw;
-    text-indent: 50px;
-    line-height: 1.2;
-    font-family: 'Roboto-Regular' , sans-serif;
-    text-transform: capitalize;
-    text-align: justify;
-}
-section .content a
-{
-    font-size: 1.5vw;
-    color: white;
-    background-color: rgb(53, 98, 165);
-    margin: 20px 0 20px 0;
-    padding: 9px;
-    border: 1px solid rgb(38, 50, 56);
-    border-radius: 5px;
-    font-family: 'Roboto-regular' , sans-serif;
-    align-self: self-start;
-    text-decoration: none;
-    transition: 200ms linear 0s all;
-}
-.content a:hover
-{
-    background-color:  rgb(36, 65, 109) ;
-    color: #ecebeb;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
 }
 section .container
 {
-    height: 100%;
-    width: 55%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
-section .container img
+.container .content
 {
-    aspect-ratio: 16/9;
-    object-fit:contain;
-    height: 90%;
-    width: 90%;
-    margin: 5%;
+    padding: 20px 60px;
+    span{
+        display: block;
+    }
+    & :nth-child(1)
+    {
+        font-family: 'Ubuntu-Bold', sans-serif;
+        font-size: 100px;
+    }
+    & :nth-child(2)
+    {
+        font-family: 'Ubuntu-Medium' , sans-serif;
+        font-size: 64px;
+    }
+    & :nth-child(3)
+    {
+        font-size: 48px;
+        font-family: 'Ubuntu-Regular', sans-serif;
+    }
 }
-footer
+.container .btn
 {
-    height: 10vh;
-    width: 100vw;
+    display: block;
+    padding: 20px 60px;
+
+    a{
+        padding: 10px 15px;
+        background-color: var(--primary-color);
+        font-size: 28px;
+        color: #ffff;
+        border-radius: 50px;
+        font-family: 'Robot' , sans-serif;
+        font-weight: 400;
+        box-shadow: 0px 0px 15px rgba(44, 44, 44, 0.514); 
+        transition: 200ms ease all 0s;
+        &:hover
+        {
+            background-color:#7376b6 ;
+        }
+    }
+}
+section .img
+{
+    height: fit-content;
+    width: fit-content;
+}
+.img img
+{
+    width: 594px;
+    height: 594px;
 }
