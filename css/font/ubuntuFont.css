@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Ubuntu-Bold';
+    font-weight: 700;
+    font-style: normal;
+    src: url('Ubuntu-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu-BoldItalic';
+    font-weight: 700;
+    font-style: italic;
+    src: url('Ubuntu-BoldItalic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu-Italic';
+    font-weight: 400;
+    font-style: italic;
+    src: url('Ubuntu-Italic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu-Light';
+    font-weight: 300;
+    font-style: normal;
+    src: url('Ubuntu-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu-LightItalic';
+    font-weight: 300;
+    font-style: italic;
+    src: url('Ubuntu-LightItalic.ttf') format('truetype'); 
+}
+@font-face {
+    font-family: 'Ubuntu-Medium';
+    font-weight: 500;
+    font-style: normal;
+    src: url('Ubuntu-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu-MediumItalic';
+    font-weight: 500;
+    font-style: normal;
+    src: url('Ubuntu-MediumItalic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Ubuntu-Regular';
+    font-weight: 400;
+    font-style: normal;
+    src: url('Ubuntu-Regular.ttf') format('truetype');
+}

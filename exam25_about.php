@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,18 +9,12 @@
     <style>
         <?php include 'css/exam25_about.css' ?>
     </style>
+    <script>
+        <?php include_once 'js/jquery-3.7.1.min.js'; ?>
+    </script>
 </head>
 <body>
-    <header>
-        <span> <a href="index.php">Exam25</a> </span>
-        <nav>
-            <a href="exam25_home.php">HOME</a>
-            <a href="student_login.php">EXAM</a>
-            <a href="#">RESULT</a>
-            <a href="#">ABOUT</a>
-            <a href="student_reg.php">REGISTER</a>
-        </nav>
-    </header>
+    <?php include_once 'include/header.php';  ?>
     <section>
         <div class="box">
             <div class="content">
@@ -49,5 +46,25 @@
     <footer>
 
     </footer>
+    <script>
+        //------show profile menu-------//
+        $("nav .img").click(()=>{
+            $("nav .user-menu").css('display', 'flex');
+        });
+        // ------hide profile menu-------//
+        let img = document.querySelector(".img");
+        let menu = document.querySelector(".user-menu");
+        img.addEventListener("click",()=>{
+            menu.style.display = 'flex';
+        });
+        document.addEventListener("click",()=>{
+            let imgClicked = img.contains(event.target);
+            let menuClicked = menu.contains(event.target);
+            if(!imgClicked && !menuClicked)
+            {
+                menu.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
