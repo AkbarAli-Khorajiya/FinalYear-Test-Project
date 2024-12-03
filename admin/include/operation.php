@@ -530,9 +530,11 @@ class Student_operation
                 $i = 1;
                 while($row = mysqli_fetch_assoc($result))
                 {
+                    $name = explode("|" , $row['name']);
+
                     $str .= "<tr>
                         <td>".$i."</td>
-                        <td>".$row['name']."</td>
+                        <td>".$name[0]." ".$name[1]." ".$name[2]."</td>
                         <td>".$row['email']."</td>
                         <td class='status'>".($row['status'] == 1 ? "Active" : "De-Active")."</td>
                         <td>".$row['gender']."</td>
@@ -600,7 +602,7 @@ class Student_operation
             return 0 ."||Select Class";
         }
         else{  
-            $name = $post['surName'] .' '. $post['firstName'] .' '. $post['lastName'];
+            $name = $post['surName'] .'|'. $post['firstName'] .'|'. $post['lastName'];
             $email = $post['email'];
             $password = password_hash($post['password'] , PASSWORD_DEFAULT);
             $gender = $post['gender'];

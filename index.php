@@ -33,11 +33,5 @@
             <img src="image/Exams-bro.png" alt="">
         </div>
     </section>
-    <footer>
-
-    </footer>
-    <script>
-        <?php include_once 'js/exam25.js'; ?>
-    </script>
 </body>
 </html>

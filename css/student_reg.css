@@ -11,13 +11,12 @@ body
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(255, 255, 255);
 }
 .container
 {
     display: grid;
     grid-template-columns: 0.7fr 1fr;
-    background-color: red;
     background: linear-gradient(to top,rgb(0,109,176), rgb(0,147,175));
     width: 800px;
     height: 450px;

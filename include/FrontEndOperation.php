@@ -52,7 +52,7 @@
                 return 0 ."||Select Class";
             }
             else{  
-                $name = $post['surName'] .' '. $post['firstName'] .' '. $post['lastName'];
+                $name = $post['surName'] .'|'. $post['firstName'] .'|'. $post['lastName'];
                 $email = $post['email'];
                 $password = password_hash($post['password'] , PASSWORD_DEFAULT);
                 $gender = $post['gender'];
@@ -79,14 +79,21 @@
                 $row = mysqli_fetch_assoc($result);
                 $user_password = $row['password'];
                 $user_id = $row['id'];
-                $user_name = explode(" ",$row['name']);
+                $user_name = explode("|",$row['name']);
                 $user_mail = $row['email'];
+                $gender = $row['gender'];
+                $status = $row['status'];
+                if($status == '0')
+                {
+                    return 0 ."||Access Denied";
+                }
                 if(password_verify($password , $user_password))
                 {
                     $_SESSION['stdLogin'] = 1;
                     $_SESSION['userId'] = $user_id;
                     $_SESSION['userName'] = $user_name;
-                    $_SESSION['userMail'] = $user_mail; 
+                    $_SESSION['userMail'] = $user_mail;
+                    $_SESSION['userGender'] = $gender; 
                     return 1 ."||Login Success";
                 }  
                 else

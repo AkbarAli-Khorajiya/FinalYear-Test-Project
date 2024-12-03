@@ -177,7 +177,7 @@ var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 var seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
 // Display the remaining time in an element with id="clock"
-document.getElementById("clock").innerHTML = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
+document.getElementById("clock").innerHTML = addZero(hours) + " : " + addZero(minutes) + " : " + addZero(seconds);
 
 // If the countdown is over, display a message and stop the interval
 if (difference < 0) 
