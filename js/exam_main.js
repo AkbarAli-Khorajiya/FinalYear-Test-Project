@@ -227,11 +227,11 @@ function redirect(value)
     let arr = answer_count(1);
     if(value == 'Submit')
     {
-        jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
+        // jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
     }
     else if(value == 'time_over')
     {
-        jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
+        // jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
     }
 }
 
