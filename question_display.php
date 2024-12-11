@@ -55,7 +55,7 @@ $link = mysqli_connect('localhost','root','','exam_test');
     }
 
  $html.=' </span>
-  <span><input type="submit" value="Submit" name="submit" onclick="redirect(this.value)"></span>
+  <span><input type="submit" value="Submit" name="submit" onclick="testSubmit()"></span>
  </div>
 </div>
 <script>option_check();</script>';

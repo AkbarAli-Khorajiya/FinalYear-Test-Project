@@ -8,7 +8,8 @@
     // {
     $link = mysqli_connect('localhost','root','','exam_test');
     //get question id from DB
-    $que_get_query = 'select id from question where test_id = 60';
+    $test_id = 60;
+    $que_get_query = 'select id from question where test_id ='.$test_id;
     $que_get_result = mysqli_query($link,$que_get_query);
     $i=0;
     while($row = mysqli_fetch_assoc($que_get_result))
@@ -60,6 +61,7 @@
 <script>
     <?php include_once 'js/jquery-3.7.1.min.js';?>
     var id_arr = JSON.parse('<?= json_encode($id_arr);?>'); //string array
+    var test_id = JSON.parse('<?= json_encode($test_id);?>')
     id_arr = id_arr.map(Number);                           // Converted into number array
     var max = id_arr.length;
     console.log(id_arr);

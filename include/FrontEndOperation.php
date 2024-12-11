@@ -221,6 +221,30 @@
             $data = htmlspecialchars($data);
             return $data;
         }
+
+        function userTestSubmit($data)
+        {
+            $query = 'select que.id, ans.answer from question que,answer ans where que.id=ans.que_id and que.test_id='.$data['test_id'];
+            $result = mysqli_query($this->conn,$query);
+            $answer_arr = [];
+            while($row = mysqli_fetch_assoc($result))
+            {
+                $answer_arr[$row['id']] = $row['answer'];
+            }
+            $right_answer_count = 0;
+            $wrong_answer_count = 0;
+            foreach($answer_arr as $id => $answer)
+            {
+                if(isset($data[$id]))
+                {
+                    $answer == $data[$id] ? $right_answer_count++ : $wrong_answer_count++;
+                }
+            } 
+            unset($answer_arr);
+            $answer_arr['right_answer'] = $right_answer_count;
+            $answer_arr['wrong_answer'] = $wrong_answer_count;
+            return json_encode($answer_arr);
+        }
     }
 
     $stdObj = new Student();
@@ -235,6 +259,9 @@
             break;
         case '3':
             echo $stdObj->logoutUser($_POST);
+            break;
+        case '4':
+            echo $stdObj->userTestSubmit($_POST);
             break;
     }
 ?>

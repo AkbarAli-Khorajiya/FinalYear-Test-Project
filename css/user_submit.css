@@ -44,7 +44,7 @@ body
         height: auto;
 
         .test-name{
-            color: #09090b;
+            color: var(--secondary-color);
             display: block;
             padding: 5px 10px;
             font-family: 'Roboto-bold', sans-serif;
@@ -71,6 +71,7 @@ body
             justify-content: space-between;
             align-items: center ;
             flex-direction: row;
+            color: var(--secondary-color);
         }
 
         .range{
@@ -78,7 +79,7 @@ body
             padding: 4px 10px 5px 10px;
 
             .range-fill{
-                background-color: black;
+                background-color: var(--secondary-color);
                 height: 8px;
                 border-radius: 20px;
             }
@@ -87,7 +88,7 @@ body
                 top: -8px;
                 z-index: -1;
                 width: 100%;
-                background-color: #e5e5e6;
+                background-color: #7f809e62;
                 height: 8px;
                 border-radius: 20px;
             }
@@ -101,7 +102,7 @@ body
         flex-flow:  wrap;
         gap: 16px;
         padding: 5px 10px;
-
+        color: var(--secondary-color);
         .tiles{
             border: 0.5px solid #bebebe9d;
             border-radius: 8px;

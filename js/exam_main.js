@@ -187,7 +187,7 @@ if (difference < 0)
     setTimeout(function(){
         var body = document.querySelector('body');
         body.style.display = 'none;'
-        redirect('time_over');
+        redirect(1);
     },2000);
 }
 }, 1000);
@@ -225,16 +225,34 @@ function redirect(value)
     section1.style.display = 'none';
     section2.style.display = 'flex';
     let arr = answer_count(1);
-    if(value == 'Submit')
+    console.log(arr)
+    if(value == 1)
     {
-        // jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
-    }
-    else if(value == 'time_over')
-    {
-        // jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
+        const user_answer = {}
+        user_answer['test_id'] = test_id;
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+            user_answer[key] = value;
+        }
+        $.ajax({
+            type: "POST",
+            url: "include/FrontEndOperation.php?ch=4",
+            data: user_answer,
+            success: function (response) {
+                let data = JSON.parse(response);
+                const res = {...arr,...data};
+                window.location.href = 'user_submit.php?res_data='+JSON.stringify(res);
+            }
+        });
     }
 }
 
+function testSubmit(){
+    if(confirm("Are you sure you submit test ?")){
+        redirect(1);
+    }
+}
 //function for clear localstorage every refresh
 window.addEventListener('beforeunload', function() {
     localStorage.clear();
