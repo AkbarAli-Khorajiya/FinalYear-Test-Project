@@ -88,7 +88,7 @@ body
                 top: -8px;
                 z-index: -1;
                 width: 100%;
-                background-color: #7f809e62;
+                background-color: #73737e2a;
                 height: 8px;
                 border-radius: 20px;
             }
@@ -107,25 +107,46 @@ body
             border: 0.5px solid #bebebe9d;
             border-radius: 8px;
             box-shadow: 0px 1px 10px 1px #e4e4e75e;
-            padding: 20px 15px;
+            padding: 10px 15px 7px 10px;
             display: flex;
-            justify-content: space-between;
-            flex-direction: row;
+            justify-content: flex-start;
             align-items: center;
-            .title{
-                font-family: 'Roboto-Medium', sans-serif;
-                font-size: 1.2vw;
+            flex-direction: row;
+            .icon{
+                padding: 0px 10px 0px 0px ;
             }
-            .score{
-                font-family: 'Roboto-Bold', sans-serif;
-                font-size: 1.9vw;
+            .detail{
+
+                .title{
+                    display: block;
+                    font-family: 'Roboto-Medium', sans-serif;
+                    font-size: 1vw;
+                }
+                .score{
+                    font-family: 'Roboto-Bold', sans-serif;
+                    font-size: 1.9vw;
+                }
             }
         }
         .small{
-            width: 310px;
+            width: 315px;
         }
         .large{
-            width: 668px;
+            width: 678px;
+            padding: 16.5px 10px;
+            display: block;
+            .detail{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+                .title{
+                    margin-left: 5px;
+                }
+                .score{
+                    margin-right: 5px;
+                }
+            }
         }
     }
 }

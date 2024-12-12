@@ -235,11 +235,14 @@ function redirect(value)
             const value = localStorage.getItem(key);
             user_answer[key] = value;
         }
+        user_answer['total_que'] = arr['total_que'];
+        console.log(user_answer);
         $.ajax({
             type: "POST",
             url: "include/FrontEndOperation.php?ch=4",
             data: user_answer,
             success: function (response) {
+                console.log(response);
                 let data = JSON.parse(response);
                 const res = {...arr,...data};
                 window.location.href = 'user_submit.php?res_data='+JSON.stringify(res);

@@ -243,7 +243,26 @@
             unset($answer_arr);
             $answer_arr['right_answer'] = $right_answer_count;
             $answer_arr['wrong_answer'] = $wrong_answer_count;
-            return json_encode($answer_arr);
+            $answer_arr['total_que'] = $data['total_que'];
+            $obj = $this->insertToResult($answer_arr,$data['test_id']);  
+            return json_encode($obj);
+        }
+        function insertToResult($data,$test_id){
+            $user_id = 1;//get from session 
+            $query = "select * from test where id=".$test_id;
+            $result = mysqli_query($this->conn,$query);
+            $row = mysqli_fetch_assoc($result);
+            $testName = $row['test_name'];
+            $obtainMarks = $data['right_answer'] * $row['marks_per_ques'];
+            $totalMarks = $data['total_que'] * $row['marks_per_ques'];
+
+            $query = "INSERT INTO `user_submit`( `user_id`, `test_name`,`total_marks`, `mark_obtain`) VALUES (".$user_id.",'".$testName."',".$totalMarks.",".$obtainMarks.")";
+            if(mysqli_query($this->conn,$query))
+            {
+                $data['obtain_marks'] = $obtainMarks;
+                $data['total_marks'] = $totalMarks;
+                return $data;
+            }
         }
     }
 
@@ -264,4 +283,5 @@
             echo $stdObj->userTestSubmit($_POST);
             break;
     }
+
 ?>
