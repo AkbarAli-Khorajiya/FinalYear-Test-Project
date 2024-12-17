@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <style>
-        <?php include 'css/font/robotoFont.css';?>
         <?php include 'css/student_reg.css'?>
     </style>
     <script>
@@ -12,6 +11,7 @@
     </script>
 </head>
 <body>
+    <?php include_once 'include/loader.php';?>
     <div class="container">
         <!--Data or Content-->
         <div class="box-1">

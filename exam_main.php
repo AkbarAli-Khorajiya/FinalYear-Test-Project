@@ -27,8 +27,12 @@
     <style>
         <?php include 'css/exam_main.css' ?>
     </style>
+    <script>
+        <?php include_once 'js/jquery-3.7.1.min.js';?>
+    </script>
 </head>
 <body>
+    <?php include_once 'include/loader.php';?>
     <header>
         <span><span>Exam</span>Zone</span>
         <span id="clock">00 : 00 : 00</span>

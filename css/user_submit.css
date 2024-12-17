@@ -26,10 +26,10 @@ body
     width: 720px;
     margin-top: 20px;
     padding:10px;
-    border: 0.5px solid #e4e4e7;
-    /* box-shadow: 0px 4px 16px 4px rgba(221, 220, 220, 0.37); */
+    border: 1px solid #9090945d;
+    box-shadow: 0px 0px 10px #dddcdc5e;
     border-radius: 8px;
-    /* background-color: red; */
+    background-color: rgba(114, 110, 110, 0.116);
 
     .main{
         .user-name{
@@ -130,9 +130,11 @@ body
         }
         .small{
             width: 315px;
+            background-color: #fff;
         }
         .large{
             width: 678px;
+            background-color: #fff;
             padding: 16.5px 10px;
             display: block;
             .detail{

@@ -17,6 +17,7 @@
     </script>
 </head>
 <body>
+    <?php include_once 'include/loader.php';?>
     <?php include_once 'include/header.php'; ?>
     <section>
         <div class="container">
