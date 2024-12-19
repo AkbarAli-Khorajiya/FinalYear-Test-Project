@@ -1,0 +1,85 @@
+@import url('css/font/ubuntuFont.css');
+@import url('css/font/robotoFont.css');
+:root
+{
+    --primary-color : #9D9FE6;
+    --secondary-color : #1A1A27;
+    --nav-color:rgba(26, 26, 39, 70%);
+}
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body
+{
+    background-color: #ffff;
+    height: 100%;
+    width: 100%;
+    color: var(--secondary-color);
+}
+section{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+section .container
+{
+    width: 972px;
+    /* background-color: red; */
+    height: max-content;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    box-shadow: 0px 0px 15px rgba(59, 59, 59, 0.5);
+}
+.container .titleWrapper .title
+{
+    font-size: 20px;
+    font-family: 'Roboto-Regular' , sans-serif;
+}
+.container .testContainer
+{
+    margin-top: 25px;
+    table{
+        text-align: left;
+        font-family:'Roboto-Regular' , sans-serif;
+        font-size: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        thead{
+            border-bottom: 1px solid rgba(104, 103, 103, 0.61);
+        }
+        th{
+            padding:0px 0px 5px 0px;
+        }
+        td{
+            padding: 10px 10px 10px 5px;
+        }
+        tbody
+        {
+            tr:nth-child(even){
+                background-color: rgba(44, 44, 44, 0.274);
+            }
+        }
+    }
+    .pagging
+    {
+        padding-top: 10px;
+        float: right;
+        span{
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-family: 'Roboto-Meduim', sans-serif;
+            height: 20px;
+            width: 20px;
+            padding: 5px;
+            margin: 2px;
+            background-color: rgb(148, 148, 148);
+            border-radius: 5px;
+        }
+    }
+}

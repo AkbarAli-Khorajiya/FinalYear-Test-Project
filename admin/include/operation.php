@@ -8,7 +8,7 @@ class Test_operation
     private $username = 'root';
     private $password = '';
     private $database = 'exam_test';
-    private $conn = '';
+    private $conn;
 
     function __construct()
     {
@@ -20,45 +20,46 @@ class Test_operation
     }
     public function all_test($post)
     {
-        if(isset($post['data']) && strlen($post['data']) > 0)
-        {
+        $que_obj = new Question_operation();
+        if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
-            $query = "select * from test where test_name LIKE '%$val%' OR test_date LIKE '%$val%' OR test_question LIKE '%$val%' OR test_marks LIKE '%$val%'";
+            $query = "select * from test where test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR marks_per_ques LIKE '%$val%'";
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
-        }
-        else
-        {
+        } else {
             $query = 'select *from test';
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         }
-        if ($num > 0) {
+        if ($num > 0) { 
             $str = '<thead>
                 <tr>
                     <th>Test Id</th>
                     <th>Test Name</th>
-                    <th>Test Time</th>
-                    <th>Starting Time</th>
-                    <th>Test Date</th>
+                    <th>Test Duration(min)</th>
+                    <th>Test Start(Date)</th>
+                    <th>Test Start(Time)</th>
+                    <th>Created For</th>
                     <th>Total Question</th>
-                    <th>Test marks</th>
+                    <th>Marks(per question)</th>
                     <th colspan="2" align="center">Action</th>
                 </tr>
             </thead>
             <tbody>';
             $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
+                $total_que= $que_obj->countQue($row['id']);
                 $str .= '<tr>
                         <td>' . $i++ . '</td>
                         <td id="' . $row['id'] . '" class="testlink">' . $row['test_name'] . '</td>
-                        <td>' . $row['test_time'] . '</td>
+                        <td>' . $row['duration'] . '</td>
+                        <td>' . date("d-m-Y", strtotime($row['test_start_date'])) . '</td>
                         <td>' . $row['test_start_time'] . '</td>
-                        <td>' . date("d-m-Y",strtotime($row['test_date'])) . '</td>
-                        <td>' . $row['test_question'] . '</td>
-                        <td>' . $row['test_marks'] . '</td>
-                        <td> <button class="edit-test" id="' . $row['id'] . '">Edit</button> </td> 
-                        <td> <button class="delete-test" id="' . $row['id'] . '">Delete</button> </td>
+                        <td>' . $row['created_for'] . '</td>
+                        <td>' . $total_que. '</td>
+                        <td>' . $row['marks_per_ques'] . '</td>
+                        <td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
+                        <button class="delete-test delete-m" id="' . $row['id'] . '">Delete</button> </td>
                     </tr>';
             }
             $str .= '</tbody>';
@@ -69,14 +70,14 @@ class Test_operation
     }
     function insert_test($post)
     {
-        $test_name = $post['test_name'];
-        $test_date = $post['test_date'];
-        $test_start_time = $post['test_start_time'];
-        $test_time = $post['test_time'];
-        $test_marks = $post['test_marks'];
-        $test_question = $post['test_question'];
+        $test_name = $post['test-name'];
+        $duration = $post['duration'];
+        $testStartDate = $post['date'];
+        $testStartTime = $post['time'];
+        $createdFor = $post['created-for'];
+        $marksPerQues = $post['marks'];
 
-        $query = "INSERT INTO `test`(`test_name`, `test_time`, `test_start_time`, `test_date`, `test_question`, `test_marks`) VALUES ('$test_name',' $test_time','$test_start_time','$test_date','$test_question','$test_marks')";
+        $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_date`, `test_start_time`, `created_for`, `marks_per_ques`) VALUES ('$test_name',' $duration','$testStartDate','$testStartTime','$createdFor','$marksPerQues')";
         if (mysqli_query($this->conn, $query)) {
             $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
             $execute = mysqli_query($this->conn, $stmt);
@@ -100,14 +101,14 @@ class Test_operation
     //Method used to upadte test in database
     function update_test($post)
     {
-        $test_id = $post['test_id'];
-        $test_name = $post['test_name'];
-        $test_date = $post['test_date'];
-        $test_start_time = $post['test_start_time'];
-        $test_time = $post['test_time'];
-        $test_marks = $post['test_marks'];
-        $test_question = $post['test_question'];
-        $query = "UPDATE `test` SET `test_name`='$test_name',`test_time`='$test_time',`test_start_time`='$test_start_time',`test_date`='$test_date',`test_question`='$test_question',`test_marks`='$test_marks' WHERE `id`= $test_id";
+        $test_id = $post['test-id'];
+        $test_name = $post['test-name'];
+        $test_duration = $post['duration'];
+        $test_marks = $post['marks'];
+        $test_start_date = $post['date'];
+        $test_start_time = $post['time'];
+        $created_for = $post['created-for'];
+        $query = "UPDATE `test` SET `test_name`='$test_name',`duration`='$test_duration',`test_start_date`='$test_start_date',`test_start_time`='$test_start_time',`created_for`='$created_for',`marks_per_ques`='$test_marks' WHERE `id` = $test_id";
         $result = mysqli_query($this->conn, $query);
         if ($result) {
             return 1 . "||Test Update Successfully.";
@@ -127,17 +128,17 @@ class Test_operation
             $count = 0;
             while ($row = mysqli_fetch_assoc($execute)) {
                 $response = $que_obj->delete_question($row);
-                $responseArr = explode("||",$response);
-                if ( $responseArr[0] == "1") {
+                $responseArr = explode("||", $response);
+                if ($responseArr[0] == "1") {
                     $count++;
                 }
             }
             if ($num == $count) {
                 $query = "delete from test where id=" . $id['id'];
                 if (mysqli_query($this->conn, $query)) {
-                    return 1  ."||Test Deleted Successfully";
+                    return 1  . "||Test Deleted Successfully";
                 } else {
-                    return 0 ."||Test Not Deleted";
+                    return 0 . "||Test Not Deleted";
                 }
             }
         } else {
@@ -185,7 +186,7 @@ class Question_operation extends Test_operation
     private $username = 'root';
     private $password = '';
     private $database = 'exam_test';
-    private $conn = '';
+    private $conn ;
 
     function __construct()
     {
@@ -208,9 +209,24 @@ class Question_operation extends Test_operation
 
     function all_ques($post)
     {
-        $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options FROM `question` q JOIN options o ON q.id = o.que_id WHERE q.test_id =" . $post['id'] . " GROUP BY q.id ORDER BY q.id";
-        $result = mysqli_query($this->conn, $query);
-        $num = mysqli_num_rows($result);
+        $search = $post['data']['search'];
+        $testId = $post['data']['testId'];
+        // return $testId;
+        // SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.question LIKE "%s%" && q.test_id = 93 GROUP BY q.id ORDER BY q.id;
+        
+        if (!empty($search)) {
+            $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.question LIKE '%".$search."%' && q.test_id =".$testId." GROUP BY q.id ORDER BY q.id";
+            $result = mysqli_query($this->conn, $query);
+            $num = mysqli_num_rows($result);
+        } else {
+            $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options,a.answer FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.test_id =".$testId." GROUP BY q.id ORDER BY q.id";
+            $result = mysqli_query($this->conn, $query);
+            $num = mysqli_num_rows($result);
+        }
+        // <th>Option A</th>
+        // <th>Option B</th>
+        // <th>Option C</th>
+        // <th>Option D</th>
         if ($num > 0) {
             $str = '<thead>
                 <tr>
@@ -230,9 +246,8 @@ class Question_operation extends Test_operation
                 $options = explode('||', $row['options']);
                 // return $options[2];
                 $str .=
-                '<tr>
-                            <td>' . $i++ .
-                    '</td>
+                    '<tr>
+                            <td>' . $i++ . '</td>
                             <td>' . $row['question'] . '</td>';
                 $a = 0;
                 while ($a <  count($options)) {
@@ -240,9 +255,9 @@ class Question_operation extends Test_operation
                     $a++;
                 }
 
-                $str .= '<td> <button class="edit-que" id="' . $row['id'] .
-                    '">Edit</button> </td>
-                            <td> <button class="delete-que" id="' . $row['id'] . '">Delete</button> </td>
+                $str .= '<td>' . $row['answer'] . '</td>
+                        <td> <button class="edit-que edit-m" id="' . $row['id'] .'">Edit</button>
+                            <button class="delete-que delete-m" id="' . $row['id'] . '">Delete</button> </td>
                         </tr>';
             }
             $str .= '</tbody>';
@@ -341,6 +356,73 @@ class Question_operation extends Test_operation
             return "Error";
         }
     }
+    function update_que($post)
+    {
+        $que_id = $post["que_id"];
+        $test_id = $post['test_id'];
+        $que = $post['question'];
+        $opt_arr[0] = $post['option_a'];
+        $opt_arr[1] = $post['option_b'];
+        $opt_arr[2] = $post['option_c'];
+        $opt_arr[3] = $post['option_d'];
+        $answer = $post['answer'];
+        $query = "UPDATE `question` SET `question` = '$que' where id = $que_id and test_id = $test_id";
+        $result = mysqli_query($this->conn,$query);
+        if($result)
+        {
+            if($this->update_option($que_id,$opt_arr) == 1)
+            {
+                if($this->update_answer($que_id,$answer) == 1)
+                {
+                    return 1 ."||Question Updated Successfully";
+                }
+            }            
+        }
+        else
+        {
+            return 0 ."|| Question Not Updated";
+        }
+    }
+    function update_option($queid, $opt_arr)
+    {
+        $opt_id_arr = $this->get_opt_id($queid);
+        $count = 0;
+        for($i = 0; $i < count($opt_arr); $i++)
+        {
+            $query = "UPDATE options set `options` = '$opt_arr[$i]' where id= $opt_id_arr[$i] and que_id = $queid";
+            $result = mysqli_query($this->conn, $query);
+            if($result)
+            {
+                $count++;
+            }
+        }
+        if($count == 4)
+        {
+            return 1;
+        }
+    }
+    function update_answer($queid,$answer)
+    {
+        $query = "UPDATE answer SET `answer` = '$answer' where que_id = $queid";
+        $result = mysqli_query($this->conn, $query);
+        if($result)
+        {
+            return 1;
+        }
+    }
+    function get_opt_id($queid)
+    {
+        $query = "select id from options where que_id = $queid";
+        $result = mysqli_query($this->conn, $query);
+        $i = 0;
+        $arr = array();
+        while($row = mysqli_fetch_array($result))
+        {   
+            $arr[$i] = $row['id'];
+            $i++;
+        }
+        return $arr;
+    }
     function get_id()
     {
         $id_query = "select id from question order by id desc limit 1";
@@ -348,6 +430,20 @@ class Question_operation extends Test_operation
         if ($id_result) {
             $id = mysqli_fetch_assoc($id_result);
             return $id["id"];
+        }
+    }
+    function countQue($testId)
+    {
+        $query = "SELECT COUNT(*) from `question` where `test_id` = $testId";
+        $result = mysqli_query($this->conn , $query);
+        if(mysqli_num_rows($result) > 0)
+        {
+            $val = mysqli_fetch_array($result);
+            return $val[0];
+        }
+        else
+        {
+            return 0;
         }
     }
 }
@@ -367,4 +463,273 @@ switch ($ch) {
     case "14":
         echo $que_obj->all_ques($_POST);
         break;
+    case "15":
+        echo $que_obj->all_ques($_POST);
+        break;
+    case "16":
+        echo $que_obj->update_que($_POST);
+        break;
+}
+
+class Student_operation
+{
+    private $host = 'localhost';
+    private $username = 'root';
+    private $password = '';
+    private $database = 'exam_test';
+    private $conn;
+
+    function __construct()
+    {
+        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        if (!$conn) {
+            die('' . mysqli_connect_error());
+        }
+        return $this->conn = $conn;
+    }
+    function listUser($post)
+    {
+        if (isset($post['data']) && strlen($post['data']) > 0){
+           if($post['data'] == 'Active' || $post['data'] == 'active')
+           {
+                $query = "select id,name,email,status,gender,class,created_at from user where status = 1";
+           }
+           else if($post['data'] == 'De-Active' || $post['data'] == 'de-active' || $post['data'] == 'De-active' || $post['data'] == 'de-Active')
+           {
+                $query = "select id,name,email,status,gender,class,created_at from user where status = 0";
+           }
+           else
+           {
+                $val = $post['data'];
+                $query = "select id,name,email,status,gender,class,created_at from user where name LIKE '%$val%' OR email LIKE '%$val%' OR gender LIKE '%$val%' OR class LIKE '%$val%'";
+           }
+           $result = mysqli_query($this->conn , $query);
+           $num = mysqli_num_rows($result);
+        }
+        else{
+            $query = "select id,name,email,status,gender,class,created_at from user";
+            $result = mysqli_query($this->conn , $query);
+            $num = mysqli_num_rows($result);
+        }
+        if($num > 0)
+        {
+            $str = "
+                <thead>
+                    <tr>
+                        <th>Reg_id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Gender</th>
+                        <th>Class</th>
+                        <th>Created at</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>";
+                $i = 1;
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    $name = explode("|" , $row['name']);
+
+                    $str .= "<tr>
+                        <td>".$i."</td>
+                        <td>".$name[0]." ".$name[1]." ".$name[2]."</td>
+                        <td>".$row['email']."</td>
+                        <td class='status'>".($row['status'] == 1 ? "Active" : "De-Active")."</td>
+                        <td>".$row['gender']."</td>
+                        <td>".$row['class']."</td>
+                        <td>". date('d/m/Y',strtotime($row['created_at']))."</td>
+                        <td>
+                            <button onclick='updateStatus(this)' id=".$row['id']." ".($row['status'] == 1 ?" class='de-activate'>De-Activate</button>":" class='activate'>Activate</button>").
+                        "</td>
+                    </tr>";
+                    $i++;
+                }
+                $str .= "</tbody>";
+        }
+        else
+        {
+            $str = "data not found";
+        }
+        return $str;
+    }
+    function updateStatus($post)
+    {
+        $id = $post['id'];
+        $status = $post['status'];
+        $query = "UPDATE `user` SET `status` ='$status' where `id` = '$id'";
+        $result = mysqli_query($this->conn , $query);
+        if($result)
+        {
+            return 1;
+        }
+    }
+    function addUser($post)
+    {
+        //check for existing user
+        if($this->checkUser($post) == 0)
+        {
+            return 0 ."||Already Registered";
+        }
+        // check for valid data
+        $post = $this->validData($post);
+        if($post === 0){
+            return 0 ."||Fill all fields";
+        }
+        else if ($post === 2) {
+            return 0 . "||Enter valid Name";
+        }
+        else if ($post === 3) {
+            return 0 ."||Enter Valid Email";     
+        }
+        else if($post === 4) {
+            return 0 ."||Password is required";
+        }
+        else if($post === 4.1) {
+            return 0 ."||Password must be between 8 and 20 characters";
+        }
+        else if($post === 5) {
+            return 0 ."||Confirm password is required";
+        }
+        else if($post === 5.1) {
+            return 0 ."||Passwords do not match";
+        }
+        else if ($post === 6) {
+            return 0 ."||Select Gender";
+        }
+        else if ($post === 7){
+            return 0 ."||Select Class";
+        }
+        else{  
+            $name = $post['surName'] .'|'. $post['firstName'] .'|'. $post['lastName'];
+            $email = $post['email'];
+            $password = password_hash($post['password'] , PASSWORD_DEFAULT);
+            $gender = $post['gender'];
+            $class = $post['class'];
+            $status = $post['status'];
+            $query = "insert into user (`name`,`email`,`password`,`gender`,`class`,`status`) VALUES('$name','$email','$password','$gender','$class','$status')";
+            $result = mysqli_query($this->conn, $query);
+            if ($result) {
+                return 1 ."||Successfully Registered";
+            }
+            else
+            {
+                return 0 ."||Not Registered";
+            }
+        }
+    }
+    function checkUser($data)
+    {
+        $email = $data['email'];
+        $query = "select email from user where email='$email'";
+        $result = mysqli_query($this->conn,$query);
+        if(mysqli_num_rows($result) > 0)
+        {
+            return 0;
+        }
+        return 1;
+    }
+    //Check user input Data
+    function validData($data)
+    {
+        if(empty($data)) {
+            return 0;
+        }
+        // validate name
+        if($data['surName'] == "" || $data['firstName'] == "" || $data['lastName'] == "") 
+        {
+            return 2;
+        }
+        else{
+            $surName = $this->cleanData($data['surName']);
+            $firstName = $this->cleanData($data['firstName']);
+            $lastName = $this->cleanData($data['lastName']);
+            if(!preg_match("/^[a-zA-Z ]*$/",$surName)) {
+                return 2;
+            }
+            if(!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
+                return 2;
+            }
+            if(!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
+                return 2;
+            }
+            $data['surName'] = $surName;
+            $data['firstName'] = $firstName;
+            $data['lastName'] = $lastName;
+        }
+        // validate email
+        if(empty($data['email'])) {
+            return 3;
+        }
+        else{
+            $email = $this->cleanData($data['email']);
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return 3;
+            }
+            else
+            {
+                $data['email'] = $email;
+            }
+        }
+        // validate Password
+        if (empty($data['password'])) {
+            return 4;
+        } 
+        else{
+            $password = $this->cleanData($data['password']);
+            // check if password is between 8 and 20 characters
+            if (strlen($password) < 8 || strlen($password) > 20) {
+               return 4.1;
+            }
+          }
+        // validate confirm password
+        if (empty($data["confirm-password"])) {
+            return 5;
+        } 
+        else{
+            $confirm_password = $this->cleanData($data["confirm-password"]);
+            // check if confirm password matches password
+            if ($confirm_password != $password) {
+               return 5.1;
+            }
+          }
+        // validate gender
+        if(empty($data['gender'])) {
+            return 6;
+        }
+        else{
+            $gender = $this->cleanData($data['gender']);
+            $data['gender'] = $gender;
+        };
+         //validate class
+        if(empty($data['class'])){
+            return 7;
+        }
+        else{
+            $class = $this->cleanData($data['class']);
+            $data['class'] = $class;
+        }
+        return $data;
+    }
+    // Function to sanatize data
+    function cleanData($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+}
+
+$std_obj = new Student_operation();
+switch($ch)
+{
+    case '20':
+        echo $std_obj->addUser($_POST);
+        break;
+    case '21':
+        echo $std_obj->listUser($_POST);
+    case '22':
+        echo $std_obj->updateStatus($_POST);
 }

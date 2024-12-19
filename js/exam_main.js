@@ -14,9 +14,9 @@ console.log(id_arr);
 for(let i=0;i<max;i++)
 {
     var j=i+1;
-    const list = document.createElement('li');
+    const list = document.createElement('li'); 
     const link = document.createElement('a');
-    link.id = "a"+id_arr[i];
+    link.id = "a"+id_arr[i];    
     link.className = "radio_val";
     link.setAttribute('href','javascript:void(0)');
     link.setAttribute('onclick','link('+id_arr[i]+')');
@@ -29,145 +29,47 @@ var id=0;
 //set a link for anchor tag
 function link(number)
 {
-    jQuery('#container').load('question_display.php',{id:number});
-    valid();
-    answer_count();
     id=id_arr.indexOf(number);
-}
-function valid()
-{
-    var element = document.getElementsByName("option");
-    var indicate = document.getElementById("a"+id_arr[id]);
-    var flag = true;
-    for(var i=0;i<element.length;i++)
+    if(id_arr.lastIndexOf(number))
     {
-        if(element[i].checked)
-        {
-            flag = false;
-            var option = element[i].value;
-            break;
-        }
+        jQuery('#container').load('question_display.php',{id:number,que_no: id+1,last:1});
     }
-    if(flag == true)
+    else if(number == id_arr[0])
     {
-        indicate.style.backgroundColor = '#E60026';
-        indicate.style.borderRadius = '20%';
-        indicate.style.color = 'white';  
+        jQuery('#container').load('question_display.php',{id:number,que_no: id+1,first:1});
     }
     else
     {
+        jQuery('#container').load('question_display.php',{id:number,que_no: id+1});
+    }
+    valid();
+    answer_count();
+}
+function valid(element)
+{
+    var indicate = document.getElementById("a"+id_arr[id]);
+    if(typeof element !== 'undefined')
+    {
+        var flag = false;
+        var option = element.value;
         indicate.style.backgroundColor = '#009E60';
-        indicate.style.borderRadius = '50%';
+        indicate.style.borderRadius = '20%';
         indicate.style.color = 'white';
         localStorage.setItem(id_arr[id],option);
         jQuery('#get_value').load('answer_store.php',{option:option,id:id_arr[id]});  
         console.log(option);
     }
+    else
+    {
+            if(flag != false)
+            {    
+                indicate.style.backgroundColor = '#E60026';
+                indicate.style.borderRadius = '20%';
+                indicate.style.color = 'white'; 
+            }   
+    }
   
 }
-function go(element)
-{
-if(typeof element !== 'undefined')
-{
-    switch(element.value)
-    {
-        case "Next":
-            {
-                answer_count();
-                if(id<max-1)
-                {
-                    id++;
-                    console.log("next:"+id);
-                    jQuery('#container').load('question_display.php',{id:id_arr[id]});
-                }
-                else
-                {
-                    element.disabled = true;
-                }
-                break;
-            }
-        case "Back":
-            {
-                if(id>0)
-                {
-                    id--;
-                    console.log("back"+id);
-                    jQuery('#container').load('question_display.php',{id:id_arr[id]});
-                }
-                else
-                {
-                    element.disabled = true;
-                }
-                break;
-            }       
-    } 
-}
-else
-{
-    jQuery('#container').load('question_display.php',{id:id_arr[0]});
-}
-}
-go();
-
-// Set the date and time for the countdown to end
-// var countDownDate = new Date();
-// countDownDate.setHours(countDownDate.getHours() + 1); // Add 1 hour to the current time
-// countDownDate = countDownDate.getTime(); // Convert to milliseconds
-const add_time = 30;
-const initialDuration = add_time * 60 * 1000; // add minutes to the current time
-const countDownDate = initialDuration ;
-const startTime = new Date().getTime();
-// Update the countdown every 1 second
-var x = setInterval(function() {
-
-// Get the current date and time
-var now = new Date().getTime();
-
-// Find the difference between the current time and the countdown end time
-var difference = countDownDate - (now - startTime);
-
-// Calculate the remaining time in hours, minutes, and seconds
-var hours = Math.floor(difference / (1000 * 60 * 60));
-var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-// Display the remaining time in an element with id="clock"
-document.getElementById("clock").innerHTML = addZero(hours) + ":" + addZero(minutes) + ":" + addZero(seconds);
-
-// If the countdown is over, display a message and stop the interval
-if (difference < 0) 
-{
-    clearInterval(x);
-    document.getElementById("clock").innerHTML = "Time's up!";
-    setTimeout(function(){
-        var body = document.querySelector('body');
-        body.style.display = 'none;'
-        redirect('time_over');
-    },2000);
-}
-}, 1000);
-
-function addZero(n) {
-return (n < 10) ? "0" + n : n;
-}
-
-function option_check()
-{
-    let value = localStorage.getItem(id_arr[id]);
-    if(value != null )
-    {
-        var element = document.getElementsByName("option");
-        for(var i=0;i<element.length;i++)
-        {
-            if(value == element[i].value)
-            {
-                element[i].checked = true;
-                break;
-            }
-        }
-    }
-}
-
 var nvisit_answer = document.getElementById("nvisit");
 var answer = document.getElementById("ans");
 var not_answer = document.getElementById("nans"); 
@@ -175,7 +77,7 @@ var not_answer = document.getElementById("nans");
 function answer_count(value)
 {
     const link = document.getElementsByClassName("radio_val");
-    var nvisit_count = max;
+    let nvisit_count = max;
     let ans_count=0;
     let notans_count = 0;
     for(var i = 0 ; i < link.length; i++ )
@@ -199,7 +101,121 @@ function answer_count(value)
         let arr = {answer : ans_count,not_answer:notans_count,nvisit_answer:nvisit_count,total_que:max};
         return arr;
     }
-}  
+} 
+function go(element)
+{
+    if(typeof element !== 'undefined')
+    {
+        switch(element.value)
+        {
+            case "Next":
+            {
+                
+                if(id<max-2)
+                {
+                    id++;
+                    console.log("next:"+id);
+                    jQuery('#container').load('question_display.php',{id:id_arr[id] , que_no:id+1});
+                    valid();
+                    answer_count();
+                }
+                else
+                {
+                    id++;
+                    console.log("next:"+id);
+                    jQuery('#container').load('question_display.php',{id:id_arr[id] , que_no:id+1, last:1});
+                    valid();
+                    answer_count();
+                }
+                break;
+            }
+        case "Back":
+            {
+                if(id>0)
+                {
+                    id--;
+                    console.log("back"+id);
+                    jQuery('#container').load('question_display.php',{id:id_arr[id], que_no: id+1});
+                }
+                else
+                {
+                    // element.disabled = true;
+                    element.style.display = 'none';
+                }
+                break;
+            }       
+        } 
+    }
+    else
+    {
+        valid();
+        jQuery('#container').load('question_display.php',{id:id_arr[0] , que_no:id+1, first: 1});
+        answer_count();
+    }
+}
+go();
+// Set the date and time for the countdown to end
+// var countDownDate = new Date();
+// countDownDate.setHours(countDownDate.getHours() + 1); // Add 1 hour to the current time
+// countDownDate = countDownDate.getTime(); // Convert to milliseconds
+const add_time = 30;
+const initialDuration = add_time * 60 * 1000; // add minutes to the current time
+const countDownDate = initialDuration ;
+const startTime = new Date().getTime();
+// Update the countdown every 1 second
+var x = setInterval(function() {
+
+// Get the current date and time
+var now = new Date().getTime();
+
+// Find the difference between the current time and the countdown end time
+var difference = countDownDate - (now - startTime);
+
+// Calculate the remaining time in hours, minutes, and seconds
+var hours = Math.floor(difference / (1000 * 60 * 60));
+var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+// Display the remaining time in an element with id="clock"
+document.getElementById("clock").innerHTML = addZero(hours) + " : " + addZero(minutes) + " : " + addZero(seconds);
+
+// If the countdown is over, display a message and stop the interval
+if (difference < 0) 
+{
+    clearInterval(x);
+    document.getElementById("clock").innerHTML = "Time's up!";
+    setTimeout(function(){
+        var body = document.querySelector('body');
+        body.style.display = 'none;'
+        redirect(1);
+    },2000);
+}
+}, 1000);
+
+function addZero(n) {
+return (n < 10) ? "0" + n : n;
+}
+
+function option_check()
+{
+    let value = localStorage.getItem(id_arr[id]);
+    if(value != null )
+    {
+        var element = document.getElementsByName("option");
+        for(var i=0;i<element.length;i++)
+        {
+            if(value == element[i].value)
+            {
+                element[i].checked = true;
+                break;
+            }
+        }
+        valid({value:element[i].value});
+    }
+}
+
+
+ 
 
 
 function redirect(value)
@@ -209,16 +225,37 @@ function redirect(value)
     section1.style.display = 'none';
     section2.style.display = 'flex';
     let arr = answer_count(1);
-    if(value == 'Submit')
+    console.log(arr)
+    if(value == 1)
     {
-        jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
-    }
-    else if(value == 'time_over')
-    {
-        jQuery('#secondary_section').load('user_submit.php',{answer_track_data:arr,redirect:value});
+        const user_answer = {}
+        user_answer['test_id'] = test_id;
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+            user_answer[key] = value;
+        }
+        user_answer['total_que'] = arr['total_que'];
+        console.log(user_answer);
+        $.ajax({
+            type: "POST",
+            url: "include/FrontEndOperation.php?ch=4",
+            data: user_answer,
+            success: function (response) {
+                console.log(response);
+                let data = JSON.parse(response);
+                const res = {...arr,...data};
+                window.location.href = 'user_submit.php?res_data='+JSON.stringify(res);
+            }
+        });
     }
 }
 
+function testSubmit(){
+    if(confirm("Are you sure you submit test ?")){
+        redirect(1);
+    }
+}
 //function for clear localstorage every refresh
 window.addEventListener('beforeunload', function() {
     localStorage.clear();

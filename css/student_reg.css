@@ -1,100 +1,247 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Khand:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('css/font/robotoFont.css');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
-    list-style: none;
+    font-family: 'Roboto-Regular',sans-serif;
 }
 body
 {
     height: 100vh;
-    display: grid;
-    grid-template-columns: 40% auto;
-    padding: 10px;
-    background-color: rgb(224, 224, 224);
-}
-header
-{
-    display:flex;
-    justify-content: space-evenly;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    flex-flow: column;
-    height: 90vh;
-}
-header span
-{
-    font-family: 'Oxygen', sans-serif;
-    font-size: 3.5vw;
-    color:rgb(41, 76, 127);
-    text-decoration: none;
-    cursor:pointer;
-}
-header img
-{
-  height: 65%;
-  width: 95%;
-  object-fit: contain;
-  aspect-ratio: 19/6;
+    background-color: rgb(255, 255, 255);
 }
 .container
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column wrap;    
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    background: linear-gradient(to top,rgb(0,109,176), rgb(0,147,175));
+    width: 800px;
+    height: 450px;
+    margin: 10% auto;;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(70, 70, 70, 0.445);
 }
-.container form
+.content-holder
 {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 48vh;
-    width: 28vw;
-    background-color: white;
-    border: 1px solid rgba(94, 93, 93, 0.342);
-    box-shadow: 7px 7px 10px 0px rgb(36, 69, 119);
-}
-.container form ul li h3
-{
-    color: #133083;
-    letter-spacing: 1;
-    font-weight: 600;
-}
-.container form ul li .style
-{
-    border: unset;
-    outline: none;
-    height: 2.8vw;
-    width: 22vw;
-    font-size: 1.15vw;
-    color: grey;
-    margin-top: 1vh;
-    margin-bottom: 3.5vh;
-    padding-left: 5px;
-    border-bottom: 1px solid rgba(94, 93, 93, 0.342);
-}
-.container form ul li input[type=submit]
-{
-    height: 2.8vw;
-    width: 22vw;
-    font-size: 1.4vw;
-    font-weight: 500;
-    letter-spacing: 1;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
     color: white;
-    background-color: rgb(53, 98, 165);
-    border: none;
-    transition: all 200ms linear 0s;
+    font-size: 14px;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-top: 15%;
+    padding: 50px 20px;
+}
+.content-holder h2
+{
+    font-size: 34px;
+    margin: 20px auto;
+}
+.content-holder button
+{
+    border:none;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: white;
+    width: 150px;
+    margin: 20px auto;
+    /* box-shadow:0px 0px 5px #181818d9; */
+    transition: 200ms linear 0s all;
     cursor: pointer;
+    &:hover{
+      background-color: rgb(233, 231, 231);
+      box-shadow:0px 0px 5px #666666c4 inset;
+    }
 }
-.container form ul li input[type=submit]:hover
-{
-    background-color: rgb(67, 119, 197);
-
+.box-2{
+  background-color: white;
+  border-radius: 2px;
+  margin: 5px;
+  /* height: 93%; */
 }
-.container form ul .success
+.login-form-container
 {
-    color: rgb(63, 192, 63);
+    text-align: center;
+    margin-top: 10%;
+    display: none;
+    animation: visible 300ms linear;
+}
+@keyframes visible {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+.login-form-container form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-form-container .msg
+{
+    align-self: self-start;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.login-form-container .msg .success
+{
+    background: #3db952;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.login-form-container .msg .error
+{
+    background: #eb5151;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.login-form-container h1
+{
+    color: black;
+    font-size: 24px;
+    padding: 20px;
+}
+.login-form-container .input-group
+{
+    display: flex;
+    flex-direction: column;
+}
+.login-form-container .input-group label
+{
+    text-align: start;
+    margin-left: 5px;
+}
+.input-field
+{
+    margin: 5px 2px;
+    box-sizing: border-box;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid rgb(168, 168, 168);
+    width: 350px;
+    outline: none;
+}
+.name
+{
+    width: 113px;
+    margin: 5px 0px;
+    transition: 200ms ease-in-out 0s all;
+}
+.password
+{
+    width: 175px;
+    margin: 5px 0px;
+}
+.dropdownlist
+{
+    width: 175px;
+    margin: 5px 0px;
+}
+.login
+{
+    width: 250px;
+}
+.login-button{
+    margin: 15px auto;
+    box-sizing: border-box;
+    color: white;
+    font-size: 14px;
+    padding: 13px;
+    border-radius: 7px;
+    border: none;
+    width: 250px;
+    outline: none;
+    background-color: rgb(0 127 175);
+    transition: 200ms linear 0s all;
+    cursor: pointer;
+    &:hover{
+      background-color: rgb(3, 139, 189);
+    }
+}
+.button-1
+{
+    display: none;
+}
+.register-form-container
+{
+    position: relative;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%,-60%);
+    text-align: center;
+    animation: visible 300ms linear;
+    /* display: none; */
+}
+.register-form-container h1
+{
+    color: black;
+    font-size: 24px;
+    padding: 8px;
+}
+.register-button
+{
+    margin: 15px auto;
+    box-sizing: border-box;
+    color: white;
+    font-size: 14px;
+    padding: 13px;
+    border-radius: 7px;
+    border: none;
+    width: 350px;
+    outline: none;
+    background-color:rgb(1 112 159);  
+    transition:200ms linear 0s all;
+    cursor: pointer;
+    &:hover{
+      background-color:rgb(3, 134, 190);
+    }
+}
+.register-form-container .msg
+{
+    position: relative;
+    top: 20;
+    align-self: self-start;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.register-form-container .msg .success
+{
+    background: #3db952;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.register-form-container .msg .error
+{
+    background: #eb5151;
+    margin: 0px 20px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #ffff;
+    font-size: 15px;
+    letter-spacing: 1px;
 }
