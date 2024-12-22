@@ -51,7 +51,7 @@
                         <li><span><input type="text" id="nans" value="0" style="background-color: #E60026;" readonly> Not Answered</span></li>
                     </ul>
                     <ul id="list">
-                
+                        
                     </ul>
                 </div>
             </div>
