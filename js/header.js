@@ -8,12 +8,15 @@ $(document).ready(function () {
     $(".profile-menu").hide();
     //----- Hide user navbar when click on document -------//
     $(document).click(()=> {
-        let btnUserClicked = $.contains($('.user-btn')[0], event.target);
-        let profileMenuClicked = $.contains($('.profile-menu')[0], event.target);
-        console.log(profileMenuClicked , btnUserClicked);
-        if(!profileMenuClicked && !btnUserClicked)
+        if($(".user-btn").length > 0)
         {
-            $(".profile-menu").hide();
+            let btnUserClicked = $.contains($('.user-btn')[0], event.target);
+            let profileMenuClicked = $.contains($('.profile-menu')[0], event.target);
+            console.log(profileMenuClicked , btnUserClicked);
+            if(!profileMenuClicked && !btnUserClicked)
+            {
+                $(".profile-menu").hide();
+            }
         }
     });
     $(".logout").on("click", function () {

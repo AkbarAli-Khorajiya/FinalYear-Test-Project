@@ -209,7 +209,7 @@
     <div onclick="location.href='index';" class="logo"><span>Exam</span>Zone</div>
     <nav>
         <a href="index">Home</a>
-        <a href="exam_main">Exam</a>
+        <a href="examlist">Exam</a>
         <a href="#">Events</a>
         <a href="#">About</a>
         <?php 
