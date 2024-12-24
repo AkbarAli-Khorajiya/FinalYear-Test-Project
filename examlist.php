@@ -50,7 +50,7 @@
                         if(mysqli_num_rows($ongoing_test_result) == 0)
                         {
                             echo "<tr class='body'>
-                                    <td colspan='3'>No tests are ongoing</td>
+                                    <td colspan='3' style='text-decoration:none;color:black'>No tests are ongoing</td>
                                 </tr>";
                         }
                         while($row = mysqli_fetch_assoc($ongoing_test_result))
