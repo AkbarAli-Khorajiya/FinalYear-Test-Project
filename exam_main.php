@@ -78,5 +78,5 @@
         </div>
     </section>
 </body>
-<script src="js/testing.js"></script>
+<script src="js/exam_main.js"></script>
 </html>

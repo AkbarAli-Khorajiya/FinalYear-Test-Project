@@ -229,6 +229,7 @@ $(document).ready(function () {
     }
     startTimer(75, $("#clock"));
     $("#btnSubmit").click(function(){
+        $("body").css("display", "none");
         redirect(1);
     });
     //function to redirect to result page
