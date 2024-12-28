@@ -1,74 +1,82 @@
-<?php
-    session_start();
-    // if(!isset($_SESSION['student_login']))
-    // {
-    //     header('location:student_login.php');
-    // }
-    // else
-    // {
-    $link = mysqli_connect('localhost','root','','exam_test');
-    //get question id from DB
-    $test_id = $_GET['id'];
-    $que_get_query = 'select id from question where test_id ='.$test_id;
-    $que_get_result = mysqli_query($link,$que_get_query);
-    $i=0;
-    while($row = mysqli_fetch_assoc($que_get_result))
-    {
-        $id_arr[$i]= $row['id'];
-        $i++;
-    }
-    $count = count($id_arr);
-?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Exam</title>
     <style>
         <?php include 'css/exam_main.css' ?>
     </style>
-    <script>
-        <?php include_once 'js/jquery-3.7.1.min.js';?>
-    </script>
+    <script src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <?php include_once 'include/loader.php';?>
-    <header>
-        <span><span>Exam</span>Zone</span>
-        <span id="clock">00 : 00 : 00</span>
-        <span id="u_id">Reg_id-</span>
+<header>
+        <div id="clock">00 : 00 : 00</div>
     </header>
-    <section id="primary_section">
-        <div class="panel">
-            <div id="container">
-                    <!-- Question will display Here -->
+    <section>
+        <div class="que-container">
+            <div class="que-wrapper">
+                <!-- Question 1 of 3 -->
             </div>
-            <div id="container2">
-                <div class="alert">
-                    <ul id="count">
-                        <li><span><input type="text" id="nvisit" value="<?php echo $count;?>" readonly> Not Visited</span></li>
-                        <li><span><input type="text" id="ans" value="0" style="background-color: #009E60;" readonly> Answered</span></li>
-                        <li><span><input type="text" id="nans" value="0" style="background-color: #E60026;" readonly> Not Answered</span></li>
-                    </ul>
-                    <ul id="list">
-                        
-                    </ul>
+            <hr>
+            <div class="img">
+
+            </div>
+            <div class="que" id="question">
+                 <!-- Question will be displayed here -->
+            </div>
+            <div class="opt-container">
+                <div class="opt">
+                    <input type="radio" name="option" id="option_a">
+                    <label for="option_a" id="option_a_label">
+                        <!-- Option A will be displayed here -->
+                    </label>
+                </div>
+                <div class="opt">
+                    <input type="radio" name="option" id="option_b">
+                    <label for="option_b" id="option_b_label">
+                        <!-- Option B will be displayed here -->
+                    </label>
+                </div>
+                <div class="opt">
+                    <input type="radio" name="option" id="option_c">
+                    <label for="option_c" id="option_c_label">
+                        <!-- Option C will be displayed here -->
+                    </label>
+                </div>
+                <div class="opt">
+                    <input type="radio" name="option" id="option_d">
+                    <label for="option_d" id="option_d_label">
+                        <!-- Option D will be displayed here -->
+                    </label>
                 </div>
             </div>
-            <div id="get_value"></div>
+            <div class="btn-container">
+                <input type="button" id="btnBack" class="btn" value="Back">
+                <input type="button" id="btnNext" class="btn" value="Next">
+                <input type="submit" id="btnSubmit" class="btn" value="Submit">
+            </div>
+        </div>
+        <div class="navigation-container">
+            <div class="container">
+                <div class="navigation-wrapper">
+                    Question Navigation
+                </div>
+                <hr>
+                <div class="count-wrapper">
+                    <div class="counter"> <span id="ans" style="color:#009e60;">0</span> Answered</div>
+                    <div class="counter"><span id="nAns" style="color:#e60026">0</span> Not Answered</div>
+                    <div class="counter"> <span id="nVisit" style="color:#6264a8;">0</span> Not Visited</div>
+                </div>
+                <hr>
+                <div class="que-navigation-wrapper">
+                    All Questions
+                </div>
+                <div class="que-navigation-btn-container" id="queNavigationBtn"> 
+                    <!-- All question buttons will be displayed here -->
+                </div>
+            </div>
         </div>
     </section>
-    <section id="secondary_section">
-
-    </section>
 </body>
-<script>
-    <?php include_once 'js/jquery-3.7.1.min.js';?>
-    var id_arr = JSON.parse('<?= json_encode($id_arr);?>'); //string array
-    var test_id = JSON.parse('<?= json_encode($test_id);?>')
-    id_arr = id_arr.map(Number);                           // Converted into number array
-    var max = id_arr.length;
-    console.log(id_arr);
-    <?php include 'js/exam_main.js'?>
-</script>
+<script src="js/testing.js"></script>
 </html>

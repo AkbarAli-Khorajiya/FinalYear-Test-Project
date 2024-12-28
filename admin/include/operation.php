@@ -269,13 +269,13 @@ class Question_operation extends Test_operation
 
     function insert_question($post)
     {
-        $que = $post['question'];
-        $test_id = $post['test_id'];
-        $opt_arr[0] = $post['option_a'];
-        $opt_arr[1] = $post['option_b'];
-        $opt_arr[2] = $post['option_c'];
-        $opt_arr[3] = $post['option_d'];
-        $answer = $post['answer'];
+        $que = trim($post['question']);
+        $test_id = trim($post['test_id']);
+        $opt_arr[0] = trim($post['option_a']);
+        $opt_arr[1] = trim($post['option_b']);
+        $opt_arr[2] = trim($post['option_c']);
+        $opt_arr[3] = trim($post['option_d']);
+        $answer = trim($post['answer']);
         $query = "insert into question (test_id,question) values ('$test_id','$que')";
         $result = mysqli_query($this->conn, $query);
         if ($result) {

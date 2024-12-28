@@ -224,7 +224,7 @@
 
         function userTestSubmit($data)
         {
-            $query = 'select que.id, ans.answer from question que,answer ans where que.id=ans.que_id and que.test_id='.$data['test_id'];
+            $query = 'select que.id, ans.answer from question que,answer ans where que.id=ans.que_id and que.test_id='.$data['testId'];
             $result = mysqli_query($this->conn,$query);
             $answer_arr = [];
             while($row = mysqli_fetch_assoc($result))
@@ -244,7 +244,7 @@
             $answer_arr['right_answer'] = $right_answer_count;
             $answer_arr['wrong_answer'] = $wrong_answer_count;
             $answer_arr['total_que'] = $data['total_que'];
-            $obj = $this->insertToResult($answer_arr,$data['test_id']);  
+            $obj = $this->insertToResult($answer_arr,$data['testId']);  
             return json_encode($obj);
         }
         function insertToResult($data,$test_id){
@@ -264,6 +264,21 @@
                 return $data;
             }
         }
+        function getAllQues($data){
+            $testId = $data['testId'];
+            $query = "SELECT q.*,GROUP_CONCAT(o.options SEPARATOR ' || ') options FROM `question` q JOIN options o ON q.id = o.que_id JOIN answer a ON q.id = a.que_id WHERE q.test_id =".$testId." GROUP BY q.id ORDER BY q.id";
+            $obj =[];
+            $result = mysqli_query($this->conn, $query);
+            while($row = mysqli_fetch_assoc($result)){
+                
+                $obj[$row['id']] = [
+                    'question' => $row['question'],
+                    'options' => explode('||',$row['options']),
+                ];   
+            }
+            return json_encode($obj);
+        }
+
     }
 
     $stdObj = new Student();
@@ -281,6 +296,9 @@
             break;
         case '4':
             echo $stdObj->userTestSubmit($_POST);
+            break;
+        case '5':
+            echo $stdObj->getAllQues($_POST);
             break;
     }
 
