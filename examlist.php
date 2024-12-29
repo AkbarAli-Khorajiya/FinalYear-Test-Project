@@ -132,7 +132,7 @@
 </body>
 <script>
     $(".test-name").on('click', (e)=> {
-        location.href = "exam_main.php?id="+e.target.id;
+        location.href = "exam_main.php?testId="+e.target.id;
     });
 </script>
 </html>

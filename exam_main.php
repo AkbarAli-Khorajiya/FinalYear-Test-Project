@@ -9,6 +9,7 @@
     <script src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+    <?php include_once 'include/loader.php';?>
 <header>
         <div id="clock">00 : 00 : 00</div>
     </header>

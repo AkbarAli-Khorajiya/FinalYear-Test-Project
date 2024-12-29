@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
     //get parameter from url
@@ -21,6 +20,9 @@ $(document).ready(function () {
     if(allQues == null)
     {
         location.reload();
+        // setTimeout(function(){
+        //     location.reload();
+        // },100);
     }
     // get all question id
     let queId = Object.keys(allQues);
@@ -227,7 +229,7 @@ $(document).ready(function () {
             }
         },1000);
     }
-    startTimer(75, $("#clock"));
+    startTimer(30, $("#clock"));
     $("#btnSubmit").click(function(){
         $("body").css("display", "none");
         redirect(1);

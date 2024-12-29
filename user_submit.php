@@ -26,8 +26,10 @@
     <style>
         <?php include_once 'css/user_submit.css'; ?>
     </style>
+    <script src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+<?php include_once 'include/loader.php';?>
     <div class="container">
         <div class="wrapper main">
             <span class="test-name">PHP TEST RESULT</span>
