@@ -1,0 +1,97 @@
+@import url('css/font/ubuntuFont.css');
+@import url('css/font/robotoFont.css');
+:root
+{
+    --primary-color : #9D9FE6;
+    --secondary-color : #1A1A27;
+    --nav-color:rgba(26, 26, 39, 70%);
+}
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffff;
+    color: var(--secondary-color);
+}
+form{
+    width: 310px;
+    padding: 15px;
+    border: 0.5px solid #c9c9c9;
+    border-radius: 10px;
+    background-color: #f3f4f6;
+    box-shadow: 0px 0px 10px rgba(179, 179, 179, 0.521);
+    .alert{
+        display: none;
+        text-align: center;
+        color: white;
+        font-family: 'Roboto-Regular',sans-serif;
+        font-size: 1.1rem;
+        border-radius: 5px;
+    }
+    .success{
+        padding: 5px 5px;
+        background-color: rgb(53, 206, 39);
+    }
+    .warning{
+        padding: 5px 5px;
+        background-color: rgb(238, 47, 47);
+    }
+    .head{
+        padding: 5px 5px;
+        font-size: 1.5rem;
+        font-family: 'Roboto-Bold',sans-serif;
+    }
+    .wrapper{
+        color:  #8e8e95;
+        padding: 0px 5px 5px 5px;
+        font-family: 'Roboto-Regular',sans-serif;
+        font-size: 0.9rem;
+    }
+    .input-grp{
+        padding: 10px 5px 10px 5px;
+        
+        label{
+            display: block;
+            font-size: 0.9em;
+            font-family: 'Roboto-Medium',sans-serif;
+            margin-bottom: 5px;
+        }
+        input{
+            padding:11px;
+            font-family: 'Roboto-Regular',sans-serif;
+            font-size:0.9rem;
+            width: 276px;
+            border-radius: 5px;
+            border: 0.5px solid rgb(207, 204, 204);
+            
+            &:focus{
+                outline-color: #8e8e95;
+            }
+        }
+    }
+    .btn{
+        padding: 10px 5px 5px 5px;
+        input{
+            padding:11px;
+            width: 100%;
+            font-family: 'Roboto-Medium',sans-serif;
+            font-size: 0.9rem;
+            background-color: #1A1A27;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            transition: 200ms linear 0s all;
+            &:hover{
+                background-color: #29293d;
+            }
+        }
+    }
+}

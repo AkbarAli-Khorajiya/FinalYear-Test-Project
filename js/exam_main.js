@@ -50,7 +50,7 @@ $(document).ready(function () {
         document.getElementById("queNavigationBtn").appendChild(btn);
     }
     //btn click event for navigation of question
-    $("#queNavigationBtn .btn").on('click', function () {
+    $("#queNavigationBtn .btn").on('cl ick', function () {
         i = queId.indexOf(this.id);
         disQue(this.id)
         // indicateOption(this.id);
