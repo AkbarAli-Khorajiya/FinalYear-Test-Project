@@ -34,7 +34,7 @@
         <div class="wrapper">Enter the one-time password sent to your email.</div>
         <div class="input-grp">
             <label for="otp">One-Time Password</label>
-            <input type="text" name="otp" id="otp" placeholder="Enter OTP" required>
+            <input type="number" name="otp" id="otp" placeholder="Enter OTP" required>
         </div>
         <div class="btn">
             <input type="submit" value="Verify OTP" id="btnVerifyOtp">

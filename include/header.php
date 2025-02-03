@@ -204,6 +204,70 @@
     {
         width: 78%;
     }
+    /* Responsive Design */
+@media (max-width: 1200px) {
+    header .logo {
+        font-size: 36px;
+    }
+    nav a {
+        font-size: 24px;
+    }
+    nav .login-btn {
+        font-size: 20px;
+    }
+    nav .user-btn img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+    }
+    header .logo{
+        font-size: 30px;
+    }
+    nav {
+        flex-direction: column;
+        align-items:center;
+    }
+    nav a {
+        font-size: 20px;
+        padding: 8px;
+    }
+    nav .login-btn {
+        font-size: 18px;
+        padding: 4px 15px;
+    }
+    nav .user-btn img {
+        height: 25px;
+        width: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+    header .logo {
+        font-size: 60px;
+    }
+    nav a {
+        font-size: 20px;
+        padding: 6px;
+    }
+    nav .login-btn {
+        font-size: 20px;
+        padding: 4px 10px;
+    }
+    nav .user-btn img {
+        height: 20px;
+        width: 20px;
+    }
+}
 </style>
 <header>
     <div onclick="location.href='index';" class="logo"><span>Exam</span>Zone</div>

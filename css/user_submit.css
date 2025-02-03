@@ -152,3 +152,165 @@ body
         }
     }
 }
+
+
+@media (max-width: 1200px) {
+    .container {
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    .container .wrapper .test-name {
+        font-size: 1.8vw;
+    }
+
+    .container .wrapper .user-name {
+        font-size: 1.2vw;
+    }
+
+    .container .wrapper .heading {
+        font-size: 1.4vw;
+    }
+
+    .container .wrapper .score-wrapper {
+        font-size: 0.9vw;
+    }
+
+    .container .wrapper .range {
+        width: 100%;
+    }
+
+    .tiles-container {
+        gap: 20px;
+    }
+
+    .tiles-container .tiles {
+        width: 100%;
+    }
+
+    .tiles-container .small {
+        width: 100%;
+    }
+
+    .tiles-container .large {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .container .wrapper .test-name {
+        font-size: 2.4vw;
+    }
+
+    .container .wrapper .user-name {
+        font-size: 1.6vw;
+    }
+
+    .container .wrapper .heading {
+        font-size: 1.8vw;
+    }
+
+    .container .wrapper .score-wrapper {
+        font-size: 1.2vw;
+    }
+
+    .tiles-container .tiles .detail .title {
+        font-size: 1.2vw;
+    }
+
+    .tiles-container .tiles .detail .score {
+        font-size: 2.3vw;
+    }
+
+    .tiles-container .small {
+        width: 100%;
+    }
+
+    .tiles-container .large {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        margin-top: 10px;
+        padding: 5px;
+    }
+
+    .container .wrapper .test-name {
+        font-size: 3vw;
+    }
+
+    .container .wrapper .user-name {
+        font-size: 2vw;
+    }
+
+    .container .wrapper .heading {
+        font-size: 2.2vw;
+    }
+
+    .container .wrapper .score-wrapper {
+        font-size: 1.4vw;
+    }
+
+    .tiles-container .tiles .detail .title {
+        font-size: 1.5vw;
+    }
+
+    .tiles-container .tiles .detail .score {
+        font-size: 2.6vw;
+    }
+
+    .tiles-container .small {
+        width: 100%;
+    }
+
+    .tiles-container .large {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        flex-flow: column ;
+        height: auto;
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .container .wrapper .test-name {
+        font-size: 4vw;
+    }
+
+    .container .wrapper .user-name {
+        font-size: 2.5vw;
+    }
+
+    .container .wrapper .heading {
+        font-size: 2.5vw;
+    }
+
+    .container .wrapper .score-wrapper {
+        font-size: 1.6vw;
+    }
+
+    .tiles-container .tiles .detail .title {
+        font-size: 1.8vw;
+    }
+
+    .tiles-container .tiles .detail .score {
+        font-size: 3vw;
+    }
+
+    .tiles-container .small {
+        width: 100%;
+    }
+
+    .tiles-container .large {
+        width: 100%;
+    }
+}

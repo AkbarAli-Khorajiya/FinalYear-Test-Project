@@ -1,11 +1,11 @@
-$(document).ready(function () {
+$(document).ready(async function () {
 
     //get parameter from url
     const urlParameter = new URLSearchParams(window.location.search);
     //get testId from url
     const testId = urlParameter.get('testId');
     //ajax for get que from database
-    $.ajax({
+    await $.ajax({
         type: "post",
         url: "include/FrontEndOperation.php?ch=5",
         data:{testId: testId},
@@ -19,7 +19,7 @@ $(document).ready(function () {
     const allQues = JSON.parse(localStorage.getItem('allQues'));
     if(allQues == null)
     {
-        location.reload();
+        // location.reload();
         // setTimeout(function(){
         //     location.reload();
         // },100);
