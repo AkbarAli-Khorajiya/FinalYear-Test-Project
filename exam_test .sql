@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2024 at 04:09 AM
+-- Generation Time: Feb 05, 2025 at 04:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,10 +43,12 @@ INSERT INTO `answer` (`id`, `que_id`, `answer`) VALUES
 (54, 66, '1991'),
 (55, 67, 'Pythone uses reference counting mechanism'),
 (56, 68, 'Tuple'),
-(57, 69, 'List '),
+(57, 69, 'List'),
 (58, 70, 'compiled language'),
 (59, 71, 'refrence variable'),
-(60, 72, 'datatype variable name;');
+(60, 72, 'datatype variable name;'),
+(61, 73, 'xyz'),
+(62, 74, 'xyz');
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,7 @@ INSERT INTO `options` (`id`, `que_id`, `options`) VALUES
 (263, 68, 'Tuple'),
 (264, 68, 'Dictionary '),
 (265, 68, 'Set'),
-(266, 69, 'List '),
+(266, 69, 'List'),
 (267, 69, 'Tuple'),
 (268, 69, 'String'),
 (269, 69, 'FrozenSet'),
@@ -100,7 +102,15 @@ INSERT INTO `options` (`id`, `que_id`, `options`) VALUES
 (278, 72, 'variable name;'),
 (279, 72, 'datatype variable name;'),
 (280, 72, 'datatype;'),
-(281, 72, 'none of the above');
+(281, 72, 'none of the above'),
+(282, 73, 'xyz'),
+(283, 73, 'pqr'),
+(284, 73, 'abc'),
+(285, 73, 'mno'),
+(286, 74, 'xyz'),
+(287, 74, 'pqr'),
+(288, 74, 'abc'),
+(289, 74, 'mno');
 
 -- --------------------------------------------------------
 
@@ -127,7 +137,9 @@ INSERT INTO `question` (`id`, `test_id`, `question`) VALUES
 (69, 63, 'Which is data type is mutable?'),
 (70, 67, 'Which is feature of C?'),
 (71, 67, 'What is Pointer?'),
-(72, 67, 'what is right syntax for declaring variable?');
+(72, 67, 'what is right syntax for declaring variable?'),
+(73, 69, 'what is php?'),
+(74, 62, 'what is php?');
 
 -- --------------------------------------------------------
 
@@ -151,7 +163,7 @@ CREATE TABLE `test` (
 
 INSERT INTO `test` (`id`, `test_name`, `duration`, `test_start_date`, `test_start_time`, `created_for`, `marks_per_ques`) VALUES
 (62, 'JAVA', 10, '2024-08-31', '20:04:00', 'First-Year', 30),
-(63, 'PYTHON', 10, '2024-12-12', '11:07:00', 'Third-Year', 2),
+(63, 'PYTHON', 10, '2025-01-24', '11:07:00', 'Third-Year', 2),
 (67, 'C Test', 50, '2024-12-23', '15:51:00', 'First-Year', 3),
 (68, 'C Test 2', 50, '2024-12-24', '08:30:00', 'First-Year', 3),
 (69, 'PHP 2', 12, '2024-12-25', '08:26:00', 'Third-Year', 5),
@@ -171,6 +183,7 @@ CREATE TABLE `user` (
   `gender` varchar(6) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `class` varchar(11) NOT NULL,
+  `role` int(1) NOT NULL DEFAULT 2,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -178,11 +191,13 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `password`, `gender`, `status`, `class`, `created_at`) VALUES
-(1, 'Suthar|Mahammad ali|Abid ali', 'mahammadali2307@gmail.com', '$2y$10$RBodw81eT3kb5tVbufLkOOdFNvfFaTBuwUJK19roOoDMs7YXkv5cC', 'Male', 1, 'Third-year', '2024-09-19 03:05:28'),
-(2, 'sunasara|Ahesan ali|harun ali', 'ahesan@gmail.com', '$2y$10$cjzXUzMan/c.UP94ndnohOYLc94R7yunRamD.oIQz7iOtk.CLU6Vq', 'Female', 1, 'Second-year', '2024-09-19 03:27:14'),
-(4, 'khorajiya|Akbarali|Mustakali', 'akbarali@gmail.com', '$2y$10$YLYfuAkkATmsWTRgTE.Vm.mqXZo8NU0nDJUfrzTptQj.iXeBn0kXW', 'Male', 1, 'First-Year', '2024-09-27 15:35:35'),
-(5, 'Nandoliya|Kamiyab ali|Khijar ali', 'kamiyab@gmail.com', '$2y$10$C4GWexXdMMXHxB5D8W0M3OditVJLo.vd1KekHNyJwWcDhCcMOFD6e', 'Female', 1, 'Third-year', '2024-10-07 03:09:06');
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `gender`, `status`, `class`, `role`, `created_at`) VALUES
+(1, 'Suthar|Mahammad ali|Abid ali', 'mahammadali2307@gmail.com', '$2y$10$RBodw81eT3kb5tVbufLkOOdFNvfFaTBuwUJK19roOoDMs7YXkv5cC', 'Male', 1, 'Third-year', 2, '2024-09-19 03:05:28'),
+(2, 'sunasara|Ahesan ali|harun ali', 'ahesan@gmail.com', '$2y$10$cjzXUzMan/c.UP94ndnohOYLc94R7yunRamD.oIQz7iOtk.CLU6Vq', 'Female', 1, 'Second-year', 2, '2024-09-19 03:27:14'),
+(4, 'khorajiya|Akbarali|Mustakali', 'akbarali@gmail.com', '$2y$10$YLYfuAkkATmsWTRgTE.Vm.mqXZo8NU0nDJUfrzTptQj.iXeBn0kXW', 'Male', 1, 'First-Year', 2, '2024-09-27 15:35:35'),
+(5, 'Nandoliya|Kamiyab ali|Khijar ali', 'kamiyab@gmail.com', '$2y$10$C4GWexXdMMXHxB5D8W0M3OditVJLo.vd1KekHNyJwWcDhCcMOFD6e', 'Female', 1, 'Third-year', 2, '2024-10-07 03:09:06'),
+(6, 'khorajiya|Akbarali|Mustakali', 'akbmus2004@gmail.com', '$2y$10$ZNMKAMoRuD/EFzPCInGDyuPA4vuiAr7VyZkGW4tE2Xyekeio7zmUC', 'Male', 1, 'Third-Year', 2, '2025-01-02 05:29:53'),
+(7, 'nagalpara|abbasali|Shabbirali', 'thundergodmass@gmail.com', '$2y$10$uEpukcewEregeOVjEj.HQuIFzp7yAzdVlGGOFuOxYG058LEqFtjwC', 'Male', 0, 'Third-Year', 2, '2025-01-02 14:42:38');
 
 -- --------------------------------------------------------
 
@@ -230,7 +245,48 @@ INSERT INTO `user_submit` (`id`, `user_id`, `test_name`, `total_marks`, `mark_ob
 (24, 1, 'PYTHON', 10, 0, '2024-12-19 08:36:40'),
 (25, 1, 'PYTHON', 10, 4, '2024-12-19 08:37:39'),
 (26, 1, 'PYTHON', 10, 4, '2024-12-19 16:01:30'),
-(27, 1, 'C Test', 9, 6, '2024-12-23 15:51:11');
+(27, 1, 'C Test', 9, 6, '2024-12-23 15:51:11'),
+(28, 1, 'PYTHON', 0, 0, '2024-12-26 20:50:02'),
+(29, 1, 'PYTHON', 0, 0, '2024-12-26 20:50:49'),
+(30, 1, 'PYTHON', 10, 0, '2024-12-26 20:51:57'),
+(31, 1, 'PYTHON', 10, 2, '2024-12-26 20:52:54'),
+(32, 1, 'PYTHON', 10, 2, '2024-12-26 20:53:58'),
+(33, 1, 'PYTHON', 10, 2, '2024-12-26 20:57:17'),
+(34, 1, 'PYTHON', 10, 0, '2024-12-26 21:00:45'),
+(35, 1, 'PYTHON', 10, 2, '2024-12-26 21:02:03'),
+(36, 1, 'PYTHON', 10, 2, '2024-12-26 21:04:03'),
+(37, 1, 'PYTHON', 10, 8, '2024-12-26 21:06:26'),
+(38, 1, 'PYTHON', 10, 8, '2024-12-26 21:09:37'),
+(39, 1, 'PYTHON', 10, 0, '2024-12-26 21:09:47'),
+(40, 1, 'PYTHON', 10, 2, '2024-12-26 21:09:57'),
+(41, 1, 'PYTHON', 10, 0, '2024-12-26 21:10:03'),
+(42, 1, 'PYTHON', 10, 0, '2024-12-26 21:10:17'),
+(43, 1, 'PYTHON', 10, 2, '2024-12-26 21:10:20'),
+(44, 1, 'PYTHON', 10, 8, '2024-12-26 21:10:47'),
+(45, 1, 'PYTHON', 10, 8, '2024-12-26 21:12:37'),
+(46, 1, 'PYTHON', 10, 10, '2024-12-26 21:13:38'),
+(47, 1, 'PHP 2', 5, 5, '2024-12-26 21:20:05'),
+(48, 1, 'PYTHON', 10, 10, '2024-12-26 21:20:30'),
+(49, 1, 'PYTHON', 10, 4, '2024-12-26 21:20:56'),
+(50, 1, 'PYTHON', 10, 4, '2024-12-26 21:22:19'),
+(51, 1, 'PYTHON', 10, 0, '2024-12-26 21:51:31'),
+(52, 1, 'PYTHON', 10, 10, '2024-12-26 21:51:50'),
+(53, 1, 'PYTHON', 10, 2, '2024-12-27 10:52:34'),
+(54, 1, 'PYTHON', 10, 0, '2024-12-28 15:43:40'),
+(55, 1, 'PYTHON', 10, 0, '2024-12-28 15:49:18'),
+(56, 1, 'PYTHON', 10, 0, '2024-12-28 15:49:31'),
+(57, 1, 'PYTHON', 10, 0, '2024-12-28 15:54:32'),
+(58, 1, 'PYTHON', 10, 4, '2024-12-28 15:54:52'),
+(59, 1, 'PYTHON', 10, 0, '2024-12-28 15:57:29'),
+(60, 1, 'PYTHON', 10, 0, '2024-12-29 19:28:35'),
+(61, 1, 'PYTHON', 10, 2, '2024-12-29 19:29:50'),
+(62, 1, 'PYTHON', 10, 0, '2024-12-29 20:54:29'),
+(63, 1, 'PYTHON', 10, 0, '2025-01-10 18:29:54'),
+(64, 1, 'PYTHON', 10, 0, '2025-01-15 09:58:48'),
+(65, 1, 'PYTHON', 10, 0, '2025-01-15 11:12:15'),
+(66, 1, 'PYTHON', 10, 0, '2025-01-15 11:12:41'),
+(67, 1, 'PYTHON', 10, 2, '2025-01-24 11:08:38'),
+(68, 1, 'PYTHON', 10, 0, '2025-02-03 11:11:11');
 
 --
 -- Indexes for dumped tables
@@ -284,19 +340,19 @@ ALTER TABLE `user_submit`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `options`
 --
 ALTER TABLE `options`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -308,13 +364,13 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_submit`
 --
 ALTER TABLE `user_submit`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Constraints for dumped tables
