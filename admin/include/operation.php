@@ -733,3 +733,33 @@ switch($ch)
     case '22':
         echo $std_obj->updateStatus($_POST);
 }
+
+// =============Teacher Operation================
+class Teacher_operation
+{
+    private $host = 'localhost';
+    private $username = 'root';
+    private $password = '';
+    private $database = 'exam_test';
+    private $conn;
+
+    function __construct()
+    {
+        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        if (!$conn) {
+            die('' . mysqli_connect_error());
+        }
+        return $this->conn = $conn;
+    }
+    function listAllTeacher($post)
+    {
+        return "AkbarAli";
+    }
+}
+
+$tch_obj = new Teacher_operation();
+switch ($ch) {
+    case '23':
+        echo $tch_obj->listAllTeacher($_POST);
+        break;
+}
