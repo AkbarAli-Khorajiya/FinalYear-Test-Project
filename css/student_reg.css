@@ -17,7 +17,7 @@ body
 {
     display: grid;
     grid-template-columns: 0.7fr 1fr;
-    background: linear-gradient(to top,rgb(0,109,176), rgb(0,147,175));
+    background: linear-gradient(45deg, #3235ad, #a7aaee6c);
     width: 800px;
     height: 450px;
     margin: 10% auto;;
@@ -171,11 +171,11 @@ body
     border: none;
     width: 250px;
     outline: none;
-    background-color: rgb(0 127 175);
+    background-color: #6366e6;
     transition: 200ms linear 0s all;
     cursor: pointer;
     &:hover{
-      background-color: rgb(3, 139, 189);
+      background-color: #5456dab0;
     }
 }
 .button-1
@@ -209,11 +209,11 @@ body
     border: none;
     width: 350px;
     outline: none;
-    background-color:rgb(1 112 159);  
+    background-color:#6366e6;  
     transition:200ms linear 0s all;
     cursor: pointer;
     &:hover{
-      background-color:rgb(3, 134, 190);
+      background-color:#5456dab0;
     }
 }
 .register-form-container .msg

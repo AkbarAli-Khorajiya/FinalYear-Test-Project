@@ -79,7 +79,7 @@
     {
         document.querySelector(".login-form-container").style.cssText = "display: none;";
         document.querySelector(".register-form-container").style.cssText = "display: block;";
-        document.querySelector(".container").style.cssText = "background:linear-gradient(to top,rgb(0,109,176), rgb(0,147,175))";
+        document.querySelector(".container").style.cssText = "background:linear-gradient(45deg, #3235ad, #a7aaee6c)";
         document.querySelector(".button-1").style.cssText = "display: none";
         document.querySelector(".button-2").style.cssText = "display: block";
         document.querySelector(".sub-content").innerHTML = "Already Registered?<br/>Then login";
@@ -88,7 +88,7 @@
     {
         document.querySelector(".register-form-container").style.cssText = "display: none;";
         document.querySelector(".login-form-container").style.cssText = "display: block;";
-        document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom,rgb(0,109,176), rgb(0,147,175))";
+        document.querySelector(".container").style.cssText = "background:linear-gradient(75deg,#a7abee, #3235ad,#3235ad)";
         document.querySelector(".button-2").style.cssText = "display: none";
         document.querySelector(".button-1").style.cssText = "display: block";
         document.querySelector(".sub-content").innerHTML = "Not Register yet?<br/>Then Register";
