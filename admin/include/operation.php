@@ -1,6 +1,5 @@
 <?php
 error_reporting(0);
-require_once 'database2.php';
 
 class Test_operation
 {
