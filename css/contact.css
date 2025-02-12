@@ -1,0 +1,98 @@
+@import url('css/font/ubuntuFont.css');
+@import url('css/font/robotoFont.css');
+:root
+{
+    --primary-color : #9D9FE6;
+    --secondary-color : #1A1A27;
+    --nav-color:rgba(26, 26, 39, 70%);
+}
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body
+{
+    overflow: auto;
+    background-color: #ffff;
+    height: 100vh;
+    width: auto;
+    color: var(--secondary-color);
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    .main-container{
+        width: 80%;
+        padding: 10px 20px;
+        display: grid;
+        height: auto;
+        /* background-color: #eae8fd; */
+        grid-template-columns: 50% 50%;
+        border: 1px solid rgb(218, 218, 218);
+        box-shadow: 0px 1px 11px 3px #96969647;
+        .form-container{
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px;
+            align-items: flex-start;
+            gap: 15px;
+            flex-direction: column;
+            
+            .title{
+                font-size: 2rem;
+                font-family: 'Roboto-Bold',sans-serif;
+                margin-bottom: 5px;
+            }
+            input[type="text"]{
+                font-family: 'Roboto-Regular',sans-serif;
+                width: 32vw;
+                padding: 10px;
+                border-radius: 6px;
+                border: 0.5px solid rgba(212, 212, 212, 0.904);
+                &:focus{
+                    outline: 2px solid rgb(187, 187, 187);
+                    outline-offset: 2px;
+                }
+            }
+            input[type="submit"]
+            {
+                font-size: 0.9rem;
+                font-family: 'Roboto-Medium',sans-serif;
+                width: 33.60vw;
+                padding: 10px;
+                border-radius: 6px;
+                background-color: var(--secondary-color);
+                color: #fff;
+                border: 0.5px solid rgba(212, 212, 212, 0.904);
+                transition: 200ms ease-in 0s all;
+                &:hover{
+                    background-color: #1a1a27d8;
+                }
+            }
+            textarea{
+                font-family: 'Roboto-Regular',sans-serif;
+                height: 50px;
+                width: 32vw;
+                padding: 10px;
+                resize: none;
+                border-radius: 6px;
+                border: 0.5px solid rgba(212, 212, 212, 0.904);
+                &:focus{
+                    outline: 2px solid rgb(187, 187, 187);
+                    outline-offset: 2px;
+                }
+            }
+        }
+        .img-container{
+            padding: 10px;
+            text-align: center;
+            img{
+                vertical-align: middle;
+                height: 450px;
+            }
+        }
+    }
+}

@@ -274,8 +274,8 @@
     <nav>
         <a href="index">Home</a>
         <a href="examlist">Exam</a>
-        <a href="#">Events</a>
         <a href="about">About</a>
+        <a href="contact">Contact</a>
         <?php 
             if(!isset($_SESSION['stdLogin']) && empty($_SESSION['stdLogin']))
             {
