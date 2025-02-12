@@ -1,0 +1,53 @@
+@import url('css/font/ubuntuFont.css');
+@import url('css/font/robotoFont.css');
+:root
+{
+    --primary-color : #9D9FE6;
+    --secondary-color : #1A1A27;
+    --nav-color:rgba(26, 26, 39, 70%);
+}
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body
+{
+    overflow: auto;
+    background-color: #ffff;
+    height: 100vh;
+    width: auto;
+    color: var(--secondary-color);
+}
+section{
+   display: grid;
+   grid-template-columns: 50% 50%;
+
+   .container{
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        h1{
+            width: 80%;
+            font-size: 3.5rem;
+            font-family: "Ubuntu-bold",sans-serif;
+        }
+        p{
+            width: 80%;
+            font-family: 'Roboto-Regular';
+            font-size: 1.4rem;
+        }
+   }
+   .img-container{
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 65%;
+            height: 85%;
+        }
+   }
+}

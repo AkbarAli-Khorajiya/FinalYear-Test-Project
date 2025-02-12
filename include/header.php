@@ -275,7 +275,7 @@
         <a href="index">Home</a>
         <a href="examlist">Exam</a>
         <a href="#">Events</a>
-        <a href="#">About</a>
+        <a href="about">About</a>
         <?php 
             if(!isset($_SESSION['stdLogin']) && empty($_SESSION['stdLogin']))
             {
