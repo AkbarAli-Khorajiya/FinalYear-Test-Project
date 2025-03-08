@@ -5,7 +5,7 @@ session_start();
 //     header('location:admin_login.php');
 // }
 ?>
-<html lang="en">
+<!-- <html lang="en"> -->
 
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@ session_start();
     <header>
         <span>Exam25 </span>
 
-        <div class="logout-btn" onclick="window.location.href='admin_logout.php'">
+        <div class="logout-btn" onclick="window.location.href='admin_login.php'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                 <path fill="#fff"
@@ -144,6 +144,7 @@ function alert_show(value, msg) {
             break;
     }
 }
+$("")
 </script>
 
 </html>

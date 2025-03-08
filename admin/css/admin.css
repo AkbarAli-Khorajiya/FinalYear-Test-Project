@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+
+.color-success {
+  color: #4caf50 !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -49,6 +54,7 @@ header .logout-btn {
   border-radius: 3px;
   transition: all 300ms linear 0s;
   cursor: pointer;
+
   svg {
     width: 17px;
     height: 17px;
@@ -93,13 +99,14 @@ section aside ul li {
   justify-content: flex-start;
   align-items: center;
   font-size: 1.3vw;
-  margin: 1px 7px ;
+  margin: 1px 7px;
   height: 25px;
   padding: 10px 5px 10px 10px;
   transition: all 200ms linear 0s;
   cursor: pointer;
   border-radius: 2px;
 }
+
 section aside ul li:hover {
   background-color: #d6b8b851 !important;
   box-shadow: 0px 3px 10px 0 #dac0c0a8 !important;
@@ -109,11 +116,13 @@ section aside ul li a {
   text-decoration: none;
   color: #1c1c38;
 }
+
 section aside ul li .icon {
   display: flex;
   justify-content: center;
   width: 36px;
 }
+
 section aside ul li .icon svg {
   /* height: 2.5vw; */
   /* width: auto;
@@ -131,40 +140,49 @@ section #container {
 }
 
 /*------------------------DASHBOARD STYLE-------------------------------- */
-.blue-gradient{
+.blue-gradient {
   background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%) !important;
 }
-.pink-gradient{
+
+.pink-gradient {
   background: linear-gradient(45deg, #f54ea2, #ff7676) !important;
 }
-.green-gradient{
+
+.green-gradient {
   background: linear-gradient(45deg, #11998e, #38ef7d) !important;
 }
-.orange-gradient{
+
+.orange-gradient {
   background: linear-gradient(45deg, #fa709a 0%, #fee140 100%) !important;
 }
 
-.mt-5{
+.mt-5 {
   margin-top: 5px !important;
 }
-.mt-10{
+
+.mt-10 {
   margin-top: 10px !important;
 }
-.mt-15{
+
+.mt-15 {
   margin-top: 15px !important;
 }
-.ml-15{
+
+.ml-15 {
   margin-left: 15px !important;
   /* margin-right: 25px !important; */
 }
-.row{
+
+.row {
   display: flex;
   flex-wrap: wrap;
 }
-.column-6{
+
+.column-6 {
   flex: 1;
 }
-.card{
+
+.card {
   margin: 0px 20px;
   margin-left: 0px;
   box-shadow: 0 5px 15px rgba(57, 98, 254, 0.02), 0 3px 6px rgba(117, 108, 254, 0.12);
@@ -174,26 +192,31 @@ section #container {
   background-color: #fff !important;
   padding: 15px 18px;
   cursor: pointer;
-  .card-body{
+
+  .card-body {
     display: flex;
     gap: 16px;
     align-items: flex-start;
-    .icon{
+
+    .icon {
       width: 40px;
       height: 40px;
     }
-    .content{
+
+    .content {
       display: flex;
       justify-content: flex-start;
       flex-direction: column;
       gap: 3px;
       border-left: 1px solid #ccc;
-      padding-left: 15px ;
-      p{
+      padding-left: 15px;
+
+      p {
         font-size: 13px;
         color: #1c1c38;
       }
-      h1{
+
+      h1 {
         font-weight: 700;
         letter-spacing: 1px;
         color: #1c1c38;
@@ -202,6 +225,7 @@ section #container {
     }
   }
 }
+
 /* section #container .box-container {
   display: flex;
   justify-content: space-evenly;
@@ -272,9 +296,11 @@ section #container .breadcrum {
   margin-bottom: 15px;
   font-size: 14px;
   cursor: pointer;
+
   p {
     margin: 10px 10px 5px 10px;
     color: #4b49ac;
+
     span {
       color: #7b7b7b;
     }
@@ -295,12 +321,14 @@ section #container .sub-container .add-title-btn {
   width: 100%;
   gap: 10px;
   margin-bottom: 15px;
+
   .heading {
     .page-title {
       font-size: 15px;
       text-transform: uppercase;
     }
   }
+
   button {
     display: flex;
     align-items: center;
@@ -313,9 +341,11 @@ section #container .sub-container .add-title-btn {
     border: 1px solid #fff;
     cursor: pointer;
     transition: 200ms linear 0s all;
+
     &:hover {
       background-color: #fff;
       color: #1c1c38;
+
       .icon {
         background-color: #1c1c38;
         border-radius: 5px;
@@ -324,6 +354,7 @@ section #container .sub-container .add-title-btn {
         margin: -2px 0px -2px 3px;
       }
     }
+
     .icon {
       background-color: #fff;
       border-radius: 5px;
@@ -332,6 +363,7 @@ section #container .sub-container .add-title-btn {
       margin: -2px 0px -2px 3px;
       font-weight: bold;
     }
+
     span {
       font-size: 16px;
       margin-left: 10px;
@@ -348,16 +380,20 @@ section #container .sub-container .data-display {
   border-radius: 10px;
   box-shadow: 0px 0px 10px #cccccc7d;
   padding: 10px;
+
   .table-container {
     overflow-x: auto;
   }
+
   .pagination {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
     p {
       font-size: 13px;
     }
+
     button {
       padding: 5px 15px;
       background-color: #fff;
@@ -369,6 +405,7 @@ section #container .sub-container .data-display {
       border: 0.2px solid #9e9a9a8c;
       cursor: pointer;
       box-shadow: 0px 0px 5px #95949462;
+
       &:hover {
         background-color: #1c1c38;
         color: #fff;
@@ -408,6 +445,7 @@ section #container .sub-container .data-display table tbody tr td {
   border-bottom: 1px solid #ded2d2;
   border-collapse: collapse;
 }
+
 section #container .sub-container .data-display table tbody tr:nth-child(even) {
   background-color: #ded2d251;
 }
@@ -498,36 +536,43 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
   left: 0;
   justify-content: center;
   background: #00000080;
+
   .form {
     background: #fff;
     border-radius: 5px;
     width: fit-content;
     margin-top: 50px;
     height: fit-content;
+
     .head {
       padding: 5px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #000;
+
       .close {
         margin-right: 5px;
         font-weight: 500;
         font-size: 20px;
         cursor: pointer;
+
         &:hover {
           transform: scale(1.2);
         }
       }
     }
+
     .msg {
       padding: 5px 20px 0px 20px;
+
       .success {
         background: #38b138;
         color: #fff;
         padding: 3px 7px;
         border-radius: 5px;
       }
+
       .error {
         background: #f72e2e;
         color: #fff;
@@ -535,24 +580,28 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         border-radius: 5px;
       }
     }
+
     .col-3 {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       gap: 5px;
       margin: 10px 20px;
+
       .inp-group {
         margin: 0px;
         display: flex;
         flex-direction: column;
         gap: 3px;
         flex-direction: column;
+
         label {
           font-size: 13px;
           text-shadow: 0px 0px 0px #000;
           letter-spacing: 1;
           font-weight: 500;
         }
+
         input {
           border: 1px solid #1c1c38;
           padding: 8px 5px;
@@ -563,11 +612,13 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         }
       }
     }
+
     .col {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
       margin: 0px 20px;
+
       .inp-group {
         margin: 0px;
         display: flex;
@@ -575,12 +626,14 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         gap: 3px;
         width: 100%;
         flex-direction: column;
+
         label {
           font-size: 13px;
           text-shadow: 0px 0px 0px #000;
           letter-spacing: 1;
           font-weight: 500;
         }
+
         input {
           border: 1px solid #1c1c38;
           padding: 8px 5px;
@@ -590,6 +643,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
           outline: none;
           border-bottom: 2px solid #1c1c38;
         }
+
         select {
           border: 1px solid #1c1c38;
           padding: 8px 5px;
@@ -600,23 +654,27 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         }
       }
     }
+
     .col-2 {
       display: flex;
       margin-bottom: 10px;
       margin: 10px 20px;
       gap: 5px;
+
       .inp-group {
         display: flex;
         flex-direction: column;
         gap: 3px;
         width: 100%;
         flex-direction: column;
+
         label {
           font-size: 13px;
           text-shadow: 0px 0px 0px #000;
           letter-spacing: 1;
           font-weight: 500;
         }
+
         input {
           border: 1px solid #1c1c38;
           padding: 8px 5px;
@@ -627,6 +685,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
           width: 100%;
           height: 35px;
         }
+
         select {
           border: 1px solid #1c1c38;
           padding: 8px 5px;
@@ -637,6 +696,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         }
       }
     }
+
     .bottom {
       border-top: 1px solid #000;
       padding: 10px 20px;
@@ -644,6 +704,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
       justify-content: space-between;
       align-items: center;
       margin-top: 20px;
+
       #clear {
         padding: 5px 15px;
         font-size: 15px;
@@ -653,10 +714,12 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         border-radius: 5px;
         background: #ab9e9e8c;
         box-shadow: 0px 0px 10px #00000021;
+
         &:hover {
           box-shadow: inset 0px 0px 3px #000;
         }
       }
+
       #save {
         padding: 5px 15px;
         font-size: 15px;
@@ -667,6 +730,7 @@ section #container .sub-container .data-display table tbody tr td .de-activate {
         border-radius: 5px;
         background: #1c1c38;
         box-shadow: 0px 0px 10px #00000021;
+
         &:hover {
           background-color: #1c1c38c4;
         }
@@ -847,40 +911,16 @@ section #container .que-display .display-container table tbody tr td .edit-que {
   transition: 200ms linear 0s all;
 }
 
-section
-  #container
-  .que-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .edit-que:hover {
+section #container .que-display .display-container table tbody tr td .edit-que:hover {
   background-color: rgb(78, 78, 160);
 }
 
-section
-  #container
-  .que-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-que {
+section #container .que-display .display-container table tbody tr td .delete-que {
   background-color: rgb(206, 46, 46);
   transition: 200ms linear 0s all;
 }
 
-section
-  #container
-  .que-display
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-que:hover {
+section #container .que-display .display-container table tbody tr td .delete-que:hover {
   background-color: rgb(255, 0, 0);
 }
 
@@ -943,26 +983,13 @@ section #container #edit-que-container #edit-que-content form table th {
   text-align: left;
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  th
-  input[type="text"] {
+section #container #edit-que-container #edit-que-content form table tr th input[type="text"] {
   width: 400px;
   /* border: none; */
   outline: none;
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  input[type="text"],
+section #container #edit-que-container #edit-que-content form input[type="text"],
 input[type="date"],
 input[type="time"] {
   height: 30px;
@@ -971,44 +998,20 @@ input[type="time"] {
   padding: 10px;
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="text"] {
+section #container #edit-que-container #edit-que-content form table tr td input[type="text"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="time"],
+section #container #edit-que-container #edit-que-content form table tr td input[type="time"],
 input[type="date"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  .answer {
+section #container #edit-que-container #edit-que-content form table tr td .answer {
   width: 190px;
   height: 25px;
   text-align: center;
@@ -1016,15 +1019,7 @@ section
   border: 1px solid black;
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="reset"] {
+section #container #edit-que-container #edit-que-content form table tr td input[type="reset"] {
   width: 75px;
   height: 30px;
   border: 1px solid #4b49ac;
@@ -1037,15 +1032,7 @@ section
   transition: all 200ms linear 0s;
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="submit"] {
+section #container #edit-que-container #edit-que-content form table tr td input[type="submit"] {
   width: 90px;
   height: 30px;
   border: 1px solid black;
@@ -1058,15 +1045,7 @@ section
   transition: all 200ms linear 0s;
 }
 
-section
-  #container
-  #edit-que-container
-  #edit-que-content
-  form
-  table
-  tr
-  td
-  input[type="submit"]:hover {
+section #container #edit-que-container #edit-que-content form table tr td input[type="submit"]:hover {
   background-color: #7978e9;
 }
 
@@ -1097,6 +1076,7 @@ section #container #edit-que-container .slidedown {
     top: -300px;
     opacity: 0;
   }
+
   to {
     top: 0;
     opacity: 1;
@@ -1148,26 +1128,13 @@ section #container #edit-test-container #edit-test-content form table th {
   text-align: left;
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  th
-  input[type="text"] {
+section #container #edit-test-container #edit-test-content form table tr th input[type="text"] {
   width: 400px;
   /* border: none; */
   outline: none;
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  input[type="text"],
+section #container #edit-test-container #edit-test-content form input[type="text"],
 input[type="date"],
 input[type="time"] {
   height: 30px;
@@ -1176,44 +1143,20 @@ input[type="time"] {
   padding: 10px;
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="text"] {
+section #container #edit-test-container #edit-test-content form table tr td input[type="text"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="time"],
+section #container #edit-test-container #edit-test-content form table tr td input[type="time"],
 input[type="date"] {
   width: 190px;
   outline: none;
   /* border: none; */
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="reset"] {
+section #container #edit-test-container #edit-test-content form table tr td input[type="reset"] {
   width: 95px;
   height: 30px;
   border: 1px solid #4b49ac;
@@ -1225,15 +1168,7 @@ section
   transition: all 200ms linear 0s;
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="submit"] {
+section #container #edit-test-container #edit-test-content form table tr td input[type="submit"] {
   width: 95px;
   height: 30px;
   border: 1px solid black;
@@ -1246,26 +1181,11 @@ section
   transition: all 200ms linear 0s;
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  td
-  input[type="submit"]:hover {
+section #container #edit-test-container #edit-test-content form table tr td input[type="submit"]:hover {
   background-color: #7978e9;
 }
 
-section
-  #container
-  #edit-test-container
-  #edit-test-content
-  form
-  table
-  tr
-  .button {
+section #container #edit-test-container #edit-test-content form table tr .button {
   text-align: center;
 }
 
@@ -1292,6 +1212,7 @@ section #container #edit-test-container .slidedown {
     top: -300px;
     opacity: 0;
   }
+
   to {
     top: 0;
     opacity: 1;
@@ -1522,53 +1443,21 @@ section #container .sub-container .display-container table tbody tr td button {
   cursor: pointer;
 }
 
-section
-  #container
-  .sub-container
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .edit-test {
+section #container .sub-container .display-container table tbody tr td .edit-test {
   background-color: rgb(50, 50, 102);
   transition: 200ms linear 0s all;
 }
 
-section
-  #container
-  .sub-container
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .edit-test:hover {
+section #container .sub-container .display-container table tbody tr td .edit-test:hover {
   background-color: rgb(78, 78, 160);
 }
 
-section
-  #container
-  .sub-container
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-test {
+section #container .sub-container .display-container table tbody tr td .delete-test {
   background-color: rgb(206, 46, 46);
   transition: 200ms linear 0s all;
 }
 
-section
-  #container
-  .sub-container
-  .display-container
-  table
-  tbody
-  tr
-  td
-  .delete-test:hover {
+section #container .sub-container .display-container table tbody tr td .delete-test:hover {
   background-color: rgb(255, 0, 0);
 }
 
@@ -1689,6 +1578,7 @@ section #container #alert-container .slideright {
     right: -280px;
     opacity: 0;
   }
+
   to {
     right: 0;
     opacity: 1;
@@ -1699,6 +1589,7 @@ section #container #alert-container .slideright {
 
 .search {
   float: right;
+
   input {
     padding: 6px 10px 6px 6px;
     font-size: 15px;

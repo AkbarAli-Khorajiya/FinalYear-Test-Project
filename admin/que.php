@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 
 include_once 'include/operation.php';
 $dbobj = new DB_conn();
@@ -84,14 +84,13 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             <div class="close">x</div>
         </div>
         <div class="msg">
-            <p class="success">*name is required</p>
-            <p class="error">*name is required</p>
+            <p class="success"></p>
+            <p class="error"></p>
         </div>
         <div class="col">
             <div class="inp-group">
                 <label for="question">Question</label>
-                <input type="text" id="question" value="" name="question" class="question"
-                    placeholder="Enter question">
+                <input type="text" id="question" value="" name="question" class="question" placeholder="Enter question">
             </div>
         </div>
         <div class="col-2">
@@ -143,14 +142,13 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
             <div class="close">x</div>
         </div>
         <div class="msg">
-            <p class="success">*name is required</p>
-            <p class="error">*name is required</p>
+            <p class="success"></p>
+            <p class="error"></p>
         </div>
         <div class="col">
             <div class="inp-group">
                 <label for="question">Question</label>
-                <input type="text" id="question" value="" name="question" class="question"
-                    placeholder="Enter question">
+                <input type="text" id="question" value="" name="question" class="question" placeholder="Enter question">
             </div>
         </div>
         <div class="col-2">
@@ -214,9 +212,9 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
         </div>
         <div class="table-container">
             <table cellspacing="10px" id="que-table">
-                
+
                 <!-- ///// created test list ///// -->
-                
+
             </table>
         </div>
         <div class="pagination" style="display: flex;justify-content: space-between;">

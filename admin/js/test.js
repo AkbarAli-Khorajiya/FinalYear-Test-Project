@@ -132,7 +132,7 @@ $("#test-table").on("click", ".edit-test", function() {
             $("#test-update-form input[name='test-id']").val(data["id"]);
             $("#test-update-form input[name='test-name']").val(data["test_name"]);
             $("#test-update-form input[name='duration']").val(data["duration"]);
-            $("#test-update-form input[name='marks']").val(data["marks_per_ques"]);
+            $("#test-update-form input[name='marks']").val(data["mark_per_ques"]);
             $("#test-update-form input[name='date']").val(data["test_start_date"]);
             $("#test-update-form input[name='time']").val(data["test_start_time"]);
             let created_for = data['created_for'];
