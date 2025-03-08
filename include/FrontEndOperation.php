@@ -14,7 +14,7 @@ class Student
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $database = 'exam_test';
+    private $database = 'examzone';
     private $conn;
     private $google2fa;
     function __construct()

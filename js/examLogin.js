@@ -87,6 +87,7 @@ $(document).ready(function () {
                         $(".alert").show();
                         setTimeout(() => {
                             $(".alert").fadeOut();
+                            window.location.href = "instruction.php";
                         }, 1500);
                     }
                     else{
