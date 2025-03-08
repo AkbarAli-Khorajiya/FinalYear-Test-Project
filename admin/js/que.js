@@ -36,6 +36,7 @@ $("#que-submit-form").submit(function(e) {
     let option_c = $("#que-submit-form .option_c").val();
     let option_d = $("#que-submit-form .option_d").val();
     let answer = $("#que-submit-form .answer").val();
+    console.log(option_a);
     if (
         test_id == "" ||
         question == "" ||

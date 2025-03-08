@@ -7,14 +7,14 @@
 </div>
 <!-- -----------Update teacher pop-up---------- -->
 <div class="edit-modal-container">
-    <form class="form" action="javascript:void(0)" style="width: 360px !important;" id="test-update-form">
+    <form class="form" action="javascript:void(0)" style="width: 360px !important;" id="teacher-update-form">
         <div class="head">
             <h3>Update Test</h3>
             <div class="close">x</div>
         </div>
         <div class="msg">
-            <p class="success"> </p>
-            <p class="error"> </p>
+            <!-- <p class="success"> </p>
+            <p class="error"> </p> -->
         </div>
         <div class="col-2">
             <div class="inp-group">
@@ -25,7 +25,13 @@
         <div class="col-2">
             <div class="inp-group">
                 <label for="upteacher-name">Email</label>
-                <input type="text" id="upteacher-name" value="" name="upteacher-name" placeholder="eg:-xyz">
+                <input type="text" id="upteacher-email" value="" name="upteacher-email" placeholder="eg:-xyz">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="inp-group">
+                <label for="upteacher-pass">Password</label>
+                <input type="text" id="teacher-pass" value="" name="upteacher-pass" placeholder="xyzpassword">
             </div>
         </div>
         <div class="bottom">
@@ -37,7 +43,7 @@
 <!-- ----------------------------- -->
 
 <div class="breadcrum">
-    <p>Dashboard/<span>Test</span></p>
+    <p>Dashboard/<span>Teacher</span></p>
 </div>
 <div class="sub-container">
     <div class="add-title-btn">
@@ -46,7 +52,7 @@
         </div>
         <button id="add-teacher">
             <span class="icon">+</span>
-            <span>Add Test</span>
+            <span>Add Teacher</span>
         </button>
     </div>
     <div class="data-display">
@@ -54,7 +60,7 @@
             <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
         <div class="table-container">
-            <table cellspacing="10px" id="techer-table">
+            <table cellspacing="10px" id="teacher-table">
 
                 <!-- ///// created test list ///// -->
 
@@ -74,14 +80,13 @@
 </div>
 <!-- ---------Add Teacher modal--------------  -->
 <div class="modal-container">
-    <form class="form" action="javascript:void(0)" style="width: 360px !important;" id="teacher-submit-form">
+    <form class="form" action="javascript:void(0)" style="width: 360px !important;" id="add-teacher-form">
         <div class="head">
             <h3>Add Teacher</h3>
             <div class="close">x</div>
         </div>
         <div class="msg">
-            <!-- <p class="success">*name is required</p> -->
-            <!-- <p class="error">*name is required</p> -->
+            <p class="error">*name is required</p>
         </div>
         <div class="col-2">
             <div class="inp-group">
@@ -91,20 +96,20 @@
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="teacher-name">Email</label>
-                <input type="text" id="teacher-name" value="" name="teacher-name" placeholder="eg:-xyz">
+                <label for="teacher-email">Email</label>
+                <input type="email" id="teacher-email" value="" name="teacher-email" placeholder="eg:-xyz@gmail.com">
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="teacher-name">Password</label>
-                <input type="text" id="teacher-name" value="" name="teacher-name" placeholder="eg:-xyz">
+                <label for="teacher-pass">Password</label>
+                <input type="password" id="teacher-pass" value="" name="teacher-pass" placeholder="eg:-xyz">
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
-                <label for="teacher-name">Confirm Password</label>
-                <input type="text" id="teacher-name" value="" name="teacher-name" placeholder="eg:-xyz">
+                <label for="teacher-conPass">Confirm Password</label>
+                <input type="password" id="teacher-conPass" value="" name="teacher-conPass" placeholder="eg:-xyz">
             </div>
         </div>
         <div class="bottom">
