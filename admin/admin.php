@@ -15,14 +15,14 @@ session_start();
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="icon" type="image/png" href="image/admin/settings.png">
     <style>
-    <?php include 'css/admin.css';
-    include 'css/all.min.css';
+        <?php include 'css/admin.css';
+        include 'css/all.min.css';
 
-    ?>
+        ?>
     </style>
 
     <script>
-    <?php include_once 'js/jquery-3.7.1.min.js'; ?>
+        <?php include_once 'js/jquery-3.7.1.min.js'; ?>
     </script>
 </head>
 
@@ -66,29 +66,36 @@ session_start();
                     </span>
                     <a href="javascript:void(0)"> Students </a>
                 </li>
-                <li onclick="jQuery('#container').load('test.php');">
-                    <span class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                            <path height="50" width=""
-                                d="m6,0C2.686,0,0,2.686,0,6s2.686,6,6,6,6-2.686,6-6S9.314,0,6,0Zm3.692,5.722l-2.712,2.605c-.452.446-1.052.671-1.653.671s-1.204-.225-1.664-.674l-1.132-1.108c-.395-.387-.401-1.02-.015-1.414.386-.395,1.019-.401,1.414-.016l1.132,1.108c.144.142.379.141.522,0l2.723-2.614c.398-.381,1.032-.37,1.414.029.383.398.37,1.031-.029,1.414Zm3.577,9.759c-.813.813-1.27,1.915-1.27,3.065v1.455h1.455c1.15,0,2.252-.457,3.065-1.27l6.807-6.807c.897-.897.897-2.353,0-3.25-.897-.897-2.353-.897-3.25,0l-6.807,6.807Zm7.73,1.598v2.922c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4v-6.589c.927.377,1.939.589,3,.589,4.411,0,8-3.589,8-8,0-.339-.028-.672-.069-1h3.069c1.193,0,2.254.536,2.987,1.367-.48.209-.933.5-1.325.892l-6.808,6.808c-1.187,1.188-1.855,2.798-1.855,4.478v1.455c0,1.105.895,2,2,2h1.455c1.679,0,3.29-.667,4.478-1.855l3.067-3.067Z" />
-                        </svg>
-                    </span>
-                    <a href="javascript:void(0)"> Tests </a>
-                </li>
+                <?php
+                // if ($_SESSION['role'] == 'admin') {
+                if ("admin" == 'admin') {
+                ?>
+                    <li onclick="jQuery('#container').load('test.php');">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                                <path height="50" width=""
+                                    d="m6,0C2.686,0,0,2.686,0,6s2.686,6,6,6,6-2.686,6-6S9.314,0,6,0Zm3.692,5.722l-2.712,2.605c-.452.446-1.052.671-1.653.671s-1.204-.225-1.664-.674l-1.132-1.108c-.395-.387-.401-1.02-.015-1.414.386-.395,1.019-.401,1.414-.016l1.132,1.108c.144.142.379.141.522,0l2.723-2.614c.398-.381,1.032-.37,1.414.029.383.398.37,1.031-.029,1.414Zm3.577,9.759c-.813.813-1.27,1.915-1.27,3.065v1.455h1.455c1.15,0,2.252-.457,3.065-1.27l6.807-6.807c.897-.897.897-2.353,0-3.25-.897-.897-2.353-.897-3.25,0l-6.807,6.807Zm7.73,1.598v2.922c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4v-6.589c.927.377,1.939.589,3,.589,4.411,0,8-3.589,8-8,0-.339-.028-.672-.069-1h3.069c1.193,0,2.254.536,2.987,1.367-.48.209-.933.5-1.325.892l-6.808,6.808c-1.187,1.188-1.855,2.798-1.855,4.478v1.455c0,1.105.895,2,2,2h1.455c1.679,0,3.29-.667,4.478-1.855l3.067-3.067Z" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)"> Tests </a>
+                    </li>
+                <?php
+                }
+                ?>
                 <?php
                 // if ($_SESSION['role'] == 'admin') {
                 if ("admin" == 'admin') {
                 ?>
 
-                <li onclick="jQuery('#container').load('teacher.php');">
-                    <span class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                            <path height="50" width=""
-                                d="m6,0C2.686,0,0,2.686,0,6s2.686,6,6,6,6-2.686,6-6S9.314,0,6,0Zm3.692,5.722l-2.712,2.605c-.452.446-1.052.671-1.653.671s-1.204-.225-1.664-.674l-1.132-1.108c-.395-.387-.401-1.02-.015-1.414.386-.395,1.019-.401,1.414-.016l1.132,1.108c.144.142.379.141.522,0l2.723-2.614c.398-.381,1.032-.37,1.414.029.383.398.37,1.031-.029,1.414Zm3.577,9.759c-.813.813-1.27,1.915-1.27,3.065v1.455h1.455c1.15,0,2.252-.457,3.065-1.27l6.807-6.807c.897-.897.897-2.353,0-3.25-.897-.897-2.353-.897-3.25,0l-6.807,6.807Zm7.73,1.598v2.922c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4v-6.589c.927.377,1.939.589,3,.589,4.411,0,8-3.589,8-8,0-.339-.028-.672-.069-1h3.069c1.193,0,2.254.536,2.987,1.367-.48.209-.933.5-1.325.892l-6.808,6.808c-1.187,1.188-1.855,2.798-1.855,4.478v1.455c0,1.105.895,2,2,2h1.455c1.679,0,3.29-.667,4.478-1.855l3.067-3.067Z" />
-                        </svg>
-                    </span>
-                    <a href="javascript:void(0)"> Teacher </a>
-                </li>
+                    <li onclick="jQuery('#container').load('teacher.php');">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                                <path height="50" width=""
+                                    d="m6,0C2.686,0,0,2.686,0,6s2.686,6,6,6,6-2.686,6-6S9.314,0,6,0Zm3.692,5.722l-2.712,2.605c-.452.446-1.052.671-1.653.671s-1.204-.225-1.664-.674l-1.132-1.108c-.395-.387-.401-1.02-.015-1.414.386-.395,1.019-.401,1.414-.016l1.132,1.108c.144.142.379.141.522,0l2.723-2.614c.398-.381,1.032-.37,1.414.029.383.398.37,1.031-.029,1.414Zm3.577,9.759c-.813.813-1.27,1.915-1.27,3.065v1.455h1.455c1.15,0,2.252-.457,3.065-1.27l6.807-6.807c.897-.897.897-2.353,0-3.25-.897-.897-2.353-.897-3.25,0l-6.807,6.807Zm7.73,1.598v2.922c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4v-6.589c.927.377,1.939.589,3,.589,4.411,0,8-3.589,8-8,0-.339-.028-.672-.069-1h3.069c1.193,0,2.254.536,2.987,1.367-.48.209-.933.5-1.325.892l-6.808,6.808c-1.187,1.188-1.855,2.798-1.855,4.478v1.455c0,1.105.895,2,2,2h1.455c1.679,0,3.29-.667,4.478-1.855l3.067-3.067Z" />
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)"> Teacher </a>
+                    </li>
                 <?php
                 }
                 ?>
@@ -110,41 +117,41 @@ session_start();
     </section>
 </body>
 <script>
-jQuery('#container').load('dash.php');
-const listItems = document.querySelectorAll('li');
-const firstList = document.querySelectorAll('li')[0];
-firstList.style.boxShadow = '0px 3px 10px 0 #dac0c0a8 ';
-firstList.style.backgroundColor = '#d6b8b851';
-firstList.style.zIndex = '999';
-listItems.forEach(item => {
-    item.addEventListener('click', function() {
-        listItems.forEach(item => {
-            item.style.boxShadow = 'none';
-            item.style.backgroundColor = '#fff';
-            item.style.zIndex = '0';
+    jQuery('#container').load('dash.php');
+    const listItems = document.querySelectorAll('li');
+    const firstList = document.querySelectorAll('li')[0];
+    firstList.style.boxShadow = '0px 3px 10px 0 #dac0c0a8 ';
+    firstList.style.backgroundColor = '#d6b8b851';
+    firstList.style.zIndex = '999';
+    listItems.forEach(item => {
+        item.addEventListener('click', function() {
+            listItems.forEach(item => {
+                item.style.boxShadow = 'none';
+                item.style.backgroundColor = '#fff';
+                item.style.zIndex = '0';
 
-        })
-        this.style.boxShadow = '0px 3px 10px 0 #dac0c0a8 ';
-        this.style.backgroundColor = '#d6b8b851';
-        this.style.zIndex = '999';
+            })
+            this.style.boxShadow = '0px 3px 10px 0 #dac0c0a8 ';
+            this.style.backgroundColor = '#d6b8b851';
+            this.style.zIndex = '999';
+        });
     });
-});
-//-----------Show Alert------------//
-function alert_show(value, msg) {
-    switch (value) {
-        case '1':
-            $(".alert h3").text(msg);
-            $("#alert-container div").addClass("success-alert");
-            $("#alert-container").show().css('display', 'flex');
-            break;
-        case '0':
-            $(".alert h3").text(msg);
-            $("#alert-container div").addClass("danger-alert");
-            $("#alert-container").show().css('display', 'flex');
-            break;
+    //-----------Show Alert------------//
+    function alert_show(value, msg) {
+        switch (value) {
+            case '1':
+                $(".alert h3").text(msg);
+                $("#alert-container div").addClass("success-alert");
+                $("#alert-container").show().css('display', 'flex');
+                break;
+            case '0':
+                $(".alert h3").text(msg);
+                $("#alert-container div").addClass("danger-alert");
+                $("#alert-container").show().css('display', 'flex');
+                break;
+        }
     }
-}
-$("")
+    $("")
 </script>
 
 </html>
