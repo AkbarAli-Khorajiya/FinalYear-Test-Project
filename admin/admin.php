@@ -28,7 +28,7 @@ session_start();
 
 <body>
     <header>
-        <span>Exam25 </span>
+        <span>ExamZone</span>
 
         <div class="logout-btn" onclick="window.location.href='admin_login.php'">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
