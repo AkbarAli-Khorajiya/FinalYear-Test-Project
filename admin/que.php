@@ -201,10 +201,18 @@ if (isset($_POST['update_que']) && $_POST['update_que'] == 1) {
         <div class="heading">
             <h3 class="page-title">Created Question List</h3>
         </div>
-        <button id="add-btn">
-            <span class="icon">+</span>
-            <span>Add Question</span>
-        </button>
+        <?php
+        session_start();
+        if ($_SESSION['admin_role'] != 1) {
+        ?>
+            <button id="add-btn">
+                <span class="icon">+</span>
+                <span>Add Question</span>
+            </button>
+        <?php
+        }
+        session_commit();
+        ?>
     </div>
     <div class="data-display">
         <div class="search">

@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-
+session_start();
 $ch = $_GET["ch"];
 
 class DB_conn
@@ -41,11 +41,19 @@ class Test_operation
         $que_obj = new Question_operation();
         if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
-            $query = "select * from test where created_by_admin = 1 and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
+            if ($_SESSION['admin_role'] == 1) {
+                $query = "select * from test where test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
+            } else {
+                $query = "select * from test where created_by_admin = " . $_SESSION['admin_id'] . " and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
+            }
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         } else {
-            $query = 'select * from test where created_by_admin = 1'; //$_SESSION['admin_id']
+            if ($_SESSION['admin_role'] == 1) {
+                $query = 'select * from test';
+            } else {
+                $query = 'select * from test where created_by_admin =  ' . $_SESSION['admin_id'] . '';
+            }
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         }
@@ -59,9 +67,11 @@ class Test_operation
                     <th>Test Start(Time)</th>
                     <th>Created For</th>
                     <th>Total Question</th>
-                    <th>Marks(per question)</th>
-                    <th colspan="2" align="center">Action</th>
-                </tr>
+                    <th>Marks(per question)</th>';
+            if ($_SESSION['admin_role'] != 1) {
+                $str .= '<th colspan="2" align="center">Action</th>';
+            }
+            $str .= '</tr>
             </thead>
             <tbody>';
             $i = 1;
@@ -75,10 +85,13 @@ class Test_operation
                         <td>' . $row['test_start_time'] . '</td>
                         <td>' . $row['created_for'] . '</td>
                         <td>' . $total_que . '</td>
-                        <td>' . $row['mark_per_ques'] . '</td>
-                        <td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
+                        <td>' . $row['mark_per_ques'] . '</td>';
+                if ($_SESSION['admin_role'] != 1) {
+                    $str .= '<td> <button class="edit-test edit-m" id="' . $row['id'] . '">Edit</button>   
                         <button class="delete-test delete-m" id="' . $row['id'] . '">Delete</button> </td>
-                    </tr>';
+                    ';
+                }
+                $str .= '</tr>';
             }
             $str .= '</tbody>';
         } else {
@@ -162,7 +175,7 @@ class Test_operation
                 }
             }
         } else {
-            $query = "delete from test where id=" . $id['id'];
+            $query = "delete from test where id=" . $id['id '];
             if (mysqli_query($this->conn, $query)) {
                 return 1 . "||Test Deleted Successfully";
             } else {
@@ -197,10 +210,6 @@ switch ($ch) {
 
 class Question_operation extends Test_operation
 {
-    // private $question;
-    // private $opt_array;
-    // private $answer;
-    // private $test_id;
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
@@ -211,20 +220,10 @@ class Question_operation extends Test_operation
     {
         $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
         if (!$conn) {
-            die('' . mysqli_connect_error());
+            die(' ' . mysqli_connect_error());
         }
         return $this->conn = $conn;
     }
-    // function set_value($que, $opt_a, $opt_b, $opt_c, $opt_d, $ans, $test_id)
-    // {
-    //     $this->question = $que;
-    //     $this->opt_array[0] = $opt_a;
-    //     $this->opt_array[1] = $opt_b;
-    //     $this->opt_array[2] = $opt_c;
-    //     $this->opt_array[3] = $opt_d;
-    //     $this->answer = $ans;
-    //     $this->test_id = $test_id;
-    // }
 
     function all_ques($post)
     {
@@ -242,10 +241,6 @@ class Question_operation extends Test_operation
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         }
-        // <th>Option A</th>
-        // <th>Option B</th>
-        // <th>Option C</th>
-        // <th>Option D</th>
         if ($num > 0) {
             $str = '<thead>
                 <tr>
@@ -255,9 +250,11 @@ class Question_operation extends Test_operation
                     <th>Option B</th>
                     <th>Option C</th>
                     <th>Option D</th>
-                    <th>Right Answer</th>
-                    <th colspan="2" align="center">Action</th>
-                </tr>
+                    <th>Right Answer</th>';
+            if ($_SESSION['admin_role'] != 1) {
+                $str .= '<th colspan="2" align="center">Action</th>';
+            }
+            $str .= '</tr>
             </thead>
             <tbody>';
             $i = 1;
@@ -274,10 +271,12 @@ class Question_operation extends Test_operation
                     $a++;
                 }
 
-                $str .= '<td class="color-success">' . $row['answer'] . '</td>
-                        <td> <button class="edit-que edit-m" id="' . $row['id'] . '">Edit</button>
-                            <button class="delete-que delete-m" id="' . $row['id'] . '">Delete</button> </td>
-                        </tr>';
+                $str .= '<td class="color-success">' . $row['answer'] . '</td>';
+                if ($_SESSION['admin_role'] != 1) {
+                    $str .= '<td> <button class="edit-que edit-m" id="' . $row['id'] . '">Edit</button>
+                            <button class="delete-que delete-m" id="' . $row['id'] . '">Delete</button> </td>';
+                }
+                $str .= '</tr>';
             }
             $str .= '</tbody>';
         } else {
@@ -524,7 +523,11 @@ class Student_operation
                         <th>Gender</th>
                         <th>Class</th>
                         <th>Created at</th>
-                        <th>Action</th>
+                        ";
+            if ($_SESSION['admin_role'] == 1) {
+                $str .= "<th>Action</th>";
+            }
+            $str .= "
                     </tr>
                 </thead>
                 <tbody>";
@@ -540,10 +543,11 @@ class Student_operation
                         <td>" . $row['gender'] . "</td>
                         <td>" . $row['class'] . "</td>
                         <td>" . date('d/m/Y', strtotime($row['created_at'])) . "</td>
-                        <td>
-                            <button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate'>Activate</button>") .
-                    "</td>
-                    </tr>";
+                        ";
+                if ($_SESSION['admin_role'] == 1) {
+                    $str .= "<td><button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate'>Activate</button>") . "</td>";
+                }
+                $str .= "</tr>";
                 $i++;
             }
             $str .= "</tbody>";
@@ -556,7 +560,7 @@ class Student_operation
     {
         $id = $post['id'];
         $status = $post['status'];
-        $query = "UPDATE `user` SET `status` ='$status' where `id` = '$id'";
+        $query = "UPDATE `user` SET `status` =$status where `id` = '$id'";
         $result = mysqli_query($this->conn, $query);
         if ($result) {
             return 1;
@@ -725,11 +729,37 @@ class Teacher_operation
         }
         return $this->conn = $conn;
     }
-    function logout()
+    function login($post)
+    {
+        $email = $this->cleanData($post['email']);
+        $password = $this->cleanData($post['password']);
+        $query = "select * from admin where email = '$email'";
+        $result = mysqli_query($this->conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            if (password_verify($password, $row['password'])) {
+                if ($row['status'] == 0) {
+                    return 2;
+                }
+                session_start();
+                $_SESSION['admin_id'] = $row['id'];
+                $_SESSION['admin_name'] = $row['name'];
+                $_SESSION['admin_email'] = $row['email'];
+                $_SESSION['admin_role'] = $row['role'];
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+    function logout($post)
     {
         session_start();
         session_destroy();
-        header('location:../index.php');
+        session_unset();
+        return "1";
     }
     function listAllTeacher($post)
     {
@@ -761,8 +791,8 @@ class Teacher_operation
                     <td class='status'>" . ($row['status'] == 1 ? "Active" : "De-Active") . "</td>
                     <td>" . date('d/m/Y', strtotime($row['created_at'])) . "</td>
                     <td>
-                            <button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate'>Activate</button>") .
-                "</td>
+                            <button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate '>Activate</button>") .
+                    "</td>
                 </tr>";
                 $i++;
             }
@@ -806,6 +836,45 @@ class Teacher_operation
             return 1;
         }
     }
+    function getDashInfo($post)
+    {
+        // Total Teacher
+        $stmtTotal = "SELECT COUNT(*) as totalTeacher FROM `admin` where role=2";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row1 = mysqli_fetch_assoc($result);
+
+        // Total Student
+        $stmtTotal = "SELECT COUNT(*) as totalStudent FROM `user`";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row2 = mysqli_fetch_assoc($result);
+
+        // Total Test
+        $stmtTotal = "SELECT COUNT(*) as totalTest FROM `test`";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row3 = mysqli_fetch_assoc($result);
+
+        // Total Active Student
+        $stmtTotal = "SELECT COUNT(*) as totalActiveStudent FROM `user` WHERE status = 1";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row4 = mysqli_fetch_assoc($result);
+
+        // Total De-Active Student
+        $stmtTotal = "SELECT COUNT(*) as totalDeActiveStudent FROM `user` WHERE status = 0";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row5 = mysqli_fetch_assoc($result);
+
+        // Total De-Active Teacher
+        $stmtTotal = "SELECT COUNT(*) as totalActiveTeacher FROM `admin` WHERE status = 1 and role = 2";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row6 = mysqli_fetch_assoc($result);
+
+        // Total De-Active Teacher
+        $stmtTotal = "SELECT COUNT(*) as totalDeActiveTeacher FROM `admin` WHERE status = 0 and role = 2";
+        $result = mysqli_query($this->conn, $stmtTotal);
+        $row7 = mysqli_fetch_assoc($result);
+
+        return $row1['totalTeacher'] . "||" . $row2['totalStudent'] . "||" . $row3['totalTest'] . "||" . $row4['totalActiveStudent'] . "||" . $row5['totalDeActiveStudent'] . "||" . $row6['totalActiveTeacher'] . "||" . $row7['totalDeActiveTeacher'];
+    }
 }
 
 $tch_obj = new Teacher_operation();
@@ -821,5 +890,11 @@ switch ($ch) {
         break;
     case '26':
         echo $tch_obj->logout($_POST);
+        break;
+    case '27':
+        echo $tch_obj->login($_POST);
+        break;
+    case '28':
+        echo $tch_obj->getDashInfo($_POST);
         break;
 }

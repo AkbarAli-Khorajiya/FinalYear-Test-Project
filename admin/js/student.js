@@ -72,6 +72,7 @@ listUser();
 function updateStatus(element) {
 
     let id = element.id;
+    console.log(id)
     if (element.className == "activate") {
         $.ajax({
             type: "POST",
@@ -79,6 +80,7 @@ function updateStatus(element) {
             data: { id: id, status: 1 },
             encode: true,
             success: function(response) {
+                console.log(response)
                 if (response == 1) {
                     listUser();
                 }
@@ -91,6 +93,7 @@ function updateStatus(element) {
             data: { id: id, status: 0 },
             encode: true,
             success: function(response) {
+                console.log(response)
                 if (response == 1) {
                     listUser();
                 }

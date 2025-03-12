@@ -6,19 +6,27 @@
         <div class="heading">
             <h3 class="page-title">Students Registered List</h3>
         </div>
-        <button id="add-student">
-            <span class="icon">+</span>
-            <span>Add Student</span>
-        </button>
+        <?php
+        session_start();
+        if ($_SESSION['admin_role'] == 1) {
+        ?>
+            <button id="add-student">
+                <span class="icon">+</span>
+                <span>Add Student</span>
+            </button>
+        <?php
+        }
+        session_commit();
+        ?>
     </div>
     <div class="data-display">
         <div class="search">
             <input type="text" placeholder="&#x1F50D; search" name="search" class="search" id="search">
         </div>
         <div class="table-container">
-        <table id="user-table">
-           <!-- displaying all user -->
-        </table>
+            <table id="user-table">
+                <!-- displaying all user -->
+            </table>
         </div>
         <div class="pagination">
             <div class="total-list">
@@ -70,17 +78,18 @@
             </div>
             <div class="inp-group">
                 <label for="confirmpassword" class="">Confirm Password</label>
-                <input type="password" name="confirm-password" id="confirmpassword" placeholder="eg:-xyzstudent" required>
+                <input type="password" name="confirm-password" id="confirmpassword" placeholder="eg:-xyzstudent"
+                    required>
             </div>
         </div>
         <div class="col-2">
             <div class="inp-group">
                 <label for="gender" class="">Gender</label>
-                    <select name="gender" id="gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
+                <select name="gender" id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
             <div class="inp-group">
                 <label for="class" class="">Class</label>

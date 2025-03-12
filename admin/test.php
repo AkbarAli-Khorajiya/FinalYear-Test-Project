@@ -61,56 +61,6 @@
 </div>
 
 <!-- ------------create test------------ -->
-<!-- <div class="test-container">
-    <h2> Create Test Panel</h2>
-    <form id="test_form" name="test_form">
-        <table cellspacing="20px">
-            <tr>
-                <th colspan=""
-                    style="display: flex;flex-direction:column;gap:10px;align-items:center;width:fit-content">
-                    <h2>Add Test</h2>
-                </th>
-                <th>
-                    <p style="color: red; font-size: 15px;text-align:end" class="test"></p>
-                </th>
-            </tr>
-            <tr>
-                <th colspan="2"> <input type="text" name="test_name" class="test_name" placeholder="Write test name"
-                        value="<?php //echo $test_name; 
-                                ?>"> </th>
-            </tr>
-            <tr>
-                <td> <input type="text" name="test_date" class="test_date" placeholder="Test date"
-                        value="<?php //echo $test_date; 
-                                ?>" onfocus="(this.type='date')"
-                        onblur="if(this.value==''){this.type='text'}"> </td>
-                <td> <input type="text" name="test_start_time" class="test_start_time" placeholder="Test start time"
-                        value="<?php //echo $test_start_time; 
-                                ?>" onfocus="(this.type='time')"
-                        onblur="if(this.value==''){this.type='text'}"></td>
-            </tr>
-            <tr>
-                <td> <input type="text" name="test_time" class="test_time" placeholder="Test time (in minutes )"
-                        value="<?php //echo $test_time; 
-                                ?>"> </td>
-                <td> <input type="text" name="test_marks" class="test_marks" placeholder="Each Question marks"
-                        value="<?php //echo $test_marks; 
-                                ?>"> </td>
-            </tr>
-            <tr>
-                <td> <input type="text" name="test_question" class="test_question"
-                        placeholder="Total number of Question" value="<?php //echo $test_question; 
-                                                                        ?>"> </td>
-                 <td style="display:none;"> <input type="text" name="test_id" value="" hidden> </td> -->
-<!-- <td class="button">
-    <input type="reset" value="Clear">
-    <input type="submit" name="create" value="Create"> -->
-<!-- <button type="button" name="create" >Create</button> -->
-<!-- </td>
-</tr>
-</table>
-</form>
-</div> -->
 <div class="breadcrum">
     <p>Dashboard/<span>Test</span></p>
 </div>
@@ -119,10 +69,18 @@
         <div class="heading">
             <h3 class="page-title">Created Test List</h3>
         </div>
-        <button id="add-btn">
-            <span class="icon">+</span>
-            <span>Add Test</span>
-        </button>
+        <?php
+        session_start();
+        if ($_SESSION['admin_role'] != 1) {
+        ?>
+            <button id="add-btn">
+                <span class="icon">+</span>
+                <span>Add Test</span>
+            </button>
+        <?php
+        }
+        session_commit();
+        ?>
     </div>
     <div class="data-display">
         <div class="search">

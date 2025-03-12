@@ -69,11 +69,6 @@ $(document).ready(function () {
         });
     });
 
-
-
-
-
-
 });
 
 
@@ -83,15 +78,10 @@ function list_all_teacher() {
         url: "include/operation.php?ch=23",
         encode: true,
         success: function (response) {
-            console.log(response);
             $("#teacher-table").html(response);
             $("table .status").each(function () {
                 $(this).text() == "De-Active" ? $(this).css("color", "red") : $(this).css("color", "green");
             });
-            // //----- Update test show---//
-            // $(".edit-test").on("click", () => {
-            //     $(".edit-modal-container").show();
-            // });
         },
     });
 }
