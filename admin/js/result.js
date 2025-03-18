@@ -10,4 +10,10 @@ $(document).ready(function() {
         )
     }
     listTestResult();
+
+    //--- link for redirect to detail of test result ----//
+    $("#result-table").on("click", ".view-more", function () {
+        $("#container").load("resultDetail.php?id=" + this.id);
+    });
+
 })
