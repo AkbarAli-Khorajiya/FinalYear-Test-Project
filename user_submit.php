@@ -20,116 +20,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
-    <style>
-        <?php include_once 'css/user_submit.css'; ?>
-    </style>
-    <script src="js/jquery-3.7.1.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Result</title>
+  <script src="js/jquery-3.7.1.min.js"></script>
+  <style>
+    <?php include_once 'css/user_submit.css'; ?>
+  </style>
 </head>
 <body>
 <?php include_once 'include/loader.php';?>
-    <div class="container">
-        <div class="wrapper main">
-            <span class="test-name">PHP TEST RESULT</span>
-            <div class="score-wrapper">
-                <span class="title">Overall Score</span>
-                <span class="score"><?php echo $overall_score."/100(".$overall_score."%)"?></span>
-            </div>
-            <div class="range">
-                <div class="range-fill" id="overall-score" style=<?php echo "width:".$overall_score."%";?>></div>
-                <div class="range-unfill"></div>
-            </div>
+  <div class="main-card card">
+    <div class="card-content space-y-4">
+      <div>
+        <h1>PHP TEST RESULT</h1>
+        <div class="flex justify-between items-center mt-1">
+          <span class="text-sm font-medium">Overall Score</span>
+          <span class="text-sm font-medium"><?php echo $overall_score."/100(".$overall_score."%)"?></span>
         </div>
-        <div class="tiles-container">
-            <div class="tiles small">
-                <div class="icon" style="color:#22c55e">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
-                </div>
-                <div class="detail">
-                    <span class="title">Right Answers</span>
-                    <span class="score" ><?php echo $arr->right_answer?></span>
-                </div>
-            </div>
-            <div class="tiles small">
-                <div class="icon" style="color:#ef4444;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x w-5 h-5 text-red-500"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
-                </div>
-                <div class="detail">
-                    <span class="title">Wrong Answers</span>
-                    <span class="score" ><?php echo $arr->wrong_answer;?></span>
-                </div>
-            </div>
-            <div class="tiles small">
-                <div class="icon" style="color:#3b82f6;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert w-5 h-5 text-blue-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>    
-                </div>
-                <div class="detail">
-                    <span class="title">Answered Questions</span>
-                    <span class="score"> <?php echo $arr->answer ?> </span>
-                </div>
-            </div>
-            <div class="tiles small">
-                <div class="icon" style="color:#eab308">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-help w-5 h-5 text-yellow-500"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
-                </div>
-                <div class="detail">
-                    <span class="title">Unanswered Questions</span>
-                    <span class="score"> <?php echo $unanswered_que;?> </span>
-                </div>
-            </div>
-            <div class="tiles large">
-                <div class="detail">
-                    <span class="title">Total Questions</span>
-                    <span class="score"> <?php echo $arr->total_que ?> </span>
-                </div>
-            </div>
-            <div class="tiles small">
-                <div class="icon" style="color:#eab308">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award w-5 h-5 text-yellow-500"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
-                </div>
-                <div class="detail">
-                    <span class="title">Obtain Marks</span>
-                    <span class="score"> <?php echo $arr->obtain_marks ?> </span>
-                </div>
-            </div>
-            <div class="tiles small">
-                <div class="icon" style="color:#3b82f6">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-5 h-5 text-blue-500"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                </div>
-                <div class="detail">
-                    <span class="title">Total Marks</span>
-                    <span class="score"> <?php echo $arr->total_marks;?> </span>
-                </div>
-            </div>
+        <div class="progress">
+          <div class="progress-bar" style=<?php echo "width:".$overall_score."%";?>></div>
         </div>
-        <div class="wrapper rate">
-            <div class="heading">
-                Performance Breakdown
-            </div>
-            <div class="score-wrapper">
-                <span class="title">Accuracy Rate</span>
-                <span class="score"><?php echo $accuracy_rate."%";?></span>
-            </div>
-            <div class="range">
-                <div class="range-fill" id="accuracy-rate" style=<?php echo "width:".$accuracy_rate."%";?>></div>
-                <div class="range-unfill"></div>
-            </div>
-            <div class="score-wrapper">
-                <span class="title">Completion Rate</span>
-                <span class="score"> <?php echo $completion_rate."%";?> </span>
-            </div>
-            <div class="range">
-                <div class="range-fill" id="completion-rate" style=<?php echo "width:".$completion_rate."%";?>></div>
-                <div class="range-unfill"></div>
-            </div>
-        </div>
-    </div>
+      </div>
 
+      <div class="grid grid-cols-2">
+        <div class="card border shadow-none">
+          <div class="card-content p-4 flex items-center">
+            <div class="icon-container bg-green-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">Right Answers</p>
+              <p class="text-3xl"><?php echo $arr->right_answer?></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border shadow-none">
+          <div class="card-content p-4 flex items-center">
+            <div class="icon-container bg-red-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">Wrong Answers</p>
+              <p class="text-3xl"><?php echo $arr->wrong_answer;?></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border shadow-none">
+          <div class="card-content p-4 flex items-center">
+            <div class="icon-container bg-blue-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">Answered Questions</p>
+              <p class="text-3xl"><?php echo $arr->answer ?></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border shadow-none">
+          <div class="card-content p-4 flex items-center">
+            <div class="icon-container bg-yellow-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">Unanswered Questions</p>
+              <p class="text-3xl"><?php echo $unanswered_que;?></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border shadow-none">
+        <div class="card-content p-4 flex justify-between items-center">
+          <p class="text-sm font-medium">Total Questions</p>
+          <p class="text-3xl"><?php echo $arr->total_que ?></p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2">
+        <div class="card border shadow-none">
+          <div class="card-content p-4 flex items-center">
+            <div class="icon-container bg-yellow-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">Obtain Marks</p>
+              <p class="text-3xl"><?php echo $arr->obtain_marks ?></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border shadow-none">
+          <div class="card-content p-4 flex items-center">
+            <div class="icon-container bg-blue-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">Total Marks</p>
+              <p class="text-3xl"><?php echo $arr->total_marks ?></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2>Performance Breakdown</h2>
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="text-sm">Accuracy Rate</span>
+              <span class="text-sm font-medium"><?php echo $accuracy_rate."%";?></span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style=<?php echo "width:".$accuracy_rate."%";?>></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="text-sm">Completion Rate</span>
+              <span class="text-sm font-medium"><?php echo $completion_rate."%";?></span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style=<?php echo "width:".$completion_rate."%";?>></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <script>
         <?php 
-            include_once 'js/jquery-3.7.1.min.js';
             include 'js/user_submit.js';
         ?>
     </script>

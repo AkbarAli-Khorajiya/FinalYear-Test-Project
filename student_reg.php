@@ -16,7 +16,7 @@
         <!--Data or Content-->
         <div class="box-1">
             <div class="content-holder">
-                <h2>Exam25</h2>
+                <h2>ExamZone</h2>
                 <p class="sub-content">Already Registered?<br/>Then login</p>
                 <button class="button-2" onclick="login()">Login</button>
                 <button class="button-1" onclick="register()">Register</button>
@@ -27,9 +27,6 @@
             <!--Create Container for Signup form-->
             <div class="register-form-container">
                 <form id="std-reg-form">
-                    <div class="msg">
-                        <div></div>
-                    </div>
                     <h1>Register</h1>
                     <input type="text" name="surName" id="sname" placeholder="Surname"  class="input-field name " required> 
                     <input type="text" name="firstName" id="fname" placeholder="First name"  class="input-field name " required>
@@ -51,23 +48,22 @@
                         <option value="Third-year">Third-year</option>
                     </select>
                     <button class="register-button" id="submit-reg" type="submit">Register</button>
+                    <span class="login-wrapper">Already Registered? Then <a onclick="login()" href="javascript:void(0)">Login</a></span>
                 </form>
             </div>
             <div class="login-form-container">
                 <form id="std-login-form">
-                    <div class="msg">
-                        <div></div>
-                    </div>
                     <h1>Login</h1>
                     <div class="input-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" placeholder="Email" class="input-field login" required>
                     </div>
                     <div class="input-group">
-                        <label for="password"> password</label>
+                        <label for="password"> Password</label>
                         <input type="password" name="password" placeholder="Password" class="input-field login" requ>
                     </div>
                     <button class="login-button" id="submit-login" type="submit">Login</button>
+                    <span class="register-wrapper">Not Register yet? Then <a onclick="register()" href="javascript:void(0)">Register</a></span>
                 </form>
             </div>
         </div>
@@ -94,22 +90,79 @@
         document.querySelector(".sub-content").innerHTML = "Not Register yet?<br/>Then Register";
     };
     $("#sname").focus(()=> {
-        $("#sname").css('width', '222px');
-        $("#fname").css('width', '58px');
-        $("#lname").css('width', '58px');
+        switch($(".container").width()){
+            case 800:
+                $("#sname").css('width', '222px');
+                $("#fname").css('width', '58px');
+                $("#lname").css('width', '58px');
+                break;
+            
+            case 600:
+                $("#sname").css('width', '158px');
+                $("#fname").css('width', '41px');
+                $("#lname").css('width', '41px');
+                break;
+            case 300:
+                $("#sname").css('width', '158px');
+                $("#fname").css('width', '41px');
+                $("#lname").css('width', '41px');
+                break;
+        }
     });
     $("#fname").focus(()=> {
-        $("#sname").css('width', '58px');
-        $("#fname").css('width', '222px');
-        $("#lname").css('width', '58px');
+        switch($(".container").width()){
+            case 800:
+                $("#sname").css('width', '58px');
+                $("#fname").css('width', '222px');
+                $("#lname").css('width', '58px');
+                break;
+            
+            case 600:
+                $("#sname").css('width', '41px');
+                $("#fname").css('width', '158px');
+                $("#lname").css('width', '41px');
+                break;
+            case 300:
+                $("#sname").css('width', '41px');
+                $("#fname").css('width', '158px');
+                $("#lname").css('width', '41px');
+                break;
+        }
     });
     $("#lname").focus(()=> {
-        $("#sname").css('width', '58px');
-        $("#fname").css('width', '58px');
-        $("#lname").css('width', '222px');
+        switch($(".container").width()){
+            case 800:
+                $("#sname").css('width', '58px');
+                $("#fname").css('width', '58px');
+                $("#lname").css('width', '222px');
+                break;
+            
+            case 600:
+                $("#sname").css('width', '41px');
+                $("#fname").css('width', '41px');
+                $("#lname").css('width', '158px');
+                break;
+            case 300:
+                $("#sname").css('width', '41px');
+                $("#fname").css('width', '41px');
+                $("#lname").css('width', '158px');
+                break;
+        }
     });
     $(".name").blur(()=>{
-        $(".name").css('width','113px');
+        switch($(".container").width()){
+            case 800:
+                $(".name").css('width','113px');
+                break;
+            
+            case 600:
+                $(".name").css('width','81px');
+                break;
+            
+            case 300:
+                $(".name").css('width','81px');
+                break;
+        }
     });
 </script>
 </html>

@@ -30,7 +30,7 @@ section{
         margin-top: 25px;
         padding: 20px;
         /* background-color: #8b8b8b; */
-        width: 80%;
+        width: 95%;
         
         .panel{
             border: 1px solid rgb(197, 197, 197);
@@ -47,7 +47,7 @@ section{
                 margin-top: 25px;
                 .head{
                     font-family: "Roboto-Medium",sans-serif;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     color: #71717a;
                 }
                 td{
@@ -62,7 +62,7 @@ section{
                 }
                 .body{
                     font-family: 'Roboto-Regular',sans-serif;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     border-top: 1px solid rgb(197, 197, 197);
                     transition: 200ms linear 0s all;
                     &:hover{
@@ -70,7 +70,7 @@ section{
                     }
                     td span{
                         font-family: 'Roboto-Medium',sans-serif;
-                        font-size: 13px;
+                        font-size: 0.813rem;
                         padding: 4px 12px;
                         background-color: #3c49b9;
                         border-radius: 15px;

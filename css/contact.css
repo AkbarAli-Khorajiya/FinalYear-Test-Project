@@ -87,12 +87,90 @@ section{
             }
         }
         .img-container{
-            padding: 10px;
+            padding: 10px 0px 10px 20px;
             text-align: center;
             img{
                 vertical-align: middle;
                 height: 450px;
             }
         }
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    section{
+        .main-container {
+            .form-container{
+                justify-content: center;
+                align-items:center;
+                .title {
+                    align-self: flex-start;
+                    font-size: 1.8rem;
+                }
+                input[type="text"], input[type="submit"], textarea {
+                    width: 100%;
+                }
+            }
+            .img-container img {
+                height: 320px;
+            }
+        }
+       
+    }
+}
+
+@media (max-width: 768px) {
+    section{
+        .main-container {
+            width: 90%;
+            padding: 0px 20px;
+            .form-container{
+                justify-content: center;
+                align-items:center;
+                .title {
+                    align-self: flex-start;
+                    font-size: 1.8rem;
+                }
+                input[type="text"], input[type="submit"], textarea {
+                    width: 100%;
+                }
+            }
+            .img-container{
+                img{
+                    height: 300px;
+                }
+            }
+        }
+        
+    }
+}
+
+@media (max-width: 480px) {
+    section{
+        .main-container {
+            grid-template-columns: 1fr;
+            width: 90%;
+            padding: 5px 10px;
+            .form-container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .title {
+                    font-size: 1.5rem;
+                }
+                input[type="text"], input[type="submit"], textarea {
+                    width: 93%;
+                }
+                
+            }
+            .img-container img {
+                /* height: 200px; */
+                display: none;
+            }
+        }
+        
     }
 }

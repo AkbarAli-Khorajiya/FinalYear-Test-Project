@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $('.range-fill').each( function() {
-            const rangeFillWidth = $(this).width() / $('.range-unfill').width() * 100;  
+    $('.progress-bar').each( function() {
+            const rangeFillWidth = $(this).width() / $('.progress').width() * 100;  
             console.log(rangeFillWidth);
         if(rangeFillWidth < '30'){
             $(this).css('background-color','#ef4444');
