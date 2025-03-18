@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Online Test Instructions</title>
     <style>
-        <?php include_once 'css/instruction.css' ;?>
+        <?php include_once 'css/instruction.css';
+        ?>
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Online Test Instructions</h1>
@@ -29,11 +32,12 @@
     <script>
         document.getElementById('startTest').addEventListener('click', function() {
             if (document.getElementById('agree').checked) {
-                // window.location.href = 'test.html'; 
+                window.location.href = 'test.html';
             } else {
                 alert('Please check the checkbox to confirm you have read the instructions.');
             }
         });
     </script>
 </body>
+
 </html>
