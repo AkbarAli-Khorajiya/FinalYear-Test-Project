@@ -235,10 +235,9 @@ class Student
         $result = mysqli_query($this->conn, $query);
         $row = mysqli_fetch_assoc($result);
         $testName = $row['test_name'];
-        $obtainMarks = $data['right_answer'] * $row['marks_per_ques'];
-        $totalMarks = $data['total_que'] * $row['marks_per_ques'];
-
-        $query = "INSERT INTO `user_submit`( `user_id`, `test_name`,`total_marks`, `mark_obtain`) VALUES (" . $user_id . ",'" . $testName . "'," . $totalMarks . "," . $obtainMarks . ")";
+        $obtainMarks = $data['right_answer'] * $row['mark_per_ques'];
+        $totalMarks = $data['total_que'] * $row['mark_per_ques'];
+        $query = "INSERT INTO `user_submit`( `user_id`, `test_id`,`total_marks`, `mark_obtain`) VALUES (" . $user_id . ",'" . $test_id . "'," . $totalMarks . "," . $obtainMarks . ")";
         if (mysqli_query($this->conn, $query)) {
             $data['obtain_marks'] = $obtainMarks;
             $data['total_marks'] = $totalMarks;
@@ -274,7 +273,7 @@ class Student
             return 1 ."||Verification Successful";
         }
         else{
-            return 0 ."||Verification Not Successful"; 
+            return 1 . "||Verification Not Successful";
         }
     }
     function mail($email,$otp)

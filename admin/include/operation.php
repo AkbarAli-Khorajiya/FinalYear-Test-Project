@@ -875,6 +875,91 @@ class Teacher_operation
 
         return $row1['totalTeacher'] . "||" . $row2['totalStudent'] . "||" . $row3['totalTest'] . "||" . $row4['totalActiveStudent'] . "||" . $row5['totalDeActiveStudent'] . "||" . $row6['totalActiveTeacher'] . "||" . $row7['totalDeActiveTeacher'];
     }
+    function listTestResult($post)
+    {
+        if ($_SESSION['admin_role'] == 2) {
+            $stmt = "SELECT usub.id,usub.test_id,t.test_name,COUNT(DISTINCT usub.user_id) totalParticipant,t.duration ,(SELECT COUNT(*) from question where test_id = t.id) as totalQuestion,usub.total_marks,t.created_for,teach.name as teacherName FROM `user_submit` AS usub JOIN test AS t ON usub.test_id = t.id JOIN question AS que ON que.test_id = usub.test_id JOIN admin AS teach ON t.created_by_admin = teach.id WHERE teach.id = " . $_SESSION['admin_id'] . " GROUP BY usub.test_id";
+        } else {
+            $stmt = "SELECT usub.id,usub.test_id,t.test_name,COUNT(DISTINCT usub.user_id) totalParticipant,t.duration ,(SELECT COUNT(*) from question where test_id = t.id) as totalQuestion,usub.total_marks,t.created_for,teach.name as teacherName FROM `user_submit` AS usub JOIN test AS t ON usub.test_id = t.id JOIN question AS que ON que.test_id = usub.test_id JOIN admin AS teach ON t.created_by_admin = teach.id GROUP BY usub.test_id";
+        }
+        $result = mysqli_query($this->conn, $stmt);
+        $num = mysqli_num_rows($result);
+        $str = '<thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Test Name</th>
+                    <th>Total Participants</th>
+                    <th>Test Duration (min)</th>
+                    <th>Total Questions</th>
+                    <th>Total Marks</th>
+                    <th>Created For</th>
+                    <th>Created By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>';
+        if ($num > 0) {
+            $i = 1;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $str .= '<tr>
+                <td>' . $i . '</td>
+                <td>' . $row["test_name"] . '</td>
+                <td>' . $row["totalParticipant"] . '</td>
+                <td>' . $row["duration"] . '</td>
+                <td>' . $row["totalQuestion"] . '</td>
+                <td>' . $row["total_marks"] . '</td>
+                <td>' . $row["created_for"] . '</td>
+                <td>' . $row["teacherName"] . '</td>
+                <td><button id=' . $row['test_id'] . ' class="primaryBtn view-more">View More</button></td>
+            </tr>';
+                $i++;
+            }
+            $str .= "</tbody>";
+            return $str;
+        } else {
+            return "Data Not Found";
+        }
+    }
+    function listAttemptedStudents($post)
+    {
+        // return $post['data']['id'];
+        $resultId = $post['data']['id'];
+        // return $resultId;
+        $stmt = "SELECT usub.id,t.test_name,u.name,usub.mark_obtain,usub.total_marks,u.class,usub.attempted_at FROM `user_submit` as usub join user as u ON usub.user_id = u.id JOIN test as t ON usub.test_id = $resultId";
+        // return $stmt;
+        $result = mysqli_query($this->conn, $stmt);
+        $num = mysqli_num_rows($result);
+        $str = '<thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Student Name</th>
+                    <th>Marks Obtain</th>
+                    <th>Total Marks</th>
+                    <th>Class</th>
+                    <th>Attempted On</th>
+                </tr>
+            </thead>
+            <tbody>';
+        if ($num > 0) {
+            $i = 1;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $nameArr = explode('|', $row['name']);
+                $str .= '<tr>
+                <td>' . $i . '</td>
+                <td>' . $nameArr[0] . ' ' . $nameArr[1] . ' ' . $nameArr[2] . '</td>
+                <td>' . $row["mark_obtain"] . '</td>
+                <td>' . $row["total_marks"] . '</td>
+                <td>' . $row["class"] . '</td>
+                <td>' . $row["attempted_on"] . '</td>
+            </tr>';
+                $i++;
+            }
+            $str .= "</tbody>";
+            return $str;
+        } else {
+            return "Data Not Found";
+        }
+    }
 }
 
 $tch_obj = new Teacher_operation();
@@ -896,5 +981,11 @@ switch ($ch) {
         break;
     case '28':
         echo $tch_obj->getDashInfo($_POST);
+        break;
+    case '29':
+        echo $tch_obj->listTestResult($_POST);
+        break;
+    case '30':
+        echo $tch_obj->listAttemptedStudents($_POST);
         break;
 }
