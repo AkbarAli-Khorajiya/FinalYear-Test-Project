@@ -91,7 +91,7 @@ function updateStatus(element) {
 
     let id = element.id;
     console.log(id)
-    if (element.className == "activate") {
+    if (element.className.trim() == "activate") {
         $.ajax({
             type: "POST",
             url: "include/operation.php?ch=25",
@@ -103,7 +103,7 @@ function updateStatus(element) {
                 }
             }
         });
-    } else if (element.className == "de-activate") {
+    } else if (element.className.trim() == "de-activate") {
         $.ajax({
             type: "POST",
             url: "include/operation.php?ch=25",

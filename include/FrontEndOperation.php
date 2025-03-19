@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-
+require_once __DIR__ . '/../env.php';
 use PragmaRX\Google2FA\Google2FA;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -241,6 +241,9 @@ class Student
         if (mysqli_query($this->conn, $query)) {
             $data['obtain_marks'] = $obtainMarks;
             $data['total_marks'] = $totalMarks;
+            $data['test_name'] = $testName;
+            $post["logout"] = 1;
+            $this->logoutUser($post);
             return $data;
         }
     }
@@ -256,6 +259,19 @@ class Student
                 'question' => $row['question'],
                 'options' => explode('||', $row['options']),
             ];
+        }
+        return json_encode($obj);
+    }
+    function getTestData($data){
+        $testId = $data['testId'];
+        $obj =[];
+        $testDataQuery = "SELECT * FROM test WHERE id=".$testId;
+        $testDataResult = mysqli_query($this->conn,$testDataQuery);
+        while ($testDataRow = mysqli_fetch_assoc($testDataResult)){
+            $obj['testName'] = $testDataRow['test_name'];
+            $obj['testDuration'] = $testDataRow['duration'];
+            $obj['testStartTime'] = $testDataRow['test_start_time'];
+            $obj['testStartDate'] = $testDataRow['test_start_date'];
         }
         return json_encode($obj);
     }
@@ -288,13 +304,13 @@ class Student
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'mahammadali2307@gmail.com';                     //SMTP username
-            $mail->Password   = 'rdmk jhpl cgpm rpwp';                               //SMTP password
+            $mail->Username   = $_ENV["hostEmail"];                     //SMTP username
+            $mail->Password   = $_ENV["hostAppPassword"];                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('mahmmadali2307@gmail.com', 'ExamZone');
+            $mail->setFrom($_ENV["hostEmail"], 'ExamZone');
             $mail->addAddress($email);     //Add a recipient 
 
             //Content
@@ -331,5 +347,8 @@ switch ($ch) {
         break;
     case '6':
         echo $stdObj->verifyOtp($_POST);
+        break;
+    case '7':
+        echo $stdObj->getTestData($_POST);
         break;
 }

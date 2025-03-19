@@ -14,16 +14,22 @@ $(document).ready(async function () {
             localStorage.setItem('allQues', JSON.stringify(response));
         }
     });
-
+    let testData;
+    await $.ajax({
+        type: "post",
+        url: "include/FrontEndOperation.php?ch=7",
+        data:{testId: testId},
+        success: function (response) {
+            testData = JSON.parse(response);
+            console.log(testData)
+            if(testData != null)
+            {
+                getTestLeftDuration();
+            }
+        }
+    });
     //get question from local storage
     const allQues = JSON.parse(localStorage.getItem('allQues'));
-    if(allQues == null)
-    {
-        // location.reload();
-        // setTimeout(function(){
-        //     location.reload();
-        // },100);
-    }
     // get all question id
     let queId = Object.keys(allQues);
 
@@ -229,7 +235,15 @@ $(document).ready(async function () {
             }
         },1000);
     }
-    startTimer(30, $("#clock"));
+    function getTestLeftDuration(){
+        let cuurentTime = new Date();
+        let strStartDate = testData['testStartDate'] +" "+testData["testStartTime"] +" GMT+0530 (India Standard Time)";
+        let testStartTime = new Date(strStartDate);
+        let endTime = new Date(testStartTime.getTime() + parseInt(testData['testDuration']) * 60000);
+        const remaining = Math.round((endTime - cuurentTime) /60000);
+        return remaining;
+    }
+    startTimer(getTestLeftDuration(), $("#clock"));
     $("#btnSubmit").click(function(){
         $("body").css("display", "none");
         redirect(1);
@@ -267,6 +281,41 @@ $(document).ready(async function () {
             });
         }
     }
+
+    // below code for preventing cheating 
+    //disable right-click
+    // $(document).on("contextmenu", function (e) {
+    //     e.preventDefault();
+    // });
+    //disable copy paste
+    $(document).on("copy paste", function (e) {
+        e.preventDefault();
+    });
+
+    // //Block dev tools shortcuts
+    // $(document).on("keydown", function (e) {
+    //     if (
+    //       e.key === "F12" ||
+    //       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+    //       (e.ctrlKey && e.key === "U")
+    //     ) {
+    //       e.preventDefault();
+    //     }
+    // });
+    
+    //window lose focus or blur
+    let warningCount = 0;
+    const maxWarnings = 3;
+
+    // Detect tab switching (loss of focus)
+    // $(window).on('blur', function () {
+    //   warningCount++;
+    //   alert(`⚠️ Warning ${warningCount}/3: Do not switch tabs or windows!`);
+    //   if (warningCount >= maxWarnings) {
+    //     alert("❌ Test terminated due to suspicious activity.");
+    //     redirect(1);
+    //   }
+    // });
 });
 $(window).on('beforeunload', function () {
     for (const key in localStorage) {

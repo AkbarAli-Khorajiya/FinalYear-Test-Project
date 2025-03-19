@@ -17,6 +17,7 @@ function list_all_test() {
         url: "include/operation.php?ch=1",
         encode: true,
         success: function(response) {
+            console.log(response)
             $("#test-table").html(response);
             //----- Update test show---//
             $(".edit-test").on("click", () => {

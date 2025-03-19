@@ -1,8 +1,8 @@
 <?php
-    session_start();
     if(isset($_GET)){
         $arr = json_decode($_GET['res_data']);
         $unanswered_que = $arr->not_answer+$arr->nvisit_answer;
+        $testName = $arr->test_name;
         try {
             $overall_score = round(($arr->right_answer / $arr->total_que)*100, 2);
             $accuracy_rate = round(($arr->right_answer / $arr->answer) * 100,2);
@@ -33,7 +33,7 @@
   <div class="main-card card">
     <div class="card-content space-y-4">
       <div>
-        <h1>PHP TEST RESULT</h1>
+        <h1><?php if(str_contains(strtoupper($testName),"TEST")){ echo strtoupper($testName) ."RESULT";} else {echo strtoupper($testName) ." TEST RESULT";}?> </h1>
         <div class="flex justify-between items-center mt-1">
           <span class="text-sm font-medium">Overall Score</span>
           <span class="text-sm font-medium"><?php echo $overall_score."/100(".$overall_score."%)"?></span>
@@ -173,6 +173,10 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="btn-container">
+      <button id="btnPrint">Print</button>
+      <button id="btnHome">Home</button>
   </div>
     <script>
         <?php 

@@ -1,3 +1,10 @@
+<?php
+session_start();
+    if(!isset($_SESSION["testId"]) && $_SESSION["testId"]==null)
+    {
+        header('location:examlist');
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

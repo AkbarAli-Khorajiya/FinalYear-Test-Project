@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 error_reporting(0);
 session_start();
 $ch = $_GET["ch"];
@@ -41,7 +44,7 @@ class Test_operation
         $que_obj = new Question_operation();
         if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
-            if ($_SESSION['admin_role'] == 1) {
+            if ($_SESSION['admin_role']== 1) {
                 $query = "select * from test where test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
             } else {
                 $query = "select * from test where created_by_admin = " . $_SESSION['admin_id'] . " and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
@@ -107,10 +110,10 @@ class Test_operation
         $testStartTime = $post['time'];
         $createdFor = $post['created-for'];
         $marksPerQues = $post['marks'];
-
+        $createdBy = $_SESSION["admin_id"];
         // return $test_name . "||" . $duration . "||" . $testStartDate . "||" . $testStartTime . "||" . $createdFor . "||" . $marksPerQues;
 
-        $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_time`, `test_start_date`, `mark_per_ques`, `created_for`, `created_by_admin`, `status`) VALUES ('$test_name',' $duration','$testStartTime','$testStartDate','$marksPerQues', '$createdFor','1','1')";
+        $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_time`, `test_start_date`, `mark_per_ques`, `created_for`, `created_by_admin`, `status`) VALUES ('$test_name',' $duration','$testStartTime','$testStartDate','$marksPerQues', '$createdFor','$createdBy','1')";
         if (mysqli_query($this->conn, $query)) {
             $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
             $execute = mysqli_query($this->conn, $stmt);
@@ -925,7 +928,7 @@ class Teacher_operation
         // return $post['data']['id'];
         $resultId = $post['data']['id'];
         // return $resultId;
-        $stmt = "SELECT usub.id,t.test_name,u.name,usub.mark_obtain,usub.total_marks,u.class,usub.attempted_at FROM `user_submit` as usub join user as u ON usub.user_id = u.id JOIN test as t ON usub.test_id = $resultId";
+        $stmt = "SELECT usub.id, t.test_name, u.name, usub.mark_obtain, usub.total_marks, u.class, usub.attempted_at FROM user_submit AS usub JOIN user AS u ON usub.user_id = u.id JOIN test AS t ON usub.test_id = t.id WHERE usub.test_id = $resultId";
         // return $stmt;
         $result = mysqli_query($this->conn, $stmt);
         $num = mysqli_num_rows($result);
@@ -950,7 +953,7 @@ class Teacher_operation
                 <td>' . $row["mark_obtain"] . '</td>
                 <td>' . $row["total_marks"] . '</td>
                 <td>' . $row["class"] . '</td>
-                <td>' . $row["attempted_on"] . '</td>
+                <td>' . date("d M Y",strtotime($row["attempted_at"])) . '</td>
             </tr>';
                 $i++;
             }

@@ -14,7 +14,8 @@ $(document).ready(function () {
         }
         else{
             const data = $("#loginForm").serialize();
-            console.log(data);
+            // console.log(data);
+        
             $.ajax({
                 type: "POST",
                 url: "include/FrontEndOperation.php?ch=2",
@@ -24,9 +25,8 @@ $(document).ready(function () {
                     $('.loader-container').show();
                 },
                 success: function (response) {
-                    console.log(response)
                     let responseArr = response.split("||");
-                    // console.log(responseArr)
+                    console.log(responseArr)
                     if(responseArr[0].substr(responseArr[0].length-1) == 1)
                     {
                         $("#loginForm").css("display","none");                   
@@ -38,6 +38,7 @@ $(document).ready(function () {
                         $(".alert").show();
                         setTimeout(() => {
                             $(".alert").fadeOut();
+                            $(".alert").removeClass('warning');
                         }, 1500);
                     }  
                 },
@@ -56,6 +57,7 @@ $(document).ready(function () {
             $("#otpForm .alert").show();
             setTimeout(() => {
                 $("#otpForm .alert").fadeOut();
+                $("#otpForm .alert").removeClass('warning');
             }, 1500);
         }
         const regex = /^\d+$/;
@@ -66,6 +68,7 @@ $(document).ready(function () {
             $("#otpForm .alert").show();
             setTimeout(() => {
                 $("#otpForm .alert").fadeOut();
+                $("#otpForm .alert").removeClass('warning');
             }, 1500);
         }
         else{
@@ -79,7 +82,6 @@ $(document).ready(function () {
                     $('.loader-container').show();
                 },
                 success: function (response) {
-                    console.log(response)
                     let responseArr = response.split("||");
                     if(responseArr[0]==1){
                         $(".alert").text(responseArr[1]);
@@ -96,6 +98,7 @@ $(document).ready(function () {
                         $(".alert").show();
                         setTimeout(() => {
                             $(".alert").fadeOut();
+                            $(".alert").removeClass('warning');
                         }, 1500);
                     }
                 },

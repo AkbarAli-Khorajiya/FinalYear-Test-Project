@@ -10,4 +10,14 @@ $(document).ready(function () {
             $(this).css('background-color','#22c55e');
         }
     });
+    //redirct to home
+    $("#btnHome").click(()=> { 
+        window.location.href = "index";
+    });
+    $("#btnPrint").click(()=> { 
+        $(".btn-container").hide();
+        window.print();
+        $(".btn-container").show();
+
+    });
 });

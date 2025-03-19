@@ -1,6 +1,12 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["testId"]) && $_SESSION["testId"] == null)
+    {
+        header('location:examlist'); 
+    }
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Online Test Instructions</title>
     <style>
@@ -18,7 +24,7 @@
             <li>The test consists of multiple-choice questions.</li>
             <li>There is no negative marking.</li>
             <li>You can review and change your answers before submitting the test.</li>
-            <li>Do not refresh the page or close the browser window during the test.</li>
+            <li>Do not refresh the page or close the browser window during the test else test will terminate.</li>
             <li>If you experience any technical issues, contact the support team immediately.</li>
         </ol>
         <br>
@@ -32,11 +38,12 @@
     <script>
         document.getElementById('startTest').addEventListener('click', function() {
             if (document.getElementById('agree').checked) {
-                window.location.href = 'test.html';
+                window.location.href = 'exam_main?testId=<?php echo $_SESSION["testId"];?>';
             } else {
                 alert('Please check the checkbox to confirm you have read the instructions.');
             }
         });
+
     </script>
 </body>
 

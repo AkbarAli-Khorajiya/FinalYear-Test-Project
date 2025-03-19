@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(isset($_GET["testId"]) && $_GET["testId"] != null){
         $_SESSION["testId"] = $_GET["testId"];
     }
