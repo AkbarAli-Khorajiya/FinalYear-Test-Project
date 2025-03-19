@@ -284,38 +284,38 @@ $(document).ready(async function () {
 
     // below code for preventing cheating 
     //disable right-click
-    // $(document).on("contextmenu", function (e) {
-    //     e.preventDefault();
-    // });
+    $(document).on("contextmenu", function (e) {
+        e.preventDefault();
+    });
     //disable copy paste
     $(document).on("copy paste", function (e) {
         e.preventDefault();
     });
 
-    // //Block dev tools shortcuts
-    // $(document).on("keydown", function (e) {
-    //     if (
-    //       e.key === "F12" ||
-    //       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
-    //       (e.ctrlKey && e.key === "U")
-    //     ) {
-    //       e.preventDefault();
-    //     }
-    // });
+    //Block dev tools shortcuts
+    $(document).on("keydown", function (e) {
+        if (
+          e.key === "F12" ||
+          (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+          (e.ctrlKey && e.key === "U")
+        ) {
+          e.preventDefault();
+        }
+    });
     
     //window lose focus or blur
     let warningCount = 0;
     const maxWarnings = 3;
 
-    // Detect tab switching (loss of focus)
-    // $(window).on('blur', function () {
-    //   warningCount++;
-    //   alert(`⚠️ Warning ${warningCount}/3: Do not switch tabs or windows!`);
-    //   if (warningCount >= maxWarnings) {
-    //     alert("❌ Test terminated due to suspicious activity.");
-    //     redirect(1);
-    //   }
-    // });
+   // Detect tab switching (loss of focus)
+    $(window).on('blur', function () {
+      warningCount++;
+      alert(`⚠️ Warning ${warningCount}/3: Do not switch tabs or windows!`);
+      if (warningCount >= maxWarnings) {
+        alert("❌ Test terminated due to suspicious activity.");
+        redirect(1);
+      }
+    });
 });
 $(window).on('beforeunload', function () {
     for (const key in localStorage) {
