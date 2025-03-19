@@ -35,6 +35,7 @@ $("#test-table").on("click", ".testlink", function() {
 $("#test-table").on("click", ".delete-test", function() {
     if (confirm("Are you sure you want to Delete Test?")) {
         let data = this.id;
+        console.log(data)
         $.post(
             "include/operation.php?ch=3", {
                 ch: "3",

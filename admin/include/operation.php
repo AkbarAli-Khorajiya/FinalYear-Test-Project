@@ -45,17 +45,17 @@ class Test_operation
         if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
             if ($_SESSION['admin_role']== 1) {
-                $query = "select * from test where test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
+                $query = "select * from test where status = 1 and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
             } else {
-                $query = "select * from test where created_by_admin = " . $_SESSION['admin_id'] . " and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
+                $query = "select * from test where status = 1 and created_by_admin = " . $_SESSION['admin_id'] . " and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
             }
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
         } else {
             if ($_SESSION['admin_role'] == 1) {
-                $query = 'select * from test';
+                $query = 'select * from test where status = 1';
             } else {
-                $query = 'select * from test where created_by_admin =  ' . $_SESSION['admin_id'] . '';
+                $query = 'select * from test where status = 1 and created_by_admin =  ' . $_SESSION['admin_id'] . '';
             }
             $result = mysqli_query($this->conn, $query);
             $num = mysqli_num_rows($result);
@@ -156,35 +156,45 @@ class Test_operation
     // SELECT `id`, `test_id`, `question` FROM `question` WHERE test_id = 1; to get all question of test
     function delete_test($id)
     {
-        $que_obj = new Question_operation();
-        $query = "select id from question where test_id=" . $id['id'];
+
+
+        $query = "UPDATE `test` SET `status`= 0 WHERE `id` =" . $id['id'];
         $execute = mysqli_query($this->conn, $query);
-        $num = mysqli_num_rows($execute);
-        if ($num != 0) {
-            $count = 0;
-            while ($row = mysqli_fetch_assoc($execute)) {
-                $response = $que_obj->delete_question($row);
-                $responseArr = explode("||", $response);
-                if ($responseArr[0] == "1") {
-                    $count++;
-                }
-            }
-            if ($num == $count) {
-                $query = "delete from test where id=" . $id['id'];
-                if (mysqli_query($this->conn, $query)) {
-                    return 1  . "||Test Deleted Successfully";
-                } else {
-                    return 0 . "||Test Not Deleted";
-                }
-            }
+        if ($execute) {
+            return 1  . "||Test Deleted Successfully";
         } else {
-            $query = "delete from test where id=" . $id['id '];
-            if (mysqli_query($this->conn, $query)) {
-                return 1 . "||Test Deleted Successfully";
-            } else {
-                return 0 . "||Test Not Deleted";
-            }
+            return 0 . "||Test Not Deleted";
         }
+
+        // $que_obj = new Question_operation();
+        // $query = "select id from question where test_id=" . $id['id'];
+        // $execute = mysqli_query($this->conn, $query);
+        // $num = mysqli_num_rows($execute);
+        // if ($num != 0) {
+        //     $count = 0;
+        //     while ($row = mysqli_fetch_assoc($execute)) {
+        //         $response = $que_obj->delete_question($row);
+        //         $responseArr = explode("||", $response);
+        //         if ($responseArr[0] == "1") {
+        //             $count++;
+        //         }
+        //     }
+        //     if ($num == $count) {
+        //         $query = "delete from test where id=" . $id['id'];
+        //         if (mysqli_query($this->conn, $query)) {
+        //             return 1  . "||Test Deleted Successfully";
+        //         } else {
+        //             return 0 . "||Test Not Deleted";
+        //         }
+        //     }
+        // } else {
+        //     $query = "delete from test where id=" . $id['id '];
+        //     if (mysqli_query($this->conn, $query)) {
+        //         return 1 . "||Test Deleted Successfully";
+        //     } else {
+        //         return 0 . "||Test Not Deleted";
+        //     }
+        // }
     }
 }
 
@@ -852,7 +862,7 @@ class Teacher_operation
         $row2 = mysqli_fetch_assoc($result);
 
         // Total Test
-        $stmtTotal = "SELECT COUNT(*) as totalTest FROM `test`";
+        $stmtTotal = "SELECT COUNT(*) as totalTest FROM `test` where status = 1";
         $result = mysqli_query($this->conn, $stmtTotal);
         $row3 = mysqli_fetch_assoc($result);
 
