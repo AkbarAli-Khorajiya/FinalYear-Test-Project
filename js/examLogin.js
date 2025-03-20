@@ -37,8 +37,7 @@ $(document).ready(function () {
                         $(".alert").addClass('warning');
                         $(".alert").show();
                         setTimeout(() => {
-                            $(".alert").fadeOut();
-                            $(".alert").removeClass('warning');
+                            $(".warning").fadeOut();
                         }, 1500);
                     }  
                 },
@@ -56,8 +55,7 @@ $(document).ready(function () {
             $("#otpForm .alert").addClass('warning');
             $("#otpForm .alert").show();
             setTimeout(() => {
-                $("#otpForm .alert").fadeOut();
-                $("#otpForm .alert").removeClass('warning');
+                $("#otpForm .warning").fadeOut();
             }, 1500);
         }
         const regex = /^\d+$/;
@@ -67,8 +65,7 @@ $(document).ready(function () {
             $("#otpForm .alert").addClass('warning');
             $("#otpForm .alert").show();
             setTimeout(() => {
-                $("#otpForm .alert").fadeOut();
-                $("#otpForm .alert").removeClass('warning');
+                $("#otpForm .warning").fadeOut();
             }, 1500);
         }
         else{
@@ -97,8 +94,8 @@ $(document).ready(function () {
                         $(".alert").addClass('warning');
                         $(".alert").show();
                         setTimeout(() => {
-                            $(".alert").fadeOut();
-                            $(".alert").removeClass('warning');
+                            $(".warning").fadeOut();
+                            
                         }, 1500);
                     }
                 },

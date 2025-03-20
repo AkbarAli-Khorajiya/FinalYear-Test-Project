@@ -81,6 +81,13 @@ class Student
             $user_mail = $row['email'];
             $gender = $row['gender'];
             $status = $row['status'];
+            if(isset($post['testLogin']) && $post['testLogin'] == 1)
+            {
+                $isAttempted = $this->checkUserAttemptedTest($user_id);
+                if($isAttempted){
+                    return 0 . "||Already Attempted Test"; 
+                }
+            }
             if ($status == '0') {
                 return 0 . "||Access Denied";
             }
@@ -100,6 +107,13 @@ class Student
             }
         } else {
             return 0 . "||Invalid Credential";
+        }
+    }
+    function checkUserAttemptedTest($id){
+        $query = "SELECT * FROM user_submit WHERE user_id =".$id;
+        $result = mysqli_query($this->conn,$query);
+        if(mysqli_num_rows($result) > 0){
+            return true;
         }
     }
     function logoutUser($post)

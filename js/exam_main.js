@@ -313,7 +313,9 @@ $(document).ready(async function () {
       alert(`⚠️ Warning ${warningCount}/3: Do not switch tabs or windows!`);
       if (warningCount >= maxWarnings) {
         alert("❌ Test terminated due to suspicious activity.");
-        redirect(1);
+        setTimeout(()=>{
+            redirect(1);
+        },2000)
       }
     });
 });

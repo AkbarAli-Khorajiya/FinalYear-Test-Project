@@ -36,6 +36,7 @@
             <input type="submit" value="Send OTP" id="btnOtp">
         </div>
         <input type="text" name="otp" value="true" hidden>
+        <input type="text" name="testLogin" value="1" hidden>
     </form>
     <form id="otpForm" style="display:none" action="javascript:void(0)">
         <div class="alert"></div>
