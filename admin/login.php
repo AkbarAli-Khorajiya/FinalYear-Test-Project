@@ -7,6 +7,7 @@
     <title>Admin Login</title>
     <style type="text/css">
         <?php include_once 'css/login.css';
+
         ?>
     </style>
     <script src="js/jquery-3.7.1.min.js" type="text/javascript"></script>
