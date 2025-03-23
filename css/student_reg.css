@@ -203,7 +203,15 @@ body
         color:#6366e6;
     }
 }
-
+.forget-wrapper{
+    a{
+        float: right;
+        font-size: 0.9rem;
+        text-decoration: none;
+        color: #474ab7;
+        font-family: 'Roboto-Medium', sans-serif;
+    }
+}
 /* Responsive Design */
 @media (max-width: 1200px) {
     .container{

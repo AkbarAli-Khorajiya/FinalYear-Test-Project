@@ -61,6 +61,7 @@
                     <div class="input-group">
                         <label for="password"> Password</label>
                         <input type="password" name="password" placeholder="Password" class="input-field login" requ>
+                        <span class="forget-wrapper"> <a href="forgetpassword">Forget password?</a></span>
                     </div>
                     <button class="login-button" id="submit-login" type="submit">Login</button>
                     <span class="register-wrapper">Not Register yet? Then <a onclick="register()" href="javascript:void(0)">Register</a></span>
