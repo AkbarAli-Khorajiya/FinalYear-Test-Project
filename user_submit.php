@@ -1,5 +1,5 @@
 <?php
-    if(isset($_GET)){
+    if(isset($_GET['res_data'])){
         $arr = json_decode($_GET['res_data']);
         $unanswered_que = $arr->not_answer+$arr->nvisit_answer;
         $testName = $arr->test_name;

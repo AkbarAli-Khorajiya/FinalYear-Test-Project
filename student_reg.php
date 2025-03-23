@@ -17,7 +17,7 @@
         <div class="box-1">
             <div class="content-holder">
                 <h2>ExamZone</h2>
-                <p class="sub-content">Already Registered?<br/>Then login</p>
+                <p class="sub-content">Not Register yet?<br/>Then Register</p>
                 <button class="button-2" onclick="login()">Login</button>
                 <button class="button-1" onclick="register()">Register</button>
             </div>

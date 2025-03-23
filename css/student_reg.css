@@ -78,7 +78,7 @@ body
 {
     text-align: center;
     /* margin-top: 10%; */
-    display: none;
+    /* display: none; */
     animation: visible 300ms linear;
 }
 @keyframes visible {
@@ -160,7 +160,7 @@ body
       background-color: #5456dab0;
     }
 }
-.button-1
+.button-2
 {
     display: none;
 }
@@ -168,7 +168,7 @@ body
 {
     text-align: center;
     animation: visible 300ms linear;
-    /* display: none; */
+    display: none;
 }
 .register-form-container h1
 {

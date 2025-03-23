@@ -76,6 +76,14 @@ form{
                 outline-color: #8e8e95;
             }
         }
+        .otp-timer{
+            display: block;
+            text-align: right;
+            padding: 5px;
+            font-family: 'Roboto-Medium', sans-serif;
+            font-size: 0.9rem;
+            color: #0d920d;
+        }
     }
     .btn{
         padding: 10px 5px 5px 5px;

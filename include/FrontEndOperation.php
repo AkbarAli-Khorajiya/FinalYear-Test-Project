@@ -43,7 +43,7 @@ class Student
         } else if ($post === 4) {
             return 0 . "||Password is required";
         } else if ($post === 4.1) {
-            return 0 . "||Password must be between 8 and 20 characters";
+            return 0 . "||Password must be between 8 to 20 characters";
         } else if ($post === 5) {
             return 0 . "||Confirm password is required";
         } else if ($post === 5.1) {
@@ -306,6 +306,59 @@ class Student
             return 1 . "||Verification Not Successful";
         }
     }
+    //function for send again otp
+    function sendAgainOtp()
+    {
+        
+    }
+    function sendForgotPasswordOTP($data){
+        if($this->checkUser($data) == 1)
+        {
+            return 0 . "||Invalid Email";
+        }
+        else{
+            $otp = $this->sendOtp();
+            $_SESSION["forgetPasswordEmail"] = $data['email'];
+            $msg = $this->mail($data['email'],$otp);
+            return 1 ."||OTP Send";
+        }
+    }
+    function forgetPassword($data){
+        // validate Password
+        if (empty($data['newPassword'])) {
+            return 4;
+        } else {
+            $password = $this->cleanData($data['newPassword']);
+            // check if password is between 8 and 20 characters
+            if (strlen($password) < 8 || strlen($password) > 20) {
+                return 0 ."|| Password must be between 8 to 20 characters";
+            }
+        }
+        // validate confirm password
+        if (empty($data["confirmNewPassword"])) {
+            return 0 . "||Confirm password is required";
+        } else {
+            $confirmPassword = $this->cleanData($data["confirmNewPassword"]);
+            // check if confirm password matches password
+            if ($confirmPassword != $password) {
+                return 0 . "||Passwords does not match";
+            }
+        }
+
+        //update password in db
+        $email = $_SESSION['forgetPasswordEmail'];
+        $password = password_hash($confirmPassword, PASSWORD_DEFAULT);
+        $query = "UPDATE `user` SET `password` = '$password' WHERE `email` = '$email'";
+        $result = mysqli_query($this->conn,$query);
+        if($result)
+        {
+            unset($_SESSION['forgetPasswordEmail']);
+            return 1 . "|| Password updated Successfully"; 
+        }
+        else{
+            return 0 . "|| Password not updated";
+        }
+    }
     function mail($email,$otp)
     {
 
@@ -330,7 +383,7 @@ class Student
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Exam Login OTP';
-            $mail->Body    = "Your OTP is".$otp;
+            $mail->Body    = "Your OTP is <b>".$otp."</b>";
 
             $mail->send();
             return 'Message has been sent';
@@ -364,5 +417,11 @@ switch ($ch) {
         break;
     case '7':
         echo $stdObj->getTestData($_POST);
+        break;
+    case '8':
+        echo $stdObj->sendForgotPasswordOTP($_POST);
+        break;
+    case '9':
+        echo $stdObj->forgetPassword($_POST);
         break;
 }

@@ -33,9 +33,9 @@ $(document).ready(function () {
                         $("#otpForm").css("display", "block");
                     }
                     else{
-                        $(".alert").text(responseArr[1]);
-                        $(".alert").addClass('warning');
-                        $(".alert").show();
+                        $("#loginForm .alert").text(responseArr[1]);
+                        $("#loginForm .alert").addClass('warning');
+                        $("#loginForm .alert").show();
                         setTimeout(() => {
                             $(".warning").fadeOut();
                         }, 1500);
@@ -81,20 +81,20 @@ $(document).ready(function () {
                 success: function (response) {
                     let responseArr = response.split("||");
                     if(responseArr[0]==1){
-                        $(".alert").text(responseArr[1]);
-                        $(".alert").addClass('success');
-                        $(".alert").show();
+                        $("#otpForm .alert").text(responseArr[1]);
+                        $("#otpForm .alert").addClass('success');
+                        $("#otpForm .alert").show();
                         setTimeout(() => {
-                            $(".alert").fadeOut();
+                            $("#otpForm .alert").fadeOut();
                             window.location.href = "instruction.php";
                         }, 1500);
                     }
                     else{
-                        $(".alert").text(responseArr[1]);
-                        $(".alert").addClass('warning');
-                        $(".alert").show();
+                        $("#otpForm .alert").text(responseArr[1]);
+                        $("#otpForm .alert").addClass('warning');
+                        $("#otpForm .alert").show();
                         setTimeout(() => {
-                            $(".warning").fadeOut();
+                            $("#otpForm .warning").fadeOut();
                             
                         }, 1500);
                     }
