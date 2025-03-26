@@ -1,5 +1,5 @@
 <?php
-    if(isset($_GET)){
+    if(isset($_GET['res_data'])){
         $arr = json_decode($_GET['res_data']);
         $unanswered_que = $arr->not_answer+$arr->nvisit_answer;
         $testName = $arr->test_name;
@@ -22,7 +22,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Result</title>
+  <title><?php if(str_contains(strtoupper($testName),"TEST")){ echo strtoupper($testName) ."RESULT";} else {echo strtoupper($testName) ." TEST RESULT";}?></title>
   <script src="js/jquery-3.7.1.min.js"></script>
   <style>
     <?php include_once 'css/user_submit.css'; ?>

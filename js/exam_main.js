@@ -307,15 +307,17 @@ $(document).ready(async function () {
     // let warningCount = 0;
     // const maxWarnings = 3;
 
-    // Detect tab switching (loss of focus)
-    // $(window).on('blur', function () {
-    //   warningCount++;
-    //   alert(`⚠️ Warning ${warningCount}/3: Do not switch tabs or windows!`);
-    //   if (warningCount >= maxWarnings) {
-    //     alert("❌ Test terminated due to suspicious activity.");
-    //     redirect(1);
-    //   }
-    // });
+   // Detect tab switching (loss of focus)
+    $(window).on('blur', function () {
+      warningCount++;
+      alert(`⚠️ Warning ${warningCount}/3: Do not switch tabs or windows!`);
+      if (warningCount >= maxWarnings) {
+        alert("❌ Test terminated due to suspicious activity.");
+        setTimeout(()=>{
+            redirect(1);
+        },2000)
+      }
+    });
 });
 $(window).on('beforeunload', function () {
     for (const key in localStorage) {

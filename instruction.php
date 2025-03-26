@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Online Test Instructions</title>
+    <title>Test Instructions</title>
     <style>
         <?php include_once 'css/instruction.css';
         ?>

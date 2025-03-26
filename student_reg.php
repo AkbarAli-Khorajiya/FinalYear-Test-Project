@@ -17,7 +17,7 @@
         <div class="box-1">
             <div class="content-holder">
                 <h2>ExamZone</h2>
-                <p class="sub-content">Already Registered?<br/>Then login</p>
+                <p class="sub-content">Not Register yet?<br/>Then Register</p>
                 <button class="button-2" onclick="login()">Login</button>
                 <button class="button-1" onclick="register()">Register</button>
             </div>
@@ -61,6 +61,7 @@
                     <div class="input-group">
                         <label for="password"> Password</label>
                         <input type="password" name="password" placeholder="Password" class="input-field login" requ>
+                        <span class="forget-wrapper"> <a href="forgetpassword">Forget password?</a></span>
                     </div>
                     <button class="login-button" id="submit-login" type="submit">Login</button>
                     <span class="register-wrapper">Not Register yet? Then <a onclick="register()" href="javascript:void(0)">Register</a></span>

@@ -1,18 +1,9 @@
-<?php
-    session_start();
-    if(isset($_GET["testId"]) && $_GET["testId"] != null){
-        $_SESSION["testId"] = $_GET["testId"];
-    }
-    else{
-        header('location:examlist');    
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Login</title>
+    <title>Forget Password</title>
     <style type="text/css">
         <?php include_once 'css/examLogin.css'; ?>
     </style>
@@ -28,15 +19,10 @@
             <label for="email">Email</label>
             <input type="text" name="email" id="email" placeholder="Enter your email" required>
         </div>
-        <div class="input-grp">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" required>
-        </div>
         <div class="btn">
             <input type="submit" value="Send OTP" id="btnOtp">
         </div>
         <input type="text" name="otp" value="true" hidden>
-        <input type="text" name="testLogin" value="1" hidden>
     </form>
     <form id="otpForm" style="display:none" action="javascript:void(0)">
         <div class="alert"></div>
@@ -45,11 +31,29 @@
         <div class="input-grp">
             <label for="otp">One-Time Password</label>
             <input type="text" name="otp" id="otp" placeholder="Enter OTP" required>
+            <!-- displaying send again option for otp -->
+            <!-- <span class="otp-timer"> <a href="#" id="btnSendAgainOtp">Send again</a> 00:30</span> -->
         </div>
         <div class="btn">
             <input type="submit" value="Verify OTP" id="btnVerifyOtp">
         </div>
     </form>
-    <script src="js/examLogin.js" type="text/javascript"></script>
+    <form id="forgetPasswordForm" style="display:none" action="javascript:void(0)">
+        <div class="alert"></div>
+        <div class="head">Reset Password</div>
+        <div class="wrapper">Enter new password to change password</div>
+        <div class="input-grp">
+            <label for="newPassword">New Password</label>
+            <input type="password" name="newPassword" id="newPassword" required>
+        </div>
+        <div class="input-grp">
+            <label for="newPassword">Confirm New Password</label>
+            <input type="password" name="confirmNewPassword" id="confirmNewPassword" required>
+        </div>
+        <div class="btn">
+            <input type="submit" value="Reset Password" id="btnResetPassword">
+        </div>
+    </form>
+    <script src="js/forgetpassword.js" type="text/javascript"></script>
 </body>
 </html>
