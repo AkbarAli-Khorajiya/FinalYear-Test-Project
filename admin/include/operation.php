@@ -44,7 +44,7 @@ class Test_operation
         $que_obj = new Question_operation();
         if (isset($post['data']) && strlen($post['data']) > 0) {
             $val = $post['data'];
-            if ($_SESSION['admin_role']== 1) {
+            if ($_SESSION['admin_role'] == 1) {
                 $query = "select * from test where status = 1 and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
             } else {
                 $query = "select * from test where status = 1 and created_by_admin = " . $_SESSION['admin_id'] . " and test_name LIKE '%$val%' OR duration LIKE '%$val%' OR test_start_date LIKE '%$val%' OR mark_per_ques LIKE '%$val%'";
@@ -558,7 +558,10 @@ class Student_operation
                         <td>" . date('d/m/Y', strtotime($row['created_at'])) . "</td>
                         ";
                 if ($_SESSION['admin_role'] == 1) {
-                    $str .= "<td><button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate'>Activate</button>") . "</td>";
+                    $str .= "<td>
+                    <button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate'>Activate</button>") . "
+                    <button id=" . $row['id'] . " class='primaryBtn stdInfo' name='" . $name[0] . " " . $name[1] . " " . $name[2] . "'>Info</button>
+                    </td>";
                 }
                 $str .= "</tr>";
                 $i++;
@@ -963,7 +966,7 @@ class Teacher_operation
                 <td>' . $row["mark_obtain"] . '</td>
                 <td>' . $row["total_marks"] . '</td>
                 <td>' . $row["class"] . '</td>
-                <td>' . date("d M Y",strtotime($row["attempted_at"])) . '</td>
+                <td>' . date("d M Y", strtotime($row["attempted_at"])) . '</td>
             </tr>';
                 $i++;
             }
@@ -972,6 +975,125 @@ class Teacher_operation
         } else {
             return "Data Not Found";
         }
+    }
+    function listAttemptedTest($post)
+    {
+        $studentId =  $post['id'];
+        $stmt = "SELECT usub.id, t.test_name, usub.mark_obtain, usub.total_marks, usub.attempted_at,t.mark_per_ques FROM user_submit AS usub JOIN test AS t ON usub.test_id = t.id WHERE usub.user_id = $studentId";
+        $result = mysqli_query($this->conn, $stmt);
+        $num = mysqli_num_rows($result);
+        // return $num;
+        if ($num > 0) {
+            $str = "";
+            while ($row = mysqli_fetch_assoc($result)) {
+                $totalQuestion = $row['total_marks'] / $row['mark_per_ques'];
+                $rightQuestion = $row['mark_obtain'] / $row['mark_per_ques'];
+                $str .= '<div class="cardStd test-card" id="' . $row['id'] . '">
+                        <div class="card-content">
+                            <div class="flex items-center justify-between">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-file-text h-4 w-4 text-muted-foreground">
+                                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                            <path d="M10 9H8"></path>
+                                            <path d="M16 13H8"></path>
+                                            <path d="M16 17H8"></path>
+                                        </svg>
+                                        <h3 class="font-medium">' . $row['test_name'] . '</h3>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm text-muted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-calendar h-3 w-3">
+                                            <path d="M8 2v4"></path>
+                                            <path d="M16 2v4"></path>
+                                            <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                            <path d="M3 10h18"></path>
+                                        </svg>
+                                        <span>' . $row['attempted_at'] . '</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-right ">
+                                        <div class="font-medium mb-2 text-lg">' . ($row['mark_obtain'] * 100 / $row['total_marks']) . '%</div>
+                                        <div class="text-sm text-muted">
+                                            ' . $rightQuestion . '/' . $totalQuestion . ' correct
+                                        </div>
+                                    </div>
+                                    <span class="badge badge-outline badge-green">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                            <path
+                                                d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+            }
+            return $str;
+        } else {
+            return '<div class="text-center py-8">
+            <p class="text-muted flex items-center justify-center">No test attempts found for this student.</p>
+          </div>';
+        }
+    }
+    function testSummary($post)
+    {
+        $id =  $post['id'];
+        $stmt = "SELECT usub.id, t.test_name, usub.mark_obtain, usub.total_marks, usub.attempted_at,t.mark_per_ques FROM user_submit AS usub JOIN test AS t ON usub.test_id = t.id WHERE usub.id = $id ";
+        $result = mysqli_query($this->conn, $stmt);
+        $num = mysqli_num_rows($result);
+        if ($num > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $totalQuestion = $row['total_marks'] / $row['mark_per_ques'];
+            $CorrectQuestion = $row['mark_obtain'] / $row['mark_per_ques'];
+            $InCorrectQuestion = $totalQuestion - $CorrectQuestion;
+            $testName = $row['test_name'];
+            $testDate = $row['attempted_at'];
+            $percentage = ($row['mark_obtain'] * 100 / $row['total_marks']);
+            $submitId = $row['id'];
+        }
+        return $totalQuestion . '|' . $CorrectQuestion . '|' . $InCorrectQuestion . '|' . $testName . '|' . $testDate . '|' . $percentage;
+    }
+    function storeFeedback($post)
+    {
+        $id =  $post['id'];
+        $msg = $post['msg'];
+        $stmt = "INSERT INTO feedback (`user_submit_id`,`message`) VALUES(" . $id . ",'" . $msg . "')";
+        $result = mysqli_query($this->conn, $stmt);
+        if ($result) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    function listFeedback($post)
+    {
+        $id =  $post['id'];
+        $stmt = "SELECT * FROM feedback WHERE user_submit_id = $id ";
+        $result = mysqli_query($this->conn, $stmt);
+        $num = mysqli_num_rows($result);
+        $str = '';
+
+        if ($num > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $str .= ' <div class="space-y-2 feedback-msg">
+                                <p class="text-sm">' . $row['message'] . '</p>
+                                <p class="feedback-date">' . $row['created_at'] . '</p>
+                            </div>';
+            }
+        } else {
+            $str .= '<div class="space-y-2 text-muted flex items-center justify-center">
+                                <p class="text-sm">No Feedback Added..!! Send Feedback For Better Result</p>
+                            </div>';
+        }
+        return $str;
     }
 }
 
@@ -1000,5 +1122,17 @@ switch ($ch) {
         break;
     case '30':
         echo $tch_obj->listAttemptedStudents($_POST);
+        break;
+    case '31':
+        echo $tch_obj->listAttemptedTest($_POST);
+        break;
+    case '32':
+        echo $tch_obj->testSummary($_POST);
+        break;
+    case '33':
+        echo $tch_obj->storeFeedback($_POST);
+        break;
+    case '34':
+        echo $tch_obj->listFeedback($_POST);
         break;
 }
