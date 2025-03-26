@@ -206,6 +206,7 @@ section #container {
 
 .column-6 {
   flex: 1;
+  margin-right: 30px;
 }
 
 .card {

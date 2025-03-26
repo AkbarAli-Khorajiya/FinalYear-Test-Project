@@ -84,7 +84,7 @@
         </div>
       </div>
     </div>
-    <div class=" column-6">
+    <div class="column-6">
       <div class="card">
         <div class="card-body">
           <div class="icon">
