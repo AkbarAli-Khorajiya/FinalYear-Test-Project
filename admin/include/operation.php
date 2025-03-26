@@ -1,7 +1,14 @@
 <?php
 
 use function PHPSTORM_META\type;
-
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../env.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+require __DIR__ . '/../../phpMailer/src/Exception.php';
+require __DIR__ . '/../../phpMailer/src/PHPMailer.php';
+require __DIR__ . '/../../phpMailer/src/SMTP.php';
 error_reporting(0);
 session_start();
 $ch = $_GET["ch"];
@@ -979,7 +986,7 @@ class Teacher_operation
     function listAttemptedTest($post)
     {
         $studentId =  $post['id'];
-        $stmt = "SELECT usub.id, t.test_name, usub.mark_obtain, usub.total_marks, usub.attempted_at,t.mark_per_ques FROM user_submit AS usub JOIN test AS t ON usub.test_id = t.id WHERE usub.user_id = $studentId";
+        $stmt = "SELECT usub.id, t.test_name, usub.mark_obtain, usub.total_marks, usub.attempted_at,t.mark_per_ques FROM user_submit AS usub JOIN test AS t ON usub.test_id = t.id WHERE usub.user_id = $studentId ORDER BY usub.attempted_at DESC";
         $result = mysqli_query($this->conn, $stmt);
         $num = mysqli_num_rows($result);
         // return $num;
@@ -1046,7 +1053,7 @@ class Teacher_operation
     function testSummary($post)
     {
         $id =  $post['id'];
-        $stmt = "SELECT usub.id, t.test_name, usub.mark_obtain, usub.total_marks, usub.attempted_at,t.mark_per_ques FROM user_submit AS usub JOIN test AS t ON usub.test_id = t.id WHERE usub.id = $id ";
+        $stmt = "SELECT usub.id, t.test_name, usub.mark_obtain, usub.total_marks, usub.attempted_at,t.mark_per_ques FROM user_submit AS usub JOIN test AS t ON usub.test_id = t.id WHERE usub.id = $id";
         $result = mysqli_query($this->conn, $stmt);
         $num = mysqli_num_rows($result);
         if ($num > 0) {
@@ -1068,9 +1075,24 @@ class Teacher_operation
         $stmt = "INSERT INTO feedback (`user_submit_id`,`message`) VALUES(" . $id . ",'" . $msg . "')";
         $result = mysqli_query($this->conn, $stmt);
         if ($result) {
+            $this->sendFeedbackMail($id,$msg);
             return 1;
         } else {
             return 0;
+        }
+    }
+    function sendFeedbackMail($userSubmitId,$msg)
+    {
+        $getUserEmailQuery = "SELECT u.email,u.name,t.test_name FROM user_submit usub JOIN user u ON u.id = usub.user_id JOIN test t ON usub.test_id = t.id  WHERE usub.id =".$userSubmitId;
+        $getUserEmailResult = mysqli_query($this->conn,$getUserEmailQuery);
+        $details = mysqli_fetch_assoc($getUserEmailResult);
+        $Mail = new mailOperation();
+        $studentName  = explode("|",$details['name']);
+        $sendMsg = "Dear ".$studentName[0]." ".$studentName[1]." ".$studentName[2].", <br/><p>I'm writing to provide you with feedback on your recent ".$details["test_name"]."</p><p>Overall, <b>".$msg."</b></p>";
+        $subject = "Feedback on ".$details['test_name'];
+        $isSend = $Mail->sendMail(trim($details['email']),$sendMsg,$subject);
+        if($isSend == 1){
+            return 1;
         }
     }
     function listFeedback($post)
@@ -1135,4 +1157,37 @@ switch ($ch) {
     case '34':
         echo $tch_obj->listFeedback($_POST);
         break;
+}
+
+class mailOperation{
+    function sendMail($email,$msg,$subject){
+         //Create an instance; passing `true` enables exceptions
+         $mail = new PHPMailer(true);
+
+         try {
+             //Server settings
+             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+             $mail->isSMTP();                                            //Send using SMTP
+             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+             $mail->Username   = $_ENV["hostEmail"];                     //SMTP username
+             $mail->Password   = $_ENV["hostAppPassword"];                               //SMTP password
+             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+ 
+             //Recipients
+             $mail->setFrom($_ENV["hostEmail"], 'ExamZone');
+             $mail->addAddress($email);     //Add a recipient 
+ 
+             //Content
+             $mail->isHTML(true);                                  //Set email format to HTML
+             $mail->Subject = $subject;
+             $mail->Body    = $msg;
+ 
+             $mail->send();
+             return 1;
+         } catch (Exception $e) {
+             return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+         }
+    }
 }

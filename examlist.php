@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once 'include/database.php';
     date_default_timezone_set('Asia/Kolkata');
     $today_test_query = "SELECT * FROM test WHERE test_start_date = CURDATE() AND test_start_time > CURTIME()";
