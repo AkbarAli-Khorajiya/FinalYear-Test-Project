@@ -189,9 +189,9 @@ class Test_operation
                     }
                 }
 
-                return "||" . 1 . "||" . $lastID . "||Test Created Successfully";
+                return 1 . "||" . $lastID . "||Test Created Successfully";
             } else {
-                return "||" . 0 . "|| Test Not Created";
+                return 0 . "|| Test Not Created";
             }
         }
 
