@@ -212,3 +212,19 @@ $(".search .reset").on("click", function() {
     $(".search .search_input").val("");
     list_all_test();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
