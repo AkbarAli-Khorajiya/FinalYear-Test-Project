@@ -1,5 +1,7 @@
 <?php
 
+use Dom\Mysql;
+
 use function PHPSTORM_META\type;
 
 error_reporting(0);
@@ -111,18 +113,52 @@ class Test_operation
         $createdFor = $post['created-for'];
         $marksPerQues = $post['marks'];
         $createdBy = $_SESSION["admin_id"];
-        // return $test_name . "||" . $duration . "||" . $testStartDate . "||" . $testStartTime . "||" . $createdFor . "||" . $marksPerQues;
 
-        $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_time`, `test_start_date`, `mark_per_ques`, `created_for`, `created_by_admin`, `status`) VALUES ('$test_name',' $duration','$testStartTime','$testStartDate','$marksPerQues', '$createdFor','$createdBy','1')";
-        if (mysqli_query($this->conn, $query)) {
-            $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
-            $execute = mysqli_query($this->conn, $stmt);
-            $lastRow = mysqli_fetch_assoc($execute);
-            $lastID = $lastRow["id"];
-            return 1 . "||" . $lastID . "||Test Created Successfully";
+
+        // --------------------------------
+        $test_name = $post['test-name'];
+        $duration = $post['duration'];
+        $testStartDate = $post['date'];
+        $testStartTime = $post['time'];
+        $createdFor = $post['created-for'];
+        $marksPerQues = $post['marks'];
+        $createdBy = $_SESSION["admin_id"];
+
+        // Calculate end time
+        $testStartDateTime = new DateTime("$testStartDate $testStartTime");
+        $testStartDateTime->modify("+$duration minutes");
+        $testEndTime = $testStartDateTime->format('Y-m-d H:i:s');
+
+        // SQL Query to Check for Conflicts
+        $sql = "SELECT * FROM test
+        WHERE created_for = '$createdFor'
+        AND test_start_date = '$testStartDate'
+        AND status = 1
+        AND (
+            (test_start_time <= '$testStartTime' AND ADDTIME(test_start_time, SEC_TO_TIME(duration * 60)) > '$testStartTime') OR
+            (test_start_time < '$testEndTime' AND ADDTIME(test_start_time, SEC_TO_TIME(duration * 60)) >= '$testEndTime') OR
+            (test_start_time >= '$testStartTime' AND ADDTIME(test_start_time, SEC_TO_TIME(duration * 60)) <= '$testEndTime')
+        )";
+
+        $result = mysqli_query($this->conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            // Conflict found // The selected time slot is already allocated for another test.
+            return 0 . "|| The selected time slot is already allocated for another test. Please choose a different time.";
         } else {
-            return 0 . "|| Test Not Created";
+            $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_time`, `test_start_date`, `mark_per_ques`, `created_for`, `created_by_admin`, `status`) VALUES ('$test_name',' $duration','$testStartTime','$testStartDate','$marksPerQues', '$createdFor','$createdBy','1')";
+            if (mysqli_query($this->conn, $query)) {
+                $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
+                $execute = mysqli_query($this->conn, $stmt);
+                $lastRow = mysqli_fetch_assoc($execute);
+                $lastID = $lastRow["id"];
+                return 1 . "||" . $lastID . "||Test Created Successfully";
+            } else {
+                return 0 . "|| Test Not Created";
+            }
         }
+
+        // // return $test_name . "||" . $duration . "||" . $testStartDate . "||" . $testStartTime . "||" . $createdFor . "||" . $marksPerQues;
+
     }
     //method used to get record for display in update pop up
     function get_edit_test($id)
@@ -537,10 +573,7 @@ class Student_operation
                         <th>Class</th>
                         <th>Created at</th>
                         ";
-            if ($_SESSION['admin_role'] == 1) {
-                $str .= "<th>Action</th>";
-            }
-            $str .= "
+            $str .= "<th>Action</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -560,6 +593,11 @@ class Student_operation
                 if ($_SESSION['admin_role'] == 1) {
                     $str .= "<td>
                     <button onclick='updateStatus(this)' id=" . $row['id'] . " " . ($row['status'] == 1 ? " class='de-activate'>De-Activate</button>" : " class='activate'>Activate</button>") . "
+                    <button id=" . $row['id'] . " class='primaryBtn stdInfo' name='" . $name[0] . " " . $name[1] . " " . $name[2] . "'>Info</button>
+                    
+                    </td>";
+                } else {
+                    $str .= "<td>
                     <button id=" . $row['id'] . " class='primaryBtn stdInfo' name='" . $name[0] . " " . $name[1] . " " . $name[2] . "'>Info</button>
                     </td>";
                 }

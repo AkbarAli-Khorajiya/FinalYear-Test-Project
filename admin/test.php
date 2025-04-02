@@ -88,9 +88,7 @@
         </div>
         <div class="table-container">
             <table cellspacing="10px" id="test-table">
-
                 <!-- ///// created test list ///// -->
-
             </table>
         </div>
         <div class="pagination" style="display: flex;justify-content: space-between;">
