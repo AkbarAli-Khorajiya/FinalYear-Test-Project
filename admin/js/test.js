@@ -103,17 +103,17 @@ $("#test-submit-form").submit(function(e) {
             success: function(response) {
                 console.log(response);
                 let dataArr = response.split("||");
-                if (dataArr[0] == 1) {
+                if (dataArr[1] == 1) {
                     list_all_test()
                     $(".modal-container").hide();
 
-                    alert_show(dataArr[0], dataArr[2]);
+                    alert_show(dataArr[1], dataArr[3]);
                     setTimeout(function() {
                         $("#alert-container").fadeOut();
                     }, 900);
-                    $("#container").load("que.php?id=" + dataArr[1]);
+                    $("#container").load("que.php?id=" + dataArr[2]);
                 } else {
-                    alert_show(dataArr[0], dataArr[1]);
+                    alert_show(dataArr[1], dataArr[2]);
                 }
             },
         });

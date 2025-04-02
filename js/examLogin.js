@@ -15,6 +15,7 @@ $(document).ready(function () {
         else{
             let param = new URLSearchParams(location.search);
             let examId = param.get('testId');
+            let otp = $("#loginForm #otp").val();
             let email = $("#loginForm #email").val();
             let password = $("#loginForm #password").val();
             $.ajax({
@@ -23,7 +24,8 @@ $(document).ready(function () {
                 data: {
                     email: email,
                     password: password,
-                    examId: examId
+                    examId: examId,
+                    otp: otp
                 },
                 encode: true,
                 beforeSend:function(){

@@ -121,16 +121,6 @@ class Test_operation
         $marksPerQues = $post['marks'];
         $createdBy = $_SESSION["admin_id"];
 
-
-        // --------------------------------
-        $test_name = $post['test-name'];
-        $duration = $post['duration'];
-        $testStartDate = $post['date'];
-        $testStartTime = $post['time'];
-        $createdFor = $post['created-for'];
-        $marksPerQues = $post['marks'];
-        $createdBy = $_SESSION["admin_id"];
-
         // Calculate end time
         $testStartDateTime = new DateTime("$testStartDate $testStartTime");
         $testStartDateTime->modify("+$duration minutes");
@@ -149,18 +139,59 @@ class Test_operation
 
         $result = mysqli_query($this->conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            // Conflict found // The selected time slot is already allocated for another test.
             return 0 . "|| The selected time slot is already allocated for another test. Please choose a different time.";
         } else {
             $query = "INSERT INTO `test`(`test_name`, `duration`, `test_start_time`, `test_start_date`, `mark_per_ques`, `created_for`, `created_by_admin`, `status`) VALUES ('$test_name',' $duration','$testStartTime','$testStartDate','$marksPerQues', '$createdFor','$createdBy','1')";
             if (mysqli_query($this->conn, $query)) {
+                // Get the last inserted test ID
                 $stmt = "SELECT * FROM test ORDER BY id DESC LIMIT 1";
                 $execute = mysqli_query($this->conn, $stmt);
                 $lastRow = mysqli_fetch_assoc($execute);
                 $lastID = $lastRow["id"];
-                return 1 . "||" . $lastID . "||Test Created Successfully";
+
+                // Initialize mail operation
+                $Mail = new mailOperation2();
+
+                // Fetch all active student emails for the class
+                $stmtEmails = "SELECT email FROM user WHERE class = '$createdFor' AND status = 1";
+                $result = mysqli_query($this->conn, $stmtEmails);
+
+                // Collect all emails into an array
+                $emails = [];
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $emails[] = $row['email'];
+                }
+
+                // Only proceed if there are emails to send
+                if (!empty($emails)) {
+                    $subject = "New Test: $test_name";
+
+                    // Construct the email message once
+                    $message = "<html><body>";
+                    $message .= "<h3>Hi $createdFor Students,</h3>";
+                    $message .= "<p>Please check your test schedule:</p>";
+                    $message .= "<table border='1' cellpadding='8' cellspacing='0' style='border-collapse: collapse;'>";
+                    $message .= "<tr><td><b>Test Name</b></td><td>$test_name</td></tr>";
+                    $message .= "<tr><td><b>Test Duration</b></td><td>$duration minutes</td></tr>";
+                    $message .= "<tr><td><b>Test Start Date</b></td><td>$testStartDate</td></tr>";
+                    $message .= "<tr><td><b>Test Start Time</b></td><td>$testStartTime</td></tr>";
+                    $message .= "</table>";
+                    $message .= "<br><p>Best of luck for your test!</p>";
+                    $message .= "<p><b>Regards,</b><br>Your Teacher</p>";
+                    $message .= "</body></html>";
+
+                    // Send one email with all recipients in BCC
+                    if ($Mail->sendMail($emails, $message, $subject)) {
+                        // Email sent successfully
+                    } else {
+                        // Log failure if needed, but don't block the response
+                        error_log("Failed to send email for test: $test_name");
+                    }
+                }
+
+                return "||" . 1 . "||" . $lastID . "||Test Created Successfully";
             } else {
-                return 0 . "|| Test Not Created";
+                return "||" . 0 . "|| Test Not Created";
             }
         }
 
@@ -1227,5 +1258,55 @@ class mailOperation{
          } catch (Exception $e) {
              return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
          }
+    }
+}
+
+class mailOperation2
+{
+    private $mailer;
+
+    public function __construct()
+    {
+        // Assuming PHPMailer or similar
+        $this->mailer = new PHPMailer(true);
+        // Configure your SMTP settings here
+        $this->mailer->isSMTP();
+        $this->mailer->Host = 'smtp.gmail.com';
+        $this->mailer->SMTPAuth = true;
+        $this->mailer->Username = $_ENV["hostEmail"];
+        $this->mailer->Password =  $_ENV["hostAppPassword"];
+        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->mailer->Port = 465;
+    }
+
+    public function sendMail($emails, $message, $subject)
+    {
+        try {
+            // Clear previous recipients
+            $this->mailer->clearAllRecipients();
+
+            // If $emails is an array, use BCC; otherwise, use single recipient
+            if (is_array($emails)) {
+                $this->mailer->setFrom($_ENV["hostEmail"], 'ExamZone');
+                $this->mailer->addAddress($_ENV["hostEmail"]); // Default "To" address
+                foreach ($emails as $email) {
+                    $this->mailer->addBCC($email);
+                }
+            } else {
+                $this->mailer->setFrom($_ENV["hostEmail"], 'Exam Zone');
+                $this->mailer->addAddress($emails);
+            }
+
+            // Set email content
+            $this->mailer->Subject = $subject;
+            $this->mailer->Body = $message;
+            $this->mailer->isHTML(true);
+
+            // Send email
+            return $this->mailer->send();
+        } catch (Exception $e) {
+            error_log("Mail error: " . $this->mailer->ErrorInfo);
+            return false;
+        }
     }
 }

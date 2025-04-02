@@ -94,9 +94,9 @@ class Student
             }
             if (password_verify($password, $user_password)) {
                 if (isset($post['otp']) && $post['otp'] == true) {
+                    $otp = $this->sendOtp();
+                    $msg = $this->mail($user_mail, $otp);
                 }
-                $otp = $this->sendOtp();
-                $msg = $this->mail($user_mail, $otp);
                 $_SESSION['stdLogin'] = 1;
                 $_SESSION['userId'] = $user_id;
                 $_SESSION['userName'] = $user_name;
