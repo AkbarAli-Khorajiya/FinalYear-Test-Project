@@ -321,7 +321,7 @@
                         <span class="email"> <?php echo $_SESSION['userMail']?> </span>
                     </div>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item" onclick="window.location.href = 'userprogress'">
                     <span class="icon"><img  src="image/userprofile/progress.svg" alt=""></span>
                     <span class="title">My Progress</span>
                 </div>

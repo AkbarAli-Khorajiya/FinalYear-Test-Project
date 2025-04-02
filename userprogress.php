@@ -1,3 +1,22 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['stdLogin']) && empty($_SESSION['stdLogin']))
+    {
+        header('location:index');
+    }
+    else{
+        include_once 'include/database.php';
+        date_default_timezone_set('Asia/Kolkata');
+        $averagScoreDataQuery = "SELECT * FROM user_submit WHERE user_id=".$_SESSION['userId'];
+        $averagScoreDataResult = mysqli_query($link,$averagScoreDataQuery);
+        $sumOfObtainMarks = $sumOfTotalMarks = 0;
+        while($row = mysqli_fetch_assoc($averagScoreDataResult)){
+            $sumOfObtainMarks += intval($row['mark_obtain']);
+            $sumOfTotalMarks += intval($row['total_marks']);
+        }
+        $averageScorePercantage = ($sumOfObtainMarks/$sumOfTotalMarks) * 100;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +45,7 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        John Doe
+                        <?php echo $_SESSION['userName'][0] ." ". $_SESSION['userName'][1]?>
                     </h2>
                     <div class="card-description">Average Score Percentage</div>
                 </div>
@@ -34,11 +53,12 @@
                     <div class="progress-container">
                         <div class="progress-bar" style="width: 85%"></div>
                     </div>
-                    <p class="mt-2 text-sm text-gray-600">85.0% Average Score</p>
+                    <p class="mt-2 text-sm text-gray-600"><?php echo round($averageScorePercantage,2).'% Average Score'?></p>
                 </div>
             </div>
 
             <!-- Completed Tests Card -->
+            
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">
@@ -51,27 +71,30 @@
                 </div>
                 <div class="card-content">
                     <ul class="space-y-4">
-                        <li class="flex items-center justify-between">
+                        <!-- <li class="flex items-center justify-between">
                             <div>
                                 <p class="font-medium">Mathematics 101</p>
                                 <p class="text-sm text-gray-500">2025-02-10</p>
                             </div>
                             <span class="badge">85%</span>
-                        </li>
+                        </li> -->
+                        <?php
+                            $completedTestQuery = "SELECT usub.*,t.test_name AS 'test_name' FROM user_submit usub,test t WHERE usub.test_id = t.id and usub.user_id =".$_SESSION['userId']." ORDER BY usub.attempted_at DESC";
+                            $completedTestResult = mysqli_query($link,$completedTestQuery);
+                            while($row = mysqli_fetch_assoc($completedTestResult))
+                            { 
+                                $percantage = (intval($row['mark_obtain']) / intval($row['total_marks'])) * 100;
+                        ?>
                         <li class="flex items-center justify-between">
                             <div>
-                                <p class="font-medium">English Literature</p>
-                                <p class="text-sm text-gray-500">2025-02-12</p>
+                                <p class="font-medium"><?php echo $row["test_name"];?></p>
+                                <p class="text-sm text-gray-500"><?php echo date("d-m-Y",strtotime($row["attempted_at"]));?></p>
                             </div>
-                            <span class="badge">92%</span>
+                            <span class="badge"><?php echo $percantage."%"?></span>
                         </li>
-                        <li class="flex items-center justify-between">
-                            <div>
-                                <p class="font-medium">Physics Fundamentals</p>
-                                <p class="text-sm text-gray-500">2025-02-15</p>
-                            </div>
-                            <span class="badge secondary">78%</span>
-                        </li>
+                       <?php
+                            }
+                       ?>
                     </ul>
                 </div>
             </div>
@@ -88,7 +111,7 @@
                 </div>
                 <div class="card-content">
                     <ul class="space-y-4">
-                        <li class="flex items-start space-x-4">
+                        <!-- <li class="flex items-start space-x-4">
                             <div class="avatar">
                                 <div class="avatar-fallback">DS</div>
                             </div>
@@ -98,29 +121,27 @@
                                 <p class="text-sm text-gray-600">Excellent progress in algebra. Work on geometry concepts.</p>
                                 <p class="text-xs text-gray-500">2025-02-18</p>
                             </div>
-                        </li>
+                        </li> -->
+                        <?php
+                            $feedbackQuery = "SELECT f.message, f.created_at, ad.name AS admin_name, t.test_name FROM feedback f JOIN user_submit usub ON f.user_submit_id = usub.id JOIN test t ON usub.test_id = t.id JOIN admin ad ON t.created_by_admin = ad.id WHERE usub.user_id =".$_SESSION["userId"];
+                            $feedbackResult = mysqli_query($link,$feedbackQuery);
+                            while($row = mysqli_fetch_assoc($feedbackResult)){
+                            $strName =  explode(' ',$row['admin_name']);    
+                        ?>
                         <li class="flex items-start space-x-4">
                             <div class="avatar">
-                                <div class="avatar-fallback">MJ</div>
+                                <div class="avatar-fallback"><?php echo strtoupper(substr($strName[0],0,1).substr($strName[1],0,1));?></div>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-sm font-medium leading-none">Ms. Johnson</p>
-                                <p class="text-sm text-muted">English</p>
-                                <p class="text-sm text-gray-600">Great essay structure. Focus on expanding vocabulary.</p>
-                                <p class="text-xs text-gray-500">2025-02-16</p>
+                                <p class="text-sm font-medium leading-none"><?php echo strtoupper($row["admin_name"]);?></p>
+                                <p class="text-sm text-muted"><?php echo $row["test_name"];?></p>
+                                <p class="text-sm text-gray-600"><?php echo $row["message"];?></p>
+                                <p class="text-xs text-gray-500"><?php echo date("d-m-Y",strtotime($row["created_at"]));?></p>
                             </div>
                         </li>
-                        <li class="flex items-start space-x-4">
-                            <div class="avatar">
-                                <div class="avatar-fallback">MB</div>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-sm font-medium leading-none">Mr. Brown</p>
-                                <p class="text-sm text-muted">Physics</p>
-                                <p class="text-sm text-gray-600">Good understanding of mechanics. Review thermodynamics.</p>
-                                <p class="text-xs text-gray-500">2025-02-14</p>
-                            </div>
-                        </li>
+                        <?php
+                            }
+                        ?>
                     </ul>
                 </div>
             </div>
