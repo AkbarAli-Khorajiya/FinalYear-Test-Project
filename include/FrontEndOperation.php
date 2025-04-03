@@ -73,6 +73,7 @@ class Student
         $password = $post['password'];
         $query = "select * from user where email = '$email'";
         $result = mysqli_query($this->conn, $query);
+        $testId = $post['examId'];
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $user_password = $row['password'];
@@ -83,7 +84,7 @@ class Student
             $status = $row['status'];
             if(isset($post['testLogin']) && $post['testLogin'] == 1)
             {
-                $isAttempted = $this->checkUserAttemptedTest($user_id);
+                $isAttempted = $this->checkUserAttemptedTest($user_id, $testId);
                 if($isAttempted){
                     return 0 . "||Already Attempted Test"; 
                 }
@@ -94,7 +95,7 @@ class Student
             if (password_verify($password, $user_password)) {
                 if (isset($post['otp']) && $post['otp'] == true) {
                     $otp = $this->sendOtp();
-                    $msg = $this->mail($user_mail,$otp);
+                    $msg = $this->mail($user_mail, $otp);
                 }
                 $_SESSION['stdLogin'] = 1;
                 $_SESSION['userId'] = $user_id;
@@ -109,8 +110,9 @@ class Student
             return 0 . "||Invalid Credential";
         }
     }
-    function checkUserAttemptedTest($id){
-        $query = "SELECT * FROM user_submit WHERE user_id =".$id;
+    function checkUserAttemptedTest($id, $testId)
+    {
+        $query = "SELECT * FROM user_submit WHERE test_id = " . $testId . " AND user_id =" . $id;
         $result = mysqli_query($this->conn,$query);
         if(mysqli_num_rows($result) > 0){
             return true;
@@ -303,7 +305,7 @@ class Student
             return 1 ."||Verification Successful";
         }
         else{
-            return 1 . "||Verification Not Successful";
+            return 0 . "||Verification Not Successful";
         }
     }
     //function for send again otp

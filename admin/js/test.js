@@ -16,8 +16,7 @@ function list_all_test() {
         type: "GET",
         url: "include/operation.php?ch=1",
         encode: true,
-        success: function(response) {
-            console.log(response)
+        success: function (response) {
             $("#test-table").html(response);
             //----- Update test show---//
             $(".edit-test").on("click", () => {
@@ -105,6 +104,7 @@ $("#test-submit-form").submit(function(e) {
                 console.log(response);
                 let dataArr = response.split("||");
                 if (dataArr[0] == 1) {
+                    list_all_test()
                     $(".modal-container").hide();
 
                     alert_show(dataArr[0], dataArr[2]);
@@ -212,3 +212,19 @@ $(".search .reset").on("click", function() {
     $(".search .search_input").val("");
     list_all_test();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

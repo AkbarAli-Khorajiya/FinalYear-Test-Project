@@ -13,13 +13,20 @@ $(document).ready(function () {
             }, 1500);
         }
         else{
-            const data = $("#loginForm").serialize();
-            // console.log(data);
-        
+            let param = new URLSearchParams(location.search);
+            let examId = param.get('testId');
+            let otp = $("#loginForm #otp").val();
+            let email = $("#loginForm #email").val();
+            let password = $("#loginForm #password").val();
             $.ajax({
                 type: "POST",
                 url: "include/FrontEndOperation.php?ch=2",
-                data: data,
+                data: {
+                    email: email,
+                    password: password,
+                    examId: examId,
+                    otp: otp
+                },
                 encode: true,
                 beforeSend:function(){
                     $('.loader-container').show();
@@ -59,7 +66,7 @@ $(document).ready(function () {
             }, 1500);
         }
         const regex = /^\d+$/;
-        if(!regex.test(otp))
+        if (!regex.test(otp))
         {
             $("#otpForm .alert").text("Invalid OTP");
             $("#otpForm .alert").addClass('warning');
