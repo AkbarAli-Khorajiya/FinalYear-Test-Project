@@ -162,6 +162,7 @@ section #container {
   height: 100%;
   /* background-color: rgb(245, 247, 255); */
   overflow: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
