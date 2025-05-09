@@ -1,0 +1,74 @@
+@import url('css/font/ubuntuFont.css');
+@import url('css/font/robotoFont.css');
+:root
+{
+    --primary-color : #9D9FE6;
+    --secondary-color : #1A1A27;
+    --nav-color:rgba(26, 26, 39, 70%);
+}
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body {
+    font-family: sans-serif;
+    margin: 0;
+    /* padding: 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #9d9fe61c;
+    /* background-color: #f0f0f0; */
+}
+
+.container {
+    /* background-color: #f8f2ff; */
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(112, 112, 112, 0.205);
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Roboto-Bold',sans-serif;
+    padding: 5px 0px;
+}
+p{
+    font-family: 'Roboto-Medium',sans-serif;
+    padding: 10px 0px;
+}
+ol {
+    /* margin-top: 20px; */
+    padding-left: 20px;
+}
+
+li {
+    font-family: 'Roboto-Regular',sans-serif;
+    line-height: 2rem;
+    font-size: 1rem;
+    /* margin-bottom: 10px; */
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+    accent-color: var(--primary-color);
+    transform: scale(1.2);
+}
+button {
+    background-color: var(--primary-color);
+    font-family: 'Roboto-Regular',sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 200ms linear 0s all;
+    &:hover{
+        background-color: #303044;
+    }
+}
